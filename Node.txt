@@ -1,1 +1,6 @@
+
+REFRESH_TOKEN_SECRET: mã hóa bí mật cho id
+
+///////////////////////////////////////////
 10:56 2/10/2022: {msg: "Đã tạo xong đăng ký bằng email, thông qua nodejs, chưa có kết hợp reactjs"}
+11:20 3/10/2022: {msg: "Đã hoàn thành api"}
