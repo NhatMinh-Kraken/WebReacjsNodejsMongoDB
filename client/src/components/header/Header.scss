@@ -81,56 +81,72 @@
                 }
             }
 
-            .left-none-header {
-                display: flex;
-                width: 50%;
-                padding: 10px;
-                justify-content: center;
+            // .left-none-header {
+            //     display: flex;
+            //     width: 50%;
+            //     padding: 10px;
+            //     justify-content: center;
 
-                .input-header {
-                    display: flex;
-                    justify-items: center;
-                    align-items: center;
-                    width: 100%;
+            //     .input-header {
+            //         display: flex;
+            //         justify-items: center;
+            //         align-items: center;
+            //         width: 100%;
 
-                    .input-header-search {
-                        position: relative;
-                        display: flex;
-                        width: 100%;
+            //         .input-header-search {
+            //             position: relative;
+            //             display: flex;
+            //             width: 100%;
 
-                        input.form-control {
-                            width: 100%;
-                            height: 39px;
-                            border-radius: 19px;
-                            border: 1px solid #000;
-                            display: flex;
-                        }
+            //             .form-control {
+            //                 width: 100%;
+            //                 height: 39px;
+            //                 border-radius: 19px;
+            //                 border: 1px solid #000;
+            //                 display: flex;
 
-                        button.btn-search {
-                            //background: #ccc;
-                            // border-radius: 50%;
-                            // height: 37px;
-                            right: 1px;
-                            top: 1px;
-                            transition: all .3s ease-in-out;
-                            //width: 37px;
-                            position: absolute;
-                            border-left: 1px solid #bbb;
+            //                 &:invalid:not(:focus) {
+            //                     .btn-search {
+            //                         cursor: pointer;
+            //                     }
+            //                 }
+            //             }
 
-                            &:hover {
-                                color: red;
+            //             .btn-search {
+            //                 //background: #ccc;
+            //                 // border-radius: 50%;
+            //                 // height: 37px;
+            //                 right: 1px;
+            //                 top: 1px;
+            //                 width: 3em;
+            //                 height: 3em;
+            //                 //transition: all .3s ease-in-out;
+            //                 //width: 37px;
+            //                 position: absolute;
+            //                 border-left: 1px solid #bbb;
 
-                            }
-                        }
-                    }
-                }
-            }
+            //                 &::before {
+            //                     transition: all 0.25s ease-out;
+            //                 }
+
+            //                 &::after {
+            //                     transition: all 0.25s ease-out;
+            //                 }
+
+            //                 &:hover {
+            //                     color: red;
+
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
 
             .center-header {
                 display: flex;
                 width: 15%;
                 padding: 10px;
-                justify-content: center;
+                justify-content: flex-start;
 
                 .center-header-icon {
                     display: flex;
@@ -143,10 +159,11 @@
                         height: 30px;
                         color: rgb(172, 168, 168);
                         background: #000;
+                        transition: filter 300ms;
 
                         &:hover {
-                            background: rgb(252, 157, 157);
-                            color: #000;
+                            filter: brightness(1.2);
+                            color: rgb(252, 157, 157);
                             transition: all 0.4s;
                         }
                     }
@@ -157,7 +174,7 @@
                 display: flex;
                 width: 10%;
                 padding: 10px;
-                justify-content: center;
+                justify-content: flex-start;
 
                 .right-header-login {
                     display: flex;
@@ -170,10 +187,11 @@
                         height: 50px;
                         color: #ccc;
                         background: #000;
+                        transition: filter 300ms;
 
                         &:hover {
-                            background: rgb(174, 243, 147);
-                            color: #000;
+                            filter: brightness(1.2);
+                            color: rgb(174, 243, 147);
                             transition: all 0.4s;
                         }
                     }
