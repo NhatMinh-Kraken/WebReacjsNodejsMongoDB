@@ -1,6 +1,10 @@
 
 REFRESH_TOKEN_SECRET: mã hóa bí mật cho id
 
+rfce
+
 ///////////////////////////////////////////
 10:56 2/10/2022: {msg: "Đã tạo xong đăng ký bằng email, thông qua nodejs, chưa có kết hợp reactjs"}
 11:20 3/10/2022: {msg: "Đã hoàn thành api"}
+10:24 5/10/2022: {msg: "Thiếu reposive"} -> chưa xong
+10:04 6/10/2022: {msg: "Xong login -> redux"}

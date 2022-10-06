@@ -20,15 +20,15 @@ function NavItem(props) {
             document.removeEventListener("mousedown", handler);
             document.removeEventListener("touchstart", handler);
         };
-    });
+    }, [open]);
 
     return (
-        <>
-            <button className='button-login mx-1' onClick={() => setOpen(!open)} ref={ref}>
+        <ul className='right-header-login' ref={ref}>
+            <button className='button-login mx-1' onClick={() => setOpen((prev) => !prev)} >
                 <i className="far fa-user"></i>
             </button>
             {open && props.children}
-        </>
+        </ul>
     );
 }
 

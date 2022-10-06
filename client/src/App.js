@@ -1,16 +1,24 @@
-import React from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
-import Header from './components/header/Header';
-import Body from './components/body/Body';
+import React, { Fragment } from 'react'
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
+
+import { path } from '../src/components/utils/constant'
+import Login from './components/body/Auth/Login';
+import Home from './components/Home/Home';
+import Register from './components/body/Auth/Register';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <Body />
-      </div>
-    </Router>
+    <Fragment>
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route path={path.HOME} exact component={(Home)} />
+            <Route path={path.LOGIN} component={(Login)} />
+            <Route path={path.REGISTER} component={(Register)} />
+          </Switch>
+        </div>
+      </Router>
+    </Fragment>
   );
 }
 

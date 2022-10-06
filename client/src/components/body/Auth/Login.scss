@@ -1,0 +1,149 @@
+.black {
+    color: black;
+}
+
+.grey {
+    color: rgb(184, 180, 180);
+}
+
+.blue {
+    color: rgb(9, 171, 224);
+}
+
+
+.login-background {
+    background-color: rgba(223, 243, 245, 0.842);
+    border: 0.5px solid rgb(247, 246, 246);
+    height: 100vh;
+    overflow: auto;
+    //padding: 1.875rem 1.75rem;
+    padding: 7.875rem 1.75rem;
+   //display: flex;
+}
+
+.login-container {
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.login-background-header {
+    width: 26rem;
+}
+
+.login-content {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-background-1 {
+    width: 100%;
+}
+
+.nav-item .nav-link {
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid #fff;
+}
+
+.tab-pane .user-box {
+    position: relative;
+}
+
+.tab-pane .user-box .form-controll {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: rgb(10, 9, 9);
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+
+.tab-pane .user-box .form-labell {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #0d6efd;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.tab-pane .user-box .form-controll:focus~.form-labell,
+.tab-pane .user-box .form-controll:valid~.form-labell {
+    top: -20px;
+    left: 0;
+    color: rgb(9, 171, 224);
+    font-size: 14px;
+}
+
+.user-box .show-btn {
+    position: absolute;
+    right: 15px;
+    top: 40%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: rgba(143, 143, 143, 0.847);
+    display: none;
+}
+
+.user-box .form-controll:valid~.show-btn {
+    display: block;
+}
+
+/////
+
+.tab-pane .user-box .form-controlls {
+    width: 100%;
+    padding: 10px 10px 0px;
+    font-size: 16px;
+    color: rgb(10, 9, 9);
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+
+.tab-pane .user-box .form-labells {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #0d6efd;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.tab-pane .user-box .form-controlls:focus~.form-labells,
+.tab-pane .user-box .form-controlls:valid~.form-labells {
+    top: -20px;
+    left: 0;
+    color: #0d6efd;
+    font-size: 14px;
+}
+
+.form-check-input:checked[type="checkbox"] {
+    background-image: none;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background-color: rgb(4, 4, 4);
+}
+
+.alert {
+    display: flex;
+    justify-content: center;
+    justify-items: flex-start;
+}
