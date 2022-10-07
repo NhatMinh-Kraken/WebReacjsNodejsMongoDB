@@ -1,0 +1,5 @@
+.active_page {
+    display: flex;
+    justify-content: center;
+    padding: 0.875rem 1.75rem;
+}

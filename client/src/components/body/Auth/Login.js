@@ -122,7 +122,7 @@ function Login() {
                                         </div>
 
                                         <div className='col-12 d-flex justify-content-center'>
-                                            <button className="btn btn-danger btn-block mb-4 col-4 " >Sign in</button>
+                                            <button className="btn btn-danger btn-block mb-4 col-4 " type='submit'>Sign in</button>
                                         </div>
 
                                         <div className="text-center">
