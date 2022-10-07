@@ -10,7 +10,26 @@ import Navbar from './DropdownAccount/Navbar'
 import NavItem from './DropdownAccount/NavItem'
 import DropdownMenu from './DropdownAccount/DropdownMenu'
 
+import { useSelector } from 'react-redux'
+
 function Header() {
+
+    const auth = useSelector(state => state.auth)
+    const { user, isLogged } = auth
+
+    const userLink = () => {
+        return (
+            // <button type='button' className='button-login mx-1 '>
+            //     <img src={user.avatar} className="avatar" alt='Trang Cá Nhân' />
+            // </button>
+            <Navbar>
+                <NavItem>
+                    <DropdownMenu />
+                </NavItem>
+            </Navbar>
+        )
+    }
+
     return (
 
         <div className='home-header'>
@@ -40,16 +59,18 @@ function Header() {
                             <button type='button' className='button-con mx-1 '><i className='fab fa-github'></i></button>
                         </div>
                     </div>
-                    <Navbar>
+                    {/* <Navbar>
                         <NavItem>
                             <DropdownMenu />
                         </NavItem>
-                    </Navbar>
-                    {/* <div className='right-header'>
+                    </Navbar> */}
+                    <div className='right-header'>
                         <div className='right-header-login'>
-                            <button type='button' className='button-login mx-1 '><i className="far fa-user"></i></button>
+                            {
+                                isLogged ? userLink() : <button type='button' className='button-login mx-1 '><Link to="/login"><i className="far fa-user"></i></Link></button>
+                            }
                         </div>
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </div>

@@ -152,7 +152,7 @@ const userController = {
     },
     getUserInfor: async (req, res) => {
         try {
-            const user = await Users.findById(req.user.id).select('-password')
+            const user = await Users.findById(req.user.id).select(['-password', '-email', '-role'])
 
             res.json(user)
         } catch (err) {
@@ -201,7 +201,7 @@ const userController = {
     },
     deleteUser: async (req, res) => {
         try {
-            await Users.findByIdAndDelete(req.params.id )
+            await Users.findByIdAndDelete(req.params.id)
 
             res.json({ msg: "Deleted Success!" })
         } catch (err) {

@@ -1,10 +1,11 @@
 import React from 'react'
 import DropdownItem from './DropdownItem'
+import { Link } from 'react-router-dom'
 
 function DropdownMenu() {
     return (
         <div className='dropdown'>
-            <DropdownItem><i className="fa-solid fa-right-to-bracket mr-2"></i>Login</DropdownItem>
+            <DropdownItem/>
         </div>
     )
 }

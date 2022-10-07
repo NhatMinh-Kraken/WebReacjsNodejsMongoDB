@@ -12,7 +12,7 @@
     position: absolute;
     top: 10%;
     width: 250px;
-    transform: translateX(-45%);
+    transform: translateX(-35%);
     background-color: var(--bg);
     border: var(--border);
     border-radius: var(--border-radius);
@@ -26,10 +26,29 @@
         border-radius: var(--border-radius);
         transition: background var(--speed);
         padding: 0.5rem;
+        display: flex;
 
-        &:hover{
+        &:hover {
             text-decoration: none;
             color: #e95318;
+        }
+
+        .tag {
+            display: flex;
+            width: 10%;
+        }
+
+        .name {
+            display: flex;
+            width: 80%;
+        }
+
+        .next {
+            justify-content: flex-end;
+            align-items: flex-end;
+            justify-items: flex-end;
+            width: 10%;
+            display: flex;
         }
     }
 

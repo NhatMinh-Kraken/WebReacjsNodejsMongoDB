@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
-
+import { useSelector } from 'react-redux'
 
 
 function NavItem(props) {
+
+    const auth = useSelector(state => state.auth)
+    const { user, isLogged } = auth
 
     const [open, setOpen] = useState(false);
     let ref = useRef();
@@ -25,7 +28,7 @@ function NavItem(props) {
     return (
         <ul className='right-header-login' ref={ref}>
             <button className='button-login mx-1' onClick={() => setOpen((prev) => !prev)} >
-                <i className="far fa-user"></i>
+                <img src={user.avatar} className="avatar" alt='Trang Cá Nhân' />
             </button>
             {open && props.children}
         </ul>

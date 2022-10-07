@@ -1,32 +1,32 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
-    name:{
+    name: {
         type: String,
-        require:[true, "Please enter your name!"],
+        require: [true, "Please enter your name!"],
         trim: true
     },
 
-    email:{
+    email: {
         type: String,
-        require:[true, "Please enter your email!"],
+        require: [true, "Please enter your email!"],
         trim: true,
         unique: true
     },
 
-    password:{
+    password: {
         type: String,
-        require:[true, "Please enter your password!"],
+        require: [true, "Please enter your password!"],
     },
 
-    role:{
+    role: {
         type: Number,
         default: 0, // 0 = user, 1 = admin
-    }, 
+    },
 
-    avatar:{
+    avatar: {
         type: String,
-        default: "https://res.cloudinary.com/db2i9cmoo/image/upload/v1664688949/avatar/Pngtree_user_icon_5097430_xleluw.png"
+        default: "https://res.cloudinary.com/admincar/image/upload/v1664688949/avatar/Pngtree_user_icon_5097430_xleluw.png"
     }
 }, {
     timestamps: true
