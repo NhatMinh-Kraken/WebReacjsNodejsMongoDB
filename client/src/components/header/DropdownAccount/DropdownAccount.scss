@@ -20,35 +20,78 @@
     overflow: hidden;
     transition: height var(--speed) ease;
 
-
-    .menu-item {
-        align-items: center;
-        border-radius: var(--border-radius);
-        transition: background var(--speed);
-        padding: 0.5rem;
+    .user {
         display: flex;
+        margin-bottom: 16px;
+        background-color: transparent;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.596);
+        border-radius: 20px;
+
+        .menu-item-user {
+            align-items: center;
+            border-radius: var(--border-radius);
+            transition: background var(--speed);
+            padding: 0.5rem;
+            display: flex;
+
+            img {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                background-color: #242526;
+            }
+
+            .menu-item-name {
+                color: #dadce1;
+                padding-left: 10px;
+                text-decoration: none;
+            }
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
 
         &:hover {
             text-decoration: none;
-            color: #e95318;
+            background-color: #474a4d;
+            transition: all .4 ease-in-out;
         }
+    }
 
-        .tag {
-            display: flex;
-            width: 10%;
-        }
+    .setting-user {
+        border-top: 1px solid #484a4d;
+        padding-top: 16px;
 
-        .name {
+        .menu-item {
+            align-items: center;
+            border-radius: var(--border-radius);
+            transition: background var(--speed);
+            padding: 0.5rem;
             display: flex;
-            width: 80%;
-        }
 
-        .next {
-            justify-content: flex-end;
-            align-items: flex-end;
-            justify-items: flex-end;
-            width: 10%;
-            display: flex;
+            &:hover {
+                text-decoration: none;
+                color: #e95318;
+            }
+
+            .tag {
+                display: flex;
+                width: 10%;
+            }
+
+            .name {
+                display: flex;
+                width: 80%;
+            }
+
+            .next {
+                justify-content: flex-end;
+                align-items: flex-end;
+                justify-items: flex-end;
+                width: 10%;
+                display: flex;
+            }
         }
     }
 
