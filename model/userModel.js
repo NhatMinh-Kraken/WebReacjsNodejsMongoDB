@@ -27,6 +27,16 @@ const userSchema = new mongoose.Schema({
     avatar: {
         type: String,
         default: "https://res.cloudinary.com/admincar/image/upload/v1664688949/avatar/Pngtree_user_icon_5097430_xleluw.png"
+    },
+
+    numberphone: {
+        type: Number,
+        default: null,
+    },
+
+    address: {
+        type: String,
+        default: "chưa có",
     }
 }, {
     timestamps: true

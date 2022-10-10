@@ -6,5 +6,6 @@ export const path = {
     SYSTEM: '/system',
     REGISTER: '/register',
     FORGOTPASSWORD: '/forgotpassword',
-    RESETPASSWORD: '/user/reset/:token'
+    RESETPASSWORD: '/user/reset/:token',
+    PROFILE: '/profile'
 };
