@@ -41,7 +41,7 @@ function Header() {
                                 <img src={logo} />
                             </div>
                         </div>
-                        <div className='title-header'><h4>Mercedes-Benz</h4></div>
+                        <div className='title-header'><Link to="/"><h4>Mercedes-Benz</h4></Link></div>
                     </div>
                     <div className='left-none-header'>
                         <div className='input-header'>

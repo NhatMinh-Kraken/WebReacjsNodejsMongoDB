@@ -78,6 +78,14 @@
                         color: rgba(218, 216, 216, 0.87);
                         margin-bottom: 0px;
                     }
+
+                    a{
+                        text-decoration: none;
+                        
+                        &:hover{
+                            text-decoration: none;
+                        }
+                    }
                 }
             }
 
