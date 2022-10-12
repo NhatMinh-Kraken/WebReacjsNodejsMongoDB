@@ -71,9 +71,9 @@ function ProfileUser() {
                                 </div>
                                 <div className='profile_item-infor'>
                                     <div className='infor'>
-                                        <Link to="/profileuser" className='profile pb-2 active'><i class="fa-solid fa-user"></i><span>profile</span></Link>
-                                        <a href="#" className='address pb-2'><i class="fa-solid fa-location-dot"></i><span>address</span></a>
-                                        <a href="#" className='changePassword pb-2'><i class="fa-solid fa-key"></i><span>changePassword</span></a>
+                                        <a href="#profileuser" className='profile pb-2 active'><i class="fa-solid fa-user"></i><span>profile</span></a>
+                                        <a href="#moi" className='address pb-2'><i class="fa-solid fa-location-dot"></i><span>address</span></a>
+                                        <a href="#cu" className='changePassword pb-2'><i class="fa-solid fa-key"></i><span>changePassword</span></a>
                                     </div>
                                     <div className='infor_additional'>
                                         <a href="#" className='order pb-2'><i class="fa-solid fa-cart-shopping"></i><span>order</span></a>
