@@ -36,7 +36,7 @@ function Header() {
             <div className='home-header-container'>
                 <div className='container'>
                     <div className='row'>
-                        <div className='left-header col-3'>
+                        <div className='left-header col-4'>
                             <div className='logo-header'>
                                 <div className='logo-header-img'>
                                     <img src={logo} />
@@ -44,7 +44,7 @@ function Header() {
                             </div>
                             <div className='title-header'><Link to="/"><h4>Mercedes-Benz</h4></Link></div>
                         </div>
-                        <div className='left-none-header col-6 '>
+                        <div className='left-none-header col-5 '>
                             <div className='input-header'>
                                 <div className='input-header-search'>
                                     <input className='form-control' type="search" tabIndex="-1" placeholder='Từ khóa tìm kiếm / OnlineCode từ công cụ chọn cấu hình xe' pattern=".*\S.*" required />

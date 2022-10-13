@@ -4,9 +4,12 @@ import { Route, Switch, BrowserRouter as Router, Link } from 'react-router-dom'
 import { path } from '../src/components/utils/constant'
 import Home from './components/Home/Home';
 import Body from './components/body/Body';
+import Header from './components/header/Header';
+
 import { useSelector, useDispatch } from 'react-redux'
 import { dispatchLogin, fetchUser, dispatchGetUser } from './redux/action/authAction'
 import Axios from 'axios';
+import Profile from './components/body/Profile';
 
 
 function App() {
@@ -44,9 +47,10 @@ function App() {
     <Fragment>
       <Router>
         <div className="App">
+          <Home />
+          <Body />
           <Switch>
-            <Route path={path.HOME} exact component={(Home)} />
-            <Body />
+            <Route path={path.PROFILE} component={Profile} />
           </Switch>
         </div>
       </Router>

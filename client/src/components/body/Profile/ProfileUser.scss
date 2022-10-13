@@ -51,10 +51,21 @@
                     align-items: flex-start;
                     padding-bottom: 20px;
 
+                    a {
+                        text-decoration: none;
+
+                        &:hover {
+                            text-decoration: none;
+                        }
+                    }
+
                     .profile {
                         border: none;
                         background-color: transparent;
                         padding-left: 30px;
+
+
+
 
                         i {
 
@@ -70,8 +81,8 @@
                             padding-left: 20px;
                         }
 
-                        .active {
-                            border-bottom: blue;
+                        &.active span {
+                            color: rgb(228, 129, 8);
                         }
                     }
 
@@ -93,6 +104,10 @@
                             text-transform: uppercase;
                             padding-left: 20px;
                         }
+
+                        &.active span {
+                            color: rgb(228, 129, 8);
+                        }
                     }
 
                     .changePassword {
@@ -101,10 +116,12 @@
                         padding-left: 30px;
 
                         i {
-
                             margin: 0;
                             color: rgb(253, 239, 115);
+
+
                         }
+
 
                         span {
                             color: rgb(112, 109, 109);
@@ -112,6 +129,10 @@
                             font-style: italic;
                             text-transform: uppercase;
                             padding-left: 15px;
+                        }
+
+                        &.active span {
+                            color: rgb(228, 129, 8);
                         }
                     }
 
@@ -218,6 +239,11 @@
 
                 .profile_item_info {
                     border-right: 1px solid #e4e1e163;
+
+                    .profile_item_form{
+                        padding-right: 1.125rem;
+
+                    }
                 }
 
                 .profile_item_avatar {

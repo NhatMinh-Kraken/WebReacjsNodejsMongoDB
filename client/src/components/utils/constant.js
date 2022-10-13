@@ -7,5 +7,6 @@ export const path = {
     REGISTER: '/register',
     FORGOTPASSWORD: '/forgotpassword',
     RESETPASSWORD: '/user/reset/:token',
-    PROFILE: '/profile'
+    PROFILE: '/profile',
+    PROFILEUSER: '/profile/profileuser'
 };
