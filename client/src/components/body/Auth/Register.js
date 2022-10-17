@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import './Login.scss'
 import axios from 'axios'
-import { showErrMsg, showSuccessMsg } from '../../utils/notification/Notification'
 import { isEmpty, isEmail, isLenght, isMath } from '../../utils/validation/validation'
+import { toast } from 'react-toastify'
 
 
 const initialState = {
@@ -17,6 +17,8 @@ const initialState = {
 function Register() {
 
     const [user, setUser] = useState(initialState)
+
+    const history = useHistory()
     const { name, email, password, cf_password, err, success } = user
 
     const handleChangeInput = e => {
@@ -28,39 +30,36 @@ function Register() {
         e.preventDefault()
 
         if (isEmpty(name) || isEmpty(password)) {
-            return setUser({ ...user, err: 'Please fill in all fields.', success: '' })
+            return toast.error("Please fill in all fields.")
         }
 
         if (!isEmail(email)) {
-            return setUser({ ...user, err: 'Invalid Email.', success: '' })
+            return toast.error("Invalid Email.")
         }
 
         if (isLenght(password)) {
-            return setUser({ ...user, err: 'Password must be at least 6 characters.', success: '' })
+            return toast.error("Password must be at least 6 characters.")
         }
 
         if (!isMath(password, cf_password)) {
-            return setUser({ ...user, err: 'Password did not match.', success: '' })
+            return toast.error("Password did not match.")
         }
 
         try {
             const res = await axios.post('/user/register', {
                 name, email, password
             })
-            setUser({ ...user, err: '', success: res.data.msg })
+            toast.success(res.data.msg)
+            history.push("/login")
 
         } catch (err) {
             err.response.data.msg &&
-                setUser({ ...user, err: err.response.data.msg, success: '' })
+                toast.error(err.response.data.msg)
         }
     }
 
     return (
         <div className='login-background' >
-            <div className='alert'>
-                {err && showErrMsg(err)}
-                {success && showSuccessMsg(success)}
-            </div>
             <div className='login-container'>
                 <div className='login-content'>
                     <div className='login-background-1'>
@@ -76,25 +75,6 @@ function Register() {
                         </div>
                         <div className='tab-content'>
                             <div className="tab-pane fade show active">
-
-                                <div className="text-center mb-3 mt-3 mb-3">
-
-                                    <button type="button" className="btn btn-link btn-floating mx-1 ">
-                                        <i className="fab fa-facebook-f"></i>
-                                    </button>
-
-                                    <button type="button" className="btn btn-link btn-floating mx-1 ">
-                                        <i className="fab fa-google"></i>
-                                    </button>
-
-                                    <button type="button" className="btn btn-link btn-floating mx-1 ">
-                                        <i className="fab fa-twitter"></i>
-                                    </button>
-
-                                    <button type="button" className="btn btn-link btn-floating mx-1 ">
-                                        <i className="fab fa-github"></i>
-                                    </button>
-                                </div>
 
                                 <div className='' style={{ color: 'red', marginBottom: '7px' }}>
 

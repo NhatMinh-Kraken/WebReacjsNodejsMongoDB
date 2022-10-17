@@ -2,7 +2,6 @@ import React, { Fragment, useEffect } from 'react'
 import { Route, Switch, BrowserRouter as Router, Link } from 'react-router-dom'
 
 import { path } from '../src/components/utils/constant'
-import Home from './components/Home/Home';
 import Body from './components/body/Body';
 import Header from './components/header/Header';
 
@@ -10,6 +9,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { dispatchLogin, fetchUser, dispatchGetUser } from './redux/action/authAction'
 import Axios from 'axios';
 import Profile from './components/body/Profile';
+import NotFound from './components/utils/NotFound/NotFound';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -17,7 +19,7 @@ function App() {
   const dispatch = useDispatch()
   const token = useSelector(state => state.token)
   const auth = useSelector(state => state.auth)
-
+  const { isLogged } = auth
 
   useEffect(() => {
     const firstLogin = localStorage.getItem('firstLogin')
@@ -47,11 +49,23 @@ function App() {
     <Fragment>
       <Router>
         <div className="App">
-          <Home />
+          <Header />
           <Body />
           <Switch>
-            <Route path={path.PROFILE} component={Profile} />
+            <Route path={path.PROFILE} component={(isLogged ? Profile : NotFound)} />
           </Switch>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
         </div>
       </Router>
     </Fragment>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import './Login.scss'
 import { isEmail } from '../../utils/validation/validation'
-import { showErrMsg, showSuccessMsg } from '../../utils/notification/Notification'
 import Axios from 'axios'
+import { toast } from 'react-toastify'
 
 
 const initialState = {
@@ -24,24 +24,20 @@ function ForgotPassword() {
 
     const forgotPassword = async () => {
         if (!isEmail(email)) {
-            return setData({ ...data, err: 'Invalid Emails.', success: '' })
+            return toast.error("Invalid Emails.")
         }
 
         try {
             const res = await Axios.post('/user/forgot', { email })
-            return setData({ ...data, err: '', success: res.data.msg })
+            return toast.success(res.data.msg)
         } catch (err) {
-            err.response.data.msg && setData({ ...data, err: err.response.data.msg, success: '' })
+            err.response.data.msg && toast.error(err.response.data.msg)
         }
     }
 
     return (
         <>
             <div className='login-background' >
-                <div className='alert'>
-                    {err && showErrMsg(err)}
-                    {success && showSuccessMsg(success)}
-                </div>
                 <div className='login-container'>
                     <div className='login-content'>
                         <div className='login-background-1'>
@@ -83,8 +79,6 @@ function ForgotPassword() {
                                     <div className='col-12 d-flex justify-content-center'>
                                         <button className="btn btn-danger btn-block mb-4 col-6 " onClick={forgotPassword}>Verify your email</button>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>

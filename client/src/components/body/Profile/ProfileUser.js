@@ -1,33 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Profile/ProfileUser.scss'
-import Axios from 'axios'
-import { useSelector, useDispatch } from 'react-redux'
-import { BrowserRouter as Router, Link, Switch, Route, useRouteMatch, NavLink } from 'react-router-dom'
-import { isLenght, isMath } from '../../utils/validation/validation'
-import { showSuccessMsg, showErrMsg } from '../../utils/notification/Notification'
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+import { dispatchGetAllUsers, fetchAllUsers } from '../../../redux/action/userAction'
 
-import ProfileItem from './ProfileItem'
-
-
-const initialState = {
-    name: '',
-    email: '',
-    err: '',
-    success: ''
-}
 
 function ProfileUser() {
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
 
     const { user, isAdmin } = auth
-    const [data, setData] = useState(initialState)
     const [avatar, setAvatar] = useState(false)
 
-    const [loading, setLoading] = useState(false)
     const [callback, setCallback] = useState(false)
 
-    let { url } = useRouteMatch();
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (isAdmin) {
+            fetchAllUsers(token).then(res => {
+                dispatch(dispatchGetAllUsers(res))
+            })
+        }
+    }, [token, isAdmin, dispatch, callback])
+
+
+    const alluser = () => {
+        return (
+            <NavLink to="/all-user" className={({ isActive }) => (isActive ? 'profile pb-2 active' : 'profile pb-2')}><i class="fa-solid fa-list"></i><span>All user</span></NavLink>
+        )
+    }
+
     return (
         <>
             <div className='profile_item_controll col-3'>
@@ -41,6 +44,9 @@ function ProfileUser() {
                 <div className='profile_item-infor'>
                     <div className='infor'>
                         <NavLink to="/profileuser" className={({ isActive }) => (isActive ? 'profile pb-2 active' : 'profile pb-2')}><i class="fa-solid fa-user"></i><span>profile</span></NavLink>
+                        {
+                            isAdmin ? alluser() : null
+                        }
                         <NavLink to="/address" className={({ isActive }) => (isActive ? 'address pb-2 active' : 'address pb-2')}><i class="fa-solid fa-location-dot"></i><span>address</span></NavLink>
                         <NavLink to="/changePassword" className={({ isActive }) => (isActive ? 'changePassword pb-2 active' : 'changePassword pb-2')} ><i class="fa-solid fa-key"></i><span>changePassword</span></NavLink>
                     </div>

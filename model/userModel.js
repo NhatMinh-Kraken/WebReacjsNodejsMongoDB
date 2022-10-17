@@ -30,13 +30,23 @@ const userSchema = new mongoose.Schema({
     },
 
     numberphone: {
-        type: Number,
+        type: String,
         default: null,
     },
 
     address: {
         type: String,
         default: "chưa có",
+    },
+
+    sex: {
+        type: Number,
+        default: 0,
+    },
+
+    date: {
+        type: String,
+        default: null,
     }
 }, {
     timestamps: true

@@ -15,13 +15,10 @@ import { useSelector } from 'react-redux'
 function Header() {
 
     const auth = useSelector(state => state.auth)
-    const { user, isLogged } = auth
+    const { isLogged } = auth
 
     const userLink = () => {
         return (
-            // <button type='button' className='button-login mx-1 '>
-            //     <img src={user.avatar} className="avatar" alt='Trang Cá Nhân' />
-            // </button>
             <Navbar>
                 <NavItem>
                     <DropdownMenu />
@@ -60,11 +57,7 @@ function Header() {
                                 <button type='button' className='button-con mx-1 '><i className='fab fa-github'></i></button>
                             </div>
                         </div>
-                        {/* <Navbar>
-                        <NavItem>
-                            <DropdownMenu />
-                        </NavItem>
-                    </Navbar> */}
+
                         <div className='right-header col-1'>
                             <div className='right-header-login'>
                                 {

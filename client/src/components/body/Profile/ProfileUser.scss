@@ -238,10 +238,42 @@
                 display: flex;
 
                 .profile_item_info {
-                    border-right: 1px solid #e4e1e163;
+                    // border-right: 1px solid #e4e1e163;
 
-                    .profile_item_form{
+                    .profile_item_form {
                         padding-right: 1.125rem;
+
+                        .form-row {
+                            .form {
+                                display: flex;
+
+                                .form-lable {
+                                    display: flex;
+                                    margin: 0;
+                                    font-weight: 500;
+                                    text-transform: uppercase;
+                                    color: rgb(148, 148, 148);
+                                }
+
+                                .input-group {
+                                    display: flex;
+
+                                    .input-group-prepend {
+                                        padding: 0;
+
+                                        .input-group-text {
+                                            height: auto;
+                                        }
+                                    }
+                                }
+
+                                .form-control {
+                                    width: 100%;
+                                    height: auto;
+                                }
+                            }
+
+                        }
 
                     }
                 }
@@ -250,6 +282,7 @@
                     display: flex;
                     flex-flow: column;
                     align-items: center;
+                    border-left: 1px solid #e4e1e163;
 
                     .profile_iteam_avatar_body {
                         // border-left: 1px solid #bbb;

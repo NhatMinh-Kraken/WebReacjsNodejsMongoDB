@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from "react-router-dom"
 import './Login.scss'
 import axios from 'axios'
-import { showErrMsg, showSuccessMsg } from '../../utils/notification/Notification'
-import {dispatchLogin} from '../../../redux/action/authAction'
-import {useDispatch} from 'react-redux'
+import { dispatchLogin } from '../../../redux/action/authAction'
+import { useDispatch } from 'react-redux'
+
+import { toast } from 'react-toastify'
+
+import GoogleLogin from 'react-google-login';
+import { gapi } from 'gapi-script'
+
+import FacebookLogin from 'react-facebook-login'
 
 const initialState = {
     email: '',
@@ -37,7 +43,7 @@ function Login() {
         e.preventDefault()
         try {
             const res = await axios.post('/user/login', { email, password })
-            setUser({ ...user, err: '', success: res.data.msg })
+            toast.success(res.data.msg)
 
             localStorage.setItem('firstLogin', true)
 
@@ -45,21 +51,56 @@ function Login() {
 
             history.push("/")
 
-            
+
         } catch (err) {
             err.response.data.msg &&
                 setUser({ ...user, err: err.response.data.msg, success: '' })
         }
     }
 
+    const clientId = "404529522208-ujotennbb9ujd2iqenar833pgnbkgo3f.apps.googleusercontent.com"
+
+    useEffect(() => {
+        gapi.load("client:auth2", () => {
+            gapi.auth2.init({ clientId: clientId })
+        })
+    }, [])
+
+    const responseGoogle = async (response) => {
+        try {
+            const res = await axios.post('/user/google_login', { tokenId: response.tokenId })
+            toast.success(res.data.msg)
+            localStorage.setItem('firstLogin', true)
+            dispatch(dispatchLogin())
+
+            history.push("/")
+
+        } catch (err) {
+            err.response.data.msg &&
+                toast.error(err.response.data.msg)
+        }
+    }
+
+    const responseFacebook = async (response) => {
+        console.log(response)
+        try {
+            const { accessToken, userID } = response
+            const res = await axios.post('/user/facebook_login', { accessToken, userID })
+
+            toast.success(res.data.msg)
+            localStorage.setItem('firstLogin', true)
+
+            dispatch(dispatchLogin())
+            history.push('/')
+        } catch (err) {
+            err.response.data.msg &&
+                toast.error(err.response.data.msg)
+        }
+    }
 
     return (
         <>
             <div className='login-background' >
-                <div className='alert'>
-                    {err && showErrMsg(err)}
-                    {success && showSuccessMsg(success)}
-                </div>
                 <div className='login-container'>
                     <div className='login-content'>
                         <div className='login-background-1'>
@@ -76,24 +117,6 @@ function Login() {
 
                             <div className="tab-content">
                                 <div className="tab-pane fade show active">
-                                    <div className="text-center mb-3 mt-3 mb-3">
-
-                                        <button type="button" className="btn btn-link btn-floating mx-1 ">
-                                            <i className="fab fa-facebook-f"></i>
-                                        </button>
-
-                                        <button type="button" className="btn btn-link btn-floating mx-1 ">
-                                            <i className="fab fa-google"></i>
-                                        </button>
-
-                                        <button type="button" className="btn btn-link btn-floating mx-1 ">
-                                            <i className="fab fa-twitter"></i>
-                                        </button>
-
-                                        <button type="button" className="btn btn-link btn-floating mx-1 ">
-                                            <i className="fab fa-github"></i>
-                                        </button>
-                                    </div>
 
                                     <form onSubmit={handleSubmit}>
                                         <div className="user-box mb-4">
@@ -125,8 +148,19 @@ function Login() {
                                             <button className="btn btn-danger btn-block mb-4 col-4 " type='submit'>Sign in</button>
                                         </div>
 
-                                        <div className="text-center">
-                                            <p>Not a member? <Link to="/register">Register</Link></p>
+                                        <div className='d-flex col-12 mr-1'>
+                                            <GoogleLogin className='col-6'
+                                                clientId={clientId}
+                                                buttonText="Login with Google"
+                                                onSuccess={responseGoogle}
+                                                onFailure={responseGoogle}
+                                                cookiePolicy={'single_host_origin'}
+                                            />
+                                            <FacebookLogin className='col-6 ml-1'
+                                                appId="665527241564883"
+                                                autoLoad={false}
+                                                fields="name,email,picture"
+                                                callback={responseFacebook} />,
                                         </div>
                                     </form>
                                 </div>

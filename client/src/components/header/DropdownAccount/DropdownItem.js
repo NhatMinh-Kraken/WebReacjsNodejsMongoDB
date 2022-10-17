@@ -21,12 +21,12 @@ function DropdownItem(props) {
     return (
         <>
             <div className='user'>
-                <Link to="/profile" className='menu-item-user'>
+                <Link to="/profile/profileuser" className='menu-item-user'>
                     <img src={user.avatar} className='menu-item-avatar' /><span className='menu-item-name'>{user.name}</span>
                 </Link>
             </div>
             <div className='setting-user'>
-                <Link to="/profile" className="menu-item mb-2">
+                <Link to="/profile/profileuser" className="menu-item mb-2">
                     <i className="fa-solid fa-id-card mr-2 tag"></i><span className='name'>Trang Cá Nhân</span> <i className="fa-solid fa-angle-right next"></i>
                 </Link>
                 <Link to="/logout" onClick={handleLogout} className="menu-item mt-2">

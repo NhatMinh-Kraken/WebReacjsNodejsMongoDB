@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { showErrMsg, showSuccessMsg } from '../../utils/notification/Notification'
 import { isLenght, isMath } from '../../utils/validation/validation'
+
+import { toast } from 'react-toastify'
 
 const initialState = {
     password: '',
@@ -16,6 +17,8 @@ function ResetPassword() {
     const [data, setData] = useState(initialState)
     const { token } = useParams()
 
+    const history = useHistory()
+
     const { password, cf_password, err, success } = data
 
     const handleChangeInput = e => {
@@ -25,11 +28,11 @@ function ResetPassword() {
 
     const resetPassword = async () => {
         if (isLenght(password)) {
-            return setData({ ...data, err: 'Password must be at least 6 characters.', success: '' })
+            return toast.error("Password must be at least 6 characters.")
         }
 
         if (!isMath(password, cf_password)) {
-            return setData({ ...data, err: 'Password did not match.', success: '' })
+            return toast.error("Password did not match.")
         }
 
         try {
@@ -37,19 +40,16 @@ function ResetPassword() {
                 headers: { Authorization: token }
             })
 
-            return setData({ ...data, err: '', success: res.data.msg })
+            return toast.success(res.data.msg)
+            history.push("/login")
         } catch (err) {
-            err.response.data.msg && setData({ ...data, err: err.response.data.msg, success: '' })
+            err.response.data.msg && toast.error(err.response.data.msg)
         }
     }
 
     return (
         <>
             <div className='login-background' >
-                <div className='alert'>
-                    {err && showErrMsg(err)}
-                    {success && showSuccessMsg(success)}
-                </div>
                 <div className='login-container'>
                     <div className='login-content'>
                         <div className='login-background-1'>
