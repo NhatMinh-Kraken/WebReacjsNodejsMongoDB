@@ -4,13 +4,10 @@ import Axios from "axios";
 
 import { toast } from 'react-toastify';
 
-
-
 const initialState = {
     name: '',
     email: '',
     numberphone: '',
-    address: '',
     sex: '',
     date: '',
     err: '',
@@ -68,7 +65,6 @@ function ProfileItem() {
                 name: name ? name : user.name,
                 avatar: avatar ? avatar : user.avatar,
                 numberphone: numberphone ? numberphone : user.numberphone,
-                address: address ? address : user.address,
                 sex: sex ? sex : user.sex,
                 date: date ? date : user.date
             },
@@ -83,7 +79,7 @@ function ProfileItem() {
     }
 
     const handleUpdate = () => {
-        if (name || avatar || numberphone || address || sex || date) {
+        if (name || avatar || numberphone || sex || date) {
             updateInfo()
         }
         else {
@@ -143,26 +139,15 @@ function ProfileItem() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="form-row mt-3">
-                                <div className="col-12 form">
-                                    <label className="col-2 align-items-center form-lable" htmlFor="address">Address</label>
-                                    <div className="input-group">
-                                        <div className="input-group-prepend col-1">
-                                            <span className="input-group-text" id="inputGroupPrepend4"><i className="fa fa-location-arrow d-flex"></i></span>
-                                        </div>
-                                        <input type="text" className="form-control col-11" name="address" id="address" defaultValue={user.address} placeholder="address" onChange={handleChange} />
-                                    </div>
-                                </div>
-                            </div>
 
                             <div className="form-row mt-3">
                                 <div className="col-12 form">
                                     <label className="col-2 align-items-center form-lable" htmlFor="sex">Gender</label>
                                     <div className="input-group">
                                         <div className="input-group-prepend col-1">
-                                            <span className="input-group-text" id="inputGroupPrepend4"><i class="fa fa-transgender-alt"></i></span>
+                                            <span className="input-group-text" id="inputGroupPrepend4"><i className="fa fa-transgender-alt"></i></span>
                                         </div>
-                                        <select class="custom-select col-4" name="sex" id="sex" defaultValue={user.sex} onChange={handleChange}>
+                                        <select className="custom-select col-4" name="sex" id="sex" defaultValue={user.sex} onChange={handleChange}>
                                             {optionGender.map((option) => (
                                                 <option key={option.value} value={option.value} selected={user.sex == option.value}>
                                                     {option.label}
@@ -178,7 +163,7 @@ function ProfileItem() {
                                     <label className="col-2 align-items-center form-lable" htmlFor="date">Date</label>
                                     <div className="input-group">
                                         <div className="input-group-prepend col-1">
-                                            <span className="input-group-text" id="inputGroupPrepend4"><i class="fa fa-calendar"></i></span>
+                                            <span className="input-group-text" id="inputGroupPrepend4"><i className="fa fa-calendar"></i></span>
                                         </div>
                                         <input type="date" className="form-control col-4" name="date" id="date" defaultValue={user.date} onChange={handleChange} />
                                     </div>

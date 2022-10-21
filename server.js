@@ -1,9 +1,13 @@
+
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
+
+const mysql = require('mysql')
+
 
 const app = express()
 app.use(express.json())
@@ -32,3 +36,8 @@ const PORT = process.env.PORT || 26000
 app.listen(PORT, () => {
     console.log("Server is running on PORT:", PORT)
 })
+
+
+
+
+

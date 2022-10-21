@@ -182,9 +182,9 @@ const userController = {
     },
     updateUser: async (req, res) => {
         try {
-            const { name, avatar, numberphone, address, sex, date } = req.body
+            const { name, avatar, numberphone, sex, date } = req.body
             await Users.findOneAndUpdate({ _id: req.user.id }, {
-                name, avatar, numberphone, address, sex, date
+                name, avatar, numberphone, sex, date
             })
 
             res.json({ msg: "Update Success!" })
@@ -192,6 +192,19 @@ const userController = {
             return res.status(500).json({ msg: err.message })
         }
     },
+
+    updateAddress: async (req, res) => {
+        try {
+            const { address, cityId, districtId, wardId, nameCity } = req.body
+            await Users.findOneAndUpdate({ _id: req.user.id }, {
+                address, cityId, districtId, wardId, nameCity
+            })
+            res.json({ msg: "Update Success!" })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
     updateUsersRole: async (req, res) => {
         try {
             const { role } = req.body

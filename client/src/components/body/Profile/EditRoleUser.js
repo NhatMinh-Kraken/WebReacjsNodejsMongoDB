@@ -87,9 +87,9 @@ function EditRoleUser() {
               </div>
               <div className='form-row mt-3'>
                 <div className='col-12 form justify-content-center'>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="isAdmin" id="isAdmin" checked={checkAdmin} onChange={handleCheck} />
-                    <label class="form-check-label" for="exampleRadios1">
+                  <div className="form-check">
+                    <input className="form-check-input" type="checkbox" name="isAdmin" id="isAdmin" checked={checkAdmin} onChange={handleCheck} />
+                    <label className="form-check-label" for="exampleRadios1">
                       Admin
                     </label>
                   </div>

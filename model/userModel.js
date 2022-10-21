@@ -39,6 +39,21 @@ const userSchema = new mongoose.Schema({
         default: "chưa có",
     },
 
+    cityId: {
+        type: Number,
+        default: 0,
+    },
+
+    districtId: {
+        type: Number,
+        default: 0,
+    },
+
+    wardId: {
+        type: Number,
+        default: 0,
+    },
+
     sex: {
         type: Number,
         default: 0,
@@ -47,7 +62,12 @@ const userSchema = new mongoose.Schema({
     date: {
         type: String,
         default: null,
-    }
+    },
+
+    // nameCity: {
+    //     type: String,
+    //     default: "chưa có",
+    // }
 }, {
     timestamps: true
 })

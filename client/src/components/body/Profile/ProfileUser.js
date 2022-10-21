@@ -27,13 +27,13 @@ function ProfileUser() {
 
     const alluser = () => {
         return (
-            <NavLink to="/all-user" className={({ isActive }) => (isActive ? 'profile pb-2 active' : 'profile pb-2')}><i class="fa-solid fa-list"></i><span>All user</span></NavLink>
+            <NavLink to="/all-user" className={({ isActive }) => (isActive ? 'profile pb-2 active' : 'profile pb-2')}><i className="fa-solid fa-list"></i><span>All user</span></NavLink>
         )
     }
 
     return (
         <>
-            <div className='profile_item_controll col-3'>
+            <div className='profile_item_controll col-sm-3'>
                 <div className='profile_item-avatar'>
                     <img src={avatar ? avatar : user.avatar} alt="" />
                     <div className='infor_profile'>
@@ -43,17 +43,17 @@ function ProfileUser() {
                 </div>
                 <div className='profile_item-infor'>
                     <div className='infor'>
-                        <NavLink to="/profileuser" className={({ isActive }) => (isActive ? 'profile pb-2 active' : 'profile pb-2')}><i class="fa-solid fa-user"></i><span>profile</span></NavLink>
+                        <NavLink to="/profileuser" className={({ isActive }) => (isActive ? 'profile pb-2 active' : 'profile pb-2')}><i className="fa-solid fa-user"></i><span>profile</span></NavLink>
                         {
                             isAdmin ? alluser() : null
                         }
-                        <NavLink to="/address" className={({ isActive }) => (isActive ? 'address pb-2 active' : 'address pb-2')}><i class="fa-solid fa-location-dot"></i><span>address</span></NavLink>
-                        <NavLink to="/changePassword" className={({ isActive }) => (isActive ? 'changePassword pb-2 active' : 'changePassword pb-2')} ><i class="fa-solid fa-key"></i><span>changePassword</span></NavLink>
+                        <NavLink to="/address" className={({ isActive }) => (isActive ? 'address pb-2 active' : 'address pb-2')}><i className="fa-solid fa-location-dot"></i><span>address</span></NavLink>
+                        <NavLink to="/changePassword" className={({ isActive }) => (isActive ? 'changePassword pb-2 active' : 'changePassword pb-2')} ><i className="fa-solid fa-key"></i><span>changePassword</span></NavLink>
                     </div>
                     <div className='infor_additional'>
-                        <a href="#" className='order pb-2'><i class="fa-solid fa-cart-shopping"></i><span>order</span></a>
-                        <a href="#" className='bank pb-2'><i class="fa-sharp fa-solid fa-building-columns"></i><span>bank</span></a>
-                        <a href="#" className='notification pb-2'><i class="fa-solid fa-bell"></i><span>notification</span></a>
+                        <a href="#" className='order pb-2'><i className="fa-solid fa-cart-shopping"></i><span>order</span></a>
+                        <a href="#" className='bank pb-2'><i className="fa-sharp fa-solid fa-building-columns"></i><span>bank</span></a>
+                        <a href="#" className='notification pb-2'><i className="fa-solid fa-bell"></i><span>notification</span></a>
                     </div>
                 </div>
             </div>

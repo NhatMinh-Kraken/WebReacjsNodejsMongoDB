@@ -84,7 +84,7 @@ function ProfileAllUser() {
                 <div className='profile_item_body'>
                     <div className='profile_item_info col-12'>
                         <div className='bd-example'>
-                            <table class="table table-hover table-bordered">
+                            <table className="table table-hover table-bordered">
                                 <thead className='thead-dark'>
                                     <tr>
                                         <th scope="col-1">#</th>
@@ -101,10 +101,10 @@ function ProfileAllUser() {
                                                 <th scope="row" className='col-1'>{index + 1}</th>
                                                 <td className='col-4'>{user.name}</td>
                                                 <td className='col-5'>{user.email}</td>
-                                                <td className='col-1 text-center m-0'>{user.role === 1 ? <i class="fa-solid fa-circle-check text-primary"></i> : <i class="fa-solid fa-circle-xmark text-danger"></i>}</td>
+                                                <td className='col-1 text-center m-0'>{user.role === 1 ? <i className="fa-solid fa-circle-check text-primary"></i> : <i className="fa-solid fa-circle-xmark text-danger"></i>}</td>
                                                 <td className='col-1'>
-                                                    <Link to={`/edit_user/${user._id}`}><i class="fa-solid fa-pen-to-square mr-2 text-primary" title='edit'></i></Link>
-                                                    <a onClick={() => handleShow(user._id)}><i class="fa-solid fa-trash text-danger" title='delete'></i></a>
+                                                    <Link to={`/edit_user/${user._id}`}><i className="fa-solid fa-pen-to-square mr-2 text-primary" title='edit'></i></Link>
+                                                    <a onClick={() => handleShow(user._id)}><i className="fa-solid fa-trash text-danger" title='delete'></i></a>
                                                 </td>
                                             </tr>
                                         ))

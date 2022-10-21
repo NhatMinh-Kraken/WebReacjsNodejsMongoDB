@@ -124,13 +124,11 @@ function Login() {
                                             <label className="form-labell" htmlFor="loginName" >Email or username</label>
                                         </div>
 
-
                                         <div className="user-box mb-4">
                                             <input type={user.isBool ? 'text' : 'password'} id="loginPassword" className="form-controll" name='password' value={password} onChange={handleChangeInput} required />
                                             <span className='show-btn' onClick={HandleShowEyePassword}><i className={user.isBool ? 'fa fa-eye' : 'fa fa-eye-slash'}></i></span>
                                             <label className="form-labell" htmlFor="loginPassword">Password</label>
                                         </div>
-
 
                                         <div className="row mb-4">
                                             <div className="col-6 justify-content-center d-flex">
@@ -148,8 +146,8 @@ function Login() {
                                             <button className="btn btn-danger btn-block mb-4 col-4 " type='submit'>Sign in</button>
                                         </div>
 
-                                        <div className='d-flex col-12 mr-1'>
-                                            <GoogleLogin className='col-6'
+                                        <div className='d-flex col-12 login-online'>
+                                            <GoogleLogin className='col-6 mr-1'
                                                 clientId={clientId}
                                                 buttonText="Login with Google"
                                                 onSuccess={responseGoogle}
@@ -160,7 +158,8 @@ function Login() {
                                                 appId="665527241564883"
                                                 autoLoad={false}
                                                 fields="name,email,picture"
-                                                callback={responseFacebook} />,
+                                                callback={responseFacebook}
+                                                icon="fa-facebook" />
                                         </div>
                                     </form>
                                 </div>

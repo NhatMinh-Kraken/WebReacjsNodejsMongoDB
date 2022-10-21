@@ -1,16 +1,12 @@
 import React from 'react'
-import Header from '../header/Header'
-import ProfileUser from './Profile/ProfileUser'
-import ProfileItem from './Profile/ProfileItem'
+import ProfileUser from './ProfileUser'
 
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
-import ProfileRoute from './Profile/ProfileRoute'
-
+import { BrowserRouter as Router } from 'react-router-dom'
+import ProfileRoute from './ProfileRoute'
 
 function Profile() {
     return (
         <>
-            {/* <Header /> */}
             <div className='profile_page pt-5'>
                 <div className='container'>
                     <div className='profile_page_body'>

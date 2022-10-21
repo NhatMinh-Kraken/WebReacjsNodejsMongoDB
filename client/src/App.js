@@ -1,17 +1,17 @@
 import React, { Fragment, useEffect } from 'react'
-import { Route, Switch, BrowserRouter as Router, Link } from 'react-router-dom'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 import { path } from '../src/components/utils/constant'
 import Body from './components/body/Body';
-import Header from './components/header/Header';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { dispatchLogin, fetchUser, dispatchGetUser } from './redux/action/authAction'
 import Axios from 'axios';
-import Profile from './components/body/Profile';
+import Profile from './components/body/Profile/Profile';
 import NotFound from './components/utils/NotFound/NotFound';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProfieLayout from './components/body/ProfieLayout';
 
 
 function App() {
@@ -49,11 +49,8 @@ function App() {
     <Fragment>
       <Router>
         <div className="App">
-          <Header />
           <Body />
-          <Switch>
-            <Route path={path.PROFILE} component={(isLogged ? Profile : NotFound)} />
-          </Switch>
+          <Route path={path.PROFILE} component={(isLogged ? ProfieLayout : NotFound)} />
           <ToastContainer
             position="top-right"
             autoClose={5000}

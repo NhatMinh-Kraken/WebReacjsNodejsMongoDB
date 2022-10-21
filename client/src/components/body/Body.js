@@ -11,7 +11,10 @@ import { path } from '../utils/constant'
 import NotFound from '../utils/NotFound/NotFound';
 
 import { useSelector } from 'react-redux'
-import Header from '../header/Header';
+import SliderHomePage from '../Slider/SliderHomePage';
+import Profile from './Profile/Profile';
+import Home from '../Home';
+
 
 
 function Body() {
@@ -21,11 +24,13 @@ function Body() {
   return (
     <section>
       <Switch>
+        <Route path={path.HOME} component={Home} exact />
         <Route path={path.LOGIN} component={(isLogged ? NotFound : Login)} exact />
         <Route path={path.REGISTER} component={(isLogged ? NotFound : Register)} exact />
         <Route path={path.FORGOTPASSWORD} component={ForgotPassword} exact />
         <Route path={path.RESETPASSWORD} component={ResetPassword} exact />
         <Route path="/user/activation/:activation_token" component={ActivationEmail} exact />
+        {/* <Route path={path.PROFILE} component={(isLogged ? Profile : NotFound)} /> */}
       </Switch>
     </section>
   )

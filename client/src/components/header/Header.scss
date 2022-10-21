@@ -1,7 +1,7 @@
 .home-header {
     width: 100%;
-    height: 100px;
     background-color: #000;
+    height: 68px;
     //border-bottom: 1px solid rgb(199, 198, 198);
 
     .home-header-container {
@@ -14,9 +14,11 @@
         .row {
             .left-header {
                 display: flex;
-                //width: 25%;
-                padding: 10px;
-                justify-content: center;
+                align-items: center;
+
+                @media (max-width: 768px) {
+                    width: 49%;
+                }
 
                 .logo-header {
                     display: flex;
@@ -29,6 +31,10 @@
                         -webkit-animation: xoayvong 20s linear 0s infinite;
                         -moz-animation: xoayvong 20s linear 0s infinite;
                         -o-animation: xoayvong 20s linear 0s infinite;
+
+                        img {
+                            width: 50px;
+                        }
 
                         @-webkit-keyframes xoayvong {
                             from {
@@ -79,110 +85,31 @@
                         margin-bottom: 0px;
                     }
 
-                    a{
+                    a {
                         text-decoration: none;
-                        
-                        &:hover{
+
+                        &:hover {
                             text-decoration: none;
                         }
                     }
                 }
             }
 
-            // .left-none-header {
-            //     display: flex;
-            //     width: 50%;
-            //     padding: 10px;
-            //     justify-content: center;
-
-            //     .input-header {
-            //         display: flex;
-            //         justify-items: center;
-            //         align-items: center;
-            //         width: 100%;
-
-            //         .input-header-search {
-            //             position: relative;
-            //             display: flex;
-            //             width: 100%;
-
-            //             .form-control {
-            //                 width: 100%;
-            //                 height: 39px;
-            //                 border-radius: 19px;
-            //                 border: 1px solid #000;
-            //                 display: flex;
-
-            //                 &:invalid:not(:focus) {
-            //                     .btn-search {
-            //                         cursor: pointer;
-            //                     }
-            //                 }
-            //             }
-
-            //             .btn-search {
-            //                 //background: #ccc;
-            //                 // border-radius: 50%;
-            //                 // height: 37px;
-            //                 right: 1px;
-            //                 top: 1px;
-            //                 width: 3em;
-            //                 height: 3em;
-            //                 //transition: all .3s ease-in-out;
-            //                 //width: 37px;
-            //                 position: absolute;
-            //                 border-left: 1px solid #bbb;
-
-            //                 &::before {
-            //                     transition: all 0.25s ease-out;
-            //                 }
-
-            //                 &::after {
-            //                     transition: all 0.25s ease-out;
-            //                 }
-
-            //                 &:hover {
-            //                     color: red;
-
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
-
-            .center-header {
-                display: flex;
-                //width: 15%;
-                padding: 10px;
-                justify-content: flex-start;
-
-                .center-header-icon {
-                    display: flex;
-                    justify-items: center;
-                    align-items: center;
-
-                    .button-con {
-                        border-radius: 50%;
-                        width: 30px;
-                        height: 30px;
-                        color: rgb(172, 168, 168);
-                        background: #000;
-                        transition: filter 300ms;
-
-                        &:hover {
-                            filter: brightness(1.2);
-                            color: rgb(252, 157, 157);
-                            transition: all 0.4s;
-                        }
-                    }
+            .left-none-header {
+                @media (max-width: 768px) {
+                    width: 40%;
                 }
             }
 
             .right-header {
                 display: flex;
                 //width: 10%;
-                padding: 10px;
+
                 justify-content: flex-start;
+
+                @media (max-width: 768px) {
+                    width: 10%;
+                }
 
                 .right-header-login {
                     display: flex;
