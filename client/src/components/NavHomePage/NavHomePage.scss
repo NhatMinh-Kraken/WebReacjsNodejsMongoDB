@@ -28,9 +28,7 @@ a {
 
     .NavHomePage-Body {
         display: flex;
-        width: 1680px;
-        margin-left: 8rem;
-        margin-right: auto;
+        width: 100%;
         height: 56px;
 
         .NavHomePage-Item {
@@ -81,7 +79,7 @@ a {
                 top: 8rem;
                 width: 300px;
                 animation: dropdownTopBottom .4s ease-in-out;
-                left: 10%;
+                left: 6%;
 
                 &.show {
                     display: block;

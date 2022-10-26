@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Modal, Button } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import Axios from 'axios'
@@ -11,32 +11,29 @@ const initialState = {
 }
 function ProfileAllUser() {
     const auth = useSelector(state => state.auth)
-    const { user, isAdmin } = auth
+    const { user } = auth
     const [data, setData] = useState(initialState)
     const token = useSelector(state => state.token)
 
     const [deleteId, setDeleteId] = useState("")
 
-    const history = useHistory()
 
     const [show, setShow] = useState(false)
 
     const users = useSelector(state => state.users)
 
-    // const [loading, setLoading] = useState(false)
-    const [callback, setCallback] = useState(false)
+    // const [loading, setLoading] = useState(false
 
     const handleClose = () => setShow(false);
 
     const handleShow = (id) => {
         setShow(true)
         setDeleteId(id)
-
     };
 
     const handleDelete = async () => {
         try {
-            if (user._id !== deleteId) {
+            if (user.id !== deleteId) {
                 const res = await Axios.delete(`/user/delete/${deleteId}`, {
                     headers: { Authorization: token }
                 })
@@ -72,7 +69,7 @@ function ProfileAllUser() {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={() => handleDelete(user._id)}>Delete</Button>
+                    <Button variant="primary" onClick={() => handleDelete(user.id)}>Delete</Button>
                 </Modal.Footer>
             </Modal>
 
@@ -97,14 +94,14 @@ function ProfileAllUser() {
                                 <tbody>
                                     {
                                         users.map((user, index) => (
-                                            <tr key={user._id}>
+                                            <tr key={user.id}>
                                                 <th scope="row" className='col-1'>{index + 1}</th>
                                                 <td className='col-4'>{user.name}</td>
                                                 <td className='col-5'>{user.email}</td>
                                                 <td className='col-1 text-center m-0'>{user.role === 1 ? <i className="fa-solid fa-circle-check text-primary"></i> : <i className="fa-solid fa-circle-xmark text-danger"></i>}</td>
                                                 <td className='col-1'>
-                                                    <Link to={`/edit_user/${user._id}`}><i className="fa-solid fa-pen-to-square mr-2 text-primary" title='edit'></i></Link>
-                                                    <a onClick={() => handleShow(user._id)}><i className="fa-solid fa-trash text-danger" title='delete'></i></a>
+                                                    <Link to={`/edit_user/${user.id}`}><i className="fa-solid fa-pen-to-square mr-2 text-primary" title='edit'></i></Link>
+                                                    <a onClick={() => handleShow(user.id)}><i className="fa-solid fa-trash text-danger" title='delete'></i></a>
                                                 </td>
                                             </tr>
                                         ))

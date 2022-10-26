@@ -82,7 +82,7 @@ function Login() {
     }
 
     const responseFacebook = async (response) => {
-        console.log(response)
+    
         try {
             const { accessToken, userID } = response
             const res = await axios.post('/user/facebook_login', { accessToken, userID })

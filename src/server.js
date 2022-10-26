@@ -6,7 +6,7 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
 
-const mysql = require('mysql')
+const connectDB = require('./Config/ConnectDB')
 
 
 const app = express()
@@ -20,17 +20,20 @@ app.use(fileUpload({
 //Routers
 app.use('/user', require('./router/userRouter'))
 app.use('/api', require('./router/upload'))
+
 // connect to mongoDB
-const URI = process.env.MONGODB_URL
-mongoose.connect(URI, {
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}, err => {
-    if (err) throw err;
-    console.log("Connected to mongodb")
-})
+// const URI = process.env.MONGODB_URL
+// mongoose.connect(URI, {
+//     useCreateIndex: true,
+//     useFindAndModify: false,
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// }, err => {
+//     if (err) throw err;
+//     console.log("Connected to mongodb")
+// })
+
+connectDB()
 
 const PORT = process.env.PORT || 26000
 app.listen(PORT, () => {

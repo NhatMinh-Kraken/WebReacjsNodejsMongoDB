@@ -1,4 +1,7 @@
-const Users = require('../model/userModel')
+// const Users = require('../model/userModel')
+
+const db = require('../models/index')
+
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
@@ -26,7 +29,12 @@ const userController = {
                 return res.status(400).json({ msg: "Invalid Email." })
             }
 
-            const user = await Users.findOne({ email })
+            const user = await db.Users.findOne({
+                where: {
+                    email: email
+                },
+                raw: true
+            })
             if (user) {
                 return res.status(400).json({ msg: "This email already exists." })
             }
@@ -59,16 +67,19 @@ const userController = {
 
             const { name, email, password } = user
 
-            const check = await Users.findOne({ email })
+            const check = await db.Users.findOne({
+                where: {
+                    email: email
+                },
+                raw: true
+            })
             if (check) {
                 return res.status(400).json({ msg: "This email already exists." })
             }
 
-            const newUser = new Users({
+            await db.Users.create({
                 name, email, password
             })
-
-            await newUser.save()
 
             res.json({ msg: "Account has been activated!" })
 
@@ -79,7 +90,12 @@ const userController = {
     login: async (req, res) => {
         try {
             const { email, password } = req.body
-            const user = await Users.findOne({ email })
+            const user = await db.Users.findOne({
+                where: {
+                    email: email
+                },
+                raw: true
+            })
             if (!user) {
                 return res.status(400).json({ msg: "This email does not exis" })
             }
@@ -89,7 +105,7 @@ const userController = {
                 return res.status(400).json({ msg: "Password is incorrect." })
             }
 
-            const refresh_token = createRefreshToken({ id: user._id })
+            const refresh_token = createRefreshToken({ id: user.id })
             res.cookie('refreshtoken', refresh_token, {
                 httpOnly: true,
                 path: '/user/refresh_token',
@@ -124,12 +140,17 @@ const userController = {
     forgotPassword: async (req, res) => {
         try {
             const { email } = req.body
-            const user = await Users.findOne({ email })
+            const user = await db.Users.findOne({
+                where: {
+                    email: email
+                },
+                raw: true
+            })
             if (!user) {
                 return res.status(400).json({ msg: "This email does not exist." })
             }
 
-            const access_token = createAccessToken({ id: user._id })
+            const access_token = createAccessToken({ id: user.id })
             const url = `${CLIENT_URL}/user/reset/${access_token}`
 
             sendMail(email, url, "Reset your password")
@@ -142,13 +163,25 @@ const userController = {
     resetPassword: async (req, res) => {
         try {
             const { password } = req.body
-            console.log(password)
 
             const passwordHash = await bcrypt.hash(password, 12)
 
-            await Users.findOneAndUpdate({ _id: req.user.id }, {
-                password: passwordHash
+            const user = await db.Users.findOne({
+                where: {
+                    id: req.user.id,
+                },
+                raw: false
             })
+
+            if (user) {
+                user.password = passwordHash;
+                await user.save();
+            }
+
+
+            // await db.Users.findOneAndUpdate({ id: req.user.id }, {
+            //     password: passwordHash
+            // })
 
             res.json({ msg: "Password successfully changed!" })
         } catch (err) {
@@ -157,7 +190,15 @@ const userController = {
     },
     getUserInfor: async (req, res) => {
         try {
-            const user = await Users.findById(req.user.id).select(['-password'])
+            const user = await db.Users.findOne({
+                where: {
+                    id: req.user.id,
+                },
+                attributes: {
+                    exclude: ['password']
+                },
+                raw: true
+            })
 
             res.json(user)
         } catch (err) {
@@ -166,7 +207,12 @@ const userController = {
     },
     getUsersAllInfor: async (req, res) => {
         try {
-            const user = await Users.find().select('-password')
+            const user = await db.Users.findAll({
+                attributes: {
+                    exclude: ['password']
+                },
+                raw: true
+            })
             res.json(user)
         } catch (err) {
             return res.status(500).json({ msg: err.message })
@@ -183,9 +229,20 @@ const userController = {
     updateUser: async (req, res) => {
         try {
             const { name, avatar, numberphone, sex, date } = req.body
-            await Users.findOneAndUpdate({ _id: req.user.id }, {
-                name, avatar, numberphone, sex, date
+
+            const user = await db.Users.findOne({
+                where: {
+                    id: req.user.id
+                },
+                raw: false
             })
+            if (user) {
+                user.name = name, user.avatar = avatar, user.numberphone = numberphone, user.sex = sex, user.date = date;
+                await user.save();
+            }
+            // await db.Users.findOneAndUpdate({ id: req.user.id }, {
+            //     name, avatar, numberphone, sex, date
+            // })
 
             res.json({ msg: "Update Success!" })
         } catch (err) {
@@ -196,9 +253,21 @@ const userController = {
     updateAddress: async (req, res) => {
         try {
             const { address, cityId, districtId, wardId, nameCity } = req.body
-            await Users.findOneAndUpdate({ _id: req.user.id }, {
-                address, cityId, districtId, wardId, nameCity
+
+            const user = await db.Users.findOne({
+                where: {
+                    id: req.user.id
+                },
+                raw: false
             })
+
+            if (user) {
+                address, cityId, districtId, wardId, nameCity;
+                await user.save();
+            }
+            // await db.Users.findOneAndUpdate({ id: req.user.id }, {
+            //     address, cityId, districtId, wardId, nameCity
+            // })
             res.json({ msg: "Update Success!" })
         } catch (err) {
             return res.status(500).json({ msg: err.message })
@@ -208,9 +277,21 @@ const userController = {
     updateUsersRole: async (req, res) => {
         try {
             const { role } = req.body
-            await Users.findOneAndUpdate({ _id: req.params.id }, {
-                role
+
+            const user = await db.Users.findOne({
+                where: {
+                    id: req.params.id
+                },
+                raw: false
             })
+            if (user) {
+                user.role = role;
+                await user.save();
+            }
+
+            // await db.Users.findOneAndUpdate({ id: req.params.id }, {
+            //     role
+            // })
 
             res.json({ msg: "Update Success!" })
         } catch (err) {
@@ -219,7 +300,21 @@ const userController = {
     },
     deleteUser: async (req, res) => {
         try {
-            await Users.findByIdAndDelete(req.params.id)
+            const user = await db.Users.findOne({
+                where: {
+                    id: req.params.id
+                }
+            })
+            if (!user) {
+                res.json({ msg: "Not Account!" })
+            }
+            // await db.Users.findByIdAndDelete(req.params.id)
+
+            await db.Users.destroy({
+                where: {
+                    id: req.params.id
+                }
+            })
 
             res.json({ msg: "Deleted Success!" })
         } catch (err) {
@@ -240,13 +335,18 @@ const userController = {
 
             if (!email_verified) return res.status(400).json({ msg: "Email verification failed." })
 
-            const user = await Users.findOne({ email })
+            const user = await db.Users.findOne({
+                where: {
+                    email: email
+                },
+                raw: true
+            })
 
             if (user) {
                 const isMatch = await bcrypt.compare(password, user.password)
                 if (!isMatch) return res.status(400).json({ msg: "Password is incorrect." })
 
-                const refresh_token = createRefreshToken({ id: user._id })
+                const refresh_token = createRefreshToken({ id: user.id })
                 res.cookie('refreshtoken', refresh_token, {
                     httpOnly: true,
                     path: '/user/refresh_token',
@@ -255,13 +355,16 @@ const userController = {
 
                 res.json({ msg: "Login success!" })
             } else {
-                const newUser = new Users({
+                // const newUser = new Users({
+                //     name, email, password: passwordHash, avatar: picture
+                // })
+
+                // await newUser.save()
+                const newUser = await db.Users.create({
                     name, email, password: passwordHash, avatar: picture
                 })
 
-                await newUser.save()
-
-                const refresh_token = createRefreshToken({ id: newUser._id })
+                const refresh_token = createRefreshToken({ id: newUser.id })
                 res.cookie('refreshtoken', refresh_token, {
                     httpOnly: true,
                     path: '/user/refresh_token',
@@ -270,7 +373,6 @@ const userController = {
 
                 res.json({ msg: "Login success!" })
             }
-
 
         } catch (err) {
             return res.status(500).json({ msg: err.message })
@@ -291,13 +393,18 @@ const userController = {
 
             const passwordHash = await bcrypt.hash(password, 12)
 
-            const user = await Users.findOne({ email })
+            const user = await db.Users.findOne({
+                where: {
+                    email: email
+                },
+                raw: true
+            })
 
             if (user) {
                 const isMatch = await bcrypt.compare(password, user.password)
                 if (!isMatch) return res.status(400).json({ msg: "Password is incorrect." })
 
-                const refresh_token = createRefreshToken({ id: user._id })
+                const refresh_token = createRefreshToken({ id: user.id })
                 res.cookie('refreshtoken', refresh_token, {
                     httpOnly: true,
                     path: '/user/refresh_token',
@@ -306,13 +413,17 @@ const userController = {
 
                 res.json({ msg: "Login success!" })
             } else {
-                const newUser = new Users({
+
+                // const newUser = new Users({
+                //     name, email, password: passwordHash, avatar: picture.data.url
+                // })
+
+                const newUser = await db.Users.create({
                     name, email, password: passwordHash, avatar: picture.data.url
                 })
-
                 await newUser.save()
 
-                const refresh_token = createRefreshToken({ id: newUser._id })
+                const refresh_token = createRefreshToken({ id: newUser.id })
                 res.cookie('refreshtoken', refresh_token, {
                     httpOnly: true,
                     path: '/user/refresh_token',
@@ -346,7 +457,6 @@ const createAccessToken = (payload) => {
 const createRefreshToken = (payload) => {
     return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' })
 }
-
 
 
 module.exports = userController

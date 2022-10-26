@@ -39,9 +39,8 @@ function ResetPassword() {
             const res = await Axios.post('/user/reset', { password }, {
                 headers: { Authorization: token }
             })
-
-            return toast.success(res.data.msg)
             history.push("/login")
+            return toast.success(res.data.msg);
         } catch (err) {
             err.response.data.msg && toast.error(err.response.data.msg)
         }

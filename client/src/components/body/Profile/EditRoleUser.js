@@ -6,6 +6,7 @@ import Axios from 'axios'
 import { toast } from 'react-toastify'
 
 
+
 function EditRoleUser() {
   const { id } = useParams()
   const history = useHistory()
@@ -15,20 +16,19 @@ function EditRoleUser() {
   const token = useSelector(state => state.token)
 
   const [checkAdmin, setCheckAdmin] = useState(false)
-  const [err, setErr] = useState(false)
-  const [success, setSuccess] = useState(false)
   const [num, setNum] = useState(0)
 
   useEffect(() => {
     if (users.length !== 0) {
       users.forEach(user => {
-        if (user._id === id) {
+        if (user.id == id) {
           setEditUser(user)
           setCheckAdmin(user.role === 1 ? true : false)
         }
+        
       })
     } else {
-      history.push('/profile/all-user')
+      history.push('/profileuser')
     }
   }, [users, id, history])
 
@@ -40,7 +40,7 @@ function EditRoleUser() {
   const handlUpdate = async () => {
     try {
       if (num % 2 !== 0) {
-        const res = await Axios.patch(`/user/update_role/${editUser._id}`, {
+        const res = await Axios.patch(`/user/update_role/${editUser.id}`, {
           role: checkAdmin ? 1 : 0
         }, {
           headers: { Authorization: token }
@@ -89,7 +89,7 @@ function EditRoleUser() {
                 <div className='col-12 form justify-content-center'>
                   <div className="form-check">
                     <input className="form-check-input" type="checkbox" name="isAdmin" id="isAdmin" checked={checkAdmin} onChange={handleCheck} />
-                    <label className="form-check-label" for="exampleRadios1">
+                    <label className="form-check-label" htmlFor="exampleRadios1">
                       Admin
                     </label>
                   </div>
