@@ -62,26 +62,6 @@ function ResetPassword() {
 
                             <div className="tab-content">
                                 <div className="tab-pane fade show active">
-                                    <div className="text-center mb-3 mt-3 mb-3">
-
-                                        <button type="button" className="btn btn-link btn-floating mx-1 ">
-                                            <i className="fab fa-facebook-f"></i>
-                                        </button>
-
-                                        <button type="button" className="btn btn-link btn-floating mx-1 ">
-                                            <i className="fab fa-google"></i>
-                                        </button>
-
-                                        <button type="button" className="btn btn-link btn-floating mx-1 ">
-                                            <i className="fab fa-twitter"></i>
-                                        </button>
-
-                                        <button type="button" className="btn btn-link btn-floating mx-1 ">
-                                            <i className="fab fa-github"></i>
-                                        </button>
-                                    </div>
-
-
                                     <div className="user-box mb-4">
                                         <input type="password" id="registerPassword" className="form-controlls" name='password' onChange={handleChangeInput} value={password} required />
                                         <label className="form-labells" htmlFor="registerPassword">Password</label>

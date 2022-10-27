@@ -73,6 +73,15 @@
             font-size: 14px;
             padding-top: 3px;
             word-break: break-word;
+            flex-flow: column;
+
+            .address-district{
+                border-right: 1px solid #e7e7e7;
+            }
+
+            .address-ward{
+                border-right: 1px solid #e7e7e7;
+            }
         }
     }
 }

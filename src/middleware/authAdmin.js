@@ -1,5 +1,4 @@
 // const Users = require('../model/userModel')
-const Users = require('../models/user')
 const db = require('../models/index')
 
 const authAdmin = async (req, res, next) => {

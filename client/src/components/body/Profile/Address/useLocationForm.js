@@ -104,7 +104,6 @@ function useLocationForm(shouldFetchInitialLocation) {
                 selectedDistrict: null,
                 selectedWard: null
             });
-            console.log(option)
         }
     }
 
@@ -116,13 +115,11 @@ function useLocationForm(shouldFetchInitialLocation) {
                 selectedDistrict: option,
                 selectedWard: null
             });
-            console.log(option)
         }
     }
 
     function onWardSelect(option) {
         setState({ ...state, selectedWard: option });
-        console.log(option)
     }
 
     return { state, onCitySelect, onDistrictSelect, onWardSelect };

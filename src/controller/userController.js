@@ -178,16 +178,38 @@ const userController = {
                 await user.save();
             }
 
-
-            // await db.Users.findOneAndUpdate({ id: req.user.id }, {
-            //     password: passwordHash
-            // })
-
             res.json({ msg: "Password successfully changed!" })
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
     },
+
+    changePassword: async (req, res) => {
+        try {
+            const { password, oldPassword } = req.body
+            const passwordHash = await bcrypt.hash(password, 12)
+
+            const user = await db.Users.findOne({
+                where: {
+                    id: req.user.id,
+                },
+                raw: false
+            })
+
+            const isMatch = await bcrypt.compare(oldPassword, user.password)
+            if (!isMatch) {
+                return res.status(400).json({ msg: "Please enter the correct password" })
+            }
+            if (user) {
+                user.password = passwordHash;
+                await user.save();
+            }
+            res.json({ msg: "Password successfully changed!" })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
     getUserInfor: async (req, res) => {
         try {
             const user = await db.Users.findOne({
@@ -252,7 +274,7 @@ const userController = {
 
     updateAddress: async (req, res) => {
         try {
-            const { address, cityId, districtId, wardId, nameCity } = req.body
+            const { address, cityId, districtId, wardId, nameCity, nameDis, nameWard } = req.body
 
             const user = await db.Users.findOne({
                 where: {
@@ -262,7 +284,7 @@ const userController = {
             })
 
             if (user) {
-                address, cityId, districtId, wardId, nameCity;
+                user.address = address, user.cityId = cityId, user.districtId = districtId, user.wardId = wardId, user.nameCity = nameCity, user.nameDis = nameDis, user.nameWard = nameWard;
                 await user.save();
             }
             // await db.Users.findOneAndUpdate({ id: req.user.id }, {

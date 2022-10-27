@@ -11,8 +11,6 @@ import { path } from '../utils/constant'
 import NotFound from '../utils/NotFound/NotFound';
 
 import { useSelector } from 'react-redux'
-import SliderHomePage from '../Slider/SliderHomePage';
-import Profile from './Profile/Profile';
 import Home from '../Home';
 
 

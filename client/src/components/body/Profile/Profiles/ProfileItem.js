@@ -113,7 +113,7 @@ function ProfileItem() {
                                         <div className="input-group-prepend col-1">
                                             <span className="input-group-text" id="inputGroupPrepend1"><i className="fa fa-user d-flex"></i></span>
                                         </div>
-                                        <input type="text" className="form-control col-11" name="name" id="name" defaultValue={user.name} placeholder="name" onChange={handleChange} />
+                                        <input type="text" className="form-control col-11" name="name" id="name" defaultValue={user.name} placeholder="..." onChange={handleChange} />
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@ function ProfileItem() {
                                         <div className="input-group-prepend col-1">
                                             <span className="input-group-text" id="inputGroupPrepend2"><i className="d-flex fa fa-envelope-o"></i></span>
                                         </div>
-                                        <input type="text" className="form-control col-11" name="email" id="email" defaultValue={user.email} placeholder="email" disabled />
+                                        <input type="text" className="form-control col-11" name="email" id="email" defaultValue={user.email} placeholder="..." disabled />
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@ function ProfileItem() {
                                         <div className="input-group-prepend col-1">
                                             <span className="input-group-text" id="inputGroupPrepend3"><i className="fa fa-phone d-flex"></i></span>
                                         </div>
-                                        <input type="number" className="form-control col-11" name="numberphone" id="numberphone" defaultValue={user.numberphone} placeholder="numberphone" onChange={handleChange} />
+                                        <input type="number" className="form-control col-11" name="numberphone" id="numberphone" defaultValue={user.numberphone} placeholder="..." onChange={handleChange} />
                                     </div>
                                 </div>
                             </div>

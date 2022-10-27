@@ -3,7 +3,7 @@ import './ReviewItem.scss'
 
 const ReviewItem = ({reviewDetails}) => {
 
-    const {name, address, description, img} = reviewDetails;
+    const {name, description, img} = reviewDetails;
     return (
         <div className='item'>
             <div className='shadow-effect'>
@@ -12,7 +12,6 @@ const ReviewItem = ({reviewDetails}) => {
             </div>
             <div className='testimonial-name'>
                 <h5>{name}</h5>
-                <small>{address}</small>
             </div>
         </div>
     );

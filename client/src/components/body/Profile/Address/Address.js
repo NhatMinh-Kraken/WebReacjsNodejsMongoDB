@@ -15,6 +15,9 @@ const initialState = {
     cityId: '',
     districtId: '',
     wardId: '',
+    nameCity: '',
+    nameDis: '',
+    nameWard: '',
     err: '',
     success: ''
 }
@@ -47,6 +50,9 @@ function Address() {
                 cityId: selectedCity.value,
                 districtId: selectedDistrict.value,
                 wardId: selectedWard.value,
+                nameCity: selectedCity.label,
+                nameDis: selectedDistrict.label,
+                nameWard: selectedWard.label
             },
                 {
                     headers: { Authorization: token }
@@ -97,13 +103,13 @@ function Address() {
                 </Modal.Header>
                 <Modal.Body className='col-12 d-flex'>
 
-                    <Select className='col-4 pr-0'
+                    <Select className='col-4 pr-0 pl-0'
                         name="cityId"
                         key={`cityId_${selectedCity?.value}`}
                         options={cityOptions}
                         onChange={(option) => onCitySelect(option)}
                         placeholder="Tỉnh/Thành"
-                        defaultValue={cityOptions.filter(x => x.value === user.cityId)}
+                        defaultValue={cityOptions.find(x => x.value === user.cityId)}
                     />
 
                     <Select className='col-4 pr-0'
@@ -112,7 +118,7 @@ function Address() {
                         options={districtOptions}
                         onChange={(option) => onDistrictSelect(option)}
                         placeholder="Quận/Huyện"
-                        defaultValue={districtOptions.filter(x => x.value === user.districtId)}
+                        defaultValue={districtOptions.find(x => x.value === user.districtId)}
                     />
 
                     <Select className='col-4 pr-0'
@@ -121,7 +127,7 @@ function Address() {
                         options={wardOptions}
                         placeholder="Phường/Xã"
                         onChange={(option) => onWardSelect(option)}
-                        defaultValue={wardOptions.filter(x => x.value === user.wardId)}
+                        defaultValue={wardOptions.find(x => x.value === user.wardId)}
                     />
 
                 </Modal.Body>
@@ -149,9 +155,22 @@ function Address() {
                         <div className="profile_item_form">
                             <div className="form-row">
                                 <div className="col-12 form">
-                                    <label className="col-2 form-lable" htmlFor="address">Address</label>
-                                    <div className="input-group">
-                                        <textarea className="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" defaultValue={user.address} onChange={handleChange} placeholder="Write something here..."></textarea>
+                                    <div className="col-2 form-tieude" htmlFor="address">Địa chỉ</div>
+                                    <div className="input-group pl-3 col-10">
+                                        <div className='profile-address d-flex mb-2'>
+                                            <div className='name-address d-flex'>{user.name}</div>
+                                            <div className='phone-address d-flex'>(+84) {user.numberphone}</div>
+                                        </div>
+                                        <div className="body-address d-flex">
+                                            <div className='address d-flex '>
+                                                {user.address}
+                                            </div>
+                                            <div className='address-full d-flex'>
+                                                <div className='address-ward mr-1'>{user.nameWard}</div>
+                                                <div className='address-district mr-1'>{user.nameDis}</div>
+                                                <div className='address-city mr-1'>{user.nameCity}</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

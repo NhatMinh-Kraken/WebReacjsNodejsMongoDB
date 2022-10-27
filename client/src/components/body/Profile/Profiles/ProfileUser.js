@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import '../Profile/ProfileUser.scss'
+import '../Profiles/ProfileUser.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { dispatchGetAllUsers, fetchAllUsers } from '../../../redux/action/userAction'
+import { dispatchGetAllUsers, fetchAllUsers } from '../../../../redux/action/userAction'
 
 
 function ProfileUser() {

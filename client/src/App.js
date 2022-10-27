@@ -7,7 +7,6 @@ import Body from './components/body/Body';
 import { useSelector, useDispatch } from 'react-redux'
 import { dispatchLogin, fetchUser, dispatchGetUser } from './redux/action/authAction'
 import Axios from 'axios';
-import Profile from './components/body/Profile/Profile';
 import NotFound from './components/utils/NotFound/NotFound';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

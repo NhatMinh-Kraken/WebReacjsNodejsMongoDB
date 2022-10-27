@@ -25,10 +25,7 @@
 }
 
 .img-circle {
-    border-radius: 50%;
     vertical-align: middle;
-    max-width: 110px;
-    min-height: 100px;
     transform-style: preserve-3d;
     margin: 0 auto 17px;
 }
@@ -49,6 +46,12 @@
     text-align: center;
     color: #fff;
     box-shadow: 0px 9px 18px rgba(0, 0, 0, 0.12), 0px 5px 7px rgba(0, 0, 0, 0.5);
+}
+
+.testimonial-name h5{
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
 }
 
 #customer-testimonoals .item {

@@ -49,8 +49,8 @@ function Register() {
             const res = await axios.post('/user/register', {
                 name, email, password
             })
-            toast.success(res.data.msg)
             history.push("/login")
+            toast.success(res.data.msg)
 
         } catch (err) {
             err.response.data.msg &&

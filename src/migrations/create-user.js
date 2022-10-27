@@ -54,6 +54,15 @@ module.exports = {
         type: Sequelize.STRING,
         defaultValue: null,
       },
+      nameCity: {
+        type: Sequelize.STRING,
+      },
+      nameDis: {
+        type: Sequelize.STRING,
+      },
+      nameWard: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

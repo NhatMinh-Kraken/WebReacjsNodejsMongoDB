@@ -5,33 +5,34 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
+import ANh1 from '../../../assets/images/baoduong1,2.png'
+import ANh2 from '../../../assets/images/baoduong2,1.png'
+import ANh3 from '../../../assets/images/BaoDuong2.2.jpg'
+import ANh4 from '../../../assets/images/BaoDuong2.3.jpg'
+
 // import userPic from '../user-one.png';
 
 const Review = () => {
     const review = [
         {
-            name: 'Rekob Ramya',
+            name: 'Đặt hẹn dịch vụ trực tuyến',
             description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.',
-            address: 'USA',
-            img: 'https://i.ibb.co/hgGJc8d/Gareth-Bale.jpg'
+            img: ANh1
         },
         {
-            name: 'Brandon Savage',
+            name: 'Ưu đãi đặc biệt',
             description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.',
-            address: 'USA',
-            img: 'https://i.ibb.co/z7Kp6yr/np-file-33188.jpg'
+            img: ANh2
         },
         {
-            name: 'Steve Burns',
+            name: 'Bảo hành & Bảo hiểm',
             description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.',
-            address: 'USA',
-            img: 'https://i.ibb.co/CP5sj7g/2856040-58866808-2560-1440.jpg'
+            img: ANh3
         },
         {
-            name: 'Kevin Canlas',
+            name: 'Dịch vụ & bảo dưỡng',
             description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s.',
-            address: 'USA',
-            img: 'https://i.ibb.co/10SYccm/1552313010-354215-noticia-normal.jpg'
+            img: ANh4
         },
     ]
     //Owl Carousel Settings
