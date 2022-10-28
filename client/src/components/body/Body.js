@@ -28,7 +28,6 @@ function Body() {
         <Route path={path.FORGOTPASSWORD} component={ForgotPassword} exact />
         <Route path={path.RESETPASSWORD} component={ResetPassword} exact />
         <Route path="/user/activation/:activation_token" component={ActivationEmail} exact />
-        {/* <Route path={path.PROFILE} component={(isLogged ? Profile : NotFound)} /> */}
       </Switch>
     </section>
   )

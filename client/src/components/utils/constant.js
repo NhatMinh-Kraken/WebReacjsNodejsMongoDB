@@ -8,5 +8,6 @@ export const path = {
     FORGOTPASSWORD: '/forgotpassword',
     RESETPASSWORD: '/user/reset/:token',
     PROFILE: '/profile',
-    PROFILEUSER: '/profile/profileuser'
+    PROFILEUSER: '/profile/profileuser',
+    PRODUCTCAR:'/product_car'
 };

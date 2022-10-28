@@ -11,6 +11,7 @@ import NotFound from './components/utils/NotFound/NotFound';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProfieLayout from './components/body/ProfieLayout';
+import Home from './components/Home';
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
     <Fragment>
       <Router>
         <div className="App">
+          <Route path={path.PRODUCTCAR} component={Home} />
           <Body />
           <Route path={path.PROFILE} component={(isLogged ? ProfieLayout : NotFound)} />
           <ToastContainer
