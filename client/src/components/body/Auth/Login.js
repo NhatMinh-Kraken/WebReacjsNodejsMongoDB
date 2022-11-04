@@ -12,6 +12,8 @@ import { gapi } from 'gapi-script'
 
 import FacebookLogin from 'react-facebook-login'
 
+import Loadding from '../../utils/Loadding/loadding'
+
 const initialState = {
     email: '',
     password: '',
@@ -30,6 +32,8 @@ function Login() {
 
     const { email, password, err, success, isBool } = user
 
+    const [loadding, setLoadding] = useState(false)
+
     const handleChangeInput = e => {
         const { name, value } = e.target
         setUser({ ...user, [name]: value, err: '', success: '' })
@@ -42,6 +46,7 @@ function Login() {
     const handleSubmit = async e => {
         e.preventDefault()
         try {
+            setLoadding(false)
             const res = await axios.post('/user/login', { email, password })
             toast.success(res.data.msg)
 
@@ -49,6 +54,7 @@ function Login() {
 
             dispatch(dispatchLogin())
 
+            setLoadding(true)
             history.push("/")
 
         } catch (err) {
@@ -66,11 +72,12 @@ function Login() {
 
     const responseGoogle = async (response) => {
         try {
+            setLoadding(true)
             const res = await axios.post('/user/google_login', { tokenId: response.tokenId })
             toast.success(res.data.msg)
             localStorage.setItem('firstLogin', true)
             dispatch(dispatchLogin())
-
+            setLoadding(false)
             history.push("/")
 
         } catch (err) {
@@ -80,8 +87,9 @@ function Login() {
     }
 
     const responseFacebook = async (response) => {
-    
+
         try {
+            setLoadding(true)
             const { accessToken, userID } = response
             const res = await axios.post('/user/facebook_login', { accessToken, userID })
 
@@ -89,11 +97,16 @@ function Login() {
             localStorage.setItem('firstLogin', true)
 
             dispatch(dispatchLogin())
+            setLoadding(false)
             history.push('/')
         } catch (err) {
             err.response.data.msg &&
                 toast.error(err.response.data.msg)
         }
+    }
+
+    if (loadding) {
+        return <div><Loadding /></div>
     }
 
     return (

@@ -1,21 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Axios from 'axios'
+
+import Loadding from '../../utils/Loadding/loadding'
 
 function DropdownItem(props) {
 
     const auth = useSelector(state => state.auth)
     const { user, isLogged } = auth
+    const [loadding, setLoadding] = useState(false)
 
     const handleLogout = async () => {
         try {
+            setLoadding(true)
             await Axios.get('/user/logout')
             localStorage.removeItem('firstLogin')
+            setLoadding(false)
             window.location.href = "/";
         } catch (err) {
             window.location.href = "/";
         }
+    }
+
+    if (loadding) {
+        return <div><Loadding /></div>
     }
 
     return (

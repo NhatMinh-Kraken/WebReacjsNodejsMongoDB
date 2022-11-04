@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 import { path } from '../src/components/utils/constant'
@@ -13,6 +13,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import ProfieLayout from './components/body/ProfieLayout';
 import Home from './components/Home';
 
+import Loadding from './components/utils/Loadding/loadding';
+
 
 function App() {
 
@@ -21,12 +23,20 @@ function App() {
   const auth = useSelector(state => state.auth)
   const { isLogged } = auth
 
+  const [loading, setLoading] = useState(false)
+
   useEffect(() => {
     const firstLogin = localStorage.getItem('firstLogin')
     if (firstLogin) {
       const getToken = async () => {
+        setLoading(true)
         const res = await Axios.post('/user/refresh_token', null)
         dispatch({ type: 'GET_TOKEN', payload: res.data.access_token })
+        setLoading(false)
+
+        setTimeout(() => {
+          getToken()
+        }, 10 * 60 * 1000)
       }
       getToken()
     }
@@ -44,6 +54,10 @@ function App() {
       getUser()
     }
   }, [token, dispatch])
+
+  if (loading) {
+    return <div><Loadding /></div>
+  }
 
   return (
     <Fragment>

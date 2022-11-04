@@ -25,7 +25,6 @@ function EditRoleUser() {
           setEditUser(user)
           setCheckAdmin(user.role === 1 ? true : false)
         }
-        
       })
     } else {
       history.push('/profileuser')
@@ -39,15 +38,29 @@ function EditRoleUser() {
 
   const handlUpdate = async () => {
     try {
-      if (num % 2 !== 0) {
+      if (editUser.id !== 1 && num % 2 !== 0) {
         const res = await Axios.patch(`/user/update_role/${editUser.id}`, {
           role: checkAdmin ? 1 : 0
         }, {
           headers: { Authorization: token }
         })
-        window.location.href = "http://localhost:3000/profile/all-user"
+        // window.location.href = "http://localhost:3000/profile/all-user"
+        history.goBack('/all-user')
         toast.success(res.data.msg)
+        setNum(0)
       }
+      else {
+        const res = await Axios.patch(`/user/update_role/${editUser.id}`, {
+          role: checkAdmin ? 1 : 0
+        }, {
+          headers: { Authorization: token }
+        })
+        alert("Bạn có chắc là mún sửa của mình không")
+        window.location.href = "http://localhost:3000/profile/profileuser"
+        toast.success(res.data.msg)
+        setNum(0)
+      }
+
     } catch (err) {
       err.response.data.msg && toast.error(err.response.data.msg)
     }
@@ -55,53 +68,49 @@ function EditRoleUser() {
 
   return (
     <>
-      <div className='profile_item col-9'>
-        <div className='profile_item_header pt-3'>
-          <h3>Sửa chữa vai trò khách hàng</h3>
-          <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
-        </div>
-        <div className='profile_item_body'>
-          <div className='profile_item_info col-9'>
-            <div className="profile_item_form">
-              <div className="form-row">
-                <div className="col-12 form">
-                  <label className="col-2 align-items-center form-lable" htmlFor="name">Name</label>
-                  <div className="input-group">
-                    <div className="input-group-prepend col-1">
-                      <span className="input-group-text" id="inputGroupPrepend1"><i className="fa fa-user d-flex"></i></span>
-                    </div>
-                    <input type="text" className="form-control col-11" name="name" id="name" defaultValue={editUser.name} placeholder="name" disabled />
+
+      <div className='profile_item_body'>
+        <div className='profile_item_info col-9'>
+          <div className="profile_item_form">
+            <div className="form-row">
+              <div className="col-12 form">
+                <label className="col-2 align-items-center form-lable" htmlFor="name">Name</label>
+                <div className="input-group">
+                  <div className="input-group-prepend ">
+                    <span className="input-group-text" id="inputGroupPrepend1"><i className="fa fa-user d-flex"></i></span>
                   </div>
+                  <input type="text" className="form-controls col-10" name="name" id="name" defaultValue={editUser.name} placeholder="name" disabled />
                 </div>
               </div>
-              <div className="form-row mt-3">
-                <div className="col-12 form">
-                  <label className="col-2 align-items-center form-lable" htmlFor="email">Email</label>
-                  <div className="input-group">
-                    <div className="input-group-prepend col-1">
-                      <span className="input-group-text" id="inputGroupPrepend2"><i className="d-flex fa fa-envelope-o"></i></span>
-                    </div>
-                    <input type="text" className="form-control col-11" name="email" id="email" defaultValue={editUser.email} placeholder="email" disabled />
+            </div>
+            <div className="form-row mt-3">
+              <div className="col-12 form">
+                <label className="col-2 align-items-center form-lable" htmlFor="email">Email</label>
+                <div className="input-group">
+                  <div className="input-group-prepend ">
+                    <span className="input-group-text" id="inputGroupPrepend2"><i className="d-flex fa fa-envelope-o"></i></span>
                   </div>
+                  <input type="text" className="form-controls col-10" name="email" id="email" defaultValue={editUser.email} placeholder="email" disabled />
                 </div>
               </div>
-              <div className='form-row mt-3'>
-                <div className='col-12 form justify-content-center'>
-                  <div className="form-check">
-                    <input className="form-check-input" type="checkbox" name="isAdmin" id="isAdmin" checked={checkAdmin} onChange={handleCheck} />
-                    <label className="form-check-label" htmlFor="exampleRadios1">
-                      Admin
-                    </label>
-                  </div>
+            </div>
+            <div className='form-row mt-3'>
+              <div className='col-12 form justify-content-center'>
+                <div className="form-check">
+                  <input className="form-check-input" type="checkbox" name="isAdmin" id="isAdmin" checked={checkAdmin} onChange={handleCheck} />
+                  <label className="form-check-label" htmlFor="exampleRadios1">
+                    Admin
+                  </label>
                 </div>
               </div>
-              <div className='col-12 d-flex justify-content-center pt-4'>
-                <button className="btn btn-danger btn-block mb-4 col-4 " type='submit' onClick={handlUpdate}>Update</button>
-              </div>
+            </div>
+            <div className='col-12 d-flex justify-content-center pt-4'>
+              <button className="btn btn-danger btn-block mb-4 col-4 " type='submit' onClick={handlUpdate}>Update</button>
             </div>
           </div>
         </div>
       </div>
+
     </>
   )
 }

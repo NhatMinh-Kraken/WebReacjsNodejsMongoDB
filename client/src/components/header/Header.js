@@ -10,6 +10,8 @@ import Navbar from './DropdownAccount/Navbar'
 import NavItem from './DropdownAccount/NavItem'
 import DropdownMenu from './DropdownAccount/DropdownMenu'
 
+import {path} from '../utils/constant'
+
 import { useSelector } from 'react-redux'
 
 function Header() {
@@ -39,7 +41,7 @@ function Header() {
                                     <img src={logo}/>
                                 </div>
                             </div>
-                            <div className='title-header'><Link to="/"><h4>Mercedes-Benz</h4></Link></div>
+                            <div className='title-header'><Link to={path.HOME}><h4>Mercedes-Benz</h4></Link></div>
                         </div>
                         <div className='left-none-header col-8 '>
                             <div className='input-header'>

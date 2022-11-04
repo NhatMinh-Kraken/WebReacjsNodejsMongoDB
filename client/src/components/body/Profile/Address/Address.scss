@@ -58,7 +58,6 @@
             .name-address {
                 color: black;
                 font-weight: 600;
-                border-right: 1px solid #97969663;
                 padding-right: 5px;
                 font-size: 14px;
             }
@@ -75,13 +74,6 @@
             word-break: break-word;
             flex-flow: column;
 
-            .address-district{
-                border-right: 1px solid #e7e7e7;
-            }
-
-            .address-ward{
-                border-right: 1px solid #e7e7e7;
-            }
         }
     }
 }

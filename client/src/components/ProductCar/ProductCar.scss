@@ -14,13 +14,10 @@
     }
 
     .ProductCar-Control {
-        display: flex;
-        flex-wrap: wrap;
         margin-left: 15px;
         margin-right: 15px;
 
         .ProductCar-Section {
-            display: flex;
             padding-top: 20px;
             padding-bottom: 20px;
 
@@ -55,7 +52,7 @@
                         a {
                             text-decoration: none;
 
-                            &:hover{
+                            &:hover {
                                 text-decoration: none;
                             }
                         }
@@ -86,7 +83,7 @@
                             border-right: 1px solid #bbb;
                             font-style: italic;
 
-                            &.active{
+                            &.active {
                                 background-color: #000;
                                 border-color: #262626;
                                 color: #fff;
@@ -120,7 +117,7 @@
                             border-right: 1px solid #bbb;
                             font-style: italic;
 
-                            &.active{
+                            &.active {
                                 background-color: #000;
                                 border-color: #262626;
                                 color: #fff;
@@ -154,7 +151,7 @@
                             border-right: 1px solid #bbb;
                             font-style: italic;
 
-                            &.active{
+                            &.active {
                                 background-color: #000;
                                 border-color: #262626;
                                 color: #fff;
@@ -187,7 +184,7 @@
                             border-right: 1px solid #bbb;
                             font-style: italic;
 
-                            &.active{
+                            &.active {
                                 background-color: #000;
                                 border-color: #262626;
                                 color: #fff;
@@ -196,6 +193,133 @@
                         }
                     }
                 }
+
+
+            }
+        }
+
+        .ProductCar-Body-item {
+            padding-top: 20px;
+
+            .Product-Item-Controll {
+                flex-flow: column;
+
+                .Product_Item_Controll-Energy {
+                    padding-bottom: 10px;
+
+                    h2 {
+                        font-size: 18px;
+                        font-weight: 700;
+                        font-style: italic;
+                        font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                        margin-bottom: 10px;
+                    }
+
+                    .Product_Item_Energy {
+                        color: #767676;
+
+                        .Product-Item-Energy {
+                            color: #767676;
+                            font-size: 18px;
+                            font-weight: 400;
+                            font-style: italic;
+                            font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                            display: flex;
+                            justify-content: center;
+
+                            i {
+                                display: flex;
+                                align-items: center;
+                            }
+
+                            span {
+                                display: flex;
+                                margin-left: 10px;
+                                align-items: center;
+                            }
+
+                            &:hover {
+                                color: #fbd749;
+                            }
+
+                            &.active {
+                                color: #fbd749;
+                            }
+                        }
+
+                        a {
+                            text-decoration: none;
+
+                            &:hover {
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                }
+
+                .Product_Item_Controll-Body {
+                    padding-top: 10px;
+                    border-top: 1px solid #e7e4e4;
+
+                    h2 {
+                        font-size: 18px;
+                        font-weight: 700;
+                        font-style: italic;
+                        font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                        margin-bottom: 10px;
+                    }
+
+                    .Product_Item_Img {
+                        display: flex;
+                        color: #767676;
+                        flex-flow: column;
+
+                        .Product-Item-Car {
+                            color: #767676;
+                            font-size: 18px;
+                            font-weight: 400;
+                            font-style: italic;
+                            font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                            display: flex;
+
+                            img {
+                                width: 50px;
+                                filter: invert(50%) sepia(8%) saturate(15%) hue-rotate(314deg) brightness(90%) contrast(84%);
+                            }
+
+                            span {
+                                display: flex;
+                                align-items: center;
+                                margin-left: 10px;
+                            }
+
+                            &:hover {
+                                color: #1a9790;
+                                filter: invert(47%) sepia(44%) saturate(5818%) hue-rotate(150deg) brightness(92%) contrast(80%);
+                            }
+
+                            &.active {
+                                color: #1a9790;
+                                filter: invert(47%) sepia(44%) saturate(5818%) hue-rotate(150deg) brightness(92%) contrast(80%);
+                            }
+
+                        }
+
+                        a {
+                            text-decoration: none;
+
+                            &:hover {
+                                text-decoration: none;
+                            }
+                        }
+
+
+                    }
+                }
+            }
+            .Product-Item{
+                height: 60vh;
+                border-left: 1px solid #e7e4e4;
             }
         }
     }

@@ -67,7 +67,10 @@ function Address() {
     }
 
     const handleUpdate = () => {
-        if (address || cityId || districtId || wardId) {
+        if (!address) {
+            toast.error("Hãy thêm địa chỉ cụ thể")
+        }
+        else {
             Update()
         }
     }
@@ -78,7 +81,7 @@ function Address() {
         onCitySelect,
         onDistrictSelect,
         onWardSelect,
-    } = useLocationForm(true);
+    } = useLocationForm(false);
 
     const {
         cityOptions,
@@ -106,28 +109,34 @@ function Address() {
                     <Select className='col-4 pr-0 pl-0'
                         name="cityId"
                         key={`cityId_${selectedCity?.value}`}
+                        isDisabled={cityOptions.length === 0}
                         options={cityOptions}
                         onChange={(option) => onCitySelect(option)}
                         placeholder="Tỉnh/Thành"
-                        defaultValue={cityOptions.find(x => x.value === user.cityId)}
+                        //defaultValue={cityOptions.find(x => x.value === user.cityId)}
+                        defaultValue={selectedCity}
                     />
 
                     <Select className='col-4 pr-0'
                         name="districtId"
                         key={`districtId_${selectedDistrict?.value}`}
+                        isDisabled={districtOptions.length === 0}
                         options={districtOptions}
                         onChange={(option) => onDistrictSelect(option)}
                         placeholder="Quận/Huyện"
-                        defaultValue={districtOptions.find(x => x.value === user.districtId)}
+                        //defaultValue={districtOptions.find(x => x.value === user.districtId)}
+                        defaultValue={selectedDistrict}
                     />
 
                     <Select className='col-4 pr-0'
                         name="wardId"
                         key={`wardId_${selectedWard?.value}`}
+                        isDisabled={wardOptions.length === 0}
                         options={wardOptions}
                         placeholder="Phường/Xã"
                         onChange={(option) => onWardSelect(option)}
-                        defaultValue={wardOptions.find(x => x.value === user.wardId)}
+                        //defaultValue={wardOptions.find(x => x.value === user.wardId)}
+                        defaultValue={selectedWard}
                     />
 
                 </Modal.Body>
@@ -145,31 +154,25 @@ function Address() {
                 </Modal.Footer>
             </Modal>
 
-            <div className='profile_item col-9'>
-                <div className='profile_item_header pt-3'>
-                    <h3>Hồ Sơ Của Tôi</h3>
-                    <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
-                </div>
-                <div className='profile_item_body'>
-                    <div className='profile_item_info col-12'>
-                        <div className="profile_item_form">
-                            <div className="form-row">
-                                <div className="col-12 form">
-                                    <div className="col-2 form-tieude" htmlFor="address">Địa chỉ</div>
-                                    <div className="input-group pl-3 col-10">
-                                        <div className='profile-address d-flex mb-2'>
-                                            <div className='name-address d-flex'>{user.name}</div>
-                                            <div className='phone-address d-flex'>(+84) {user.numberphone}</div>
+            <div className='profile_item_body'>
+                <div className='profile_item_info col-12'>
+                    <div className="profile_item_form">
+                        <div className="form-row">
+                            <div className="col-12 form">
+                                <div className="col-2 form-tieude" htmlFor="address">Địa chỉ</div>
+                                <div className="input-group pl-3 col-10">
+                                    <div className='profile-address d-flex mb-2'>
+                                        <div className='name-address d-flex'>{user.name}</div>
+                                        <div className='phone-address d-flex'>(+84) {user.numberphone}</div>
+                                    </div>
+                                    <div className="body-address d-flex">
+                                        <div className='address d-flex '>
+                                            {user.address}
                                         </div>
-                                        <div className="body-address d-flex">
-                                            <div className='address d-flex '>
-                                                {user.address}
-                                            </div>
-                                            <div className='address-full d-flex'>
-                                                <div className='address-ward mr-1'>{user.nameWard}</div>
-                                                <div className='address-district mr-1'>{user.nameDis}</div>
-                                                <div className='address-city mr-1'>{user.nameCity}</div>
-                                            </div>
+                                        <div className='address-full d-flex'>
+                                            <div className='address-ward mr-1'>{user.nameWard}</div>-
+                                            <div className='address-district mr-1'>{user.nameDis}</div>-
+                                            <div className='address-city mr-1'>{user.nameCity}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -177,9 +180,9 @@ function Address() {
                         </div>
                     </div>
                 </div>
-                <div className='col-12 d-flex justify-content-center pt-4'>
-                    <button className="btn btn-danger btn-block mb-4 col-4 " onClick={handleShow} type='submit'>Chỉnh sửa</button>
-                </div>
+            </div>
+            <div className='col-12 d-flex justify-content-center pt-4'>
+                <button className="btn btn-danger btn-block mb-4 col-4 " onClick={handleShow} type='submit'>Chỉnh sửa</button>
             </div>
         </>
     )

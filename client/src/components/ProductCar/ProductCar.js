@@ -1,7 +1,7 @@
 import { BrowserRouter as Router } from 'react-router-dom'
 import React from 'react'
 import './ProductCar.scss'
-import ProductCarRouter from './ProductCarRouter'
+import ProductCarContr from './ProductCarContr'
 
 function ProductCar() {
   return (
@@ -15,7 +15,7 @@ function ProductCar() {
             <div className='ProductCar-Control'>
               <div className='ProductCar-Section'>
                 <Router basename='/product_car'>
-                  <ProductCarRouter />
+                  <ProductCarContr />
                 </Router>
               </div>
             </div>

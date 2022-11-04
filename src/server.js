@@ -20,6 +20,8 @@ app.use(fileUpload({
 //Routers
 app.use('/user', require('./router/userRouter'))
 app.use('/api', require('./router/upload'))
+app.use('/api', require('./router/categoryRouter'))
+app.use('/api',require('./router/productCarRouter'))
 
 // connect to mongoDB
 // const URI = process.env.MONGODB_URL
