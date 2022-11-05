@@ -4,6 +4,7 @@ import { NavLink, Route, Switch } from 'react-router-dom'
 import Sedans from '../../assets/images/sedan-car-model.png'
 import SUV from '../../assets/images/car-suv.png'
 import Coupe from '../../assets/images/coupe-car.png'
+import ProductCarAll from './ProductCarAll'
 
 function ProductCarContr() {
     return (
@@ -37,7 +38,7 @@ function ProductCarContr() {
                 </div>
                 <div className='Product-Item d-flex col-9'>
                     <Switch>
-                        <Route path="/all_car">All</Route>
+                        <Route path="/all_car" component={ProductCarAll}/>
                         <Route path="/mercedes_eq">mercedes_eq</Route>
                         <Route path="/amg">AMG</Route>
                         <Route path="/maybach">MayBach</Route>

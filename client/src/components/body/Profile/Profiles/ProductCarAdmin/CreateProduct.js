@@ -18,11 +18,10 @@ const initialState = {
     money: '',
     energy: '',
     description: 'How to and tutorial videos of cool CSS effect, Web Design ideas,JavaScript libraries, Node.',
-    sold: '',
     amount: '',
-    id: '',
-    err: '',
-    success: ''
+    // id: '',
+    // err: '',
+    // success: ''
 }
 
 function CreateProduct() {
@@ -33,6 +32,8 @@ function CreateProduct() {
 
     const [product, setProduct] = useState(initialState)
     const [callback, setCallback] = useState(false)
+
+    const { product_car_id, name, type, money, energy, description, amount } = product
 
     const [open, setOpen] = useState(false);
 
@@ -107,7 +108,7 @@ function CreateProduct() {
             toast.success("Upload Image Success")
 
         } catch (err) {
-            setProduct({ ...product, err: err.response.data.msg, success: '' })
+
             toast.error(err.response.data.msg)
         }
     }
@@ -142,7 +143,7 @@ function CreateProduct() {
             toast.success("Upload Image Success")
 
         } catch (err) {
-            setProduct({ ...product, err: err.response.data.msg, success: '' })
+
             toast.error(err.response.data.msg)
         }
     }
@@ -177,7 +178,7 @@ function CreateProduct() {
             toast.success("Upload Image Success")
 
         } catch (err) {
-            setProduct({ ...product, err: err.response.data.msg, success: '' })
+
             toast.error(err.response.data.msg)
         }
     }
@@ -212,7 +213,7 @@ function CreateProduct() {
             toast.success("Upload Image Success")
 
         } catch (err) {
-            setProduct({ ...product, err: err.response.data.msg, success: '' })
+
             toast.error(err.response.data.msg)
         }
     }
@@ -310,10 +311,10 @@ function CreateProduct() {
             }
 
             await Axios.post('/api/products', {
-                ...product, 
-                avatar: avatar.url, 
-                colortypeone: colortypeone.url, 
-                colortypetwo: colortypetwo.url, 
+                ...product,
+                avatar: avatar.url,
+                colortypeone: colortypeone.url,
+                colortypetwo: colortypetwo.url,
                 colortypethree: colortypethree.url
             }, {
                 headers: { Authorization: token }
@@ -329,6 +330,7 @@ function CreateProduct() {
 
         } catch (err) {
             toast.error(err.response.data.msg)
+            console.log(err)
         }
     }
     //
@@ -573,7 +575,7 @@ function CreateProduct() {
                             </div>
                         </div>
                         <div className='col-12 d-flex justify-content-center pt-4'>
-                            <button className="btn btn-danger btn-block mb-4 col-4 " disabled={loading} onClick={handleSubmit} type='submit'>Create</button>
+                            <button className="btn btn-danger btn-block mb-4 col-4 " disabled={loading || loading2 || loading3 || loading1} onClick={handleSubmit} type='submit'>Create</button>
                         </div>
                     </div >
                 </div>

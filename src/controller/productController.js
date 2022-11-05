@@ -53,13 +53,16 @@ class APIfeatures {
 const productController = {
     getProducts: async (req, res) => {
         try {
-            const features = new APIfeatures(db.ProductCars.findAll(), req.query).filtering().sorting().paginating()
-            const productCar = await features.query
-            res.json({
-                status: "success",
-                result: productCar.length,
-                productCar: productCar
-            })
+            // const features = new APIfeatures(db.ProductCars.findAll(), req.query).filtering().sorting().paginating()
+            // const productCar = await features.query
+
+            // res.json({
+            //     status: "success",
+            //     result: productCar.length,
+            //     productCar: productCar
+            // })
+            const productCar = await db.ProductCars.findAll()
+            res.json(productCar)
 
         } catch (err) {
             return res.status(500).json({ msg: err.message })
@@ -98,6 +101,7 @@ const productController = {
             res.json("Create Sussecc")
 
         } catch (err) {
+            console.log(err)
             return res.status(500).json({ msg: err.message })
         }
     },
@@ -145,6 +149,24 @@ const productController = {
             }
             res.json({ msg: "Update Success!" })
         } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
+    SelectNameType: async (req, res) => {
+        try {
+            const user = await db.ProductCars.findAll({
+                include: [
+                    {
+                        model: db.Categorys, as: 'CategoryData'
+                    }
+                ],
+                raw: false,
+                nest: true,
+            })
+            res.json(user)
+        } catch (err) {
+            console.log(err)
             return res.status(500).json({ msg: err.message })
         }
     }

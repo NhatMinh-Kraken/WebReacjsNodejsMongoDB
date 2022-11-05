@@ -11,34 +11,28 @@ module.exports = {
             },
             product_car_id: {
                 type: Sequelize.STRING(100),
-                unique: true,
                 trim: true,
                 required: true
             },
             name: {
                 type: Sequelize.STRING(255),
                 require: true,
-                unique: true,
                 trim: true
             },
             type: {
-                type: Sequelize.STRING(20),
-                allowNull: false
+                type: Sequelize.INTEGER,
             },
             money: {
                 type: Sequelize.STRING(20),
             },
             colortypeone: {
                 type: Sequelize.STRING(255),
-                allowNull: false
             },
             colortypetwo: {
                 type: Sequelize.STRING(255),
-                allowNull: false
             },
             colortypethree: {
                 type: Sequelize.STRING(255),
-                allowNull: false
             },
             energy: {
                 type: Sequelize.INTEGER,
@@ -46,7 +40,6 @@ module.exports = {
             },
             avatar: {
                 type: Sequelize.STRING(255),
-                allowNull: false
             },
             description: {
                 type: Sequelize.TEXT,
@@ -55,12 +48,8 @@ module.exports = {
                 type: Sequelize.BOOLEAN,
                 defaultValue: false
             },
-            sold: {
-                type: Sequelize.STRING,
-                defaultValue: 0,
-            },
             amount: {
-                type: Sequelize.STRING,
+                type: Sequelize.INTEGER,
                 defaultValue: 0,
             },
             createdAt: {

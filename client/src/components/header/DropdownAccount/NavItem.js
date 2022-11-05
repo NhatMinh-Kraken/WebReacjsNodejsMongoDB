@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 function NavItem(props) {
 
     const auth = useSelector(state => state.auth)
-    const { user, isLogged } = auth
+    const { user} = auth
 
     const [open, setOpen] = useState(false);
     let ref = useRef();

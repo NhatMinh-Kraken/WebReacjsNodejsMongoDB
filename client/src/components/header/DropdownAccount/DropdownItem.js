@@ -5,10 +5,10 @@ import Axios from 'axios'
 
 import Loadding from '../../utils/Loadding/loadding'
 
-function DropdownItem(props) {
+function DropdownItem() {
 
     const auth = useSelector(state => state.auth)
-    const { user, isLogged } = auth
+    const { user } = auth
     const [loadding, setLoadding] = useState(false)
 
     const handleLogout = async () => {
@@ -31,7 +31,7 @@ function DropdownItem(props) {
         <>
             <div className='user'>
                 <Link to="/profile/profileuser" className='menu-item-user'>
-                    <img src={user.avatar} className='menu-item-avatar' /><span className='menu-item-name'>{user.name}</span>
+                    <img src={user.avatar} alt="" className='menu-item-avatar' /><span className='menu-item-name'>{user.name}</span>
                 </Link>
             </div>
             <div className='setting-user'>

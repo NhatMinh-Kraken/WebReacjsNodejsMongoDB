@@ -1,6 +1,5 @@
 import React from 'react'
 import DropdownItem from './DropdownItem'
-import { Link } from 'react-router-dom'
 
 function DropdownMenu() {
     return (
