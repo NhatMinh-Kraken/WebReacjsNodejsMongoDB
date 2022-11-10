@@ -31,7 +31,7 @@ const initialState = {
     // success: ''
 }
 
-function CreateProduct() {
+function EditProduct() {
     const auth = useSelector(state => state.auth)
     const { isAdmin } = auth
 
@@ -127,7 +127,7 @@ function CreateProduct() {
             })
 
             setLoading(false)
-            setAvatar(res.data)
+            setAvatar(JSON.stringify(res.data))
             toast.success("Upload Image Success")
 
         } catch (err) {
@@ -135,6 +135,8 @@ function CreateProduct() {
             toast.error(err.response.data.msg)
         }
     }
+
+   // console.log(avatar)
 
     const changeUpload1 = async (e) => {
         e.preventDefault()
@@ -162,7 +164,7 @@ function CreateProduct() {
             })
 
             setLoading1(false)
-            setColortypeone(res.data)
+            setColortypeone(JSON.stringify(res.data))
             toast.success("Upload Image Success")
 
         } catch (err) {
@@ -197,7 +199,7 @@ function CreateProduct() {
             })
 
             setLoading2(false)
-            setColortypetwo(res.data)
+            setColortypetwo(JSON.stringify(res.data))
             toast.success("Upload Image Success")
 
         } catch (err) {
@@ -232,7 +234,7 @@ function CreateProduct() {
             })
 
             setLoading3(false)
-            setColortypethree(res.data)
+            setColortypethree(JSON.stringify(res.data))
             toast.success("Upload Image Success")
 
         } catch (err) {
@@ -241,9 +243,13 @@ function CreateProduct() {
         }
     }
 
+
     //
 
     //destroy
+    const avatarDestroy = JSON.parse(avatar) 
+    //console.log(avatarDestroy)
+    
     const handleDistroy = async () => {
         try {
             if (!isAdmin) {
@@ -251,7 +257,7 @@ function CreateProduct() {
                 window.location.reload()
             }
             setLoading(true)
-            await Axios.post('/api/destroy_product_car', { public_id: avatar.public_id }, {
+            await Axios.post('/api/destroy_product_car', { public_id: avatarDestroy.public_id }, {
                 headers: { Authorization: token }
             })
             setLoading(false)
@@ -262,6 +268,8 @@ function CreateProduct() {
         }
     }
 
+    const oneDestroy = JSON.parse(colortypeone) 
+
     const handleDistroy1 = async () => {
         try {
             if (!isAdmin) {
@@ -269,7 +277,7 @@ function CreateProduct() {
                 window.location.reload()
             }
             setLoading1(true)
-            await Axios.post('/api/destroy_product_car', { public_id: colortypeone.public_id }, {
+            await Axios.post('/api/destroy_product_car', { public_id: oneDestroy.public_id }, {
                 headers: { Authorization: token }
             })
             setLoading1(false)
@@ -280,6 +288,8 @@ function CreateProduct() {
         }
     }
 
+    const twoDestroy = JSON.parse(colortypetwo) 
+
     const handleDistroy2 = async () => {
         try {
             if (!isAdmin) {
@@ -287,7 +297,7 @@ function CreateProduct() {
                 window.location.reload()
             }
             setLoading2(true)
-            await Axios.post('/api/destroy_product_car', { public_id: colortypetwo.public_id }, {
+            await Axios.post('/api/destroy_product_car', { public_id: twoDestroy.public_id }, {
                 headers: { Authorization: token }
             })
             setLoading2(false)
@@ -298,6 +308,8 @@ function CreateProduct() {
         }
     }
 
+    const threeDestroy = JSON.parse(colortypethree) 
+
     const handleDistroy3 = async () => {
         try {
             if (!isAdmin) {
@@ -305,7 +317,7 @@ function CreateProduct() {
                 window.location.reload()
             }
             setLoading3(true)
-            await Axios.post('/api/destroy_product_car', { public_id: colortypethree.public_id }, {
+            await Axios.post('/api/destroy_product_car', { public_id: threeDestroy.public_id }, {
                 headers: { Authorization: token }
             })
             setLoading3(false)
@@ -333,8 +345,7 @@ function CreateProduct() {
                 toast.error("No avatar Upload")
             }
 
-
-            await Axios.post('/api/products', {
+            await Axios.put(`/api/products/${product.id}`, {
                 name: product.name,
                 type: product.type,
                 money: product.money,
@@ -342,18 +353,16 @@ function CreateProduct() {
                 energy: product.energy,
                 description: markdown.description,
                 descriptionHTML: markdown.descriptionHTML,
-                avatar: avatar,
-                colortypeone: colortypeone,
-                colortypetwo: colortypetwo,
-                colortypethree: colortypethree
+                avatar: JSON.parse(avatar),
+                colortypeone: JSON.parse(colortypeone),
+                colortypetwo: JSON.parse(colortypetwo),
+                colortypethree: JSON.parse(colortypethree)
             }, {
                 headers: { Authorization: token }
             })
             setCallback(!callback)
             history.push("/all-product")
-
-            toast.success("Create Success!")
-
+            toast.success("Update Success!")
 
         } catch (err) {
             toast.error(err.response.data.msg)
@@ -399,11 +408,11 @@ function CreateProduct() {
     //
 
     // edit
-    // const [onEdit, setOnEdit] = useState(false)
+    //const [onEdit, setOnEdit] = useState(false)
 
     useEffect(() => {
         if (param.id) {
-            // setOnEdit(true)
+            //setOnEdit(true)
             products.forEach(productt => {
                 if (productt.id == param.id) {
                     setProduct(productt)
@@ -412,12 +421,12 @@ function CreateProduct() {
                     setColortypetwo(productt.colortypetwo)
                     setColortypethree(productt.colortypethree)
                     setMarkdown(productt)
-                    console.log(product)
+                   // console.log(product)
                 }
             })
         }
         else {
-            // setOnEdit(false)
+           // setOnEdit(false)
             setProduct(initialState)
             setAvatar(false)
             setColortypeone(false)
@@ -535,7 +544,7 @@ function CreateProduct() {
                                                     <span className='destroy' onClick={handleDistroy}>X</span>
                                                 </div>
                                                 <div className='profile_item_avatar_product'>
-                                                    <img src={avatar ? avatar.url : imageUser} alt="" />
+                                                    <img src={avatar ? avatarDestroy.url : imageUser} alt="" />
                                                     <span className='spans' style={{ display: avatar ? "none" : "block" }}>
                                                         <i className="fa-solid fa-camera"></i>
                                                         <input type="file" name='file' id="file_up" onChange={changeUpload} />
@@ -559,7 +568,7 @@ function CreateProduct() {
                                                     <span className='destroy' onClick={handleDistroy1}>X</span>
                                                 </div>
                                                 <div className='profile_item_avatar_product'>
-                                                    <img src={colortypeone ? colortypeone.url : imageUser} alt="" />
+                                                    <img src={colortypeone ? oneDestroy.url : imageUser} alt="" />
                                                     <span className='spans' style={{ display: colortypeone ? "none" : "block" }}>
                                                         <i className="fa-solid fa-camera"></i>
                                                         <input type="file" name='file' id="file_up" onChange={changeUpload1} />
@@ -583,7 +592,7 @@ function CreateProduct() {
                                                     <span className='destroy' onClick={handleDistroy2}>X</span>
                                                 </div>
                                                 <div className='profile_item_avatar_product'>
-                                                    <img src={colortypetwo ? colortypetwo.url : imageUser} alt="" />
+                                                    <img src={colortypetwo ? twoDestroy.url : imageUser} alt="" />
                                                     <span className='spans' style={{ display: colortypetwo ? "none" : "block" }}>
                                                         <i className="fa-solid fa-camera"></i>
                                                         <input type="file" name='file' id="file_up" onChange={changeUpload2} />
@@ -607,7 +616,7 @@ function CreateProduct() {
                                                     <span className='destroy' onClick={handleDistroy3}>X</span>
                                                 </div>
                                                 <div className='profile_item_avatar_product'>
-                                                    <img src={colortypethree ? colortypethree.url : imageUser} alt="" />
+                                                    <img src={colortypethree ? threeDestroy.url : imageUser} alt="" />
                                                     <span className='spans' style={{ display: colortypethree ? "none" : "block" }}>
                                                         <i className="fa-solid fa-camera"></i>
                                                         <input type="file" name='file' id="file_up" onChange={changeUpload3} />
@@ -638,7 +647,7 @@ function CreateProduct() {
                             </div>
                         </div>
                         <div className='col-12 d-flex justify-content-center pt-4'>
-                            <button className="btn btn-danger btn-block mb-4 col-4 " disabled={loading || loading2 || loading3 || loading1} onClick={handleSubmit} type='submit'>Create</button>
+                            <button className="btn btn-danger btn-block mb-4 col-4 " disabled={loading || loading2 || loading3 || loading1} onClick={handleSubmit} type='submit'>Update</button>
                         </div>
                     </div >
                 </div>
@@ -648,4 +657,4 @@ function CreateProduct() {
     )
 }
 
-export default CreateProduct
+export default EditProduct

@@ -1,15 +1,8 @@
-
 import React, { useState } from 'react'
-
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import OwlCarousel from 'react-owl-carousel';
-import steering_wheel from '../../../assets/images/steering-wheel.png'
+import { Link } from 'react-router-dom';
 
-function ProductCarAllItem({ nametypes }) {
-    const auth = useSelector(state => state.auth)
-
-    const { isAdmin } = auth
+function ProductCarAdminItem({ nametypes }) {
     const [isHover, setIsHover] = useState(false)
 
     const handleHover = () => {
@@ -37,10 +30,10 @@ function ProductCarAllItem({ nametypes }) {
         nav: false,
         responsive: false
     };
-
     return (
         <>
             <div className='product-card col-4' onMouseEnter={handleHover} onMouseLeave={handleNotHover}>
+                <input type="checkbox" className="custom-control-inputs" style={{ opacity: isHover ? "1" : "0" }} id="customCheck1" />
                 <Link to="/detail_product" className='product-card-link' >
                     <div className='product-car-header'>
                         <div className='product-card-name'>
@@ -86,13 +79,10 @@ function ProductCarAllItem({ nametypes }) {
                 </Link>
                 <div className={`product-car-control ${isHover ? "visible" : "hidden"} ${isHover ? "opacity-1" : "opacity-0"}`}>
                     <div className='product-car-detail heights-48'>
-                        <Link to="/detail_product" className='detail-product'><i className="fa-solid fa-circle-info d-flex pr-3"></i>Detail</Link>
+                        <Link to={`/edit-product/${nametypes.id}`} className='detail-product'><i className="fa-solid fa-pen-to-square d-flex pr-3"></i>Edit</Link>
                     </div>
                     <div className='product-car-detail heights-48'>
-                        <Link to="/add" className='detail-product'><i className="fa-solid fa-cart-shopping d-flex pr-3"></i>Add</Link>
-                    </div>
-                    <div className='product-car-detail heights-48'>
-                        <Link to="/advise" className='detail-product'><img src={steering_wheel} alt="steering" /><span>Advise</span></Link>
+                        <Link to="/delete" className='detail-product'><i className="fa-solid fa-trash d-flex pr-3"></i>Delete</Link>
                     </div>
                 </div>
             </div>
@@ -100,4 +90,4 @@ function ProductCarAllItem({ nametypes }) {
     )
 }
 
-export default ProductCarAllItem
+export default ProductCarAdminItem

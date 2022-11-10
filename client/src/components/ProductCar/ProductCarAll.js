@@ -5,6 +5,7 @@ import ProductCarAllItem from './ProductItem/ProductCarAllItem'
 
 function ProductCarAll() {
     const [nametype, setNametype] = useState([])
+    const [callback, setCallback] = useState(false)
 
     useEffect(() => {
         const getNameType = async () => {
@@ -12,15 +13,17 @@ function ProductCarAll() {
             setNametype(res.data)
         }
         getNameType()
-    }, [])
+    }, [callback])
 
     return (
-        <div className='product-all'>
-            {
-                nametype.map((nametypes) => {
-                    return < ProductCarAllItem key={nametypes.id} nametypes={nametypes} />
-                })
-            }
+        <div className='product-all col-12'>
+            <div className='row'>
+                {
+                    nametype.map((nametypes) => {
+                        return < ProductCarAllItem key={nametypes.id} nametypes={nametypes} />
+                    })
+                }
+            </div>
         </div>
     )
 }

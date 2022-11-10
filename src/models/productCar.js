@@ -16,18 +16,17 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     ProductCars.init({
-        product_car_id: DataTypes.STRING,
         name: DataTypes.STRING,
         type: DataTypes.INTEGER,
         money: DataTypes.STRING,
-        colortypeone: DataTypes.STRING,
-        colortypetwo: DataTypes.STRING,
-        colortypethree: DataTypes.STRING,
+        colortypeone: DataTypes.JSON,
+        colortypetwo: DataTypes.JSON,
+        colortypethree: DataTypes.JSON,
         energy: DataTypes.INTEGER,
-        avatar: DataTypes.STRING,
-        description: DataTypes.TEXT,
+        avatar: DataTypes.JSON,
+        description: DataTypes.TEXT('long'),
+        descriptionHTML: DataTypes.TEXT('long'),
         checked: DataTypes.BOOLEAN,
-        // sold: DataTypes.INTEGER,
         amount: DataTypes.INTEGER
     }, {
         sequelize,

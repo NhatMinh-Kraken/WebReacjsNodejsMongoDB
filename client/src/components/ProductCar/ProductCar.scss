@@ -1,3 +1,7 @@
+.heights-48 {
+    height: 48px;
+}
+
 .ProductCar {
     padding-top: 20px;
     height: 100vh;
@@ -317,9 +321,218 @@
                     }
                 }
             }
-            .Product-Item{
-                height: 60vh;
+
+            .Product-Item {
+                //height: 100vh;
                 border-left: 1px solid #e7e4e4;
+            }
+        }
+    }
+}
+
+.product-all {
+
+    .add-car {
+        width: 100%;
+        align-items: center;
+        justify-content: flex-end;
+
+        .controll-add-car {
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            background-color: #0a44b8;
+            border: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-decoration: none;
+
+            i {
+                color: #e7e7e7;
+            }
+
+            &:hover{
+                text-decoration: none;
+            }
+        }
+
+    }
+
+    .product-card {
+        position: relative;
+        // height: 360px;
+        margin-bottom: 20px;
+
+        &:hover {
+            text-decoration: none;
+            background-color: #f8f8f8;
+            background-image: linear-gradient(#f9f9f9, #f8f8f8);
+            border-radius: 2px;
+            border: 1px solid #f8d4d4;
+            transition: all .4s ease-out;
+
+            // visibility: visible;
+            // opacity: 1;
+        }
+
+        // height: 280px;
+        .product-card-link {
+            text-decoration: none;
+            color: #9f9f9f;
+            display: flex;
+            border-radius: 2px;
+            box-sizing: border-box;
+            text-align: center;
+            flex-flow: column;
+            padding-bottom: 20px;
+
+            &:hover {
+                text-decoration: none;
+            }
+
+            .product-car-header {
+                display: flex;
+                flex-direction: column;
+
+                .product-card-name {
+                    span {
+                        color: #000;
+                        -webkit-font-smoothing: antialiased;
+                        word-wrap: normal;
+                        font: inherit;
+                        font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                        font-size: 24px;
+                        font-style: none;
+                        font-weight: 400;
+                        line-height: 2.5rem;
+                        text-decoration: none;
+                        word-break: break-word;
+                    }
+                }
+
+                .product-card-type {
+                    span {
+                        font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 16px;
+                        margin-bottom: 2px;
+                        margin-top: 8px;
+                        text-align: center;
+                    }
+                }
+            }
+
+            .product-card-body {
+                display: flex;
+
+                .product-card-img {
+                    display: flex;
+                    overflow: hidden;
+                    width: 240px;
+                    height: 154px;
+                    width: 100%;
+                    cursor: pointer;
+                    padding: 0;
+                    vertical-align: middle;
+                    padding-bottom: 20px;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                        object-fit: cover;
+                        border-radius: 10px;
+                    }
+                }
+
+
+            }
+        }
+
+        .custom-control-inputs {
+            left: 0;
+            width: 1rem;
+            height: 1.25rem;
+        }
+
+        .product-car-control {
+            display: flex;
+            flex-flow: column;
+            left: 0;
+            width: 100%;
+            z-index: 9;
+            top: auto;
+            animation-duration: .3s;
+            box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1), 0 4px 8px 0 rgba(0, 0, 0, .1);
+            margin: -17px auto -20px;
+            border-radius: 5px;
+            transition: visibility 0s, opacity 0.5s linear;
+            list-style: none;
+
+            .product-car-detail {
+                background-color: #fff;
+                border: 1px solid #e8e8e8;
+                border-bottom: 0;
+                transition: color .3s;
+                width: 100%;
+                display: flex;
+
+                .detail-product {
+                    font: inherit;
+                    font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                    font-size: .875rem;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.25rem;
+                    padding: 0 14px;
+                    align-items: center;
+                    color: #333;
+                    display: flex;
+                    text-decoration: none;
+                    width: 100%;
+                    text-align: center;
+                    justify-content: flex-start;
+                }
+
+                &:hover {
+                    background-color: #f8f8f8;
+                    color: #000;
+                    font-weight: 600;
+                }
+
+                img {
+                    width: 17px;
+                    height: 17px;
+                }
+
+                span {
+                    padding-left: 1rem;
+                }
+            }
+        }
+    }
+}
+
+.product-card-body {
+    #customer-testimonoals .item {
+        text-align: center;
+        padding: 50px;
+        margin-bottom: 0px;
+        opacity: 0;
+        transform: scale3d(0.8, 0.8, 1);
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+.product-card-body {
+    .owl-carousel {
+        .owl-stage {
+            .item {
+                transform: translate3d(-90px, 0px, 0px) !important;
             }
         }
     }

@@ -46,7 +46,7 @@ const NavMenuItems = ({ items, depthLevel }) => {
             onClick={() => setDropdown((prev) => !prev)}
           >
             <i className={items.icon} aria-hidden="true"></i>
-            <button type="button" className={dropdown ? "text-title active" : "text-title"}>{items.title}{""}</button>
+            <div type="button" className={dropdown ? "text-title active" : "text-title"}>{items.title}{""}</div>
             {depthLevel > 0 ? <span>&raquo;</span> : <span className="arrow" />}
           </button>
           <Dropdown

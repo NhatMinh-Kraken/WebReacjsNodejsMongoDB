@@ -7,7 +7,8 @@ function ProductCar() {
   return (
     <>
       <section>
-        <div className='ProductCar'>
+        <div className='ProductCar' data-aos="fade-up"
+          data-aos-duration="3000">
           <div className='container'>
             <div className='ProductCar-Title'>
               <h2>Các dòng xe Mercedes-Benz</h2>

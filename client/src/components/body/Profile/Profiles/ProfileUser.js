@@ -12,6 +12,8 @@ import CategoryCar from './CategoryCar.js/CategoryCar'
 import CreateProduct from './ProductCarAdmin/CreateProduct'
 
 import Address from '../Address/Address'
+import ProductCarAdmin from './ProductCarAdmin/ProductCarAdmin'
+import EditProduct from './ProductCarAdmin/EditProduct'
 
 
 function ProfileUser() {
@@ -102,7 +104,7 @@ function ProfileUser() {
             <>
                 <NavLink to="/all-user" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All user</span></NavLink>
                 <NavLink to="/all-category" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All Category</span></NavLink>
-                <NavLink to="/create-product" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Create Product</span></NavLink>
+                <NavLink to="/all-product" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All Product</span></NavLink>
             </>
         )
     }
@@ -150,7 +152,9 @@ function ProfileUser() {
                                         <Route path="/address" component={isLogged ? Address : NotFound} exact />
                                         <Route path="/changePassword" component={isLogged ? ChangePassword : NotFound} exact />
                                         <Route path="/all-category" component={isAdmin ? CategoryCar : NotFound} exact />
+                                        <Route path="/all-product" component={isAdmin ? ProductCarAdmin : NotFound} exact />
                                         <Route path="/create-product" component={isAdmin ? CreateProduct : NotFound} exact />
+                                        <Route path="/edit-product/:id" component={isAdmin ? EditProduct : NotFound} exact />
                                     </Switch>
                                 </div>
                             </Router>

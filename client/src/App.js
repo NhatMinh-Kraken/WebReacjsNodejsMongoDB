@@ -13,6 +13,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import ProfieLayout from './components/body/ProfieLayout';
 import Home from './components/Home';
 
+import AOS from 'aos'
+import "aos/dist/aos.css";
 import Loadding from './components/utils/Loadding/loadding';
 
 
@@ -26,6 +28,7 @@ function App() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    AOS.init();
     const firstLogin = localStorage.getItem('firstLogin')
     if (firstLogin) {
       const getToken = async () => {

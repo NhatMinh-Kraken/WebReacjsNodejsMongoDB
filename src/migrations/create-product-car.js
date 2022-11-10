@@ -9,11 +9,6 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            product_car_id: {
-                type: Sequelize.STRING(100),
-                trim: true,
-                required: true
-            },
             name: {
                 type: Sequelize.STRING(255),
                 require: true,
@@ -26,23 +21,26 @@ module.exports = {
                 type: Sequelize.STRING(20),
             },
             colortypeone: {
-                type: Sequelize.STRING(255),
+                type: Sequelize.JSON,
             },
             colortypetwo: {
-                type: Sequelize.STRING(255),
+                type: Sequelize.JSON,
             },
             colortypethree: {
-                type: Sequelize.STRING(255),
+                type: Sequelize.JSON,
             },
             energy: {
                 type: Sequelize.INTEGER,
                 defaultValue: 0,
             },
             avatar: {
-                type: Sequelize.STRING(255),
+                type: Sequelize.JSON,
             },
             description: {
-                type: Sequelize.TEXT,
+                type: Sequelize.TEXT('long'),
+            },
+            descriptionHTML: {
+                type: Sequelize.TEXT('long'),
             },
             checked: {
                 type: Sequelize.BOOLEAN,

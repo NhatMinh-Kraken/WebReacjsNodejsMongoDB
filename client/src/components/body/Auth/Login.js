@@ -83,6 +83,8 @@ function Login() {
         } catch (err) {
             err.response.data.msg &&
                 toast.error(err.response.data.msg)
+            toast.error("Email đã được sử dụng")
+            history.push("/")
         }
     }
 
@@ -102,6 +104,9 @@ function Login() {
         } catch (err) {
             err.response.data.msg &&
                 toast.error(err.response.data.msg)
+
+            toast.error("Email đã được sử dụng")
+            history.push("/")
         }
     }
 

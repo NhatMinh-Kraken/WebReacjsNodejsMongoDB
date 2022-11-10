@@ -63,6 +63,7 @@ const productController = {
             // })
             const productCar = await db.ProductCars.findAll()
             res.json(productCar)
+            
 
         } catch (err) {
             return res.status(500).json({ msg: err.message })
@@ -70,13 +71,13 @@ const productController = {
     },
     createProducts: async (req, res) => {
         try {
-            const { product_car_id, name, type, money, colortypeone, colortypetwo, colortypethree, energy, avatar, description, checked, sold, amount } = req.body
+            const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, avatar, description, descriptionHTML, checked, amount } = req.body
             if (!avatar || !colortypeone || !colortypetwo || !colortypethree) {
                 return res.status(400).json({ msg: "No Image Upload" })
             }
             const product = await db.ProductCars.findOne({
                 where: {
-                    id: product_car_id
+                    name: name
                 }
             })
             if (product) {
@@ -85,15 +86,15 @@ const productController = {
 
             const newProduct = new db.ProductCars({
                 where: {
-                    id: product_car_id
+                    name: name
                 }
             })
 
             if (newProduct) {
-                newProduct.product_car_id = product_car_id, newProduct.name = name, newProduct.type = type, newProduct.money = money,
+                newProduct.name = name, newProduct.type = type, newProduct.money = money,
                     newProduct.colortypeone = colortypeone, newProduct.colortypetwo = colortypetwo, newProduct.colortypethree = colortypethree,
-                    newProduct.energy = energy, newProduct.avatar = avatar, newProduct.description = description.toLowerCase(), newProduct.checked = checked,
-                    newProduct.sold = sold, newProduct.amount = amount
+                    newProduct.energy = energy, newProduct.avatar = avatar, newProduct.description = description.toLowerCase(), newProduct.descriptionHTML = descriptionHTML.toLowerCase(), newProduct.checked = checked,
+                    newProduct.amount = amount
 
                 await newProduct.save()
             }
@@ -129,21 +130,22 @@ const productController = {
     },
     updateProducts: async (req, res) => {
         try {
-            const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, avatar, description, checked, sold, amount } = req.body
+            const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, avatar, description, descriptionHTML, checked, amount } = req.body
             if (!colortypeone || !colortypetwo || !colortypethree || !avatar) {
                 return res.status(400).json({ msg: "No Image Upload" })
             }
 
-            const newProduct = await db.ProductCars({
+            const newProduct = await db.ProductCars.findOne({
                 where: {
                     id: req.params.id
-                }
+                },
+                raw: false
             })
             if (newProduct) {
                 newProduct.name = name, newProduct.type = type, newProduct.money = money,
                     newProduct.colortypeone = colortypeone, newProduct.colortypetwo = colortypetwo, newProduct.colortypethree = colortypethree,
-                    newProduct.energy = energy, newProduct.avatar = avatar, newProduct.description = description.toLowerCase(), newProduct.checked = checked,
-                    newProduct.sold = sold, newProduct.amount = amount
+                    newProduct.energy = energy, newProduct.avatar = avatar, newProduct.description = description.toLowerCase(), newProduct.descriptionHTML = descriptionHTML.toLowerCase(), newProduct.checked = checked,
+                    newProduct.amount = amount
 
                 await newProduct.save()
             }
