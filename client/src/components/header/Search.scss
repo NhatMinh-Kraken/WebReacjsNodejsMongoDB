@@ -36,7 +36,7 @@
     background: #fff;
     border-radius: 1.5em;
     box-shadow: 0 0 0 0.4em #171717 inset;
-    padding: 0.75em;
+    padding: 1.1em;
     transform: translate(0.5em, 0.5em) scale(0.5);
     transform-origin: 100% 0;
     -webkit-appearance: none;
@@ -72,7 +72,7 @@
 
     background: #fff;
     border-radius: 0 0.75em 0.75em 0 / 0 1.5em 1.5em 0;
-    padding: 0.75em;
+    padding: 1.5em;
     position: relative;
     transform: translate(0.25em, 0.25em) rotate(45deg) scale(0.25, 0.125);
     transform-origin: 0 50%;
@@ -157,4 +157,10 @@
 .input-header .form-control:focus+.btn-search:active,
 .input-header .form-control:valid+.btn-search:active {
     transform: translateY(1px);
+}
+
+button.button-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

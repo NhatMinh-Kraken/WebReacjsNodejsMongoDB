@@ -20,7 +20,7 @@ function ProductCarAll() {
             <div className='row'>
                 {
                     nametype.map((nametypes) => {
-                        return < ProductCarAllItem key={nametypes.id} nametypes={nametypes} />
+                        return < ProductCarAllItem key={nametypes._id} nametypes={nametypes} />
                     })
                 }
             </div>

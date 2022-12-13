@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Header.scss'
 import logo from '../../assets/images/logo.png'
@@ -47,7 +47,7 @@ function Header() {
                             <div className='input-header'>
                                 <div className='input-header-search'>
                                     <input className='form-control' type="search" tabIndex="-1" placeholder='Từ khóa tìm kiếm / OnlineCode từ công cụ chọn cấu hình xe' pattern=".*\S.*" required />
-                                    <button type='button' className='btn btn-search'><i className="fa-solid fa-magnifying-glass"></i></button>
+                                    <button type='button' className='btn btn-search button-search'><i className="fa-solid fa-magnifying-glass"></i></button>
                                 </div>
                             </div>
                         </div>

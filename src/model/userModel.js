@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
 
     numberphone: {
         type: String,
-        default: null,
+        default: "0",
     },
 
     address: {
@@ -64,10 +64,18 @@ const userSchema = new mongoose.Schema({
         default: null,
     },
 
-    // nameCity: {
-    //     type: String,
-    //     default: "chưa có",
-    // }
+    nameCity: {
+        type: String,
+        default: "chưa có",
+    },
+    nameDis: {
+        type: String,
+        default: "chưa có",
+    },
+    nameWard: {
+        type: String,
+        default: "chưa có",
+    }
 }, {
     timestamps: true
 })

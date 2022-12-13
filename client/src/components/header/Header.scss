@@ -1,15 +1,24 @@
+body{
+    font-size: 1rem !important;
+    background-color: #eceef5 !important;
+}
+
+
 .home-header {
     width: 100%;
-    background-color: #000;
     height: 68px;
     //border-bottom: 1px solid rgb(199, 198, 198);
 
     .home-header-container {
-        max-width: 100%;
+        width: 100%;
         padding-left: 25px;
         padding-right: 25px;
         margin-left: auto;
         margin-right: auto;
+        background-color: #000;
+        position: fixed;
+        z-index: 1000;
+        margin-bottom: 5px;
 
         .row {
             .left-header {
@@ -116,6 +125,7 @@
                     display: flex;
                     justify-items: center;
                     align-items: center;
+                    margin: 0;
 
                     .button-login {
                         border: none;

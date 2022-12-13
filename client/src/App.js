@@ -13,9 +13,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import ProfieLayout from './components/body/ProfieLayout';
 import Home from './components/Home';
 
+import DeatailProduct from './components/ProductCar/Detail/DeatailProduct'
+
 import AOS from 'aos'
 import "aos/dist/aos.css";
 import Loadding from './components/utils/Loadding/loadding';
+import DeatailProductBody from './components/ProductCar/Detail/DeatailProductBody';
+import ManagerLayout from './components/body/ManagerLayout';
 
 
 function App() {
@@ -23,7 +27,7 @@ function App() {
   const dispatch = useDispatch()
   const token = useSelector(state => state.token)
   const auth = useSelector(state => state.auth)
-  const { isLogged } = auth
+  const { isLogged, isAdmin } = auth
 
   const [loading, setLoading] = useState(false)
 
@@ -42,6 +46,7 @@ function App() {
         }, 10 * 60 * 1000)
       }
       getToken()
+      setLoading(false)
     }
   }, [auth.isLogged, dispatch])
 
@@ -67,8 +72,11 @@ function App() {
       <Router>
         <div className="App">
           <Route path={path.PRODUCTCAR} component={Home} />
+          <Route path="/detail_product/:id" component={DeatailProduct} exact/>
           <Body />
           <Route path={path.PROFILE} component={(isLogged ? ProfieLayout : NotFound)} />
+          <Route path='/manager' component={(isAdmin ? ManagerLayout : NotFound)} />
+          
           <ToastContainer
             position="top-right"
             autoClose={5000}

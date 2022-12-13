@@ -6,7 +6,7 @@ import ProductCarContr from './ProductCarContr'
 function ProductCar() {
   return (
     <>
-      <section>
+      <section className='pt-3 pb-3'>
         <div className='ProductCar' data-aos="fade-up"
           data-aos-duration="3000">
           <div className='container'>

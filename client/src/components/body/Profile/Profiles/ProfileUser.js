@@ -5,10 +5,10 @@ import { NavLink, Route, Switch, BrowserRouter as Router } from 'react-router-do
 import { dispatchGetAllUsers, fetchAllUsers } from '../../../../redux/action/userAction'
 import ProfileItem from './ProfileItem'
 import NotFound from '../../../utils/NotFound/NotFound'
-import ProfileAllUser from './ProfileAllUser'
-import EditRoleUser from './EditRoleUser'
+import ProfileAllUser from '../Profiles/AdminManager/ProfileAllUser'
+import EditRoleUser from './AdminManager/EditRoleUser'
 import ChangePassword from '../ChangePassword/ChangePassword'
-import CategoryCar from './CategoryCar.js/CategoryCar'
+import CategoryCar from './CategoryCar/CategoryCar'
 import CreateProduct from './ProductCarAdmin/CreateProduct'
 
 import Address from '../Address/Address'
@@ -20,9 +20,7 @@ function ProfileUser() {
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
 
-    const { isLogged } = auth
-
-    const { user, isAdmin } = auth
+    const { user, isAdmin, isLogged } = auth
     const [avatar, setAvatar] = useState(false)
 
     const [callback, setCallback] = useState(false)
@@ -41,84 +39,16 @@ function ProfileUser() {
     }, [token, isAdmin, dispatch, callback])
 
 
-    //items
-
-    // const menuItemUser = [
-    //     {
-    //         path: "/profileuser",
-    //         name: "profile",
-    //         icon: "fa-solid fa-user",
-    //     },
-    //     {
-    //         path: "/address",
-    //         name: "address",
-    //         icon: "fa-solid fa-location-dot",
-    //     },
-    //     {
-    //         path: "/changePassword",
-    //         name: "changePassword",
-    //         icon: "fa-solid fa-key",
-    //     }
-    // ]
-
-    // const menuItemAdmin = [
-    //     {
-    //         path: "/all-user",
-    //         name: "All user",
-    //         icon: "fa-solid fa-list",
-    //     },
-    //     {
-    //         path: "/all-category",
-    //         name: "All Category",
-    //         icon: "fa-solid fa-list",
-    //     },
-    //     {
-    //         path: "/create-product",
-    //         name: "Create Product",
-    //         icon: "fa-solid fa-list",
-    //     }
-    // ]
-
-    // const menuItem = [
-    //     {
-    //         path: "#",
-    //         name: "order",
-    //         icon: "fa-solid fa-cart-shopping",
-    //     },
-    //     {
-    //         path: "#",
-    //         name: "bank",
-    //         icon: "fa-sharp fa-solid fa-building-columns",
-    //     },
-    //     {
-    //         path: "#",
-    //         name: "notification",
-    //         icon: "fa-solid fa-bell",
-    //     }
-    // ]
-    //
-
-
-    const alluser = () => {
-        return (
-            <>
-                <NavLink to="/all-user" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All user</span></NavLink>
-                <NavLink to="/all-category" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All Category</span></NavLink>
-                <NavLink to="/all-product" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All Product</span></NavLink>
-            </>
-        )
-    }
-
     return (
         <>
-            <div className='profile_page pt-5 pb-5'>
+            <div className='profile_page pt-5'>
                 <div className='container'>
                     <div className='profile_page_body'>
                         <div className='row'>
                             <Router basename='/profile'>
                                 <div style={{ width: isOpen ? "25%" : "9%" }} className='profile_item_controll' >
                                     <div className='profile_item-avatar' style={{ justifyContent: isOpen ? "start" : "center" }} onClick={toggle}>
-                                        <img src={avatar ? avatar : user.avatar} alt=""  />
+                                        <img src={avatar ? avatar : user.avatar} alt="" />
                                         <div className='infor_profile' style={{ display: isOpen ? "" : "none" }}>
                                             <h2>{isAdmin ? "Admin Profile" : "User Profile"}</h2>
                                             <p>{user.name}</p>
@@ -126,12 +56,9 @@ function ProfileUser() {
                                     </div>
                                     <div className='profile_item-infor'>
                                         <div className='infor' style={{ alignItems: isOpen ? "flex-start" : "center" }}>
-                                            <NavLink to="/profileuser" className={({ isActive }) => (isActive ? 'profile pb-2 active' : 'profile pb-2')}><i className="fa-solid fa-user"></i><span style={{ display: isOpen ? "" : "none" }}>profile</span></NavLink>
-                                            {
-                                                isAdmin ? alluser() : null
-                                            }
-                                            <NavLink to="/address" className={({ isActive }) => (isActive ? 'address pb-2 active' : 'address pb-2')}><i className="fa-solid fa-location-dot"></i><span style={{ display: isOpen ? "" : "none" }}>address</span></NavLink>
-                                            <NavLink to="/changePassword" className={({ isActive }) => (isActive ? 'changePassword pb-2 active' : 'changePassword pb-2')} ><i className="fa-solid fa-key"></i><span style={{ display: isOpen ? "" : "none" }}>changePassword</span></NavLink>
+                                            <NavLink to="/profileuser" className={({ isActive }) => (isActive ? 'profile pb-2 active' : 'profile pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-user"></i><span style={{ display: isOpen ? "" : "none" }}>profile</span></NavLink>
+                                            <NavLink to="/address" className={({ isActive }) => (isActive ? 'address pb-2 active' : 'address pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-location-dot"></i><span style={{ display: isOpen ? "" : "none" }}>address</span></NavLink>
+                                            <NavLink to="/changePassword" className={({ isActive }) => (isActive ? 'changePassword pb-2 active' : 'changePassword pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-key"></i><span style={{ display: isOpen ? "" : "none" }}>changePassword</span></NavLink>
                                         </div>
                                         <div className='infor_additional' style={{ alignItems: isOpen ? "flex-start" : "center" }}>
                                             <a href="#" className='order pb-2'><i className="fa-solid fa-cart-shopping"></i><span style={{ display: isOpen ? "" : "none" }}>order</span></a>

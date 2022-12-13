@@ -19,7 +19,7 @@ const initialState = {
 
 function ProfileItem() {
     const auth = useSelector(state => state.auth)
-    const { user, isAdmin } = auth
+    const { user } = auth
     const [avatar, setAvatar] = useState(false)
 
     const [data, setData] = useState(initialState)
@@ -32,13 +32,13 @@ function ProfileItem() {
 
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if (isAdmin) {
-            fetchAllUsers(token).then(res => {
-                dispatch(dispatchGetAllUsers(res))
-            })
-        }
-    }, [token, isAdmin, dispatch, callback])
+    // useEffect(() => {
+    //     if (isAdmin) {
+    //         fetchAllUsers(token).then(res => {
+    //             dispatch(dispatchGetAllUsers(res))
+    //         })
+    //     }
+    // }, [token, isAdmin, dispatch, callback])
 
     const changeAvatar = async (e) => {
         e.preventDefault()
@@ -74,6 +74,8 @@ function ProfileItem() {
             toast.error(err.response.data.msg)
         }
     }
+
+    console.log(avatar)
 
     const handleChange = e => {
         const { name, value } = e.target
@@ -111,10 +113,10 @@ function ProfileItem() {
 
     const handleDistroy = async () => {
         try {
-            if (!isAdmin) {
-                toast.error("You're not an admin")
-                window.location.reload()
-            }
+            // if (!isAdmin) {
+            //     toast.error("You're not an admin")
+            //     window.location.reload()
+            // }
             setLoading(true)
             await Axios.post('/api/destroy_avatar', { public_id: avatar.public_id }, {
                 headers: { Authorization: token }
@@ -124,6 +126,7 @@ function ProfileItem() {
             toast.success("Destroy Image Success")
         } catch (err) {
             toast.error(err.response.data.msg)
+            console.log(err)
         }
     }
 
@@ -229,14 +232,6 @@ function ProfileItem() {
                         </>
                     }
 
-
-                    {/* <div className='profile_iteam_avatar_body'>
-                        <img src={avatar ? avatar : user.avatar} alt="" />
-                        <span className="span">
-                            <i className="fa-solid fa-camera"></i>
-                            <input type="file" name='file' id="file_up" onChange={changeAvatar} />
-                        </span>
-                    </div> */}
                     <p>Dụng lượng file tối đa 1 MB</p>
                     <p>Định dạng:.JPEG, .PNG</p>
                 </div>

@@ -1,4 +1,16 @@
-const db = require('../models/index')
+const ProductCars = require('../model/productCarModel')
+
+const cloudinary = require('cloudinary')
+const fs = require('fs')
+const { file } = require('googleapis/build/src/apis/file')
+
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET,
+    cloud_api: process.env.CLOUD_API
+})
 
 
 class APIfeatures {
@@ -61,9 +73,9 @@ const productController = {
             //     result: productCar.length,
             //     productCar: productCar
             // })
-            const productCar = await db.ProductCars.findAll()
+            const productCar = await ProductCars.find()
             res.json(productCar)
-            
+
 
         } catch (err) {
             return res.status(500).json({ msg: err.message })
@@ -71,33 +83,49 @@ const productController = {
     },
     createProducts: async (req, res) => {
         try {
-            const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, avatar, description, descriptionHTML, checked, amount } = req.body
-            if (!avatar || !colortypeone || !colortypetwo || !colortypethree) {
-                return res.status(400).json({ msg: "No Image Upload" })
+            let avatar = [...req.body.avatar]
+            let imageBuffer = []
+
+            for (let i = 0; i < avatar.length; i++) {
+                const result = await cloudinary.v2.uploader.upload(avatar[i], {
+                    folder: "imageProduct"
+                })
+
+                imageBuffer.push({
+                    public_id: result.public_id,
+                    url: result.secure_url
+                })
             }
-            const product = await db.ProductCars.findOne({
-                where: {
-                    name: name
-                }
+
+            req.body.avatar = imageBuffer
+
+            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, checked, amount } = req.body
+
+
+            if (!name || !type || !money || !energy || !description || !specifications || !amount) {
+                return res.status(400).json({ msg: "Please complete all information" })
+            }
+
+            const product = await ProductCars.findOne({
+                name
             })
             if (product) {
                 return res.status(400).json({ msg: "This product already exists" })
             }
 
-            const newProduct = new db.ProductCars({
-                where: {
-                    name: name
-                }
+            const newProduct = new ProductCars({
+                name
             })
 
             if (newProduct) {
                 newProduct.name = name, newProduct.type = type, newProduct.money = money,
-                    newProduct.colortypeone = colortypeone, newProduct.colortypetwo = colortypetwo, newProduct.colortypethree = colortypethree,
-                    newProduct.energy = energy, newProduct.avatar = avatar, newProduct.description = description.toLowerCase(), newProduct.descriptionHTML = descriptionHTML.toLowerCase(), newProduct.checked = checked,
+                    newProduct.energy = energy, newProduct.avatar = req.body.avatar, newProduct.description = description, newProduct.descriptionHTML = descriptionHTML, newProduct.specifications = specifications, newProduct.specificationsHTML = specificationsHTML, newProduct.checked = checked,
                     newProduct.amount = amount
 
                 await newProduct.save()
             }
+
+            // console.log(newProduct)
 
             res.json("Create Sussecc")
 
@@ -108,21 +136,16 @@ const productController = {
     },
     deleteProducts: async (req, res) => {
         try {
-            const product = await db.ProductCars.findOne({
-                where: {
-                    id: req.params.id
-                }
+            const product = await ProductCars.findOne({
+                _id: req.params.id
             })
             if (!product) {
                 res.json({
                     msg: "Not Product"
                 })
             }
-            await db.ProductCars.destroy({
-                where: {
-                    id: req.params.id
-                }
-            })
+
+            await ProductCars.findByIdAndDelete(req.params.id)
             res.json({ msg: "Deleted a Product" })
         } catch (err) {
             return res.status(500).json({ msg: err.message })
@@ -130,21 +153,19 @@ const productController = {
     },
     updateProducts: async (req, res) => {
         try {
-            const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, avatar, description, descriptionHTML, checked, amount } = req.body
-            if (!colortypeone || !colortypetwo || !colortypethree || !avatar) {
-                return res.status(400).json({ msg: "No Image Upload" })
-            }
+            const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, avatar, description, descriptionHTML, specifications, specificationsHTML, checked, amount } = req.body
 
-            const newProduct = await db.ProductCars.findOne({
-                where: {
-                    id: req.params.id
-                },
-                raw: false
+            // if (!name || !type || !money || !energy || !description || !specifications || !amount) {
+            //     return res.status(400).json({ msg: "Please complete all information" })
+            // }
+
+            const newProduct = await ProductCars.findOne({
+                _id: req.params.id
             })
             if (newProduct) {
                 newProduct.name = name, newProduct.type = type, newProduct.money = money,
                     newProduct.colortypeone = colortypeone, newProduct.colortypetwo = colortypetwo, newProduct.colortypethree = colortypethree,
-                    newProduct.energy = energy, newProduct.avatar = avatar, newProduct.description = description.toLowerCase(), newProduct.descriptionHTML = descriptionHTML.toLowerCase(), newProduct.checked = checked,
+                    newProduct.energy = energy, newProduct.avatar = req.body.avatar, newProduct.description = description, newProduct.descriptionHTML = descriptionHTML, newProduct.specifications = specifications, newProduct.specificationsHTML = specificationsHTML, newProduct.checked = checked,
                     newProduct.amount = amount
 
                 await newProduct.save()
@@ -157,21 +178,19 @@ const productController = {
 
     SelectNameType: async (req, res) => {
         try {
-            const user = await db.ProductCars.findAll({
-                include: [
-                    {
-                        model: db.Categorys, as: 'CategoryData'
-                    }
-                ],
-                raw: false,
-                nest: true,
-            })
+            const user = await ProductCars.find().populate('type')
             res.json(user)
         } catch (err) {
             console.log(err)
             return res.status(500).json({ msg: err.message })
         }
     }
+}
+
+const removeTmp = (path) => {
+    fs.unlink(path, err => {
+        if (err) throw err
+    })
 }
 
 module.exports = productController

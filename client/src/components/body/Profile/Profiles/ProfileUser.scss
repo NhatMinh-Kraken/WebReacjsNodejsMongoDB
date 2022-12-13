@@ -1,5 +1,6 @@
 .profile_page {
     background-color: #eceef5;
+    padding-bottom: 5rem;
 
     .profile_page_body {
         background-color: transparent;
@@ -7,14 +8,15 @@
 
         .profile_item_controll {
             position: sticky;
-            top: 2%;
-            height: 450px;
+            top: 12%;
+            height: 100%;
             padding: 10px;
             border: 1px solid rgb(211, 204, 204);
             border-radius: 20px;
             margin-right: 10px;
             transition: all 0.5s ease;
-            background-color: #fff;
+            background: rgba(215, 225, 235, 0.128);
+            box-shadow: 0 8px 32px 0 rgba(155, 207, 242, 0.37);
 
             .profile_item-avatar {
                 display: flex;
@@ -74,8 +76,15 @@
                     }
 
                     .profile {
-                        border: none;
-                        background-color: transparent;
+                        background: rgba(215, 225, 235, 0.128);
+                        box-shadow: 0 8px 32px 0 rgba(155, 207, 242, 0.37);
+                        border-radius: 10px;
+                        border: 1px solid rgba(155, 207, 242, 0.37);
+                        padding-top: 0.5rem;
+                        padding-bottom: 0.5rem;
+                        padding-left: 1rem;
+                        padding-right: 1rem;
+                        margin-bottom: 5px;
 
                         i {
 
@@ -93,17 +102,25 @@
                             padding-left: 20px;
                         }
 
-                        &.active span {
+                        &.active {
                             font-weight: 700;
                             font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
-                            color: rgb(228, 129, 8);
+                            color: rgb(30, 228, 8);
+                            background-color: rgba(105, 210, 96, 0.231);
+                            transition: all 0.4 ease;
                         }
                     }
 
                     .category {
-                        border: none;
-                        background-color: transparent;
-                        transition: all 0.5s ease;
+                        background: rgba(215, 225, 235, 0.128);
+                        box-shadow: 0 8px 32px 0 rgba(155, 207, 242, 0.37);
+                        border-radius: 10px;
+                        border: 1px solid rgba(155, 207, 242, 0.37);
+                        padding-top: 0.5rem;
+                        padding-bottom: 0.5rem;
+                        padding-left: 1rem;
+                        padding-right: 1rem;
+                        margin-bottom: 5px;
 
                         i {
 
@@ -122,17 +139,25 @@
                             font-weight: 700;
                         }
 
-                        &.active span {
+                        &.active {
                             font-weight: 700;
                             font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
-                            color: rgb(228, 129, 8);
+                            color: rgb(8, 122, 228);
+                            background-color: rgba(59, 49, 234, 0.231);
+                            transition: all 0.4 ease;
                         }
                     }
 
                     .address {
-                        border: none;
-                        background-color: transparent;
-                        transition: all 0.5s ease;
+                        background: rgba(215, 225, 235, 0.128);
+                        box-shadow: 0 8px 32px 0 rgba(155, 207, 242, 0.37);
+                        border-radius: 10px;
+                        border: 1px solid rgba(155, 207, 242, 0.37);
+                        padding-top: 0.5rem;
+                        padding-bottom: 0.5rem;
+                        padding-left: 1.1rem;
+                        padding-right: 1.1rem;
+                        margin-bottom: 5px;
 
                         i {
 
@@ -150,17 +175,25 @@
                             padding-left: 20px;
                         }
 
-                        &.active span {
+                        &.active {
                             font-weight: 700;
                             font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
-                            color: rgb(228, 129, 8);
+                            color: rgb(228, 228, 8);
+                            background-color: rgba(234, 234, 49, 0.231);
+                            transition: all 0.4 ease;
                         }
                     }
 
                     .changePassword {
-                        border: none;
-                        background-color: transparent;
-                        transition: all 0.5s ease;
+                        background: rgba(215, 225, 235, 0.128);
+                        box-shadow: 0 8px 32px 0 rgba(155, 207, 242, 0.37);
+                        border-radius: 10px;
+                        border: 1px solid rgba(155, 207, 242, 0.37);
+                        padding-top: 0.5rem;
+                        padding-bottom: 0.5rem;
+                        padding-left: 1rem;
+                        padding-right: 1rem;
+                        margin-bottom: 5px;
 
                         i {
                             margin: 0;
@@ -178,10 +211,12 @@
                             padding-left: 15px;
                         }
 
-                        &.active span {
+                        &.active {
                             font-weight: 700;
                             font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
-                            color: rgb(228, 129, 8);
+                            color: rgb(6, 6, 5);
+                            background-color: rgba(10, 10, 9, 0.231);
+                            transition: all 0.4 ease;
                         }
                     }
 
@@ -268,7 +303,8 @@
 
 
         .profile_item {
-            background-color: #fff;
+            background: rgba(215, 225, 235, 0.128);
+            box-shadow: 0 8px 32px 0 rgba(155, 207, 242, 0.37);
             border-bottom: 1px solid #bbb;
             transition: all 0.5s;
             border-radius: 20px;
@@ -325,6 +361,7 @@
 
                                 .input-group {
                                     display: flex;
+                                    flex-wrap: wrap;
 
                                     .input-group-prepend {
                                         padding-right: 5px;
@@ -407,6 +444,9 @@
                             height: 30px;
                             text-align: center;
                             z-index: 1;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
                         }
                     }
 
@@ -531,5 +571,17 @@
         i {
             color: #e7e7e7;
         }
+    }
+}
+
+.width-border {
+    width: 225px;
+}
+
+td{
+    img.avatarTD{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
     }
 }

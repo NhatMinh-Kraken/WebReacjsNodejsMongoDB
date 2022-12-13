@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import steering_wheel from '../../../../../assets/images/steering-wheel.png'
 import Axios from 'axios';
 import ProductCarAdminItem from './ProductCarAdminItem';
 
 
 function ProductCarAdmin() {
     const [nametype, setNametype] = useState([])
+    const [callback, setCallback] = useState(false)
 
     useEffect(() => {
         const getNameType = async () => {
@@ -17,8 +17,9 @@ function ProductCarAdmin() {
             setNametype(res.data)
         }
         getNameType()
-    }, [])
+    }, [callback])
 
+    console.log(nametype)
 
     return (
         <>
@@ -29,7 +30,7 @@ function ProductCarAdmin() {
                     </div>
                     {
                         nametype.map((nametypes) => {
-                            return < ProductCarAdminItem key={nametypes.id} nametypes={nametypes} />
+                            return < ProductCarAdminItem key={nametypes._id} nametypes={nametypes} callback={callback} setCallback={setCallback} />
                         })
                     }
                 </div>

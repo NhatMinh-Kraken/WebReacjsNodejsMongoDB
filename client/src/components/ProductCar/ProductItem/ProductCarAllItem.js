@@ -20,10 +20,6 @@ function ProductCarAllItem({ nametypes }) {
         setIsHover(false)
     }
 
-    const avatarJson = JSON.parse(nametypes.avatar)
-    const oneJson = JSON.parse(nametypes.colortypeone)
-    const twoJson = JSON.parse(nametypes.colortypetwo)
-    const threeJson = JSON.parse(nametypes.colortypethree)
 
     const options = {
         loop: true,
@@ -49,9 +45,9 @@ function ProductCarAllItem({ nametypes }) {
                         <div className='product-card-type'>
                             {
                                 nametypes
-                                && nametypes.CategoryData
-                                && nametypes.CategoryData.name
-                                && <span>{nametypes.CategoryData.name}</span>
+                                && nametypes.type
+                                && nametypes.type.name
+                                && <span>{nametypes.type.name}</span>
                             }
 
                         </div>
@@ -61,38 +57,24 @@ function ProductCarAllItem({ nametypes }) {
                     </div>
                     <div className='product-card-body'>
                         <OwlCarousel id="customer-testimonoals" className="product owl-carousel owl-theme" {...options}>
-                            <div className='item p-0' style={{ width: "240px" }}>
-                                <div className='product-card-img'>
-                                    <img src={avatarJson.url} alt="0" />
-                                </div>
-                            </div>
-                            <div className='item p-0' style={{ width: "240px" }}>
-                                <div className='product-card-img'>
-                                    <img src={oneJson.url} alt="1" />
-                                </div>
-                            </div>
-                            <div className='item p-0' style={{ width: "240px" }}>
-                                <div className='product-card-img'>
-                                    <img src={twoJson.url} alt="2" />
-                                </div>
-                            </div>
-                            <div className='item p-0' style={{ width: "240px" }}>
-                                <div className='product-card-img'>
-                                    <img src={threeJson.url} alt="3" />
-                                </div>
-                            </div>
+                            {
+                                nametypes.avatar.map((img, index) => (
+                                    <div className='item p-0' style={{ width: "240px" }}>
+                                        <div className='product-card-img'>
+                                            <img key={index} src={img.url} alt={img.url} loading="lazy" />
+                                        </div>
+                                    </div>
+                                ))
+                            }
                         </OwlCarousel>
                     </div>
                 </Link>
                 <div className={`product-car-control ${isHover ? "visible" : "hidden"} ${isHover ? "opacity-1" : "opacity-0"}`}>
                     <div className='product-car-detail heights-48'>
-                        <Link to="/detail_product" className='detail-product'><i className="fa-solid fa-circle-info d-flex pr-3"></i>Detail</Link>
+                        <a href={`/detail_product/${nametypes._id}`} className='detail-product'><i className="fa-solid fa-circle-info d-flex pr-3"></i>Detail</a>
                     </div>
                     <div className='product-car-detail heights-48'>
-                        <Link to="/add" className='detail-product'><i className="fa-solid fa-cart-shopping d-flex pr-3"></i>Add</Link>
-                    </div>
-                    <div className='product-car-detail heights-48'>
-                        <Link to="/advise" className='detail-product'><img src={steering_wheel} alt="steering" /><span>Advise</span></Link>
+                        <Link to="/3D" className='detail-product'><img src={steering_wheel} alt="steering" /><span>3D</span></Link>
                     </div>
                 </div>
             </div>

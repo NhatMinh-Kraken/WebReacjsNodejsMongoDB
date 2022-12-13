@@ -1,0 +1,644 @@
+.detail-product-car {
+    background-color: #eceef5;
+    // height: 1000vh;
+    padding-top: 15px;
+
+    .DetailProduct {
+        display: flex;
+        flex-flow: column;
+
+        .DetailProduct-header {
+            background: #fff;
+            box-shadow: 0 8px 32px 0 rgba(223, 236, 244, 0.098);
+            display: flex;
+            flex-flow: column;
+            padding-bottom: 10px;
+            border-radius: 5px;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 68px;
+            margin-top: 5px;
+            z-index: 2;
+            border-bottom: 1px solid #9f9b9bc7;
+
+            .DetailProduct-header-overview {
+                padding-top: 10px;
+                padding-left: 10px;
+                padding-bottom: 10px;
+
+                .overview-name {
+                    display: flex;
+                    flex-flow: column;
+
+                    .name-car {
+                        font-size: 20px;
+                        font-weight: 600;
+                        font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                        color: black;
+                    }
+
+                    .LoaiXe {
+                        span {
+                            font-size: 20px;
+                            font-weight: 600;
+                            font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                            color: black;
+                        }
+                    }
+                }
+
+                .overview-money {
+                    .price-range {
+                        font-size: 16px;
+                        font-weight: 500;
+                        font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                        color: #747272;
+                    }
+
+                    .money-car {
+                        font-size: 18px;
+                        font-weight: 500;
+                        font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                        color: #070707;
+                    }
+                }
+            }
+
+            .DetailProduct-header-controll {
+                display: flex;
+                padding-top: 10px;
+                background-color: transparent;
+
+                .control-overview {
+                    text-decoration: none;
+                    color: #070707;
+                    font-size: 18px;
+                    font-weight: 600;
+                    width: 160px;
+                    margin-right: 20px;
+                    background: rgba(255, 255, 255, 0.25);
+                    box-shadow: 0 8px 32px 0 rgba(65, 67, 85, 0.37);
+                    backdrop-filter: blur(4px);
+                    -webkit-backdrop-filter: blur(4px);
+                    border-radius: 10px;
+                    border: 1px solid rgba(255, 255, 255, 0.18);
+                    display: flex;
+                    justify-content: center;
+                    transition: all .4s ease-in;
+
+                    &:hover {
+                        text-decoration: none;
+                        background-color: #070707;
+                        color: #e6e6e6;
+                    }
+
+                    &.active {
+                        background-color: #070707;
+                        color: #e6e6e6;
+                        border-bottom: 1px solid rgb(186, 137, 30);
+                    }
+                }
+            }
+        }
+
+        .DetailProduct-body {
+            background-color: #eceef5;
+
+            .DetailProduct-body-car {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left: 5px;
+                padding-right: 5px;
+
+                .DetailProduct-TongQuan-name {
+                    padding: 30px;
+                    margin-top: 10px;
+                    background-color: #fff;
+
+                    .DetailProduct-TongQuan {
+
+                        .title-detailProduct {
+                            background-color: #0b0b0bf6;
+                            color: #fff;
+                            padding: 10px;
+                            width: 100%;
+                            border-radius: 10px;
+
+                            span {
+                                font-size: 20px;
+                                font-weight: 600;
+                                font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                                text-transform: uppercase;
+
+                            }
+                        }
+
+                        .DetailProduct-TongQuan-img {
+                            img {
+                                width: 659px;
+                                padding-right: 15px;
+                                padding-left: 10px;
+                            }
+                        }
+
+                        .DetailProduct-TongQuan-img-mini {
+                            padding: 10px;
+
+                            img {
+                                width: 120px;
+                                // border-radius: 2px;
+                                // border: 1px solid #eceef5;
+                                margin-right: 5px;
+                            }
+                        }
+                    }
+                }
+
+                .DetailProduct-TongQuan-money {
+                    padding: 30px;
+                    margin-top: 10px;
+                    background-color: #fff;
+
+                    h3 {
+                        font-weight: 600;
+                        font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                        text-transform: uppercase;
+                    }
+                }
+
+                .DetailProduct-ChiTiet-name {
+                    padding: 30px;
+                    margin-top: 10px;
+                    background-color: #fff;
+
+                    span {
+                        font-size: 20px;
+                        font-weight: 600;
+                        font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                        text-transform: uppercase;
+                    }
+
+                    .DetailProduct-ChiTiet {
+                        padding-top: 10px;
+
+                        p {
+                            text-align: justify;
+
+                            img {
+                                width: 655px;
+                            }
+                        }
+                    }
+                }
+
+                .DetailProduct-ThongSoKyThuat-name {
+                    padding: 30px;
+                    margin-top: 10px;
+                    background-color: #fff;
+
+                    span {
+                        font-size: 20px;
+                        font-weight: 600;
+                        font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                        text-transform: uppercase;
+                    }
+
+
+                    .DetailProduct-ThongSoKyThuat {
+                        table {
+                            border: 1px solid #dee2e6;
+                            width: 100%;
+                            max-width: 100%;
+                            margin-bottom: 1rem;
+                            background-color: transparent;
+                            border-collapse: collapse;
+
+                            th {
+                                border-bottom-width: 2px;
+                                vertical-align: bottom;
+                                border-bottom: 2px solid #dee2e6;
+                                border: 1px solid #dee2e6;
+                                text-align: center;
+                                background-color: #070707;
+                                color: #fff;
+                            }
+
+                            td {
+                                border-bottom-width: 2px;
+                                vertical-align: bottom;
+                                border-bottom: 2px solid #dee2e6;
+                                border: 1px solid #dee2e6;
+                                text-align: center;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .DetailProduct-summary {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left: 5px;
+                padding-right: 5px;
+
+                .DetailProduct-summary-name {
+                    background-color: #fff;
+                    padding: 30px 20px 20px 20px;
+                    margin-top: 10px;
+
+                    .title-detailProduct {
+                        background-color: #0b0b0bf6;
+                        color: #fff;
+                        padding: 10px;
+                        width: 100%;
+                        border-radius: 10px;
+
+                        span {
+                            font-size: 20px;
+                            font-weight: 600;
+                            font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                            text-transform: uppercase;
+
+                        }
+                    }
+
+                    .detailProduct-body-Receipt {
+                        padding-top: 30px;
+
+                        padding-bottom: 20px;
+                        border-bottom: 1px solid #e5e5e5;
+
+                        .Receipt-body {
+                            .Receipt-body-money {
+                                span {
+                                    font-size: 16px;
+                                    font-weight: 600;
+                                    font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                                    text-transform: uppercase;
+                                }
+                            }
+
+                            .Receipt-body-select-name {
+                                .Receipt-body-select {
+                                    border-radius: 5px;
+                                    color: #000;
+                                    font-size: 16px;
+                                    font-weight: 600;
+                                    width: 100%;
+                                    outline: 0;
+                                    box-shadow: none;
+
+                                    width: 100%;
+                                    height: 43.59px;
+                                    color: hsl(0, 0%, 60%);
+                                    font-weight: 600;
+                                    font-size: 16px;
+                                    padding: 2px 40px;
+                                    overflow: hidden;
+
+                                    align-items: center;
+                                    background-color: hsl(0, 0%, 95%);
+                                    border-color: hsl(0, 0%, 90%);
+                                    border-radius: 4px;
+                                    border-style: solid;
+                                    border-width: 1px;
+                                    cursor: default;
+                                    display: -webkit-box;
+                                    display: -webkit-flex;
+                                    display: -ms-flexbox;
+                                    display: flex;
+                                    -webkit-box-flex-wrap: wrap;
+                                    -webkit-flex-wrap: wrap;
+                                    -ms-flex-wrap: wrap;
+                                    flex-wrap: wrap;
+                                    -webkit-box-pack: justify;
+                                    -webkit-justify-content: space-between;
+                                    justify-content: space-between;
+                                    min-height: 38px;
+                                    outline: 0 !important;
+                                    position: relative;
+                                    -webkit-transition: all 100ms;
+                                    transition: all 100ms;
+                                    box-sizing: border-box;
+                                }
+
+                                .input-icons {
+                                    width: 100%;
+                                    margin-bottom: 10px;
+
+
+                                    i {
+                                        position: absolute;
+                                        z-index: 1;
+                                    }
+
+                                    i.icon {
+                                        padding: 14px;
+                                        min-width: 40px;
+                                        color: #fbd749;
+                                    }
+
+                                }
+                            }
+                        }
+
+                        .Receipt-body-nameCity {
+                            padding-top: 20px;
+
+                            .Receipt-nameCity-name {
+                                span {
+                                    font-size: 16px;
+                                    font-weight: 600;
+                                    font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                                    text-transform: uppercase;
+                                }
+                            }
+
+                            .Receipt-nameCity {
+                                .Receipt-nameCity-input {
+                                    width: 100%;
+                                    height: 43.59px;
+                                    color: hsl(0, 0%, 60%);
+                                    font-weight: 600;
+                                    font-size: 16px;
+                                    padding: 2px 40px;
+                                    overflow: hidden;
+
+                                    align-items: center;
+                                    background-color: hsl(0, 0%, 95%);
+                                    border-color: hsl(0, 0%, 90%);
+                                    border-radius: 4px;
+                                    border-style: solid;
+                                    border-width: 1px;
+                                    cursor: default;
+                                    display: -webkit-box;
+                                    display: -webkit-flex;
+                                    display: -ms-flexbox;
+                                    display: flex;
+                                    -webkit-box-flex-wrap: wrap;
+                                    -webkit-flex-wrap: wrap;
+                                    -ms-flex-wrap: wrap;
+                                    flex-wrap: wrap;
+                                    -webkit-box-pack: justify;
+                                    -webkit-justify-content: space-between;
+                                    justify-content: space-between;
+                                    min-height: 38px;
+                                    outline: 0 !important;
+                                    position: relative;
+                                    -webkit-transition: all 100ms;
+                                    transition: all 100ms;
+                                    box-sizing: border-box;
+                                }
+
+                                .input-icons {
+                                    width: 100%;
+                                    margin-bottom: 10px;
+
+
+                                    i {
+                                        position: absolute;
+                                        z-index: 1;
+                                    }
+
+                                    i.icon {
+                                        padding: 14px;
+                                        min-width: 40px;
+                                        color: #3d0e8e;
+                                    }
+
+                                }
+                            }
+                        }
+
+                        .Money-Receipt {
+                            padding-top: 20px;
+
+                            span.title-Money-Receipt {
+                                font-size: 16px;
+                                font-weight: 600;
+                                text-transform: uppercase;
+                                color: #000;
+                                font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                            }
+                        }
+                    }
+
+                    .Receipt-incurred {
+                        padding-top: 30px;
+
+                        padding-bottom: 20px;
+
+                        .table>:not(caption)>*>* {
+                            padding: 0.75rem;
+                        }
+
+                        tr {
+                            th {
+                                font-weight: 600;
+                            }
+                        }
+
+                        tr {
+                            th.money-td {
+                                text-align: right;
+                            }
+                        }
+
+                        tr.tongtien {
+                            font-weight: 700;
+                            font-size: 16px;
+                        }
+
+                        tr {
+                            td.money-td {
+                                display: flex;
+                                justify-content: flex-end;
+                            }
+                        }
+
+
+                    }
+
+                    .SetTime-TextCar {
+                        // padding-top: 30px;
+                        padding-bottom: 20px;
+
+                        .SetTime-TextCar-Name {
+                            span {
+                                font-size: 16px;
+                                font-weight: 600;
+                                text-transform: uppercase;
+                                color: #000;
+                                font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                            }
+                        }
+                    }
+
+                    .Title-note {
+                        display: flex;
+
+                        span {
+                            i {
+                                color: red;
+                                padding-right: 5px;
+                            }
+                        }
+
+                        p {
+                            color: red;
+                            font-size: 14px;
+                            font-style: italic;
+                            font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                        }
+                    }
+
+                    .Submit {
+                        padding-top: 20px;
+                        display: flex;
+                        justify-content: center;
+
+                        .Submit-car {
+                            border-radius: 5px;
+                            border: 1px solid #e5e5e5;
+                            color: rgb(243, 239, 239);
+                            font-size: 16px;
+                            background-color: #4d8feb;
+                            padding: 15px 30px 15px 30px;
+
+                            &:hover {
+                                background-color: #0d52b4;
+                                transition: all .4 ease-in;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ant-picker {
+    width: 100%;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    color: #070707 !important;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-range-end-single):not(.ant-picker-cell-range-start) .ant-picker-cell-inner {
+    border-radius: 50% !important;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single):not(.ant-picker-cell-range-end) .ant-picker-cell-inner {
+    border-radius: 50% !important;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+    border-radius: 50% !important;
+}
+
+.ant-picker-cell .ant-picker-cell-inner {
+    border-radius: 50% !important;
+}
+
+.ant-picker-cell.ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-start {
+    border-radius: 50% !important;
+}
+
+.ant-picker-cell-disabled::before {
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 50%;
+}
+
+.ant-picker-cell::before {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 6px !important;
+    z-index: 1;
+    height: 24px;
+    width: 24px;
+    /* align-items: center; */
+    transform: translateY(-50%);
+    /* transform: translateX(30%); */
+    transition: all 0.3s;
+    content: '';
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-in-range::before {
+    background: #e6f7ff;
+    border-radius: 50%;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-in-range::after {
+    background: #e6f7ff;
+    border-radius: 50%;
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single)::before,
+.ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-range-end-single)::before {
+    background: #e6f7ff;
+    border-radius: 50% !important;
+}
+
+.ant-picker-cell.ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover {
+    border-radius: 50% !important;
+
+    &:hover {
+        border-radius: 50% !important;
+    }
+}
+
+.ant-picker-cell.ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-end {
+    border-radius: 50% !important;
+
+    &:hover {
+        border-radius: 50% !important;
+    }
+}
+
+.ant-picker-cell.ant-picker-cell-in-view.ant-picker-cell-in-range {
+    &:hover {
+        border-radius: 50% !important;
+    }
+}
+
+.ant-picker-cell.ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-start {
+    border-radius: 50% !important;
+
+    &:hover {
+        border-radius: 50% !important;
+    }
+}
+
+.ant-picker-cell.ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-end {
+    border-radius: 50% !important;
+
+    &:hover {
+        border-radius: 50% !important;
+    }
+}
+
+.ant-picker-date-panel .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-start .ant-picker-cell-inner::after {
+    right: 0 !important;
+    left: 0;
+    border-radius: 50%;
+}
+
+.ant-picker-input>input {
+    padding: 10px !important;
+}
+
+.ant-picker-range-separator {
+    align-items: center;
+    padding: 0px 10px 10px !important;
+    line-height: 1;
+}
+
+.SRLCaptionContainer{
+    p{
+        display: none !important;
+    }
+    
+}

@@ -18,4 +18,4 @@ Sửa lại Address -> mysql
 https://www.npmjs.com/package/react-image-lightbox -> lightbox ảnh
 
 
-deleted
+deleted mul dùng for giống create rồi destroy images[i].public_id

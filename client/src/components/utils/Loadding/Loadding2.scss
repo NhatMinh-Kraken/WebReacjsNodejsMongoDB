@@ -1,0 +1,53 @@
+.loadding2 {
+    --mdb-backdrop-zindex: 1050;
+    --mdb-backdrop-bg: rgb(0, 0, 0);
+    --mdb-backdrop-opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--mdb-backdrop-zindex);
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--mdb-backdrop-bg);
+    display: flex;
+    opacity: var(--mdb-backdrop-opacity);
+}
+
+.loadding2-top {
+    width: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: auto;
+    animation: xoayvongLoading 10s linear 0s infinite;
+    -webkit-animation: xoayvongLoading 10s linear 0s infinite;
+    -moz-animation: xoayvongLoading 10s linear 0s infinite;
+    -o-animation: xoayvongLoading 10s linear 0s infinite;
+}
+
+@-webkit-keyframes xoayvongLoading {
+    from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+    }
+}
+
+@keyframes xoayvongLoading {
+    from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+    }
+}

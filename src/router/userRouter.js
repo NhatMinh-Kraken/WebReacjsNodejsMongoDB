@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const addressController = require('../controller/addressController')
+// const addressController = require('../controller/addressController')
 const userController = require('../controller/userController')
 const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
@@ -39,8 +39,8 @@ router.post('/facebook_login', userController.facebookLogin)
 
 // Address
 
-router.post('/address_city', addressController.addressCity)
-router.post('/address_district', addressController.addressDistrict)
+// router.post('/address_city', addressController.addressCity)
+// router.post('/address_district', addressController.addressDistrict)
 
 
 module.exports = router

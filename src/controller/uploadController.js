@@ -6,7 +6,8 @@ const { file } = require('googleapis/build/src/apis/file')
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUD_API_KEY,
-    api_secret: process.env.CLOUD_API_SECRET
+    api_secret: process.env.CLOUD_API_SECRET,
+    cloud_api: process.env.CLOUD_API
 })
 
 const uploadController = {
@@ -84,7 +85,7 @@ const uploadController = {
 
     destroyImage: (req, res) => {
         try {
-            const { public_id } = req.body;
+            const public_id = req.body.public_id;
             if (!public_id) return res.status(400).json({ msg: 'No images Selected' })
 
             cloudinary.v2.uploader.destroy(public_id, async (err, result) => {
@@ -93,6 +94,53 @@ const uploadController = {
                 res.json({ msg: "Deleted Image" })
             })
 
+
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
+    uploadMul: async (req, res) => {
+        try {
+            let imgArr = []
+            let images = [...req.body.images]
+
+            console.log(images)
+
+            for (let i = 0; i < images.length; i++) {
+                cloudinary.v2.uploader.upload(images[i].tempFilePath, { folder: "imageProduct" }, async (err, result) => {
+                    if (err) throw err;
+
+                    removeTmp(images[i].tempFilePath)
+
+                    imgArr.push({ public_id: result.public_id, url: result.secure_url })
+                })
+            }
+
+            console.log(imgArr)
+        }
+
+        catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
+    destroyAllAvatar: async (req, res) => {
+        try {
+            let DestroyAllAvatar = [...req.body.DestroyAllAvatar]
+
+            if (!DestroyAllAvatar) {
+                return res.status(400).json({ msg: 'No images Selected' })
+            }
+
+            for (let i = 0; i < DestroyAllAvatar.length; i++) {
+                cloudinary.v2.uploader.destroy(DestroyAllAvatar[i].public_id, async (err, result) => {
+                    if (err) throw err;
+
+                    // res.json({ msg: "Deleted Image" })
+                })
+            }
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
