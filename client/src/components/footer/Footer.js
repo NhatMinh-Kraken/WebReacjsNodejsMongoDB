@@ -8,10 +8,15 @@ import data from '@emoji-mart/data'
 
 import logo from '../../assets/images/logo.png'
 import send from '../../assets/images/send-message.png'
+import { useSelector } from 'react-redux'
+import Axios from 'axios'
 
 
 
 function Footer() {
+
+    const auth = useSelector(state => state.auth)
+    const { user } = auth
 
     const [clickChat, setClickChat] = useState(false)
     const [clickChatIcon, setClickChatIcon] = useState(false)
@@ -68,6 +73,18 @@ function Footer() {
     // }
     //
 
+    useEffect(() => {
+        const getConvesations = async () => {
+            try {
+                const res = await Axios.get(`/api/convertion/${user._id}`)
+                console.log(res)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        getConvesations()
+    }, [user._id])
+
 
     return (
         <>
@@ -119,7 +136,30 @@ function Footer() {
                                 </div>
                             </div>
                         </div>
-                        <div className='right-header-chat-form-body'>2</div>
+                        <div className='right-header-chat-form-body' id="style-2">
+                            <div className='form-chat-body'>
+                                <div className='chat-body-receiver'>
+                                    <div className='chat-time-form'>
+                                        <div className='chat-time'>8:59</div>
+                                    </div>
+                                    <div className='chat-text-body'>
+                                        <p>hello Huyền</p>
+                                    </div>
+                                </div>
+
+                                <div className='chat-body-sender'>
+                                    <div className='chat-body-img-form'>
+                                        <img src={logo} className='chat-body-img' alt='receiver' />
+                                    </div>
+                                    <div className='chat-text-body'>
+                                        <p>hello Minh hello Minh hello Minh hello Minh hello Minh hello Minh hello Minh hello Minh hello Minh hello Minh hello Minh hello Minh hello Minhhello Minhhello Minhhello Minhhello Minhhello Minhhello Minhhello Minh max-width: 200px; max-width: 200px; max-width: 200px;max-width: 200px;max-width: 200px;max-width: 200px;max-width: 200px;max-width: 200px;max-width: 200px;max-width: 200px;max-width: 200px;max-width: 200px;</p>
+                                    </div>
+                                    <div className='chat-time-form'>
+                                        <div className='chat-time'>8:59</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div className='right-header-chat-form-footer'>
                             <div className='chat-form-footer-border'>
                                 <div className='chat-form-footers col-11 p-0'>
@@ -131,7 +171,7 @@ function Footer() {
                                                 maxHeight: "120px",
                                                 overflow: "auto"
 
-                                            }} onChange={handleHeight} value={scHeight} />
+                                            }} onChange={handleHeight} value={scHeight} placeholder="Aa" />
 
                                         </div>
 
@@ -149,18 +189,16 @@ function Footer() {
                 </div>
             </div>
 
-            {/* <div className='EmojiPickerChat-form'>
+            <div className='EmojiPickerChat-form'>
                 <div className={`EmojiPickerChat ${clickChatIcon === true ? 'd-block' : 'd-none'}`}>
-                    <Picker data={data} previewPosition="none" onEmojiSelect={(e) => {
-                        setCurrentEmoji(e.native)
-                    }} />
+                    <Picker data={data} previewPosition="none" />
                     <button className={`close-icon ${clickChatIcon === false ? 'd-none' : 'd-block'}`} onClick={handleCloseIcon}>
                         <div className='close-icon-x'>
                             <i className="fa-solid fa-xmark"></i>
                         </div>
                     </button>
                 </div>
-            </div> */}
+            </div>
         </>
     )
 }
