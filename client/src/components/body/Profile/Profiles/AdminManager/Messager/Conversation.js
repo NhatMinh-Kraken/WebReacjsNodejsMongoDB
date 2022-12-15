@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux'
 import logo from '../../../../../../assets/images/logo.png'
 import logoUser from '../../../../../../assets/images/user.png'
 
-function Conversation({ conversation, currentUser }) {
+function Conversation({ conversation, currentUser, currentChat }) {
 
     const [userInf, setUserInf] = useState([])
     const [actives, setActives] = useState(false)
 
     const token = useSelector(state => state.token)
 
-    console.log(currentUser._id)
+    //console.log(currentUser._id)
 
     useEffect(() => {
         const frientId = conversation.members.find((m) => m !== currentUser._id)
@@ -33,7 +33,8 @@ function Conversation({ conversation, currentUser }) {
 
     return (
         <>
-            <div className='conversation-infor'>
+
+            <div className={`conversation-infor ${currentChat == conversation ? "active" : null}`}>
                 <div className='conversation-all-infor-img'>
                     <img src={userInf.avatar ? userInf.avatar : logoUser} alt='user' className='img-all-infor' />
                     <span className='active-note'></span>
@@ -42,6 +43,7 @@ function Conversation({ conversation, currentUser }) {
                     <p>{userInf.name}</p>
                 </div>
             </div>
+
         </>
     )
 }

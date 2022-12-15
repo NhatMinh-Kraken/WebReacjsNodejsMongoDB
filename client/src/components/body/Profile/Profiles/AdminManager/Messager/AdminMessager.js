@@ -32,8 +32,6 @@ function AdminMessager() {
         getConvesations()
     }, [user._id])
 
-   // console.log("conversation: ", conversation)
-
     useEffect(() => {
         const getMessager = async () => {
             try {
@@ -53,7 +51,7 @@ function AdminMessager() {
                     <div className='profile_page_body'>
                         <div className='row'>
                             <div className='form-mess d-flex'>
-                                <div className='mess col-4'>
+                                <div className='mess col-3'>
                                     <div className='conversation'>
                                         <div className='conversation-form'>
                                             <div className='conversation-body d-flex'>
@@ -62,22 +60,25 @@ function AdminMessager() {
                                                         <div className='conversation-infor'>Messager</div>
                                                     </div>
                                                     <div className='conversation-form-all-infor'>
-                                                        <div className='conversation-all-infor'>
-                                                            {
-                                                                conversation.map((c) => (
-                                                                    <div key={c._id} onClick={() => setCurrentChat(c)}>
-                                                                        <Conversation conversation={c} currentUser={user} />
-                                                                    </div>
-                                                                ))
-                                                            }
-                                                        </div>
+                                                        {conversation ?
+                                                            <div className='conversation-all-infor'>
+                                                                {
+                                                                    conversation.map((c) => (
+                                                                        <div key={c._id} onClick={() => setCurrentChat(c)}>
+                                                                            <Conversation conversation={c} currentChat={currentChat} currentUser={user} />
+                                                                        </div>
+                                                                    ))
+                                                                }
+                                                            </div>
+                                                            : <span>Chưa có phản hồi</span>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className='profile_item-mess col-8'>
+                                <div className='profile_item-mess col-6 p-0'>
                                     <div className='profile_item_header-mess'>
                                         <div className='form-chat-body-form'>
                                             <div className='form-chat-body'>
@@ -90,9 +91,9 @@ function AdminMessager() {
                                                     : <span className='PhanHoi'>Chưa có phản hồi</span>}
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
+                                <div className='col-3'></div>
                             </div>
 
                         </div>
