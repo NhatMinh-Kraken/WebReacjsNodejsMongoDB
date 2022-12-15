@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const conversitonSchema = new mongoose.Schema({
-    member: {
+    members: {
         type: Array,
     },
 

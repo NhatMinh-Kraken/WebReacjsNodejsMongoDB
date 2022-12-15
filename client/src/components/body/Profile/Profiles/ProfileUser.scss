@@ -148,6 +148,28 @@
                         }
                     }
 
+                    .note-mess {
+                        position: absolute;
+                        display: flex;
+                        background-color: rgb(234, 17, 17);
+                        width: 19px;
+                        height: 19px;
+                        border-radius: 50%;
+                        justify-content: center;
+                        right: 20px;
+                        top: 100px;
+
+                        span {
+                            padding: 0;
+                            color: #fff;
+                            font-size: .8125rem;
+                            font-weight: 500;
+                            font-family: inherit;
+                            display: flex;
+                            justify-content: center;
+                        }
+                    }
+
                     .address {
                         background: rgba(215, 225, 235, 0.128);
                         box-shadow: 0 8px 32px 0 rgba(155, 207, 242, 0.37);
@@ -315,8 +337,6 @@
                 .profile_items {
                     flex-flow: column;
                 }
-
-
 
                 h3 {
                     margin: 0;
@@ -578,8 +598,8 @@
     width: 225px;
 }
 
-td{
-    img.avatarTD{
+td {
+    img.avatarTD {
         width: 50px;
         height: 50px;
         border-radius: 50%;

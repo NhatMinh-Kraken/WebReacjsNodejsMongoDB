@@ -57,6 +57,12 @@ function AdminManager() {
                                     </div>
                                     <div className='profile_item-infor'>
                                         <div className='infor' style={{ alignItems: isOpen ? "flex-start" : "center" }}>
+                                            {/* <NavLink to="/all-messager" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-message"></i><span style={{ display: isOpen ? "" : "none" }}>Messager</span> */}
+                                            {/* </NavLink> */}
+                                            {/* <div className='note-mess'>
+                                                <span>1</span>
+                                            </div> */}
+
                                             <NavLink to="/all-user" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All user</span></NavLink>
                                             <NavLink to="/all-category" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All Category</span></NavLink>
                                             <NavLink to="/all-product" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All Product</span></NavLink>
@@ -71,6 +77,7 @@ function AdminManager() {
                                         <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
                                     </div>
                                     <Switch>
+                                        {/* <Route path="/all-messager" component={isAdmin ? ProfileAllMessagaer : NotFound} exact /> */}
                                         <Route path="/all-user" component={isAdmin ? ProfileAllUser : NotFound} exact />
                                         <Route path="/all-laithu" component={isAdmin ? DonLaiThu : NotFound} exact />
                                         <Route path="/edit_user/:id" component={isAdmin ? EditRoleUser : NotFound} exact />

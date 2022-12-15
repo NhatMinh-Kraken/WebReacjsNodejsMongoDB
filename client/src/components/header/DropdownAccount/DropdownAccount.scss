@@ -85,7 +85,7 @@
 
             .name {
                 display: flex;
-                width: 80%;
+                width: 70%;
             }
 
             .next {
@@ -94,6 +94,33 @@
                 justify-items: flex-end;
                 width: 10%;
                 display: flex;
+            }
+
+            .notes {
+                width: 10%;
+                display: flex;
+                .note-mess {
+                    //position: absolute;
+                    display: flex;
+                    background-color: #ea1111;
+                    width: 19px;
+                    height: 19px;
+                    border-radius: 50%;
+                    justify-content: center;
+                    //margin-left: 5px;
+
+                    span {
+                        padding: 0;
+                        color: #fff;
+                        font-size: .8125rem;
+                        font-weight: 500;
+                        font-family: inherit;
+                        display: flex;
+                        justify-content: center;
+                        margin: 0;
+                        align-items: center;
+                    }
+                }
             }
         }
     }

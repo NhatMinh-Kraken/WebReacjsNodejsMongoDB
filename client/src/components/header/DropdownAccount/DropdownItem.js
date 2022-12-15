@@ -33,6 +33,17 @@ function DropdownItem() {
                 <Link to="/manager/all-user" className="menu-item mb-2">
                     <i className="fa-solid fa-people-roof mr-2 tag"></i><span className='name'>Quản lý</span> <i className="fa-solid fa-angle-right next"></i>
                 </Link>
+                <Link to="/all-messager" className="menu-item mb-2" >
+                    <i className="fa-solid fa-message mr-2 tag"></i><span className='name'>Messager</span>
+                    <div className='notes'>
+                        <div className='note-mess'>
+                            <span>1</span>
+                        </div>
+                    </div>
+                    <i className="fa-solid fa-angle-right next"></i>
+
+                </Link>
+
             </>
         )
     }

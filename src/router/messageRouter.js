@@ -3,10 +3,9 @@ const messagerModel = require('../model/messagerModel');
 
 
 //add
-router.route("/messgae", async (req, res) => {
-    const newMessage = new messagerModel({
-        members: [req.body.senderId, req.body.receiverId],
-    });
+router.get("/messgae", async (req, res) => {
+    const newMessage = new messagerModel(req.body);
+
     try {
         const savedMessage = await newMessage.save();
         res.status(200).json(savedMessage);

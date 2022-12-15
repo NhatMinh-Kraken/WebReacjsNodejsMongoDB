@@ -3,7 +3,7 @@ const conversitonModel = require("../model/conversitonModel")
 
 //new conv
 
-router.route("/convertion", async (req, res) => {
+router.post("/convertion", async (req, res) => {
     const newConvertion = new conversitonModel({
         members: [req.body.senderId, req.body.receiverId],
     });
@@ -17,7 +17,7 @@ router.route("/convertion", async (req, res) => {
 
 //find
 
-router.route("/convertion/:userId", async (req, res) => {
+router.get("/convertion/:userId", async (req, res) => {
     try {
         const conversation = await conversitonModel.find({
             members: { $in: [req.params.userId] },

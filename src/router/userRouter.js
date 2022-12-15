@@ -20,7 +20,9 @@ router.patch('/change_password', auth, userController.changePassword)
 
 router.get('/infor', auth, userController.getUserInfor)
 
-router.get('/all_infor', auth, authAdmin, userController.getUsersAllInfor)
+router.get('/get_user/:id', userController.getUser)
+
+router.get('/all_infor', userController.getUsersAllInfor)
 
 router.get('/logout', userController.logout)
 

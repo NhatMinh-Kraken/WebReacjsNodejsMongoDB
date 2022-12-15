@@ -199,6 +199,19 @@ const userController = {
             return res.status(500).json({ msg: err.message })
         }
     },
+
+    //messager
+    getUser: async (req, res) => {
+        const userId = req.params.id
+        //console.log(userId)
+        try {
+            const user = await Users.findById({ _id: userId }).select('-password')
+            res.json(user)
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
     getUsersAllInfor: async (req, res) => {
         try {
             const user = await Users.find().select('-password')

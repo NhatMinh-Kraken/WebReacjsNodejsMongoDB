@@ -20,6 +20,7 @@ import "aos/dist/aos.css";
 import Loadding from './components/utils/Loadding/loadding';
 import DeatailProductBody from './components/ProductCar/Detail/DeatailProductBody';
 import ManagerLayout from './components/body/ManagerLayout';
+import MessagerLayout from './components/body/MessagerLayout';
 
 
 function App() {
@@ -72,11 +73,12 @@ function App() {
       <Router>
         <div className="App">
           <Route path={path.PRODUCTCAR} component={Home} />
-          <Route path="/detail_product/:id" component={DeatailProduct} exact/>
+          <Route path="/detail_product/:id" component={DeatailProduct} exact />
           <Body />
           <Route path={path.PROFILE} component={(isLogged ? ProfieLayout : NotFound)} />
           <Route path='/manager' component={(isAdmin ? ManagerLayout : NotFound)} />
-          
+          <Route path='/all-messager' component={(isAdmin ? MessagerLayout : NotFound)} />
+
           <ToastContainer
             position="top-right"
             autoClose={5000}

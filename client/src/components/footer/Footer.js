@@ -18,6 +18,8 @@ function Footer() {
     const auth = useSelector(state => state.auth)
     const { user } = auth
 
+    const [coversation, setConversation] = useState([])
+
     const [clickChat, setClickChat] = useState(false)
     const [clickChatIcon, setClickChatIcon] = useState(false)
 
@@ -77,7 +79,7 @@ function Footer() {
         const getConvesations = async () => {
             try {
                 const res = await Axios.get(`/api/convertion/${user._id}`)
-                console.log(res)
+                setConversation(res.data)
             } catch (err) {
                 console.log(err)
             }
