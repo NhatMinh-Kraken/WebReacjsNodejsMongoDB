@@ -41,7 +41,7 @@ function ProfileUser() {
 
     return (
         <>
-            <div className='profile_page pt-5'>
+            <div className='profile_page'>
                 <div className='container'>
                     <div className='profile_page_body'>
                         <div className='row'>

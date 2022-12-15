@@ -1,10 +1,16 @@
 .profile_page {
     background-color: #eceef5;
     padding-bottom: 5rem;
+    padding-top: 5rem;
+
 
     height: 80vh;
     display: flex;
     align-items: center;
+
+    @media only screen and (min-width: 1200px) {
+        height: auto;
+    }
 
     .profile_page_body {
         background-color: transparent;
