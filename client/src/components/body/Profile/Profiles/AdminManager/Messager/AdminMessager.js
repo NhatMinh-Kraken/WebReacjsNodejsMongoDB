@@ -15,10 +15,16 @@ function AdminMessager() {
     const [currentChat, setCurrentChat] = useState(null)
     const [messager, setMessager] = useState([])
 
-    const [frientSend, setFrientSend] = useState([])
+    //const [frientSend, setFrientSend] = useState([])
+
+    //const [allUser, setAllUser] = useState([])
+    const [userSender, setUserSender] = useState([])
+    //const [callback, setCallback] = useState(false)
 
     const auth = useSelector(state => state.auth)
     const { user } = auth
+
+   // console.log(user)
 
     useEffect(() => {
         const getConvesations = async () => {
@@ -32,6 +38,8 @@ function AdminMessager() {
         getConvesations()
     }, [user._id])
 
+    //console.log(conversation)
+
     useEffect(() => {
         const getMessager = async () => {
             try {
@@ -43,6 +51,19 @@ function AdminMessager() {
         }
         getMessager()
     }, [currentChat])
+
+    //console.log(messager)
+
+   // console.log(currentChat)
+
+    useEffect(() => {
+        messager.forEach(user => {
+            setUserSender(user.sender)
+        })
+    }, [messager, currentChat])
+
+    //console.log(userSender)
+
 
     return (
         <>
@@ -84,9 +105,10 @@ function AdminMessager() {
                                             <div className='form-chat-body'>
                                                 {currentChat
                                                     ? <div className='chat-form'>
-                                                        {messager.map((m) => (
-                                                            <FormChat key={m._id} messagerId={m.sender} messager={m} own={m.sender === user._id} />
-                                                        ))}
+                                                        <FormChat userSender={userSender} messager={messager} />
+                                                        {/* {messager.map((m) => (
+                                                            <FormChat key={m._id} userSender={userSender} messager={m} own={m.sender === user._id} />
+                                                        ))} */}
                                                     </div>
                                                     : <span className='PhanHoi'>Chưa có phản hồi</span>}
                                             </div>

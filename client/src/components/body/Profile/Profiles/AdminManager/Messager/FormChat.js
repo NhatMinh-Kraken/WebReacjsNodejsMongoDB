@@ -1,17 +1,25 @@
 import Axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux';
 
 import send from '../../../../../../assets/images/send-message.png'
 
-function FormChat({ messagerId, messager, own }) {
 
-    const [allUser, setAllUser] = useState([])
-    const [callback, setCallback] = useState(false)
+import Chat from './Chat';
 
-    const [userSender, setUserSender] = useState([])
+function FormChat({ userSender, messager }) {
+
+    const auth = useSelector(state => state.auth)
+    const { user } = auth
+
+    // const [allUser, setAllUser] = useState([])
+    //const [callback, setCallback] = useState(false)
+
+    //const [userSender, setUserSender] = useState([])
 
     const textareaRef = useRef(null);
     const [scHeight, setScHeight] = useState("")
+
 
 
     const MIN_TEXTAREA_HEIGHT = 26;
@@ -30,29 +38,30 @@ function FormChat({ messagerId, messager, own }) {
         )}px`;
     }, [scHeight])
 
-    useEffect(() => {
-        const getAllUser = async () => {
-            try {
-                const res = await Axios.get('/user/all_infor')
-                setAllUser(res.data)
-            } catch (err) {
-                console.log(err)
-            }
-        }
-        getAllUser()
-    }, [callback])
+    // useEffect(() => {
+    //     const getAllUser = async () => {
+    //         try {
+    //             const res = await Axios.get('/user/all_infor')
+    //             setAllUser(res.data)
+    //         } catch (err) {
+    //             console.log(err)
+    //         }
+    //     }
+    //     getAllUser()
+    // }, [callback])
 
 
-    useEffect(() => {
-        allUser.forEach(user => {
-            if (user._id == messagerId) {
-                setUserSender(user)
-            }
-        })
-    }, [allUser, messagerId])
+    // useEffect(() => {
+    //     allUser.forEach(user => {
+    //         if (user._id == messagerId) {
+    //             setUserSender(user)
+    //         }
+    //     })
+    // }, [allUser, messagerId])
 
-    console.log(userSender)
+    // console.log(userSender)
 
+    console.log("messager", messager)
 
     return (
         <>
@@ -72,7 +81,11 @@ function FormChat({ messagerId, messager, own }) {
                             <i className="fa-solid fa-robot"></i>
                         </div>
                     </div>
-                    <div className='chat-body'></div>
+                    <div className='chat-body'>
+                        {messager.map((m) => (
+                            <Chat key={m._id} messager={m} userSender={userSender} own={m.sender._id === user._id} />
+                        ))}
+                    </div>
                     <div className='chat-rep'>
                         <div className='form-chat-rep-01 col-11 p-0'>
                             <div className='form-chat-rep col-11 p-0'>

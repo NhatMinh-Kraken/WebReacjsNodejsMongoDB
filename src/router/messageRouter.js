@@ -20,7 +20,7 @@ router.get("/messgae/:conversationId", async (req, res) => {
     try {
         const messages = await messagerModel.find({
             conversationId: req.params.conversationId,
-        });
+        }).populate('sender');
         res.status(200).json(messages);
     } catch (err) {
         res.status(500).json(err);
