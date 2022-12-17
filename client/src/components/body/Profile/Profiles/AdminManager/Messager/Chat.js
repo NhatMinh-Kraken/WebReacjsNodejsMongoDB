@@ -10,10 +10,12 @@ function Chat({ userSender, messager, own }) {
     const auth = useSelector(state => state.auth)
     const { user } = auth
 
-    const [userAdmin, setUserAdmin] = useState([])
+    //console.log(own)
 
-    console.log(userSender)
-    console.log(messager)
+    //const [userAdmin, setUserAdmin] = useState([])
+
+    // console.log(userSender)
+    // console.log(messager)
 
     timeago.register('vi', vi);
 
@@ -27,7 +29,7 @@ function Chat({ userSender, messager, own }) {
         setIsShow(false)
     }
 
-    console.log(user)
+    //console.log(user)
 
     return (
         <>

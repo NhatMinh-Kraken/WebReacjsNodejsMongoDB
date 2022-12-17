@@ -3,7 +3,7 @@ const messagerModel = require('../model/messagerModel');
 
 
 //add
-router.get("/messgae", async (req, res) => {
+router.post("/messgae", async (req, res) => {
     const newMessage = new messagerModel(req.body);
 
     try {

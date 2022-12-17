@@ -7,20 +7,18 @@ import send from '../../../../../../assets/images/send-message.png'
 
 import Chat from './Chat';
 
-function FormChat({ userSender, messager }) {
+function FormChat({ currentChat, setCallback, callback }) {
+
+    const [messager, setMessager] = useState([])
+
+    const [userSender, setUserSender] = useState([])
 
     const auth = useSelector(state => state.auth)
     const { user } = auth
-
-    // const [allUser, setAllUser] = useState([])
-    //const [callback, setCallback] = useState(false)
-
-    //const [userSender, setUserSender] = useState([])
+    const token = useSelector(state => state.token)
 
     const textareaRef = useRef(null);
     const [scHeight, setScHeight] = useState("")
-
-
 
     const MIN_TEXTAREA_HEIGHT = 26;
 
@@ -38,30 +36,65 @@ function FormChat({ userSender, messager }) {
         )}px`;
     }, [scHeight])
 
-    // useEffect(() => {
-    //     const getAllUser = async () => {
-    //         try {
-    //             const res = await Axios.get('/user/all_infor')
-    //             setAllUser(res.data)
-    //         } catch (err) {
-    //             console.log(err)
-    //         }
-    //     }
-    //     getAllUser()
-    // }, [callback])
+    //console.log("messager", messager)
 
 
-    // useEffect(() => {
-    //     allUser.forEach(user => {
-    //         if (user._id == messagerId) {
-    //             setUserSender(user)
-    //         }
-    //     })
-    // }, [allUser, messagerId])
+    //send mess
+    const sendMess = async (e) => {
+        e.preventDefault();
+
+        const saveSendMess = {
+            conversationId: currentChat._id,
+            sender: user._id,
+            text: scHeight
+        }
+
+        try {
+            const res = await Axios.post("/api/messgae", saveSendMess)
+            setCallback(!callback)
+            setMessager([...messager, res.data])
+            setScHeight("")
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    //console.log(messager)
+    //
 
     // console.log(userSender)
+    // console.log(currentChat)
 
-    console.log("messager", messager)
+    //messager
+
+    // lấy tất cả dữ liệu mess
+    useEffect(() => {
+        const getMessager = async () => {
+            try {
+                const res = await Axios.get(`/api/messgae/${currentChat?._id}`)
+                setMessager(res.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        getMessager()
+    }, [callback, currentChat])
+
+    console.log(messager)
+
+    //
+    // tìm mess nào có sender._id !== người đã đăng nhập
+    useEffect(() => {
+        messager.map(m => {
+            if (m.sender._id !== user._id) {
+                setUserSender(m.sender)
+            }
+        })
+    }, [callback, messager])
+
+    console.log("userSender", userSender)
+
 
     return (
         <>
@@ -70,11 +103,11 @@ function FormChat({ userSender, messager }) {
                     <div className='chat-header'>
                         <div className='chat-header-form-left'>
                             <div className='chat-header-img'>
-                                <img src={userSender.avatar} alt="user" />
+                                <img src={userSender?.avatar} alt="user" />
                                 <span className='active-note'></span>
                             </div>
                             <div className='chat-header-name pl-2'>
-                                <span>{userSender.name}</span>
+                                <span>{userSender?.name}</span>
                             </div>
                         </div>
                         <div className='chat-header-form-right'>
@@ -83,7 +116,7 @@ function FormChat({ userSender, messager }) {
                     </div>
                     <div className='chat-body'>
                         {messager.map((m) => (
-                            <Chat key={m._id} messager={m} userSender={userSender} own={m.sender._id === user._id} />
+                            <Chat key={m._id} messager={m} userSender={userSender} own={m.sender._id === user._id || m.sender === user._id} />
                         ))}
                     </div>
                     <div className='chat-rep'>
@@ -100,7 +133,7 @@ function FormChat({ userSender, messager }) {
                             <div className='iconChat col-1 p-0'><i className="fa-solid fa-face-smile"></i></div>
                         </div>
                         <div className='chat-form-footer-send col-1 p-0'>
-                            <button>
+                            <button onClick={sendMess}>
                                 <img src={send} alt='send' />
                             </button>
                         </div>

@@ -18,13 +18,13 @@ function AdminMessager() {
     //const [frientSend, setFrientSend] = useState([])
 
     //const [allUser, setAllUser] = useState([])
-    const [userSender, setUserSender] = useState([])
-    //const [callback, setCallback] = useState(false)
+    // const [userSender, setUserSender] = useState([])
+    const [callback, setCallback] = useState(false)
 
     const auth = useSelector(state => state.auth)
     const { user } = auth
 
-   // console.log(user)
+    // console.log(user)
 
     useEffect(() => {
         const getConvesations = async () => {
@@ -40,29 +40,35 @@ function AdminMessager() {
 
     //console.log(conversation)
 
-    useEffect(() => {
-        const getMessager = async () => {
-            try {
-                const res = await Axios.get(`/api/messgae/${currentChat?._id}`)
-                setMessager(res.data)
-            } catch (err) {
-                console.log(err)
-            }
-        }
-        getMessager()
-    }, [currentChat])
+    // useEffect(() => {
+    //     const getMessager = async () => {
+    //         try {
+    //             const res = await Axios.get(`/api/messgae/${currentChat?._id}`)
+    //             setMessager(res.data)
+    //         } catch (err) {
+    //             console.log(err)
+    //         }
+    //     }
+    //     getMessager()
+    // }, [callback, currentChat])
 
-    //console.log(messager)
+    // console.log(messager)
 
-   // console.log(currentChat)
+    // console.log(currentChat)
 
-    useEffect(() => {
-        messager.forEach(user => {
-            setUserSender(user.sender)
-        })
-    }, [messager, currentChat])
+    // useEffect(() => {
+    //     messager.forEach(m => {
+    //         if (m.sender._id !== user._id) {
+    //             setUserSender(m.sender)
+    //         }
+    //     })
+    // }, [callback, messager, currentChat])
 
-    //console.log(userSender)
+    // console.log(messager)
+
+    // console.log(user)
+
+    // console.log(userSender)
 
 
     return (
@@ -105,10 +111,7 @@ function AdminMessager() {
                                             <div className='form-chat-body'>
                                                 {currentChat
                                                     ? <div className='chat-form'>
-                                                        <FormChat userSender={userSender} messager={messager} />
-                                                        {/* {messager.map((m) => (
-                                                            <FormChat key={m._id} userSender={userSender} messager={m} own={m.sender === user._id} />
-                                                        ))} */}
+                                                        <FormChat currentChat={currentChat} setCallback={setCallback} callback={callback} />
                                                     </div>
                                                     : <span className='PhanHoi'>Chưa có phản hồi</span>}
                                             </div>
