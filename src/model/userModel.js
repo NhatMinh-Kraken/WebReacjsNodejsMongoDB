@@ -75,9 +75,18 @@ const userSchema = new mongoose.Schema({
     nameWard: {
         type: String,
         default: "chưa có",
+    },
+    newMessages: {
+        type: Object,
+        default: {}
+    },
+    status: {
+        type: String,
+        default: "online"
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    minimize: false
 })
 
 module.exports = mongoose.model("Users", userSchema)

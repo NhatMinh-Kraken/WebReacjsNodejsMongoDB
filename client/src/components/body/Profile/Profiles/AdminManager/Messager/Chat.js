@@ -5,7 +5,7 @@ import * as timeago from 'timeago.js';
 
 import vi from 'timeago.js/lib/lang/vi';
 
-function Chat({ userSender, messager, own }) {
+function Chat({ usersenderId, messager, own }) {
 
     const auth = useSelector(state => state.auth)
     const { user } = auth
@@ -14,7 +14,7 @@ function Chat({ userSender, messager, own }) {
 
     //const [userAdmin, setUserAdmin] = useState([])
 
-    // console.log(userSender)
+    // console.log(usersenderId)
     // console.log(messager)
 
     timeago.register('vi', vi);
@@ -35,17 +35,18 @@ function Chat({ userSender, messager, own }) {
         <>
             <div className={own ? "chat-body-mess-own" : "chat-body-mess"}>
                 <div className='chat-body-mess-img'>
-                    {own ? "" : <img src={userSender.avatar} alt="user" />}
+                    {own ? "" : <img src={usersenderId.avatar} alt="user" />}
                     {own ? "" : <span className='active-note'></span>}
                 </div>
-                {own ? <div className='chat-body-time'>
-                    <div className={`chat-body-mess-time ${isShow ? "d-block" : "d-none"}`}>
-                        <p><TimeAgo
-                            datetime={messager.createdAt}
-                            locale='vi' />
-                        </p>
+                {own ?
+                    <div className='chat-body-time'>
+                        <div className={`chat-body-mess-time ${isShow ? "d-block" : "d-none"}`}>
+                            <p><TimeAgo
+                                datetime={messager.createdAt}
+                                locale='vi' />
+                            </p>
+                        </div>
                     </div>
-                </div>
                     : ""}
                 <div className='chat-body-mess-text' onMouseEnter={handleHover} onMouseLeave={handleNotHover}>
                     <div className='chat-body-mess-text-bg'>

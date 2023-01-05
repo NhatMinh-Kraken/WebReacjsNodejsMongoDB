@@ -19,4 +19,8 @@ https://www.npmjs.com/package/react-image-lightbox -> lightbox ảnh
 
 
 
-userSender?.avatar
+làm lại chat 
+https://www.youtube.com/watch?v=qdZYHbg72WQ
+
+
+design InfOnlineUser.js

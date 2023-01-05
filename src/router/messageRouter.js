@@ -4,7 +4,12 @@ const messagerModel = require('../model/messagerModel');
 
 //add
 router.post("/messgae", async (req, res) => {
-    const newMessage = new messagerModel(req.body);
+    const { conversitonId, senderId, text } = req.body;
+    const newMessage = new messagerModel(
+        {
+            conversitonId, senderId, text
+        }
+    );
 
     try {
         const savedMessage = await newMessage.save();
@@ -16,15 +21,17 @@ router.post("/messgae", async (req, res) => {
 
 //get
 
-router.get("/messgae/:conversationId", async (req, res) => {
+router.get("/messgae/:conversitonId", async (req, res) => {
+
     try {
         const messages = await messagerModel.find({
-            conversationId: req.params.conversationId,
-        }).populate('sender');
+            conversitonId: req.params.conversitonId,
+        })
         res.status(200).json(messages);
     } catch (err) {
         res.status(500).json(err);
     }
 });
+
 
 module.exports = router;

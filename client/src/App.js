@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 import { path } from '../src/components/utils/constant'
@@ -23,7 +23,17 @@ import ManagerLayout from './components/body/ManagerLayout';
 import MessagerLayout from './components/body/MessagerLayout';
 
 
+
 function App() {
+
+  //socket
+  const [rooms, setRooms] = useState([]);
+  const [currentRoom, setCurrentRoom] = useState([]);
+  const [members, setMembers] = useState([]);
+  const [messages, setMessages] = useState([]);
+  const [privateMemberMsg, setPrivateMemberMsg] = useState({});
+  const [newMessages, setNewMessages] = useState({});
+  //
 
   const dispatch = useDispatch()
   const token = useSelector(state => state.token)
@@ -69,31 +79,29 @@ function App() {
   }
 
   return (
-    <Fragment>
-      <Router>
-        <div className="App">
-          <Route path={path.PRODUCTCAR} component={Home} />
-          <Route path="/detail_product/:id" component={DeatailProduct} exact />
-          <Body />
-          <Route path={path.PROFILE} component={(isLogged ? ProfieLayout : NotFound)} />
-          <Route path='/manager' component={(isAdmin ? ManagerLayout : NotFound)} />
-          <Route path='/all-messager' component={(isAdmin ? MessagerLayout : NotFound)} />
+    <Router>
+      <div className="App">
+        <Route path={path.PRODUCTCAR} component={Home} />
+        <Route path="/detail_product/:id" component={DeatailProduct} exact />
+        <Body />
+        <Route path={path.PROFILE} component={(isLogged ? ProfieLayout : NotFound)} />
+        <Route path='/manager' component={(isAdmin ? ManagerLayout : NotFound)} />
+        <Route path='/all-messager' component={(isAdmin ? MessagerLayout : NotFound)} />
 
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
-          />
-        </div>
-      </Router>
-    </Fragment>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+      </div>
+    </Router>
   );
 }
 

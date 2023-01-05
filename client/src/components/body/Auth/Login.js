@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useHistory } from "react-router-dom"
 import './Login.scss'
 import axios from 'axios'
@@ -13,6 +13,9 @@ import { gapi } from 'gapi-script'
 import FacebookLogin from 'react-facebook-login'
 
 import Loadding from '../../utils/Loadding/loadding'
+
+import { io } from 'socket.io-client'
+
 
 const initialState = {
     email: '',
@@ -34,6 +37,13 @@ function Login() {
 
     const [loadding, setLoadding] = useState(false)
 
+    const socket = useRef()
+
+    //socket
+    useEffect(() => {
+        socket.current = io("ws://localhost:8900");
+    }, []);
+
     const handleChangeInput = e => {
         const { name, value } = e.target
         setUser({ ...user, [name]: value, err: '', success: '' })
@@ -48,6 +58,8 @@ function Login() {
         try {
             setLoadding(false)
             const res = await axios.post('/user/login', { email, password })
+            //socket
+
             toast.success(res.data.msg)
 
             localStorage.setItem('firstLogin', true)
@@ -55,7 +67,9 @@ function Login() {
             dispatch(dispatchLogin())
 
             setLoadding(true)
+
             history.push("/")
+
 
         } catch (err) {
             err.response.data.msg && toast.error(err.response.data.msg)
@@ -74,10 +88,15 @@ function Login() {
         try {
             setLoadding(true)
             const res = await axios.post('/user/google_login', { tokenId: response.tokenId })
+            //socket
+            //socket.current.emit("new-user")
+
             toast.success(res.data.msg)
             localStorage.setItem('firstLogin', true)
+
             dispatch(dispatchLogin())
             setLoadding(false)
+
             history.push("/")
 
         } catch (err) {
@@ -94,12 +113,14 @@ function Login() {
             setLoadding(true)
             const { accessToken, userID } = response
             const res = await axios.post('/user/facebook_login', { accessToken, userID })
+            //socket
 
             toast.success(res.data.msg)
             localStorage.setItem('firstLogin', true)
 
             dispatch(dispatchLogin())
             setLoadding(false)
+
             history.push('/')
         } catch (err) {
             err.response.data.msg &&

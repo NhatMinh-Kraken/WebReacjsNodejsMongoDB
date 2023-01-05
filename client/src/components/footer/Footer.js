@@ -1,32 +1,55 @@
 import React, { createRef, useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { path } from '../utils/constant'
 import './Footer.scss'
 
-import Picker from '@emoji-mart/react'
 import data from '@emoji-mart/data'
 
 import logo from '../../assets/images/logo.png'
 import send from '../../assets/images/send-message.png'
 import { useSelector } from 'react-redux'
 import Axios from 'axios'
+import FooterChat from './FooterChat'
 
+import { io } from 'socket.io-client'
+
+import InputEmoji from 'react-input-emoji'
+import { toast } from 'react-toastify'
 
 
 function Footer() {
 
     const auth = useSelector(state => state.auth)
-    const { user } = auth
+    const { user, isLogged, isAdmin } = auth
 
-    const [coversation, setConversation] = useState([])
+    const token = useSelector(state => state.token)
 
+    const [callback, setCallback] = useState(false)
+
+    const [conversation, setConversation] = useState([])
+
+    const [messager, setMessager] = useState([])
+
+    //const [usersenderId, setUsersenderId] = useState([])
+
+    const [arrivalMessager, setArrivalMessager] = useState(null)
+
+    const [conversationMes, setConversationMes] = useState(null)
+
+    const socket = useRef()
+    const [userAdmin, setUserAdmin] = useState([])
     const [clickChat, setClickChat] = useState(false)
-    const [clickChatIcon, setClickChatIcon] = useState(false)
 
-    const [currentEmoji, setCurrentEmoji] = useState()
+    const [converNew, setConverNew] = useState([])
+    const history = useHistory()
+
+
+    //const [currentEmoji, setCurrentEmoji] = useState()
 
     const inputRef = createRef()
-    const [message, setMessage] = useState('')
+    // const [message, setMessage] = useState('')
+
+    const scrollRef = useRef(null);
 
     const handleClick = () => {
         setClickChat(true)
@@ -36,44 +59,71 @@ function Footer() {
         setClickChat(false)
     }
 
-    const handleClickIcon = () => {
-        setClickChatIcon(true)
-    }
-
-    const handleCloseIcon = () => {
-        setClickChatIcon(false)
-    }
 
     const textareaRef = useRef(null);
     const [scHeight, setScHeight] = useState("")
 
     const MIN_TEXTAREA_HEIGHT = 26;
 
-    const handleHeight = (e) => {
-        setScHeight(e.target.value)
+
+
+    const handleHeight = (scHeight) => {
+        setScHeight(scHeight)
     }
 
-    useEffect(() => {
-        // Reset height - important to shrink on delete
-        textareaRef.current.style.height = "inherit";
-        // Set height
-        textareaRef.current.style.height = `${Math.max(
-            textareaRef.current.scrollHeight,
-            MIN_TEXTAREA_HEIGHT
-        )}px`;
-    }, [scHeight])
+    //all user
 
-    //emoji
-    // const pickEmoji = (e, { emoji }) => {
-    //     const ref = inputRef.current;
-    //     ref.focus();
-    //     const start = message.substring(0, ref.selectionStart);
-    //     const end = message.substring(ref.selectionStart);
-    //     const text = start + emoji + end;
-    //     setMessage(text);
-    //     setCurrentEmoji(start.length + emoji.length);
+    const [allUser, setAllUser] = useState([])
+
+    useEffect(() => {
+        const getAlUser = async () => {
+            try {
+                const res = await Axios.get("/user/all_infor")
+                setAllUser(res.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        getAlUser()
+    }, [callback])
+
+    //console.log(allUser)
+
+    //console.log(user)
+
+    //lấy id admin
+
+
+    useEffect(() => {
+        allUser.forEach((m) => {
+            if (m.role === 1) {
+                setUserAdmin(m)
+            }
+        })
+    }, [allUser])
+
+    //console.log(userAdmin._id)
+
+    const sumbitConversation = async () => {
+        try {
+            const res = await Axios.post('/api/convertion', { senderId: user._id, receiverId: userAdmin._id }, {
+                headers: { Authorization: token }
+            })
+            setConverNew(res.data)
+            setCallback(!callback)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    // //tạo conversation
+    // const createConversation = async () => {
+    //     try {
+    //         await Axios.post('/api/convertion', { senderId: user._id, receiverId: userAdmin._id })
+    //     } catch (err) {
+    //         console.log(err)
+    //     }
     // }
-    //
 
     useEffect(() => {
         const getConvesations = async () => {
@@ -85,7 +135,119 @@ function Footer() {
             }
         }
         getConvesations()
-    }, [user._id])
+    }, [user._id, callback])
+
+    //console.log(conversation)
+
+    useEffect(() => {
+        conversation.map((m) => {
+            setConversationMes(m)
+        })
+    })
+
+    //console.log(conversationMes)
+
+    //mess
+
+
+    // lấy tất cả dữ liệu mess
+    useEffect(() => {
+        const getMessager = async () => {
+            try {
+                const res = await Axios.get(`/api/messgae/${conversationMes?._id}`)
+                setMessager(res.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        getMessager()
+    }, [conversationMes])
+
+    // console.log(messager)
+
+
+    //
+
+    //Scroll to bottom mess
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+    }, [messager]);
+
+
+    //socket
+    useEffect(() => {
+        socket.current = io("ws://localhost:8900");
+        socket.current.on("getMessage", (data) => {
+            //console.log(data)
+            setArrivalMessager({
+                senderId: data.senderId,
+                text: data.text,
+                createdAt: Date.now(),
+            });
+        });
+    }, [callback]);
+
+    // console.log(arrivalMessager)
+    // console.log(conversationMes)
+
+    useEffect(() => {
+        arrivalMessager &&
+            conversationMes?.members.includes(arrivalMessager?.senderId) &&
+            setMessager((prev) => [...prev, arrivalMessager]);
+    }, [arrivalMessager, conversationMes]);
+
+    useEffect(() => {
+        socket.current.emit("addUser", user._id);
+        socket.current.on("getUsers", (users) => {
+            console.log(users)
+        });
+    }, [user]);
+
+    useEffect(() => {
+        socket.current.emit("addConversation", converNew)
+    }, [converNew])
+    //
+
+    console.log(converNew)
+
+
+    //send mess
+    const sendMess = async (e) => {
+        e.preventDefault();
+
+        // if (!isLogged) {
+        //     history.push("/login")
+        //     toast.error("Bạn chưa đăng nhập")
+        // }
+        // else {
+        const saveSendMess = {
+            conversitonId: conversationMes._id,
+            senderId: user._id,
+            text: scHeight
+        };
+
+        const receiverId = conversationMes?.members.find((member) => member !== user._id)
+
+        // console.log(receiverId)
+        socket.current.emit("sendMessage", {
+            senderId: user._id,
+            receiverId,
+            text: scHeight,
+        });
+
+        try {
+            const res = await Axios.post("/api/messgae", saveSendMess)
+            //setCallback(!callback)
+            setMessager([...messager, res.data])
+            setScHeight("")
+            setCallback(!callback)
+
+        } catch (err) {
+            console.log(err)
+        }
+        //}
+    }
+
 
 
     return (
@@ -106,16 +268,17 @@ function Footer() {
                             <span>The best or nothing – Tốt nhất hoặc không có gì</span>
                         </div>
 
-                        <div className='right-Footer-Web col-2'>
-                            <div className={`right-header-chat-footer ${clickChat === true ? "d-none" : "d-block"}`} onClick={handleClick}>
-                                <div className='right-header-chat'>
-                                    <i className="fa-brands fa-rocketchat"></i>
+                        <div className={`right-Footer-Web-block col-2 ${isLogged === true ? "d-block" : "d-none"} ${isAdmin ? "d-none" : "d-block"}`}>
+                            <div className={`right-Footer-Web `} onClick={sumbitConversation}>
+                                <div className={`right-header-chat-footer ${clickChat === true ? "d-none" : "d-block"}`} onClick={handleClick}>
+                                    <div className='right-header-chat'>
+                                        <i className="fa-brands fa-rocketchat"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div className={`right-header-chat-form ${clickChat === true ? "d-block" : "d-none"}`}>
                     <div className='chat-form'>
                         <div className='right-header-chat-form-header'>
@@ -139,66 +302,47 @@ function Footer() {
                             </div>
                         </div>
                         <div className='right-header-chat-form-body' id="style-2">
-                            <div className='form-chat-body'>
-                                <div className='chat-body-receiver'>
-                                    <div className='chat-time-form'>
-                                        <div className='chat-time'>8:59</div>
-                                    </div>
-                                    <div className='chat-text-body'>
-                                        <p>hello Huyền</p>
-                                    </div>
-                                </div>
+                            {isAdmin ? "Bạn đang là Admin" :
+                                <div>
+                                    {isLogged ?
 
-                                <div className='chat-body-sender'>
-                                    <div className='chat-body-img-form'>
-                                        <img src={logo} className='chat-body-img' alt='receiver' />
-                                    </div>
-                                    <div className='chat-text-body'>
-                                        <p>hello Minh hello Minh hello Minh hello Minh hello Minh hello Minh hello Minh hello Minh hello Minh hello Minh hello Minh hello Minh hello Minhhello Minhhello Minhhello Minhhello Minhhello Minhhello Minhhello Minh max-width: 200px; max-width: 200px; max-width: 200px;max-width: 200px;max-width: 200px;max-width: 200px;max-width: 200px;max-width: 200px;max-width: 200px;max-width: 200px;max-width: 200px;max-width: 200px;</p>
-                                    </div>
-                                    <div className='chat-time-form'>
-                                        <div className='chat-time'>8:59</div>
-                                    </div>
+                                        <>
+                                            {messager.map((m) =>
+                                                <div key={m._id} className='form-chat-body' id={'scrollRef'} ref={scrollRef}>
+                                                    <FooterChat key={m._id} messager={m} userAdmin={userAdmin} user={user} own={m.senderId === user._id || m.senderId === user._id} />
+                                                </div>
+                                            )}
+                                        </>
+                                        : "xin hãy đăng nhập"
+                                    }
                                 </div>
-                            </div>
+                            }
                         </div>
                         <div className='right-header-chat-form-footer'>
                             <div className='chat-form-footer-border'>
                                 <div className='chat-form-footers col-11 p-0'>
                                     <div className='form-chats d-flex col-12 p-0'>
-                                        <div className='chat-form-footer col-10 p-0'>
-                                            <textarea rows="1" className='input-chat' ref={textareaRef} style={{
+                                        <div className='chat-form-footer col-12 p-0'>
+                                            {/* <textarea rows="1" className='input-chat' ref={textareaRef} style={{
                                                 minHeight: MIN_TEXTAREA_HEIGHT,
                                                 resize: "none",
                                                 maxHeight: "120px",
                                                 overflow: "auto"
-
-                                            }} onChange={handleHeight} value={scHeight} placeholder="Aa" />
-
+                                            }} onChange={handleHeight} value={scHeight} placeholder="Aa" disabled={isLogged ? false : true} /> */}
+                                            <InputEmoji onChange={handleHeight} value={scHeight} placeholder="Aa" disabled={true} />
                                         </div>
 
-                                        <div className='iconChat col-2 p-0' onClick={handleClickIcon}><i className="fa-solid fa-face-smile"></i></div>
+                                        {/* <div className='iconChat col-2 p-0' onClick={handleClickIcon}><i className="fa-solid fa-face-smile"></i></div> */}
                                     </div>
                                 </div>
-                                <div className='chat-form-footer-send col-1 p-0'>
-                                    <button>
+                                <div className='chat-form-footer-send p-0'>
+                                    <button onClick={sendMess}>
                                         <img src={send} alt='send' />
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div className='EmojiPickerChat-form'>
-                <div className={`EmojiPickerChat ${clickChatIcon === true ? 'd-block' : 'd-none'}`}>
-                    <Picker data={data} previewPosition="none" />
-                    <button className={`close-icon ${clickChatIcon === false ? 'd-none' : 'd-block'}`} onClick={handleCloseIcon}>
-                        <div className='close-icon-x'>
-                            <i className="fa-solid fa-xmark"></i>
-                        </div>
-                    </button>
                 </div>
             </div>
         </>

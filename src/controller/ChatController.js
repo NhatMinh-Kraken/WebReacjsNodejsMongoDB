@@ -4,7 +4,7 @@ const ChatController = {
 
     CreateChat: async (req, res) => {
         // const newChat = new db.Chats({
-        //     members: [req.body.SenderId, req.body.ReceiverId]
+        //     members: [req.body.senderId, req.body.ReceiverId]
         // })
 
         // try {

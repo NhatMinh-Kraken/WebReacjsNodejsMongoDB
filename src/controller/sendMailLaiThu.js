@@ -8,7 +8,7 @@ const {
     MAILING_SERVICE_CLIENT_ID,
     MAILING_SERVICE_CLIENT_SECRET,
     MAILING_SERVICE_CLIENT_REFRESH_TOKEN,
-    SENDER_EMAIL_ADDRESS,
+    senderId_EMAIL_ADDRESS,
 } = process.env
 
 const oauth2Client = new OAuth2(
@@ -27,7 +27,7 @@ const sendEmailLaiThu = (to, name, type, money, smoney1, smoney2, smoney3, smone
         service: 'gmail',
         auth: {
             type: 'OAUTH2',
-            user: SENDER_EMAIL_ADDRESS,
+            user: senderId_EMAIL_ADDRESS,
             clientId: MAILING_SERVICE_CLIENT_ID,
             clientSecret: MAILING_SERVICE_CLIENT_SECRET,
             refreshToken: MAILING_SERVICE_CLIENT_REFRESH_TOKEN,
@@ -44,7 +44,7 @@ const sendEmailLaiThu = (to, name, type, money, smoney1, smoney2, smoney3, smone
     const formatSum = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sum)
 
     const mailOptions = {
-        from: SENDER_EMAIL_ADDRESS,
+        from: senderId_EMAIL_ADDRESS,
         to: to,
         subject: "DEVELOPER: Nguyễn Nhật Minh",
         html: `
