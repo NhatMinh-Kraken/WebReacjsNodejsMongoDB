@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Header.scss'
 import logo from '../../assets/images/logo.png'
@@ -14,10 +14,16 @@ import { path } from '../utils/constant'
 
 import { useSelector } from 'react-redux'
 
+import { io } from 'socket.io-client'
+
 function Header() {
 
     const auth = useSelector(state => state.auth)
-    const { isLogged } = auth
+    const { isLogged, user } = auth
+
+    const socket = useRef()
+
+    
 
     const userLink = () => {
         return (

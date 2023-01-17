@@ -1,15 +1,46 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Axios from 'axios'
 
 import Loadding from '../../utils/Loadding/loadding'
 
+import { io } from 'socket.io-client'
+
 function DropdownItem() {
 
     const auth = useSelector(state => state.auth)
     const { user, isAdmin } = auth
     const [loadding, setLoadding] = useState(false)
+
+    const socket = useRef()
+
+    const [notification, setNotification] = useState(null);
+    // const [callback, setCallback] = useState(false)
+
+    const [checkNoti, setCheckNoti] = useState(false)
+    const [callback, setCallback] = useState(false)
+
+    useEffect(() => {
+        socket.current = io("ws://localhost:8900");
+        socket.current.on("getNotification", (data) => {
+            setNotification(data)
+        });
+    }, [callback])
+
+    console.log(notification)
+
+    useEffect(() => {
+        user.notification.forEach((e) => {
+            if (e.senderId === notification?.senderId) {
+                if (e.notification === 1) {
+                    setCheckNoti(true)
+                }
+            }
+        })
+    }, [user])
+
+    console.log(checkNoti)
 
     const handleLogout = async () => {
         try {
@@ -27,19 +58,40 @@ function DropdownItem() {
         return <div><Loadding /></div>
     }
 
+    const handleNoti = async () => {
+        try {
+            await Axios.post(`/api/noti/${user._id}`, {
+                receiverNotiId: notification?.senderId,
+                notification: 0
+            })
+            window.location.href = "/all-messager"
+            setCheckNoti(false)
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
     const AdminManage = () => {
         return (
             <>
                 <Link to="/manager/all-user" className="menu-item mb-2">
                     <i className="fa-solid fa-people-roof mr-2 tag"></i><span className='name'>Quản lý</span> <i className="fa-solid fa-angle-right next"></i>
                 </Link>
-                <Link to="/all-messager" className="menu-item mb-2" >
+                <Link to="/all-messager" className="menu-item mb-2" onClick={handleNoti}>
                     <i className="fa-solid fa-message mr-2 tag"></i><span className='name'>Messager</span>
-                    <div className='notes'>
-                        <div className='note-mess'>
-                            <span>1</span>
-                        </div>
-                    </div>
+                    {
+                        checkNoti == true
+                            ?
+                            <div className='notes'>
+                                <div className='note-mess'>
+                                    <span>1</span>
+                                </div>
+                            </div>
+                            : null
+                    }
+
                     <i className="fa-solid fa-angle-right next"></i>
 
                 </Link>

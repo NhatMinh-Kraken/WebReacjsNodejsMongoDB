@@ -14,4 +14,6 @@ router.route('/products/:id')
     .delete(auth, authAdmin, productController.deleteProducts)
     .put(auth, authAdmin, productController.updateProducts)
 
+router.route('/productsDelete/:id').put(auth, authAdmin, productController.updateProductWhenDelete)
+
 module.exports = router

@@ -30,8 +30,6 @@ function AdminMessager() {
 
     const [currentChat, setCurrentChat] = useState(null)
 
-    const [currentChatOnline, setCurrentChatOnline] = useState(null)
-
     const [messager, setMessager] = useState(null)
 
     // const [arrivalMessager, setArrivalMessager] = useState(null);
@@ -42,6 +40,7 @@ function AdminMessager() {
 
     const auth = useSelector(state => state.auth)
     const { user } = auth
+    const [users, setUsers] = useState([])
     //const token = useSelector(state => state.token)
     //const [socket, setSocket] = useState(null)
     const scrollRef = useRef(null);
@@ -49,18 +48,24 @@ function AdminMessager() {
 
     const [newConversation, setNewConversation] = useState([])
 
-    const [infUser, setInfUser] = useState([])
+    const [infUser, setInfUser] = useState(null)
 
     const socket = useRef()
 
     const [onlineUser, setOnlineUser] = useState([])
 
+    const [notification, setNotification] = useState(null)
+
     //const textareaRef = useRef(null);
     const [scHeight, setScHeight] = useState("")
 
-    const [notAdmin, setNotAdmin] = useState(null)
+    const [userReceiver, setUserReceiver] = useState(null)
 
     //const MIN_TEXTAREA_HEIGHT = 26;
+
+    useEffect(() => {
+        setUsers(user)
+    })
 
     useEffect(() => {
         const getConvesations = async () => {
@@ -74,12 +79,12 @@ function AdminMessager() {
         getConvesations()
     }, [user._id, callback])
 
-    console.log(conversation)
+    // console.log(conversation)
 
-    console.log(currentChat)
+    // console.log(currentChat)
 
 
-    console.log(infUser)
+    // console.log(infUser)
 
     useEffect(() => {
         const fetchMessager = async () => {
@@ -137,7 +142,7 @@ function AdminMessager() {
         })
     }, [currentChat, user])
 
-    console.log(infUser)
+    //console.log(infUser)
 
     // tìm mess nào có senderId._id !== người đã đăng nhập
     useEffect(() => {
@@ -181,15 +186,28 @@ function AdminMessager() {
                 senderId: data.senderId,
                 text: data.text,
                 createdAt: Date.now(),
-            });
+            })
         });
 
-        // socket.current.off("new-user").on("new-user", (data) => {
-        //     console.log(data)
-        // });
     }, [callback]);
 
-    //console.log(arrivalMessager)
+    console.log(arrivalMessager)
+
+    useEffect(() => {
+        socket.current.emit("addUser", user._id);
+        socket.current.on("getUsers", (users) => {
+            setOnlineUser(users)
+        });
+    }, [user]);
+
+    useEffect(() => {
+        if (arrivalMessager) {
+            setNotification([arrivalMessager])
+        }
+    }, [arrivalMessager])
+
+
+    // console.log(notification)
     //console.log(currentChat)
 
     useEffect(() => {
@@ -216,7 +234,7 @@ function AdminMessager() {
         })
     }, [callback])
 
-    console.log(newConversation._id)
+    //console.log(newConversation._id)
 
     //
 
@@ -232,7 +250,7 @@ function AdminMessager() {
 
     }, [newConversation._id])
 
-    console.log(conversation)
+    //console.log(conversation)
 
     //alluser new
     useEffect(() => {
@@ -240,6 +258,45 @@ function AdminMessager() {
             console.log(data)
         })
     })
+
+    //noti
+    const receiverNotiId = currentChat?.members.find((member) => member !== user._id)
+
+    useEffect(() => {
+        user.notification.forEach((e) => {
+            if (e.senderId === receiverNotiId) {
+                setUserReceiver(e)
+            }
+        })
+    })
+
+    console.log(userReceiver?.notification)
+    console.log(receiverNotiId)
+    //mess
+    const hanldeMess = async (e) => {
+        e.preventDefault();
+        try {
+            await Axios.post(`/api/noti/${user._id}`, {
+                receiverNotiId,
+                notification: 0
+            })
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    //noti
+    const noti = async () => {
+        try {
+            await Axios.post("/api/noti", {
+                id: receiverNotiId,
+                notification: 1
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     //send mess
     const sendMess = async (e) => {
@@ -261,6 +318,8 @@ function AdminMessager() {
 
         try {
             const res = await Axios.post("/api/messgae", saveSendMess)
+
+            noti()
             //setCallback(!callback)
             setMessager([...messager, res.data])
             setScHeight("")
@@ -294,9 +353,11 @@ function AdminMessager() {
                                                             <div className='conversation-all-infor'>
                                                                 {
                                                                     conversation?.map((c, index) => (
-                                                                        <div key={index} onClick={() => setCurrentChat(c)}>
-                                                                            <Conversation key={index} conversation={c} currentChat={currentChat} currentUser={user} onlineUser={onlineUser} />
-                                                                        </div>
+                                                                        <>
+                                                                            <div key={index} onClick={() => setCurrentChat(c)} className="position-relative d-flex flex-column">
+                                                                                <div onClick={hanldeMess}><Conversation key={index} conversation={c} currentChat={currentChat} currentUser={user} onlineUser={onlineUser} notification={notification} /></div>
+                                                                            </div>
+                                                                        </>
                                                                     ))
                                                                 }
                                                             </div>

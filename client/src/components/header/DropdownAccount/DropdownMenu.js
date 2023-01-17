@@ -4,7 +4,7 @@ import DropdownItem from './DropdownItem'
 function DropdownMenu() {
     return (
         <div className='dropdown'>
-            <DropdownItem/>
+            <DropdownItem />
         </div>
     )
 }

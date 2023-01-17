@@ -151,7 +151,7 @@ const productController = {
             return res.status(500).json({ msg: err.message })
         }
     },
-    updateProducts: async (req, res) => {
+    updateProductWhenDelete: async (req, res) => {
         try {
             const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, avatar, description, descriptionHTML, specifications, specificationsHTML, checked, amount } = req.body
 
@@ -175,6 +175,44 @@ const productController = {
             return res.status(500).json({ msg: err.message })
         }
     },
+
+    updateProducts: async (req, res) => {
+        try {
+            let avatar = [...req.body.avatar]
+            let imageBuffer = []
+
+            for (let i = 0; i < avatar.length; i++) {
+                const result = await cloudinary.v2.uploader.upload(avatar[i], {
+                    folder: "imageProduct"
+                })
+
+                imageBuffer.push({
+                    public_id: result.public_id,
+                    url: result.secure_url
+                })
+            }
+
+            req.body.avatar = imageBuffer
+
+            console.log(req.body.avatar)
+
+            const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, description, descriptionHTML, specifications, specificationsHTML, checked, amount } = req.body
+
+            await ProductCars.findOneAndUpdate({
+                _id: req.params.id
+            }, {
+                name: name, type: type, money: money,
+                colortypeone: colortypeone, colortypetwo: colortypetwo, colortypethree: colortypethree, $push: { avatar: [...req.body.avatar] },
+                energy: energy, description: description, descriptionHTML: descriptionHTML, specifications: specifications, specificationsHTML: specificationsHTML, checked: checked,
+                amount: amount
+            })
+            
+            res.json({ msg: "Update Success!" })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
 
     SelectNameType: async (req, res) => {
         try {

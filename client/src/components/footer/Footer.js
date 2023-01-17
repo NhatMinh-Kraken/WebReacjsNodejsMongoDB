@@ -3,8 +3,6 @@ import { Link, useHistory } from 'react-router-dom'
 import { path } from '../utils/constant'
 import './Footer.scss'
 
-import data from '@emoji-mart/data'
-
 import logo from '../../assets/images/logo.png'
 import send from '../../assets/images/send-message.png'
 import { useSelector } from 'react-redux'
@@ -43,6 +41,7 @@ function Footer() {
     const [converNew, setConverNew] = useState([])
     const history = useHistory()
 
+    const [checkNoti, setCheckNoti] = useState(false)
 
     //const [currentEmoji, setCurrentEmoji] = useState()
 
@@ -208,8 +207,20 @@ function Footer() {
     }, [converNew])
     //
 
-    console.log(converNew)
-
+    // console.log(converNew)
+    const receiverNotiId = conversationMes?.members.find((member) => member !== user._id)
+    //noti
+    const noti = async () => {
+        try {
+            await Axios.post("/api/noti", {
+                id: receiverNotiId,
+                senderId: user._id,
+                notification: 1
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     //send mess
     const sendMess = async (e) => {
@@ -237,6 +248,8 @@ function Footer() {
 
         try {
             const res = await Axios.post("/api/messgae", saveSendMess)
+
+            noti()
             //setCallback(!callback)
             setMessager([...messager, res.data])
             setScHeight("")
@@ -246,6 +259,13 @@ function Footer() {
             console.log(err)
         }
         //}
+
+        //notification socket
+        socket.current.emit("sendNotification", {
+            notificationId: receiverId,
+            senderId: user._id,
+            notification: 1,
+        })
     }
 
 

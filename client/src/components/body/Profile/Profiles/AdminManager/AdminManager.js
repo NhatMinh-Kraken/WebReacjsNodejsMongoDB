@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../Profiles/ProfileUser.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink, Route, Switch, BrowserRouter as Router } from 'react-router-dom'
+import { NavLink, Route, Switch, BrowserRouter as Router, useHistory } from 'react-router-dom'
 import { dispatchGetAllUsers, fetchAllUsers } from '../../../../../redux/action/userAction'
 
 import NotFound from '../../../../utils/NotFound/NotFound'
@@ -14,12 +14,15 @@ import EditProduct from '../ProductCarAdmin/EditProduct'
 import CategoryCar from '../CategoryCar/CategoryCar'
 import ProfileAllUser from './ProfileAllUser'
 import DonLaiThu from './DonLaiThu'
+import { Button, Modal } from 'react-bootstrap'
 
 
 
 function AdminManager() {
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
+
+    const history = useHistory()
 
     const { user, isAdmin, isLogged } = auth
     const [avatar, setAvatar] = useState(false)
@@ -31,6 +34,8 @@ function AdminManager() {
 
     const dispatch = useDispatch()
 
+    const [show, setShow] = useState(false)
+
     useEffect(() => {
         if (isAdmin) {
             fetchAllUsers(token).then(res => {
@@ -40,13 +45,56 @@ function AdminManager() {
     }, [token, isAdmin, dispatch, callback])
 
 
+    const handleShow = () => {
+        setShow(true)
+    }
+
+    const handleClose = () => {
+        setShow(false)
+    }
+
+    const handleClick = () => {
+        setShow(false)
+        window.location.href = '/manager/all-category'
+    }
+
+
     return (
         <>
+
             <div className='profile_page pt-5'>
                 <div className='container'>
                     <div className='profile_page_body'>
                         <div className='row'>
                             <Router basename='/manager'>
+                                <Modal
+                                    show={show}
+                                    backdrop="static"
+                                    keyboard={false}
+                                >
+                                    <Modal.Header>
+                                        <Modal.Title>Lựu chọn chức năng</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body className='text-danger'>
+                                        <div className='buttonChucNang d-flex'>
+                                            <div className='container'>
+                                                <div className='row'>
+                                                    <div className='ClickChucNang d-flex justify-content-center col-6'>
+                                                        <NavLink onClick={handleClose} to="/all-category" className="category"><i className="fa-solid fa-list"></i><span>Category</span></NavLink>
+                                                    </div>
+                                                    <div className='ClickChucNang d-flex justify-content-center col-6'>
+                                                        <NavLink onClick={handleClose} to="/all-product" className="category"><i className="fa-solid fa-list"></i><span>Product</span></NavLink>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="primary" type="submit" onClick={handleClose}>Thoát</Button>
+                                    </Modal.Footer>
+                                </Modal>
+
+
                                 <div style={{ width: isOpen ? "25%" : "9%" }} className='profile_item_controll' >
                                     <div className='profile_item-avatar' style={{ justifyContent: isOpen ? "start" : "center" }} onClick={toggle}>
                                         <img src={avatar ? avatar : user.avatar} alt="" />
@@ -64,9 +112,9 @@ function AdminManager() {
                                             </div> */}
 
                                             <NavLink to="/all-user" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All user</span></NavLink>
-                                            <NavLink to="/all-category" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All Category</span></NavLink>
-                                            <NavLink to="/all-product" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All Product</span></NavLink>
                                             <NavLink to="/all-laithu" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All Lái thử</span></NavLink>
+
+                                            <NavLink to="/allphukien" onClick={handleShow} className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Phụ kiện</span></NavLink>
                                         </div>
 
                                     </div>

@@ -80,6 +80,9 @@ const userSchema = new mongoose.Schema({
         type: Object,
         default: {}
     },
+    notification: {
+        type: Array,
+    },
     status: {
         type: String,
         default: "online"

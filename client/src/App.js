@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 import { path } from '../src/components/utils/constant'
@@ -22,6 +22,8 @@ import DeatailProductBody from './components/ProductCar/Detail/DeatailProductBod
 import ManagerLayout from './components/body/ManagerLayout';
 import MessagerLayout from './components/body/MessagerLayout';
 
+import { io } from 'socket.io-client'
+
 
 
 function App() {
@@ -41,6 +43,10 @@ function App() {
   const { isLogged, isAdmin } = auth
 
   const [loading, setLoading] = useState(false)
+
+  const socket = useRef()
+
+  
 
   useEffect(() => {
     AOS.init();
@@ -72,7 +78,7 @@ function App() {
       }
       getUser()
     }
-  }, [token, dispatch])
+  },[token, dispatch])
 
   if (loading) {
     return <div><Loadding /></div>

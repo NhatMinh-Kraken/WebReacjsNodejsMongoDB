@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Header from './header/Header'
 import SliderHomePage from './Slider/SliderHomePage'
 import Review from './Recommendations/Review/Review'
@@ -14,10 +14,31 @@ function Home() {
     const { user } = auth
     const socket = useRef()
 
-    useEffect(() => {
-        socket.current = io("ws://localhost:8900");
-        socket.current.emit("allUser", user)
-    }, [user])
+    const [notification, setNotification] = useState(null);
+    const [callback, setCallback] = useState(false)
+
+    // useEffect(() => {
+    //     socket.current = io("ws://localhost:8900");
+    //     socket.current.on("getMessage", (data) => {
+    //         // console.log("đã kết nối")
+    //         setNotification({
+    //             senderId: data.senderId,
+    //             text: data.text,
+    //             createdAt: Date.now(),
+    //         });
+    //     });
+
+    // }, [callback]);
+
+    // useEffect(() => {
+    //     socket.current.emit("addUser", user._id);
+    //     socket.current.on("getUsers", (users) => {
+    //         console.log(users)
+    //     });
+    // }, [user]);
+
+
+    //console.log(notification)
 
     return (
         <>

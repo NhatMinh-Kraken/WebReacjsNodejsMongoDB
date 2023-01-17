@@ -65,6 +65,8 @@ function EditProduct() {
     const [show, setShow] = useState(false)
 
     const [images, setImages] = useState([])
+    const [imagesNew, setImagesNew] = useState([])
+    //const [imagesAll, setImagesAll] = useState([])
 
     const [loading, setLoading] = useState(false)
 
@@ -167,6 +169,7 @@ function EditProduct() {
                     render.readAsDataURL(file)
                     render.onloadend = () => {
                         setImages(oldArray => [...oldArray, render.result])
+                        setImagesNew(oldArray => [...oldArray, render.result])
                     }
                 }
                 else {
@@ -183,6 +186,7 @@ function EditProduct() {
     //
 
     console.log(images)
+    console.log(imagesNew)
 
 
     //destroy
@@ -227,7 +231,7 @@ function EditProduct() {
                 toast.error("No avatar Upload")
             }
 
-            await Axios.put(`/api/products/${product._id}`, {
+            await Axios.put(`/api/productsDelete/${product._id}`, {
                 name: product.name,
                 type: product.type,
                 money: product.money,
@@ -282,7 +286,7 @@ function EditProduct() {
                 descriptionHTML: markdown.descriptionHTML,
                 specifications: specifications.specifications,
                 specificationsHTML: specifications.specificationsHTML,
-                avatar: images,
+                avatar: imagesNew,
                 // colortypeone: JSON.parse(colortypeone),
                 // colortypetwo: JSON.parse(colortypetwo),
                 // colortypethree: JSON.parse(colortypethree)
@@ -460,7 +464,7 @@ function EditProduct() {
                                                     {
                                                         images.map((img, index) => (
                                                             <div key={index} className="file_img my-1">
-                                                                <img src={img.url ? img.url : URL.createObjectURL(img)} alt="1" className='img-thumbnail rounded' />
+                                                                <img src={img.url ? img.url : img} alt="1" className='img-thumbnail rounded' />
                                                                 <span disabled={loading} onClick={() => deleteImage(img.public_id, index)}>X</span>
                                                             </div>
                                                         ))

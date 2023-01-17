@@ -4,8 +4,12 @@ import { useSelector } from 'react-redux'
 import logo from '../../../../../../assets/images/logo.png'
 import logoUser from '../../../../../../assets/images/user.png'
 
-function Conversation({ conversation, currentUser, currentChat, onlineUser }) {
+import NotificationBadge, { Effect } from 'react-notification-badge'
 
+function Conversation({ conversation, currentUser, currentChat, onlineUser, notification }) {
+
+    const auth = useSelector(state => state.auth)
+    const { user } = auth
     const [userInf, setUserInf] = useState([])
     const [actives, setActives] = useState(false)
 
@@ -16,6 +20,8 @@ function Conversation({ conversation, currentUser, currentChat, onlineUser }) {
     //const [onlineFriends, setOnlineFriends] = useState([])
 
     const [online, setOnline] = useState(false)
+
+    const [notes, setNotes] = useState(false)
 
     // console.log(conversation)
     // console.log(currentUser._id)
@@ -37,7 +43,7 @@ function Conversation({ conversation, currentUser, currentChat, onlineUser }) {
     }, [currentUser, conversation])
 
     console.log(onlineUser)
-    console.log("userInf:", userInf._id)
+    // console.log("userInf:", userInf._id)
 
     useEffect(() => {
         onlineUser.forEach(e => {
@@ -50,7 +56,29 @@ function Conversation({ conversation, currentUser, currentChat, onlineUser }) {
         })
     })
 
-    console.log(online)
+    //console.log(online)
+
+    console.log(notification)
+    console.log(userInf._id)
+
+    useEffect(() => {
+        user.notification.forEach((e) => {
+            if (e.senderId === userInf._id)
+            {
+                if(e.notification === 1)
+                {
+                    setNotes(true)
+                }
+            }
+        })
+    })
+
+    useEffect(() => {
+        if (currentChat === conversation) {
+            setNotes(false)
+        }
+    })
+
 
     return (
         <>
@@ -65,6 +93,21 @@ function Conversation({ conversation, currentUser, currentChat, onlineUser }) {
                 <div className='conversation-all-infor-name'>
                     <p>{userInf.name}</p>
                 </div>
+                <div>
+                    {notes === true
+                        ?
+                        <div className='noticonf-br'><span className='noticonf'>
+                            <NotificationBadge
+                                //count={notification?.length}
+                                effect={Effect.SCALE}
+                            />
+                        </span></div>
+
+                        : null
+                    }
+
+                </div>
+
             </div>
         </>
     )

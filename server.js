@@ -13,9 +13,9 @@ const fileUpload = require('express-fileupload')
 const app = express()
 // app.use(express.json())
 
-app.use(bodyParser.json({ limit: '100mb' }));
+app.use(bodyParser.json({ limit: '1000mb' }));
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-    limit: '100mb',
+    limit: '1000mb',
     extended: true
 }));
 app.unsubscribe(cors())

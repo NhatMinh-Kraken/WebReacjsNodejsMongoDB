@@ -107,7 +107,23 @@
                                     margin: 0;
                                 }
                             }
+
+                            .noticonf-br {
+                                display: flex;
+                                align-items: center;
+                                padding: 5px;
+
+                                .noticonf {
+                                    border-radius: 50%;
+                                    width: 10px;
+                                    height: 10px;
+                                    background-color: #ea1111;
+                                    position: absolute;
+                                }
+                            }
                         }
+
+
 
                         .active {
                             background-color: #e4e6eb;

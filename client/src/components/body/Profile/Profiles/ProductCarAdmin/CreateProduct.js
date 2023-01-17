@@ -144,7 +144,7 @@ function CreateProduct() {
             toast.error(err.response.data.msg)
         }
     }
-
+    console.log(images)
     //
 
     //destroy
@@ -156,6 +156,7 @@ function CreateProduct() {
     }
     //
 
+    console.log(images)
     const handleChangeInput = e => {
         const { name, value } = e.target
         setProduct({ ...product, [name]: value })

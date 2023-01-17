@@ -10,7 +10,7 @@ rfce
 10:04 6/10/2022: {msg: "Xong login -> redux"}
 10:36 7/10/2022: {msg: "Xong registe access token info"}
 
-9:37 11/10/2022:{msg: "đợi làm xong https://www.youtube.com/watch?v=AjItjNc0bHA&list=PLs4co9a6NhMziGHd5pMwzkHIVMc9uJX4h mới làm típ update user"}
+9:37 11/10/2022:{msg: "đợi làm xong https://www.youtube.com/watch?v:AjItjNc0bHA&list:PLs4co9a6NhMziGHd5pMwzkHIVMc9uJX4h mới làm típ update user"}
 
 
 Sửa lại Address -> mysql
@@ -20,7 +20,12 @@ https://www.npmjs.com/package/react-image-lightbox -> lightbox ảnh
 
 
 làm lại chat 
-https://www.youtube.com/watch?v=qdZYHbg72WQ
+https://www.youtube.com/watch?v:qdZYHbg72WQ
 
 
-design InfOnlineUser.js
+chưa xong chức năng thông báo
+
+
+
+
+

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -24,6 +25,7 @@ function NavItem(props) {
             document.removeEventListener("touchstart", handler);
         };
     }, [open]);
+
 
     return (
         <ul className='right-header-login' ref={ref}>
