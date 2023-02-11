@@ -194,8 +194,6 @@ const productController = {
 
             req.body.avatar = imageBuffer
 
-            console.log(req.body.avatar)
-
             const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, description, descriptionHTML, specifications, specificationsHTML, checked, amount } = req.body
 
             await ProductCars.findOneAndUpdate({

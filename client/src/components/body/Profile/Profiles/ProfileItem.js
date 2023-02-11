@@ -75,8 +75,6 @@ function ProfileItem() {
         }
     }
 
-    console.log(avatar)
-
     const handleChange = e => {
         const { name, value } = e.target
         setData({ ...data, [name]: value, err: '', success: '' })

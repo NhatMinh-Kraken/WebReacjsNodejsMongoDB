@@ -22,20 +22,9 @@ import DeatailProductBody from './components/ProductCar/Detail/DeatailProductBod
 import ManagerLayout from './components/body/ManagerLayout';
 import MessagerLayout from './components/body/MessagerLayout';
 
-import { io } from 'socket.io-client'
-
 
 
 function App() {
-
-  //socket
-  const [rooms, setRooms] = useState([]);
-  const [currentRoom, setCurrentRoom] = useState([]);
-  const [members, setMembers] = useState([]);
-  const [messages, setMessages] = useState([]);
-  const [privateMemberMsg, setPrivateMemberMsg] = useState({});
-  const [newMessages, setNewMessages] = useState({});
-  //
 
   const dispatch = useDispatch()
   const token = useSelector(state => state.token)
@@ -43,8 +32,6 @@ function App() {
   const { isLogged, isAdmin } = auth
 
   const [loading, setLoading] = useState(false)
-
-  const socket = useRef()
 
   
 

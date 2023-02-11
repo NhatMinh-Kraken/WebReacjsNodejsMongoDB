@@ -191,30 +191,9 @@ function AdminMessager() {
 
     }, [callback]);
 
-    console.log(arrivalMessager)
-
-    useEffect(() => {
-        socket.current.emit("addUser", user._id);
-        socket.current.on("getUsers", (users) => {
-            setOnlineUser(users)
-        });
-    }, [user]);
-
-    useEffect(() => {
-        if (arrivalMessager) {
-            setNotification([arrivalMessager])
-        }
-    }, [arrivalMessager])
-
 
     // console.log(notification)
     //console.log(currentChat)
-
-    useEffect(() => {
-        arrivalMessager &&
-            currentChat?.members.includes(arrivalMessager.senderId) &&
-            setMessager((prev) => [...prev, arrivalMessager]);
-    }, [arrivalMessager, currentChat]);
 
     useEffect(() => {
         socket.current.emit("addUser", user._id);
@@ -222,6 +201,12 @@ function AdminMessager() {
             setOnlineUser(users)
         });
     }, [user, callback]);
+
+    useEffect(() => {
+        arrivalMessager &&
+            currentChat?.members.includes(arrivalMessager.senderId) &&
+            setMessager((prev) => [...prev, arrivalMessager]);
+    }, [arrivalMessager, currentChat]);
 
     //console.log(onlineUser)
 
@@ -270,8 +255,6 @@ function AdminMessager() {
         })
     })
 
-    console.log(userReceiver?.notification)
-    console.log(receiverNotiId)
     //mess
     const hanldeMess = async (e) => {
         e.preventDefault();

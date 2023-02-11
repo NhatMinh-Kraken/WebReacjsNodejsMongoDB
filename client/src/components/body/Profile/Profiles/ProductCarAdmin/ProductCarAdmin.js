@@ -42,8 +42,6 @@ function ProductCarAdmin() {
         setNametype([...nametype])
     }
 
-    console.log(nametype)
-
     const checkAll = () => {
         nametype.forEach(product => {
             product.checked = !isCheck

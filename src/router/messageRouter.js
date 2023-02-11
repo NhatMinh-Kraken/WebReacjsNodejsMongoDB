@@ -64,9 +64,6 @@ router.post("/noti/:id", async (req, res) => {
     try {
         const { notification, receiverNotiId } = req.body;
 
-        console.log(notification)
-        console.log(receiverNotiId)
-
         await User.updateOne(
             {
                 _id: req.params.id, 'notification.senderId': receiverNotiId
@@ -75,7 +72,7 @@ router.post("/noti/:id", async (req, res) => {
                 'notification.$.notification': notification
             }
         })
-        
+
         res.status(200).json("susscess noti");
     } catch (err) {
         res.status(500).json(err);
