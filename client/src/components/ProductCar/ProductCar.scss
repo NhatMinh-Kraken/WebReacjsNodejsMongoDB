@@ -363,6 +363,24 @@
             }
         }
 
+        .delete-all {
+            .Select-all {
+                font-weight: 400;
+                font-size: 22px;
+                font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+            }
+
+            // .checkbox-all{
+
+            // }
+
+            .button-delete-all{
+                border-radius: 50%;
+                border: 1px solid red;
+                color: red;
+            }
+        }
+
     }
 
     .product-card {
@@ -571,7 +589,7 @@
             }
         }
 
-        .owl-dots{
+        .owl-dots {
             display: inline-block !important;
         }
     }
@@ -602,7 +620,7 @@
             -webkit-transform: translate3d(20px, 0px, 0px) !important;
         }
 
-        .owl-dots{
+        .owl-dots {
             display: inline-block !important;
         }
     }
