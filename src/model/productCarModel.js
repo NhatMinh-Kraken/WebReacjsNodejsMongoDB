@@ -41,7 +41,8 @@ const productcarSchema = new mongoose.Schema({
         type: String,
     },
     checked: {
-        type: Number,
+        type: Boolean,
+        default: false
     },
     amount: {
         type: Number,

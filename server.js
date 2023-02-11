@@ -34,6 +34,7 @@ app.use('/api', require('./src/router/productCarRouter'))
 app.use('/api', require('./src/router/laithuRouter'))
 app.use('/api', require('./src/router/convertionRouter'))
 app.use('/api', require('./src/router/messageRouter'))
+app.use('/api', require('./src/router/categoryAccessoryRouter'))
 
 //connect to mongoDB
 const URI = process.env.MONGODB_URL

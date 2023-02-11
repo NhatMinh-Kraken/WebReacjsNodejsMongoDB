@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 import Loading2 from '../../../../utils/Loadding/Loadding2'
 
-function ProductCarAdminItem({ nametypes, setCallback, callback }) {
+function ProductCarAdminItem({ nametypes, setCallback, callback, handleCheck }) {
     const [isHover, setIsHover] = useState(false)
 
     const [show, setShow] = useState(false)
@@ -19,7 +19,7 @@ function ProductCarAdminItem({ nametypes, setCallback, callback }) {
 
     const [loading, setLoading] = useState(false)
 
-    console.log(nametypes.avatar)
+    //console.log(nametypes.avatar)
 
     const handleHover = () => {
         setIsHover(true)
@@ -51,7 +51,7 @@ function ProductCarAdminItem({ nametypes, setCallback, callback }) {
         setShow(false)
     }
 
-    console.log(deleteId)
+    //console.log(deleteId)
 
     const handleDeleteImage = async () => {
         try {
@@ -107,7 +107,7 @@ function ProductCarAdminItem({ nametypes, setCallback, callback }) {
 
             {loading ? <Loading2 /> :
                 <div className='product-card col-4' onMouseEnter={handleHover} onMouseLeave={handleNotHover}>
-                    <input type="checkbox" className="custom-control-inputs" style={{ opacity: isHover ? "1" : "0" }} id="customCheck1" />
+                    <input type="checkbox" checked={nametypes.checked} onChange={() => handleCheck(nametypes._id)} className={`custom-control-inputs opacity-1`} id="customCheck1" />
                     <div className='product-card-link' >
                         <div className='product-car-header'>
                             <div className='product-card-name'>
