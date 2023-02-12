@@ -102,7 +102,7 @@ function FormChat({ currentChat, messager, setMessager, setCallback, callback })
         });
     }, [callback]);
 
-    //console.log(arrivalMessager)
+   // console.log(arrivalMessager)
     //console.log(currentChat)
 
     useEffect(() => {

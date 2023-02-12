@@ -28,7 +28,7 @@ function Footer() {
 
     const [messager, setMessager] = useState([])
 
-    //const [usersenderId, setUsersenderId] = useState([])
+    const [userSocketId, setUserSocketId] = useState([])
 
     const [arrivalMessager, setArrivalMessager] = useState(null)
 
@@ -39,15 +39,7 @@ function Footer() {
     const [clickChat, setClickChat] = useState(false)
 
     const [converNew, setConverNew] = useState([])
-    const history = useHistory()
 
-    const [checkNoti, setCheckNoti] = useState(false)
-
-    //const [currentEmoji, setCurrentEmoji] = useState()
-
-    const inputRef = createRef()
-
-    const [userSocketId, setUserSocketId] = useState([])
     // const [message, setMessage] = useState('')
 
     const scrollRef = useRef(null);
@@ -60,11 +52,7 @@ function Footer() {
         setClickChat(false)
     }
 
-
-    const textareaRef = useRef(null);
     const [scHeight, setScHeight] = useState("")
-
-    const MIN_TEXTAREA_HEIGHT = 26;
 
 
 
@@ -199,11 +187,17 @@ function Footer() {
     // console.log(conversationMes)
 
     useEffect(() => {
+        socket.current.emit("addUser", user._id);
+        socket.current.on("getUsers", (users) => {
+            setUserSocketId(users)
+        });
+    }, [user]);
+
+    useEffect(() => {
         arrivalMessager &&
             conversationMes?.members.includes(arrivalMessager?.senderId) &&
             setMessager((prev) => [...prev, arrivalMessager]);
     }, [arrivalMessager, conversationMes]);
-
 
     useEffect(() => {
         socket.current.emit("addConversation", converNew)

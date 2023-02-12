@@ -75,7 +75,7 @@ router.post("/noti/:id", async (req, res) => {
                 'notification.$.notification': notification
             }
         })
-        
+
         res.status(200).json("susscess noti");
     } catch (err) {
         res.status(500).json(err);

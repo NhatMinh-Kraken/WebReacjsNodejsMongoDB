@@ -17,29 +17,6 @@ function Home() {
     const [notification, setNotification] = useState(null);
     const [callback, setCallback] = useState(false)
 
-    // useEffect(() => {
-    //     socket.current = io("ws://localhost:8900");
-    //     socket.current.on("getMessage", (data) => {
-    //         // console.log("đã kết nối")
-    //         setNotification({
-    //             senderId: data.senderId,
-    //             text: data.text,
-    //             createdAt: Date.now(),
-    //         });
-    //     });
-
-    // }, [callback]);
-
-    // useEffect(() => {
-    //     socket.current.emit("addUser", user._id);
-    //     socket.current.on("getUsers", (users) => {
-    //         console.log(users)
-    //     });
-    // }, [user]);
-
-
-    //console.log(notification)
-
     return (
         <>
             <Header />

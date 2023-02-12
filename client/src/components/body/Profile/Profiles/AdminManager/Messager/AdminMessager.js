@@ -198,17 +198,7 @@ function AdminMessager() {
         socket.current.on("getUsers", (users) => {
             setOnlineUser(users)
         });
-    }, [user]);
-
-    useEffect(() => {
-        if (arrivalMessager) {
-            setNotification([arrivalMessager])
-        }
-    }, [arrivalMessager])
-
-
-    // console.log(notification)
-    //console.log(currentChat)
+    }, [user, callback]);
 
     useEffect(() => {
         arrivalMessager &&

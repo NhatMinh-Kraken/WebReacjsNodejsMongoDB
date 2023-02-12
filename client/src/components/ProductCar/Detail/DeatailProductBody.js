@@ -56,8 +56,6 @@ function DeatailProductBody() {
         getNameType()
     }, [callback])
 
-    //console.log(nametypes)
-
     //
 
     useEffect(() => {
@@ -69,10 +67,6 @@ function DeatailProductBody() {
             });
         }
     }, [param, nametypes, callback])
-
-    // console.log(detailItem)
-
-    // console.log(detailItem.avatar)
 
     const [click, setClick] = useState(false)
     const closemenu = () => setClick(false)
