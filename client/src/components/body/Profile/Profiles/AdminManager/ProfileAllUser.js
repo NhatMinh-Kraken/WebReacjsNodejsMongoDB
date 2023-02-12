@@ -150,9 +150,10 @@ function ProfileAllUser() {
                                     <div className='tab-content'>
                                         <Form >
                                             <Row className="mb-3">
-                                                <Form.Group as={Col} md="4" controlId="validationCustom01">
+                                                <Form.Group as={Col} md="12" controlId="validationCustom01">
                                                     <Form.Label>Họ và tên</Form.Label>
                                                     <Form.Control
+                                                        className='w-100'
                                                         required
                                                         type="text"
                                                         defaultValue={giatri.name}
@@ -162,9 +163,10 @@ function ProfileAllUser() {
                                                 </Form.Group>
                                             </Row>
                                             <Row className="mb-3">
-                                                <Form.Group as={Col} md="4" controlId="validationCustom01">
+                                                <Form.Group as={Col} md="12" controlId="validationCustom01">
                                                     <Form.Label>Số điện thoại</Form.Label>
                                                     <Form.Control
+                                                        className='w-100'
                                                         required
                                                         type="Number"
                                                         defaultValue={giatri.numberphone}
@@ -174,9 +176,10 @@ function ProfileAllUser() {
                                                 </Form.Group>
                                             </Row>
                                             <Row className="mb-3">
-                                                <Form.Group as={Col} md="4" controlId="validationCustom01">
+                                                <Form.Group as={Col} md="12" controlId="validationCustom01">
                                                     <Form.Label>Password</Form.Label>
                                                     <Form.Control
+                                                        className='w-100'
                                                         required
                                                         type="password"
                                                         defaultValue={giatri.password}
@@ -186,9 +189,10 @@ function ProfileAllUser() {
                                                 </Form.Group>
                                             </Row>
                                             <Row className="mb-3">
-                                                <Form.Group as={Col} md="4" controlId="validationCustom01">
+                                                <Form.Group as={Col} md="12" controlId="validationCustom01">
                                                     <Form.Label>Repeat password</Form.Label>
                                                     <Form.Control
+                                                        className='w-100'
                                                         required
                                                         type="password"
                                                         defaultValue={giatri.cf_password}
@@ -196,11 +200,6 @@ function ProfileAllUser() {
                                                         onChange={handleChangeInput}
                                                     />
                                                 </Form.Group>
-                                            </Row>
-                                            <Row className="mb-3">
-                                                <div className='col-12 d-flex justify-content-center'>
-                                                    <Button type="submit" onClick={handleAddUser}>Submit form</Button>
-                                                </div>
                                             </Row>
                                         </Form >
                                     </div>
@@ -242,6 +241,14 @@ function ProfileAllUser() {
                     </table>
                 </Modal.Body>
                 <Modal.Footer>
+                    {
+                        addUser ?
+                            <>
+                                <Button type="submit" onClick={handleAddUser}>Submit form</Button>
+                            </>
+                            :
+                            null
+                    }
                     <Button variant="secondary" onClick={handleCloseAll}>
                         Close
                     </Button>
