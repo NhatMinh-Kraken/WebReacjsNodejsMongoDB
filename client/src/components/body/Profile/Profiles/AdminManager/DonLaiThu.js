@@ -16,6 +16,8 @@ function DonLaiThu() {
         getlaiThu()
     }, [callback])
 
+    //console.log(laithu)
+
     return (
         <>
             <div className='ManagerLaiThu p-3'>

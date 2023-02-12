@@ -183,6 +183,11 @@ function EditProduct() {
     }
 
 
+    //
+
+    // console.log(images)
+    // console.log(imagesNew)
+
 
     //destroy
     const deleteImage = async (id, index) => {

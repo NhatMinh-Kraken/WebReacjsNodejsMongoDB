@@ -28,6 +28,7 @@ function DropdownItem() {
         });
     }, [callback])
 
+    //console.log(notification)
 
     useEffect(() => {
         user.notification.forEach((e) => {
@@ -38,6 +39,8 @@ function DropdownItem() {
             }
         })
     }, [user])
+
+   // console.log(checkNoti)
 
     const handleLogout = async () => {
         try {

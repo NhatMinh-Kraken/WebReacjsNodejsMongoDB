@@ -191,9 +191,7 @@ function AdminMessager() {
 
     }, [callback]);
 
-
-    // console.log(notification)
-    //console.log(currentChat)
+    //console.log(arrivalMessager)
 
     useEffect(() => {
         socket.current.emit("addUser", user._id);
@@ -255,6 +253,8 @@ function AdminMessager() {
         })
     })
 
+    // console.log(userReceiver?.notification)
+    // console.log(receiverNotiId)
     //mess
     const hanldeMess = async (e) => {
         e.preventDefault();

@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory, useParams } from 'react-router-dom'
-import { Modal, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { Modal } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import Axios from 'axios'
 import { fetchAllUsers, dispatchGetAllUsers } from '../../../../../redux/action/userAction'
 
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Row from 'react-bootstrap/Row';
+
 const initialState = {
+    name: '',
+    numberphone: '',
+    password: '',
+    cf_password: '',
     err: '',
-    success: ''
+    success: '',
 }
 function ProfileAllUser() {
     const auth = useSelector(state => state.auth)
@@ -23,6 +33,10 @@ function ProfileAllUser() {
 
     const users = useSelector(state => state.users)
 
+    const [addUser, setAddUser] = useState(false)
+
+    const [giatri, setGiatri] = useState(initialState)
+
 
     // const [loading, setLoading] = useState(false
     const [callback, setCallback] = useState(false)
@@ -36,6 +50,12 @@ function ProfileAllUser() {
             })
         }
     }, [token, isAdmin, dispatch, callback])
+
+
+    const handleChangeInput = e => {
+        const { name, value } = e.target
+        setGiatri({ ...giatri, [name]: value, err: '', success: '' })
+    }
 
 
     const handleClose = () => setShow(false);
@@ -75,10 +95,20 @@ function ProfileAllUser() {
     }
 
     const handleCloseAll = () => {
+        setAddUser(false)
         setShowAll(false)
     }
 
     const address = userAll.nameWard + ", " + userAll.nameDis + ", " + userAll.nameCity
+
+    const handleShowAdd = () => {
+        setAddUser(true)
+        setShowAll(true)
+    }
+
+    const handleAddUser = () => {
+
+    }
 
     return (
         <>
@@ -112,37 +142,103 @@ function ProfileAllUser() {
                 <Modal.Header closeButton>
                 </Modal.Header>
                 <Modal.Body>
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <td className="font-weight-bold">Ảnh đại diện:</td>
-                                <td className="font-weight-light text-center">
-                                    <img className='avatarTD' src={userAll.avatar} alt="avatar" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="font-weight-bold">Tên Khách Hàng:</td>
-                                <td className="font-weight-light text-center">
-                                    {userAll.name}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="font-weight-bold">Email:</td>
-                                <td className="font-weight-light text-center">{userAll.email}</td>
-                            </tr>
-                            <tr>
-                                <td className="font-weight-bold">Số điện thoại:</td>
-                                <td className="font-weight-light text-center">{userAll.numberphone !== "0" ? userAll.numberphone : "Chưa có"}</td>
-                            </tr>
-                            <tr>
-                                <td className="font-weight-bold">Giới tính:</td>
-                                <td className="font-weight-light text-center">{userAll.sex === 0 ? "Nam" : "Nữ"}</td>
-                            </tr>
-                            <tr>
-                                <td className="font-weight-bold">Địa chỉ:</td>
-                                <td className="font-weight-light text-center">{userAll.nameCity !== null || userAll.nameDis !== null || userAll.nameWard !== null ? address : "Chưa có"}</td>
-                            </tr>
-                        </tbody>
+                    <table className="table table-bordered">
+                        {
+                            addUser
+                                ?
+                                <>
+                                    <div className='tab-content'>
+                                        <Form >
+                                            <Row className="mb-3">
+                                                <Form.Group as={Col} md="4" controlId="validationCustom01">
+                                                    <Form.Label>Họ và tên</Form.Label>
+                                                    <Form.Control
+                                                        required
+                                                        type="text"
+                                                        defaultValue={giatri.name}
+                                                        name='name'
+                                                        onChange={handleChangeInput}
+                                                    />
+                                                </Form.Group>
+                                            </Row>
+                                            <Row className="mb-3">
+                                                <Form.Group as={Col} md="4" controlId="validationCustom01">
+                                                    <Form.Label>Số điện thoại</Form.Label>
+                                                    <Form.Control
+                                                        required
+                                                        type="Number"
+                                                        defaultValue={giatri.numberphone}
+                                                        name='numberphone'
+                                                        onChange={handleChangeInput}
+                                                    />
+                                                </Form.Group>
+                                            </Row>
+                                            <Row className="mb-3">
+                                                <Form.Group as={Col} md="4" controlId="validationCustom01">
+                                                    <Form.Label>Password</Form.Label>
+                                                    <Form.Control
+                                                        required
+                                                        type="password"
+                                                        defaultValue={giatri.password}
+                                                        name='password'
+                                                        onChange={handleChangeInput}
+                                                    />
+                                                </Form.Group>
+                                            </Row>
+                                            <Row className="mb-3">
+                                                <Form.Group as={Col} md="4" controlId="validationCustom01">
+                                                    <Form.Label>Repeat password</Form.Label>
+                                                    <Form.Control
+                                                        required
+                                                        type="password"
+                                                        defaultValue={giatri.cf_password}
+                                                        name='cf_password'
+                                                        onChange={handleChangeInput}
+                                                    />
+                                                </Form.Group>
+                                            </Row>
+                                            <Row className="mb-3">
+                                                <div className='col-12 d-flex justify-content-center'>
+                                                    <Button type="submit" onClick={handleAddUser}>Submit form</Button>
+                                                </div>
+                                            </Row>
+                                        </Form >
+                                    </div>
+                                </>
+                                :
+                                <>
+                                    <tbody>
+                                        <tr>
+                                            <td className="font-weight-bold">Ảnh đại diện:</td>
+                                            <td className="font-weight-light text-center">
+                                                <img className='avatarTD' src={userAll.avatar} alt="avatar" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="font-weight-bold">Tên Khách Hàng:</td>
+                                            <td className="font-weight-light text-center">
+                                                {userAll.name}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="font-weight-bold">Email:</td>
+                                            <td className="font-weight-light text-center">{userAll.email}</td>
+                                        </tr>
+                                        <tr>
+                                            <td className="font-weight-bold">Số điện thoại:</td>
+                                            <td className="font-weight-light text-center">{userAll.numberphone !== "0" ? userAll.numberphone : "Chưa có"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td className="font-weight-bold">Giới tính:</td>
+                                            <td className="font-weight-light text-center">{userAll.sex === 0 ? "Nam" : "Nữ"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td className="font-weight-bold">Địa chỉ:</td>
+                                            <td className="font-weight-light text-center">{userAll.nameCity !== null || userAll.nameDis !== null || userAll.nameWard !== null ? address : "Chưa có"}</td>
+                                        </tr>
+                                    </tbody>
+                                </>
+                        }
                     </table>
                 </Modal.Body>
                 <Modal.Footer>
@@ -152,9 +248,11 @@ function ProfileAllUser() {
                 </Modal.Footer>
             </Modal>
 
-
             <div className='profile_item_body'>
                 <div className='profile_item_info col-12'>
+                    <div className='category_item pb-3 d-flex align-items-center justify-content-end'>
+                        <button onClick={(handleShowAdd)}><i className="fa-solid fa-plus" title='add'></i></button>
+                    </div>
                     <div className='bd-example'>
                         <table className="table table-hover table-bordered">
                             <thead className='thead-dark'>

@@ -39,6 +39,7 @@ function Footer() {
     const [clickChat, setClickChat] = useState(false)
 
     const [converNew, setConverNew] = useState([])
+
     // const [message, setMessage] = useState('')
 
     const scrollRef = useRef(null);
@@ -174,6 +175,13 @@ function Footer() {
             });
         });
     }, [callback]);
+
+    useEffect(() => {
+        socket.current.emit("addUser", user._id);
+        socket.current.on("getUsers", (users) => {
+            setUserSocketId(users)
+        });
+    }, [user]);
 
     // console.log(arrivalMessager)
     // console.log(conversationMes)

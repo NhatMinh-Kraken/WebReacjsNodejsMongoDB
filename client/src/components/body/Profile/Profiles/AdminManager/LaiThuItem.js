@@ -26,6 +26,8 @@ function LaiThuItem({ laithus, setCallback, callback }) {
         setIsShow(true)
     }
 
+   // console.log(laithus)
+
     // format vnđ
     const formatMoney = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(laithus.money)
     const formatMoney1 = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(laithus.smoney1)
