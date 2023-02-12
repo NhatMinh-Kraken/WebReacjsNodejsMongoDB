@@ -75,7 +75,7 @@ function ProfileItem() {
         }
     }
 
-    console.log(avatar)
+    //console.log(avatar)
 
     const handleChange = e => {
         const { name, value } = e.target

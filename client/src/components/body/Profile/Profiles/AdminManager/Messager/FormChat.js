@@ -93,7 +93,7 @@ function FormChat({ currentChat, messager, setMessager, setCallback, callback })
     useEffect(() => {
         socket.current = io("ws://localhost:8900");
         socket.current.on("getMessage", (data) => {
-            console.log(data)
+           // console.log(data)
             setArrivalMessager({
                 senderId: data.senderId,
                 text: data.text,
@@ -102,7 +102,7 @@ function FormChat({ currentChat, messager, setMessager, setCallback, callback })
         });
     }, [callback]);
 
-    console.log(arrivalMessager)
+    //console.log(arrivalMessager)
     //console.log(currentChat)
 
     useEffect(() => {

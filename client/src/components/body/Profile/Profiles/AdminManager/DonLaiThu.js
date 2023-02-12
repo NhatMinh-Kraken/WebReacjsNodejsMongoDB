@@ -16,7 +16,7 @@ function DonLaiThu() {
         getlaiThu()
     }, [callback])
 
-    console.log(laithu)
+   // console.log(laithu)
 
     return (
         <>

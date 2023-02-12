@@ -144,7 +144,7 @@ function CreateProduct() {
             toast.error(err.response.data.msg)
         }
     }
-    console.log(images)
+    //console.log(images)
     //
 
     //destroy
@@ -156,7 +156,7 @@ function CreateProduct() {
     }
     //
 
-    console.log(images)
+   // console.log(images)
     const handleChangeInput = e => {
         const { name, value } = e.target
         setProduct({ ...product, [name]: value })
@@ -190,7 +190,7 @@ function CreateProduct() {
                 headers: { Authorization: token }
             })
 
-            console.log(avatar)
+            //console.log(avatar)
             setLoading(false)
             setCallback(!callback)
             history.push("/all-product")

@@ -185,8 +185,8 @@ function EditProduct() {
 
     //
 
-    console.log(images)
-    console.log(imagesNew)
+    // console.log(images)
+    // console.log(imagesNew)
 
 
     //destroy

@@ -106,7 +106,7 @@ const uploadController = {
             let imgArr = []
             let images = [...req.body.images]
 
-            console.log(images)
+            //console.log(images)
 
             for (let i = 0; i < images.length; i++) {
                 cloudinary.v2.uploader.upload(images[i].tempFilePath, { folder: "imageProduct" }, async (err, result) => {
@@ -118,7 +118,7 @@ const uploadController = {
                 })
             }
 
-            console.log(imgArr)
+           // console.log(imgArr)
         }
 
         catch (err) {

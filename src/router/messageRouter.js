@@ -64,8 +64,8 @@ router.post("/noti/:id", async (req, res) => {
     try {
         const { notification, receiverNotiId } = req.body;
 
-        console.log(notification)
-        console.log(receiverNotiId)
+        // console.log(notification)
+        // console.log(receiverNotiId)
 
         await User.updateOne(
             {

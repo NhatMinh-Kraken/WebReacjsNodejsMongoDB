@@ -42,7 +42,7 @@ function Conversation({ conversation, currentUser, currentChat, onlineUser, noti
         getUser()
     }, [currentUser, conversation])
 
-    console.log(onlineUser)
+    //console.log(onlineUser)
     // console.log("userInf:", userInf._id)
 
     useEffect(() => {
@@ -58,8 +58,8 @@ function Conversation({ conversation, currentUser, currentChat, onlineUser, noti
 
     //console.log(online)
 
-    console.log(notification)
-    console.log(userInf._id)
+    // console.log(notification)
+    // console.log(userInf._id)
 
     useEffect(() => {
         user.notification.forEach((e) => {

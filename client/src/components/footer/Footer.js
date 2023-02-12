@@ -46,6 +46,8 @@ function Footer() {
     //const [currentEmoji, setCurrentEmoji] = useState()
 
     const inputRef = createRef()
+
+    const [userSocketId, setUserSocketId] = useState([])
     // const [message, setMessage] = useState('')
 
     const scrollRef = useRef(null);
@@ -186,6 +188,13 @@ function Footer() {
         });
     }, [callback]);
 
+    useEffect(() => {
+        socket.current.emit("addUser", user._id);
+        socket.current.on("getUsers", (users) => {
+            setUserSocketId(users)
+        });
+    }, [user]);
+
     // console.log(arrivalMessager)
     // console.log(conversationMes)
 
@@ -195,12 +204,6 @@ function Footer() {
             setMessager((prev) => [...prev, arrivalMessager]);
     }, [arrivalMessager, conversationMes]);
 
-    useEffect(() => {
-        socket.current.emit("addUser", user._id);
-        socket.current.on("getUsers", (users) => {
-            console.log(users)
-        });
-    }, [user]);
 
     useEffect(() => {
         socket.current.emit("addConversation", converNew)
