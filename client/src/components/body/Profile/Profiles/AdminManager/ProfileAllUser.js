@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Modal } from 'react-bootstrap'
+import { FormGroup, Modal } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import Axios from 'axios'
 import { fetchAllUsers, dispatchGetAllUsers } from '../../../../../redux/action/userAction'
@@ -11,6 +11,12 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
+
+import '../../Profiles/ProfileUser.scss'
+
+import { read, utils } from 'xlsx'
+
+import Loadding from '../../../../utils/Loadding/Loadding2'
 
 const initialState = {
     name: '',
@@ -26,20 +32,28 @@ function ProfileAllUser() {
     const [data, setData] = useState(initialState)
     const token = useSelector(state => state.token)
 
+    const requiredFields = ["ID", "Name", "Email", "Phone", "ChucVu", "ChucVuCuThe"];
+
     const [deleteId, setDeleteId] = useState("")
 
     const [show, setShow] = useState(false)
     const [showAll, setShowAll] = useState(false)
 
-    const users = useSelector(state => state.users)
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    // const users = useSelector(state => state.users)
 
     const [addUser, setAddUser] = useState(false)
 
-    const [giatri, setGiatri] = useState(initialState)
-
-
+    const [excelRows, setExcelRows] = useState([]);
     // const [loading, setLoading] = useState(false
     const [callback, setCallback] = useState(false)
+
+    const [users, setUsers] = useState([])
+
+    const [excel, setExcel] = useState()
+
+    const [loadding, setLoadding] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -51,10 +65,18 @@ function ProfileAllUser() {
         }
     }, [token, isAdmin, dispatch, callback])
 
+    useEffect(() => {
+        getAllUser()
+    }, [])
+
+    const getAllUser = async () => {
+        const res = await Axios.get('/user/all_infor')
+        setUsers(res.data)
+    }
 
     const handleChangeInput = e => {
         const { name, value } = e.target
-        setGiatri({ ...giatri, [name]: value, err: '', success: '' })
+        setData({ ...data, [name]: value, err: '', success: '' })
     }
 
 
@@ -110,6 +132,110 @@ function ProfileAllUser() {
 
     }
 
+    const changeExcel = async (e) => {
+        try {
+            const file = e.target.files[0]
+            setSelectedFile(file);
+            const reader = new FileReader()
+            reader.onload = (e) => {
+                const dataFile = e.target.result;
+                const workbook = read(dataFile, { type: "array" });
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                const json = utils.sheet_to_json(worksheet);
+                setExcelRows(json);
+            }
+            reader.readAsArrayBuffer(file);
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const uploadData = async () => {
+        try {
+            setLoadding(true)
+            const firstItemKeys = excelRows[0] && Object.keys(excelRows[0]);
+
+            let requiredValidation = false;
+
+            if (firstItemKeys.length) {
+                requiredFields.forEach((element) => {
+                    if (!firstItemKeys.find((x) => x === element)) {
+                        requiredValidation = true;
+                    }
+                });
+            }
+
+            if (requiredValidation) {
+                alert("Required fields " + JSON.stringify(requiredFields));
+                setLoadding(false);
+                return;
+            }
+
+            const jokesResponse = (
+                await Axios.get("/user/all_infor")
+            ).data;
+            const jokeList = jokesResponse || [];
+
+            const jokes = excelRows.map((obj) => ({
+                _id: jokeList.find((x) => x.jokeId == obj["ID"])?._id,
+                jokeId: obj["ID"] || "",
+                name: obj["Name"] || "",
+                email: obj["Email"] || "",
+                numberphone: obj["Phone"] || "",
+                chucvu: obj["ChucVu"] || "",
+                chucvucuthe: obj["ChucVuCuThe"] || "",
+            }));
+
+            const updatedJokes = jokes.filter((x) => x._id);
+            const newJokes = jokes.filter((x) => !x._id);
+
+            if (updatedJokes.length) {
+                const result = (
+                    await Axios.post(
+                        '/user/update-nv-user',
+                        updatedJokes,
+                        {
+                            headers: { Authorization: token }
+                        }
+                    )
+                ).data;
+
+                if (result) {
+                    toast.success("Successfully updated " + updatedJokes.length + " documents");
+                }
+
+                setSelectedFile(null);
+                setExcelRows([]);
+            }
+
+            if (newJokes.length) {
+                const result = (
+                    await Axios.post(
+                        "/user/insert-nv-user",
+                        newJokes,
+                        {
+                            headers: { Authorization: token }
+                        }
+                    )
+                ).data;
+
+                if (result) {
+                    toast.success("Successfully added " + newJokes.length + " documents");
+                }
+
+                setSelectedFile(null);
+                setExcelRows([]);
+            }
+
+            getAllUser();
+            setLoadding(false);
+        } catch (err) {
+            console.log(err)
+            toast.error(`Dữ liệu không phụ hợp. Vui lòng tham khảo "["ID", "Name", "Email", "Phone", "ChucVu", "ChucVuCuThe"]" `)
+        }
+    }
+
     return (
         <>
             <Modal
@@ -140,72 +266,73 @@ function ProfileAllUser() {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
+                    Add user
                 </Modal.Header>
                 <Modal.Body>
-                    <table className="table table-bordered">
-                        {
-                            addUser
-                                ?
-                                <>
-                                    <div className='tab-content'>
-                                        <Form >
-                                            <Row className="mb-3">
-                                                <Form.Group as={Col} md="12" controlId="validationCustom01">
-                                                    <Form.Label>Họ và tên</Form.Label>
-                                                    <Form.Control
-                                                        className='w-100'
-                                                        required
-                                                        type="text"
-                                                        defaultValue={giatri.name}
-                                                        name='name'
-                                                        onChange={handleChangeInput}
-                                                    />
-                                                </Form.Group>
-                                            </Row>
-                                            <Row className="mb-3">
-                                                <Form.Group as={Col} md="12" controlId="validationCustom01">
-                                                    <Form.Label>Số điện thoại</Form.Label>
-                                                    <Form.Control
-                                                        className='w-100'
-                                                        required
-                                                        type="Number"
-                                                        defaultValue={giatri.numberphone}
-                                                        name='numberphone'
-                                                        onChange={handleChangeInput}
-                                                    />
-                                                </Form.Group>
-                                            </Row>
-                                            <Row className="mb-3">
-                                                <Form.Group as={Col} md="12" controlId="validationCustom01">
-                                                    <Form.Label>Password</Form.Label>
-                                                    <Form.Control
-                                                        className='w-100'
-                                                        required
-                                                        type="password"
-                                                        defaultValue={giatri.password}
-                                                        name='password'
-                                                        onChange={handleChangeInput}
-                                                    />
-                                                </Form.Group>
-                                            </Row>
-                                            <Row className="mb-3">
-                                                <Form.Group as={Col} md="12" controlId="validationCustom01">
-                                                    <Form.Label>Repeat password</Form.Label>
-                                                    <Form.Control
-                                                        className='w-100'
-                                                        required
-                                                        type="password"
-                                                        defaultValue={giatri.cf_password}
-                                                        name='cf_password'
-                                                        onChange={handleChangeInput}
-                                                    />
-                                                </Form.Group>
-                                            </Row>
-                                        </Form >
-                                    </div>
-                                </>
-                                :
-                                <>
+                    {
+                        addUser
+                            ?
+                            <>
+                                <div className='tab-content'>
+                                    <Form >
+                                        <Row className="mb-3">
+                                            <Form.Group as={Col} md="12" controlId="validationCustom01">
+                                                <Form.Label>Họ và tên</Form.Label>
+                                                <Form.Control
+                                                    className='w-100'
+                                                    required
+                                                    type="text"
+                                                    defaultValue={data.name}
+                                                    name='name'
+                                                    onChange={handleChangeInput}
+                                                />
+                                            </Form.Group>
+                                        </Row>
+                                        <Row className="mb-3">
+                                            <Form.Group as={Col} md="12" controlId="validationCustom01">
+                                                <Form.Label>Số điện thoại</Form.Label>
+                                                <Form.Control
+                                                    className='w-100'
+                                                    required
+                                                    type="text"
+                                                    defaultValue={data.numberphone}
+                                                    name='numberphone'
+                                                    onChange={handleChangeInput}
+                                                />
+                                            </Form.Group>
+                                        </Row>
+                                        <Row className="mb-3">
+                                            <Form.Group as={Col} md="12" controlId="validationCustom01">
+                                                <Form.Label>Password</Form.Label>
+                                                <Form.Control
+                                                    className='w-100'
+                                                    required
+                                                    type="password"
+                                                    defaultValue={data.password}
+                                                    name='password'
+                                                    onChange={handleChangeInput}
+                                                />
+                                            </Form.Group>
+                                        </Row>
+                                        <Row className="mb-3">
+                                            <Form.Group as={Col} md="12" controlId="validationCustom01">
+                                                <Form.Label>Repeat password</Form.Label>
+                                                <Form.Control
+                                                    className='w-100'
+                                                    required
+                                                    type="password"
+                                                    defaultValue={data.cf_password}
+                                                    name='cf_password'
+                                                    onChange={handleChangeInput}
+                                                />
+                                            </Form.Group>
+                                        </Row>
+                                    </Form >
+                                </div>
+                            </>
+                            :
+                            <>
+                                <table className="table table-bordered">
                                     <tbody>
                                         <tr>
                                             <td className="font-weight-bold">Ảnh đại diện:</td>
@@ -236,9 +363,9 @@ function ProfileAllUser() {
                                             <td className="font-weight-light text-center">{userAll.nameCity !== null || userAll.nameDis !== null || userAll.nameWard !== null ? address : "Chưa có"}</td>
                                         </tr>
                                     </tbody>
-                                </>
-                        }
-                    </table>
+                                </table>
+                            </>
+                    }
                 </Modal.Body>
                 <Modal.Footer>
                     {
@@ -257,8 +384,45 @@ function ProfileAllUser() {
 
             <div className='profile_item_body'>
                 <div className='profile_item_info col-12'>
-                    <div className='category_item pb-3 d-flex align-items-center justify-content-end'>
-                        <button onClick={(handleShowAdd)}><i className="fa-solid fa-plus" title='add'></i></button>
+                    <div className='d-flex col-12'>
+                        <Row className="mb-3 col-6 d-flex">
+                            <Form.Group as={Col} md="12 text-left" className='d-flex' controlId="validationCustom01">
+                                <div className='d-flex flex-column'>
+                                    <Form.Control
+                                        onClick={e => (e.target.value = null)}
+                                        className='fileXslx'
+                                        required
+                                        type="file"
+                                        name='file'
+                                        onChange={changeExcel}
+                                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                    />
+                                    <Form.Text>
+                                        {
+                                            "NOTE: The headers in the Excel file should be as follows!. => "
+                                        }
+                                        {
+                                            requiredFields.join(", ")
+                                        }
+                                    </Form.Text>
+                                </div>
+
+                                <div className='pl-2 d-flex'>
+                                    {
+                                        selectedFile?.name
+                                            ?
+                                            <>
+                                                <Button className='button-xslx' color="success" onClick={uploadData}>Upload</Button>
+                                            </>
+                                            :
+                                            null
+                                    }
+                                </div>
+                            </Form.Group>
+                        </Row>
+                        <div className=' col-6 category_item pb-3 d-flex align-items-center justify-content-end'>
+                            <button onClick={(handleShowAdd)}><i className="fa-solid fa-plus" title='add'></i></button>
+                        </div>
                     </div>
                     <div className='bd-example'>
                         <table className="table table-hover table-bordered">
@@ -266,8 +430,9 @@ function ProfileAllUser() {
                                 <tr>
                                     <th scope="col-1" className="text-center">#</th>
                                     <th scope="col-3" className="text-center">Name</th>
-                                    <th scope="col-5" className="text-center">Email</th>
+                                    <th scope="col-4" className="text-center">Email</th>
                                     <th scope="col-1" className="text-center">Admin</th>
+                                    <th scope="col-1" className="text-center">Employee</th>
                                     <th scope="col-2" className="text-center">Action</th>
                                 </tr>
                             </thead>
@@ -277,8 +442,9 @@ function ProfileAllUser() {
                                         <tr key={user._id}>
                                             <th scope="row" className='col-1 text-center'>{index + 1}</th>
                                             <td className='col-3 text-center'>{user.name}</td>
-                                            <td className='col-5 text-center'>{user.email}</td>
+                                            <td className='col-4 text-center'>{user.email}</td>
                                             <td className='col-1 text-center m-0'>{user.role === 1 ? <i className="fa-solid fa-circle-check text-primary"></i> : <i className="fa-solid fa-circle-xmark text-danger"></i>}</td>
+                                            <td className='col-1 text-center m-0'>{user.chucvu === 2 ? <i className="fa-solid fa-circle-check text-primary"></i> : <i className="fa-solid fa-circle-xmark text-danger"></i>}</td>
                                             <td className='col-2 text-center'>
                                                 <a onClick={() => handleShowAll(user._id, user.name, user.email, user.avatar, user.sex, user.numberphone, user.nameCity, user.nameDis, user.nameWard)}><i className="fa-solid fa-eye text-success mr-2" title='show'></i></a>
                                                 <Link to={`/edit_user/${user._id}`}><i className="fa-solid fa-pen-to-square mr-2 text-primary" title='edit'></i></Link>

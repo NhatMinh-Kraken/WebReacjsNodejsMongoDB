@@ -396,6 +396,52 @@ const userController = {
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
+    },
+
+    insertNvUser: async (req, res) => {
+        try {
+            const jokes = req.body;
+
+            await Users.insertMany(jokes, (error, docs) => {
+                if (docs) {
+                    res
+                        .status(200)
+                        .json({ success: true, message: "Insert success" });
+                }
+                if (error) {
+                    console.log("insertMany error: ", error);
+                    res.status(400).json({
+                        success: false,
+                        error: error,
+                        message: "jokes-bulk-insert failed",
+                    });
+                }
+            });
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
+    updateNvUser: async (req, res) => {
+        try {
+            const jokes = req.body;
+
+            const promises = jokes.map(async (item) => {
+                const res = await Users.findByIdAndUpdate(item._id, {
+                    $set: { ...item },
+                });
+
+                return res;
+            });
+
+            Promise.all(promises)
+                .then(() =>
+                    res.json({ success: true, message: "Update success" })
+                )
+                .catch((err) => res.status(400).json(err));
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
     }
 }
 
