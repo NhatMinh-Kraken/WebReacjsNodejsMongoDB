@@ -39,10 +39,8 @@ router.delete('/delete/:id', auth, authAdmin, userController.deleteUser)
 router.post('/google_login', userController.googleLogin)
 router.post('/facebook_login', userController.facebookLogin)
 
-// Address
-
-// router.post('/address_city', addressController.addressCity)
-// router.post('/address_district', addressController.addressDistrict)
-
+// xlsx
+router.post('/update-nv-user', auth, userController.updateNvUser)
+router.post('/insert-nv-user', auth, userController.insertNvUser)
 
 module.exports = router

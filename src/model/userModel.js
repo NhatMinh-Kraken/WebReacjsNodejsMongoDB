@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
+    jokeId: {
+        type: String
+    },
     name: {
         type: String,
         require: [true, "Please enter your name!"],
@@ -86,6 +89,14 @@ const userSchema = new mongoose.Schema({
     status: {
         type: String,
         default: "online"
+    },
+    chucvu: {
+        type: Number,
+        default: 0
+    },
+    chucvucuthe: {
+        type: String,
+        default: "Chưa có"
     }
 }, {
     timestamps: true,
