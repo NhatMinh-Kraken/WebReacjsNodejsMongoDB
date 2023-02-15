@@ -11,6 +11,15 @@ const categoryController = {
         }
     },
 
+    getCategoriesLimit: async (req, res) => {
+        try {
+            const categories = await Categorys.find().limit(3)
+            res.json(categories)
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
     createCategory: async (req, res) => {
         try {
             //if user info role === 0 ---> admin

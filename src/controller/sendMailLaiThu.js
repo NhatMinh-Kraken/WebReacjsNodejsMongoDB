@@ -109,7 +109,7 @@ const sendEmailLaiThu = (to, name, type, money, smoney1, smoney2, smoney3, smone
                         <div style=" height: auto; padding-top:
                             20px; padding-bottom: 20px; display: flex; justify-content:
                             center;">
-                            <table class="table table-bordered" style="background-color:
+                            <table className="table table-bordered" style="background-color:
                                 #fff; padding: 20px; border-radius: 10px; margin: auto;">
                                 <tbody>
                                     <tr>

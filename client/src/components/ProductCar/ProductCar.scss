@@ -374,7 +374,7 @@
 
             // }
 
-            .button-delete-all{
+            .button-delete-all {
                 border-radius: 50%;
                 border: 1px solid red;
                 color: red;
@@ -585,7 +585,8 @@
     .owl-carousel {
         .owl-stage {
             .item {
-                transform: translate3d(-90px, 0px, 0px) !important;
+                // transform: translate3d(-90px, 0px, 0px) !important;
+                transform: translate3d(-65px, 0px, 0px) !important
             }
         }
 

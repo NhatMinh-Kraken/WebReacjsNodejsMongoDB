@@ -26,7 +26,7 @@ function LaiThuItem({ laithus, setCallback, callback }) {
         setIsShow(true)
     }
 
-   // console.log(laithus)
+    // console.log(laithus)
 
     // format vnđ
     const formatMoney = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(laithus.money)
@@ -76,7 +76,7 @@ function LaiThuItem({ laithus, setCallback, callback }) {
                 </Modal.Header>
                 <Modal.Body className='text-danger'>
                     <h3 className="text-center">Hóa đơn</h3>
-                    <table class="table table-bordered">
+                    <table className="table table-bordered">
                         <thead className='thead-dark'>
                             <tr>
                                 <th scope="col">Target</th>
