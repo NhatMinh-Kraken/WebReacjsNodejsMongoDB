@@ -44,6 +44,10 @@ const productcarSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    checkThinhHanh: {
+        type: Number,
+        default: 0
+    },
     amount: {
         type: Number,
     },

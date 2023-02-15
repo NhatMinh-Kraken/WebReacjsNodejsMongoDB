@@ -1,4 +1,5 @@
 const ProductCars = require('../model/productCarModel')
+const Categorys = require('../model/categorysModel')
 
 const cloudinary = require('cloudinary')
 const fs = require('fs')
@@ -37,7 +38,7 @@ class APIfeatures {
         //lt = lesser than
         //gt = greater than
 
-        this.query.findAll(JSON.parse(queryStr))
+        this.query.find(JSON.parse(queryStr))
 
         return this;
     }
@@ -63,16 +64,26 @@ class APIfeatures {
 }
 
 const productController = {
+
+    getProductsLoad: async (req, res) => {
+        try {
+            const features = new APIfeatures(ProductCars.find().populate("type"), req.query).filtering().sorting().paginating()
+
+            const products = await features.query
+
+            res.json({
+                status: 'success',
+                result: products.length,
+                products: products
+            })
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
     getProducts: async (req, res) => {
         try {
-            // const features = new APIfeatures(db.ProductCars.findAll(), req.query).filtering().sorting().paginating()
-            // const productCar = await features.query
-
-            // res.json({
-            //     status: "success",
-            //     result: productCar.length,
-            //     productCar: productCar
-            // })
             const productCar = await ProductCars.find()
             res.json(productCar)
 
@@ -99,7 +110,7 @@ const productController = {
 
             req.body.avatar = imageBuffer
 
-            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, checked, amount } = req.body
+            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, checked, checkThinhHanh, amount } = req.body
 
 
             if (!name || !type || !money || !energy || !description || !specifications || !amount) {
@@ -119,11 +130,17 @@ const productController = {
 
             if (newProduct) {
                 newProduct.name = name, newProduct.type = type, newProduct.money = money,
-                    newProduct.energy = energy, newProduct.avatar = req.body.avatar, newProduct.description = description, newProduct.descriptionHTML = descriptionHTML, newProduct.specifications = specifications, newProduct.specificationsHTML = specificationsHTML, newProduct.checked = checked,
-                    newProduct.amount = amount
+                    newProduct.energy = energy, newProduct.avatar = req.body.avatar, newProduct.description = description, newProduct.descriptionHTML = descriptionHTML, newProduct.specifications = specifications, newProduct.specificationsHTML = specificationsHTML, newProduct.checked = checked, newProduct.checkThinhHanh = checkThinhHanh
+                newProduct.amount = amount
 
                 await newProduct.save()
+                await Categorys.findByIdAndUpdate({
+                    _id: type
+                }, {
+                    checkThinhHanh
+                })
             }
+
 
             // console.log(newProduct)
 
@@ -196,17 +213,23 @@ const productController = {
 
             //console.log(req.body.avatar)
 
-            const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, description, descriptionHTML, specifications, specificationsHTML, checked, amount } = req.body
+            const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, description, descriptionHTML, specifications, specificationsHTML, checked, checkThinhHanh, amount } = req.body
 
             await ProductCars.findOneAndUpdate({
                 _id: req.params.id
             }, {
                 name: name, type: type, money: money,
                 colortypeone: colortypeone, colortypetwo: colortypetwo, colortypethree: colortypethree, $push: { avatar: [...req.body.avatar] },
-                energy: energy, description: description, descriptionHTML: descriptionHTML, specifications: specifications, specificationsHTML: specificationsHTML, checked: checked,
+                energy: energy, description: description, descriptionHTML: descriptionHTML, specifications: specifications, specificationsHTML: specificationsHTML, checked: checked, checkThinhHanh: checkThinhHanh,
                 amount: amount
             })
-            
+
+            await Categorys.findOneAndUpdate({
+                _id: type
+            }, {
+                checkThinhHanh
+            })
+
             res.json({ msg: "Update Success!" })
         } catch (err) {
             return res.status(500).json({ msg: err.message })

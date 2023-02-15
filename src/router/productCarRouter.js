@@ -16,4 +16,6 @@ router.route('/products/:id')
 
 router.route('/productsDelete/:id').put(auth, authAdmin, productController.updateProductWhenDelete)
 
+router.route('/productsLoad').get(productController.getProductsLoad)
+
 module.exports = router
