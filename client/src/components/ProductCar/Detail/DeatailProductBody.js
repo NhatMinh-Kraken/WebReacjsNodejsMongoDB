@@ -335,7 +335,7 @@ function DeatailProductBody() {
                                                 </div>
                                             </div>
                                             <div className='Title-note'>
-                                                <span><i class="fa-solid fa-circle-exclamation"></i></span> <p>Ngay sau khi nhận được yêu cầu chúng tôi sẽ liên hệ lại với quý khách trong thời gian sớm nhất.</p>
+                                                <span><i className="fa-solid fa-circle-exclamation"></i></span> <p>Ngay sau khi nhận được yêu cầu chúng tôi sẽ liên hệ lại với quý khách trong thời gian sớm nhất.</p>
                                             </div>
                                             <div className='Submit'>
                                                 <button type='submit' className='Submit-car' onClick={handleSubmit}>Đăng ký lái thử</button>

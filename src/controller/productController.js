@@ -21,16 +21,16 @@ class APIfeatures {
     }
     filtering() {
         const queryObj = { ...this.queryString } //queryString = req.query
-        console.log({ before: queryObj }) //before delete page
+        //console.log({ before: queryObj }) //before delete page
         const excludedFields = ['page', 'sorf', 'limit']
         excludedFields.forEach(el => delete (queryObj[el]))
 
-        console.log({ after: queryObj }) //after delete page
+        //console.log({ after: queryObj }) //after delete page
 
         let queryStr = JSON.stringify(queryObj)
 
         queryStr = queryStr.replace(/\b(gte|gt|lt|lte|regex)\b/g, match => '$' + match)
-        console.log(queryStr)
+        //console.log(queryStr)
 
 
         //gte = greater than or equal

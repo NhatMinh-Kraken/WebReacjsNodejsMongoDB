@@ -42,14 +42,17 @@ function ProductCarAllItem({ nametypes }) {
                         <div className='product-card-name'>
                             <span>{nametypes.name}</span>
                         </div>
-                        <div className='product-card-type'>
+                        <div className='product-card-type pr-2'>
                             {
                                 nametypes
                                 && nametypes.type
                                 && nametypes.type.name
                                 && <span>{nametypes.type.name}</span>
                             }
-
+                            -
+                            {
+                                nametypes.energy === 0 ? <span className='pl-2 font-weight-bold text-success'>Xe Xăng</span> : <span className='pl-2 font-weight-bold text-warning'>Xe Điện</span>
+                            }
                         </div>
                         <div className='product-card-money'>
                             <span>{nametypes.money}</span>
@@ -59,9 +62,9 @@ function ProductCarAllItem({ nametypes }) {
                         <OwlCarousel id="customer-testimonoals" className="product owl-carousel owl-theme" {...options}>
                             {
                                 nametypes.avatar.map((img, index) => (
-                                    <div className='item p-0' style={{ width: "240px" }}>
+                                    <div key={index} className='item p-0' style={{ width: "240px" }}>
                                         <div className='product-card-img'>
-                                            <img key={index} src={img.url} alt={img.url} loading="lazy" />
+                                            <img src={img.url} alt={img.url} loading="lazy" />
                                         </div>
                                     </div>
                                 ))

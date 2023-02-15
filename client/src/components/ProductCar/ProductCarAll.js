@@ -3,17 +3,17 @@ import React, { useEffect, useState } from 'react'
 
 import ProductCarAllItem from './ProductItem/ProductCarAllItem'
 
-function ProductCarAll() {
-    const [nametype, setNametype] = useState([])
-    const [callback, setCallback] = useState(false)
+function ProductCarAll({ nametype }) {
+    // const [nametype, setNametype] = useState([])
+    // const [callback, setCallback] = useState(false)
 
-    useEffect(() => {
-        const getNameType = async () => {
-            const res = await Axios.get('/api/nametype')
-            setNametype(res.data)
-        }
-        getNameType()
-    }, [callback])
+    // useEffect(() => {
+    //     const getNameType = async () => {
+    //         const res = await Axios.get('/api/nametype')
+    //         setNametype(res.data)
+    //     }
+    //     getNameType()
+    // }, [callback])
 
     return (
         <div className='product-all col-12'>
