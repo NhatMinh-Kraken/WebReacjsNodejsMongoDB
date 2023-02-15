@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import imageUser from '../../../../../assets/images/add.png'
 import Loading2 from '../../../../utils/Loadding/Loadding2'
 import './CreateProduct.scss'
-
+import Form from 'react-bootstrap/Form';
 
 //markdown
 import MarkdownIt from 'markdown-it';
@@ -48,7 +48,8 @@ function EditProduct() {
     const [markdown, setMarkdown] = useState("")
     const [specifications, setSpecifications] = useState("")
 
-
+    const [check, setCheck] = useState(false)
+    const [num, setNum] = useState(0)
     //const { description, descriptionHTML } = markdown
 
     const history = useHistory()
@@ -138,6 +139,11 @@ function EditProduct() {
         getCategories()
     }, [callback])
     //
+
+    const handleCheck = e => {
+        setCheck(!check)
+        setNum(num + 1)
+    }
 
     //upload image
     const changeUpload = async (e) => {
@@ -265,6 +271,14 @@ function EditProduct() {
         setProduct({ ...product, [name]: value })
     }
 
+    useEffect(() => {
+        products?.forEach((pr) => {
+            if (pr._id === param.id) {
+                setCheck(pr.checkThinhHanh === 1 ? true : false)
+            }
+        })
+    }, [product, param.id])
+
     // submit
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -287,6 +301,7 @@ function EditProduct() {
                 specifications: specifications.specifications,
                 specificationsHTML: specifications.specificationsHTML,
                 avatar: imagesNew,
+                checkThinhHanh: check ? 1 : 0
                 // colortypeone: JSON.parse(colortypeone),
                 // colortypetwo: JSON.parse(colortypetwo),
                 // colortypethree: JSON.parse(colortypethree)
@@ -389,7 +404,14 @@ function EditProduct() {
                                                     </option>
                                                 ))}
                                             </select>
-
+                                            <div className='col-4 d-flex justify-content-center align-items-center'>
+                                                <Form.Check
+                                                    type="checkbox"
+                                                    label="Thịnh hành"
+                                                    checked={check}
+                                                    onChange={handleCheck}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -22,6 +22,8 @@ import DeatailProductBody from './components/ProductCar/Detail/DeatailProductBod
 import ManagerLayout from './components/body/ManagerLayout';
 import MessagerLayout from './components/body/MessagerLayout';
 
+import { DataProviderNew } from './GlobalState '
+
 
 
 function App() {
@@ -33,7 +35,7 @@ function App() {
 
   const [loading, setLoading] = useState(false)
 
-  
+
 
   useEffect(() => {
     AOS.init();
@@ -65,36 +67,38 @@ function App() {
       }
       getUser()
     }
-  },[token, dispatch])
+  }, [token, dispatch])
 
   if (loading) {
     return <div><Loadding /></div>
   }
 
   return (
-    <Router>
-      <div className="App">
-        <Route path={path.PRODUCTCAR} component={Home} />
-        <Route path="/detail_product/:id" component={DeatailProduct} exact />
-        <Body />
-        <Route path={path.PROFILE} component={(isLogged ? ProfieLayout : NotFound)} />
-        <Route path='/manager' component={(isAdmin ? ManagerLayout : NotFound)} />
-        <Route path='/all-messager' component={(isAdmin ? MessagerLayout : NotFound)} />
+    <DataProviderNew>
+      <Router>
+        <div className="App">
+          <Route path={path.PRODUCTCAR} component={Home} />
+          <Route path="/detail_product/:id" component={DeatailProduct} exact />
+          <Body />
+          <Route path={path.PROFILE} component={(isLogged ? ProfieLayout : NotFound)} />
+          <Route path='/manager' component={(isAdmin ? ManagerLayout : NotFound)} />
+          <Route path='/all-messager' component={(isAdmin ? MessagerLayout : NotFound)} />
 
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
-      </div>
-    </Router>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
+        </div>
+      </Router>
+    </DataProviderNew>
   );
 }
 

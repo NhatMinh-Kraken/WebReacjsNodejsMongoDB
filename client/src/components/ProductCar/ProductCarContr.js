@@ -1,21 +1,54 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NavLink, Route, Switch } from 'react-router-dom'
 
 import Sedans from '../../assets/images/sedan-car-model.png'
 import SUV from '../../assets/images/car-suv.png'
 import Coupe from '../../assets/images/coupe-car.png'
 import ProductCarAll from './ProductCarAll'
+import Axios from 'axios'
+
+import { GlobalState } from '../../GlobalState '
 
 function ProductCarContr() {
+
+    const state = useContext(GlobalState)
+    const [categories] = state.categoriesAPI.categories
+    const [category, setCategory] = state.productsAPI.category
+
+    const [products, setProducts] = state.productsAPI.products
+
+    const handleCategory = (e) => {
+        setCategory(e.target.value)
+    }
+
     return (
         <>
             <div className='ProductCar-Button'>
                 <div className='ProductCar-Button-item'>
                     <div className='ProductCar-Button-Group-item'>
-                        <NavLink to="/all_car" className={({ isActive }) => (isActive ? 'Product-Button-1 active' : 'Product-Button-1')}><span>Tất cả các dòng xe</span></NavLink>
-                        <NavLink to="/mercedes_eq" className={({ isActive }) => (isActive ? 'Product-Button-2 active' : 'Product-Button-2')}><span>Mercedes-EQ</span></NavLink>
+                        <button className="Product-Button-1" value={category} onClick={handleCategory}><span>Tất cả các dòng xe</span></button>
+                        {
+                            categories.map((ct) => (
+                                ct.checkThinhHanh === 1 ? <button key={"type=" + ct._id} value={"type=" + ct._id} className="Product-Button-1" onClick={handleCategory}><span>{ct.name}</span></button> : null
+                            ))
+                        }
+
+
+                        {/* <select name="category" value={category} onChange={handleCategory} >
+                            <option value=''>All Products</option>
+                            {
+                                categories.map(category => (
+                                    <option value={"type=" + category._id} key={category._id}>
+                                        {category.name}
+                                    </option>
+                                ))
+                            }
+                        </select> */}
+
+
+                        {/* <NavLink to="/mercedes_eq" className={({ isActive }) => (isActive ? 'Product-Button-2 active' : 'Product-Button-2')}><span>Mercedes-EQ</span></NavLink>
                         <NavLink to="/amg" className={({ isActive }) => (isActive ? 'Product-Button-3 active' : 'Product-Button-3')}><span>AMG</span></NavLink>
-                        <NavLink to="/maybach" className={({ isActive }) => (isActive ? 'Product-Button-4 active' : 'Product-Button-4')}><span>MayBach</span></NavLink>
+                        <NavLink to="/maybach" className={({ isActive }) => (isActive ? 'Product-Button-4 active' : 'Product-Button-4')}><span>MayBach</span></NavLink> */}
                     </div>
                 </div>
             </div>
@@ -37,8 +70,12 @@ function ProductCarContr() {
                     </div>
                 </div>
                 <div className='Product-Item d-flex col-9'>
-                    <Switch>
-                        <Route path="/all_car" component={ProductCarAll}/>
+
+                    <>
+                        <ProductCarAll />
+                    </>
+                    {/* <Switch>
+                        <Route path="/all_car" component={ProductCarAll} />
                         <Route path="/mercedes_eq">mercedes_eq</Route>
                         <Route path="/amg">AMG</Route>
                         <Route path="/maybach">MayBach</Route>
@@ -46,7 +83,7 @@ function ProductCarContr() {
                         <Route path="/Sedans">Sedans</Route>
                         <Route path="/USV">USV</Route>
                         <Route path="/Coupe">Coupe</Route>
-                    </Switch>
+                    </Switch> */}
                 </div>
             </div>
         </>

@@ -35,6 +35,8 @@ function ProductCarAdmin() {
         getNameType()
     }, [callback])
 
+    console.log(nametype)
+
     const handleCheck = (id) => {
         nametype.forEach(product => {
             if (product._id === id) product.checked = !product.checked

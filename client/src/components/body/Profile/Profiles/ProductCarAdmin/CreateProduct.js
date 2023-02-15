@@ -9,6 +9,7 @@ import imageUser from '../../../../../assets/images/add.png'
 import Loading2 from '../../../../utils/Loadding/Loadding2'
 import './CreateProduct.scss'
 
+import Form from 'react-bootstrap/Form';
 
 //markdown
 import MarkdownIt from 'markdown-it';
@@ -60,6 +61,9 @@ function CreateProduct() {
     const [colortypeone, setColortypeone] = useState(false);
     const [colortypetwo, setColortypetwo] = useState(false);
     const [colortypethree, setColortypethree] = useState(false);
+
+    const [check, setCheck] = useState(false)
+    const [num, setNum] = useState(0)
 
     const [images, setImages] = useState([])
 
@@ -156,10 +160,15 @@ function CreateProduct() {
     }
     //
 
-   // console.log(images)
+    // console.log(images)
     const handleChangeInput = e => {
         const { name, value } = e.target
         setProduct({ ...product, [name]: value })
+    }
+
+    const handleCheck = e => {
+        setCheck(!check)
+        setNum(num + 1)
     }
 
     // submit
@@ -185,7 +194,8 @@ function CreateProduct() {
                 descriptionHTML: markdown.descriptionHTML,
                 specifications: specifications.specifications,
                 specificationsHTML: specifications.specificationsHTML,
-                avatar: images
+                avatar: images,
+                checkThinhHanh: check ? 1 : 0
             }, {
                 headers: { Authorization: token }
             })
@@ -300,7 +310,13 @@ function CreateProduct() {
                                                     </option>
                                                 ))}
                                             </select>
-
+                                            <div className='col-4 d-flex justify-content-center align-items-center'>
+                                                <Form.Check
+                                                    type="checkbox"
+                                                    label="Thịnh hành"
+                                                    onChange={handleCheck}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
