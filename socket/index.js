@@ -1,4 +1,4 @@
-const User = require("../src/model/userModel")
+const User = require("../backend/src/model/userModel")
 
 const io = require("socket.io")(8900, {
     cors: {

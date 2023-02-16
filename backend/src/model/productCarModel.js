@@ -52,6 +52,11 @@ const productcarSchema = new mongoose.Schema({
         type: Number,
     },
 
+    laithu: {
+        type: Number,
+        default: 0
+    }
+
 }, {
     timestamps: true
 })

@@ -20,6 +20,7 @@ function ProductCarAllItem({ nametypes }) {
         setIsHover(false)
     }
 
+    const formatMoney = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(nametypes.money)
 
     const options = {
         loop: true,
@@ -42,12 +43,12 @@ function ProductCarAllItem({ nametypes }) {
                         <div className='product-card-name'>
                             <span>{nametypes.name}</span>
                         </div>
-                        <div className='product-card-type pr-2'>
+                        <div className='product-card-type'>
                             {
                                 nametypes
                                 && nametypes.type
                                 && nametypes.type.name
-                                && <span>{nametypes.type.name}</span>
+                                && <span className='pr-2'>{nametypes.type.name}</span>
                             }
                             -
                             {
@@ -55,7 +56,7 @@ function ProductCarAllItem({ nametypes }) {
                             }
                         </div>
                         <div className='product-card-money'>
-                            <span>{nametypes.money}</span>
+                            <span>Giá từ: {formatMoney}</span>
                         </div>
                     </div>
                     <div className='product-card-body'>
@@ -74,11 +75,19 @@ function ProductCarAllItem({ nametypes }) {
                 </Link>
                 <div className={`product-car-control ${isHover ? "visible" : "hidden"} ${isHover ? "opacity-1" : "opacity-0"}`}>
                     <div className='product-car-detail heights-48'>
-                        <a href={`/detail_product/${nametypes._id}`} className='detail-product'><i className="fa-solid fa-circle-info d-flex pr-3"></i>Detail</a>
+                        <a href={`/detail_product/${nametypes._id}`} className='detail-product'><i className="fa-solid fa-circle-info d-flex pr-3"></i>Tìm hiểu thêm</a>
                     </div>
-                    <div className='product-car-detail heights-48'>
-                        <Link to="/3D" className='detail-product'><img src={steering_wheel} alt="steering" /><span>3D</span></Link>
-                    </div>
+                    {
+                        nametypes.laithu === 1
+                            ?
+                            <>
+                                <div className='product-car-detail heights-48'>
+                                    <Link to="/3D" className='detail-product'><img src={steering_wheel} alt="steering" /><span>Đăng ký lái thử</span></Link>
+                                </div>  
+                            </>
+                            :
+                            null
+                    }
                 </div>
             </div>
         </>

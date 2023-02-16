@@ -34,6 +34,8 @@ function DeatailProductBody() {
     const param = useParams()
     const [detailItem, setDetailItem] = useState([])
 
+    const [isShown, setIsShown] = useState(false);
+
     const [avatar, setAvatar] = useState(false);
     const [colortypeone, setColortypeone] = useState(false);
     const [colortypetwo, setColortypetwo] = useState(false);
@@ -156,195 +158,118 @@ function DeatailProductBody() {
 
     return (
         <>
+
             <SimpleReactLightbox>
-                <div className='detail-product-car'>
-                    <div className='container'>
-                        <div className='row'>
-                            <div className='DetailProduct'>
-                                <div className='DetailProduct-header d-flex col-12'>
-                                    <div className='DetailProduct-header-overview'>
-                                        <div className='overview-name'>
-                                            <span className='name-car'>
-                                                {detailItem.name}
-                                            </span>
-                                            <span className='LoaiXe'>
-                                                {
-                                                    detailItem
-                                                    && detailItem.type
-                                                    && detailItem.type.name
-                                                    && <span>{detailItem.type.name}</span>
-                                                }
-                                            </span>
-                                        </div>
-                                        <div className='overview-money'>
-                                            <span className='price-range mr-2'>Khoảng giá:</span>
-                                            <span className='money-car'>{formatMoney}</span>
-                                        </div>
-                                    </div>
-                                    <div className='DetailProduct-header-controll'>
+                <div className='position-relative'>
+                    <div className='DetailProduct-header-controll' onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>
+                        {/* {
+                            isShown ?
+
+                                <>
+                                    <div className='formHover-button'>
                                         <Link className="control-overview" activeClass='active' to="TongQuan" spy={true} offset={-330} smooth={true} duration={500} >Tổng quan</Link>
                                         <Link className="control-overview" activeClass='active' to="ChiTiet" spy={true} offset={-270} smooth={true} duration={500} >Chi tiết</Link>
                                         <Link className="control-overview" activeClass='active' to="ThongSoKyThuat" spy={true} offset={-270} smooth={true} duration={500} >Thông số kỹ thuật</Link>
                                     </div>
-                                </div>
-                                <div className='DetailProduct-body d-flex col-12'>
-                                    <div className='DetailProduct-body-car col-8'>
-                                        <div className='DetailProduct-TongQuan-name'>
-                                            <div className='DetailProduct-TongQuan' id='TongQuan'>
-                                                <div className='title-detailProduct'>
-                                                    <span>
-                                                        Tổng Quan
-                                                    </span>
-                                                </div>
+                                </>
+                                :
+                                <>chưa hover</>
 
-                                                <div className='DetailProduct-TongQuan-img'>
-                                                    <img src={detailItem.avatar?.[0].url} />
-                                                </div>
-                                                <SRLWrapper>
-                                                    <Slider className='DetailProduct-TongQuan-img-mini' {...settings}>
-                                                        {
-                                                            detailItem.avatar?.map((img, index) => (
-                                                                <img key={index} src={img.url} alt={img.url} />
-                                                            ))
-                                                        }
-                                                    </Slider>
-                                                </SRLWrapper>
+                        } */}
 
+                        <div className='formHover-button'>
+                            <Link className="control-overview" activeClass='active' to="TongQuan" spy={true} offset={-330} smooth={true} duration={500} ><span className='span-icon' /><span className='d-flex align-items-center'>Tổng quan</span></Link>
+                            <Link className="control-overview" activeClass='active' to="ChiTiet" spy={true} offset={-270} smooth={true} duration={500} ><span className='span-icon' /><span className='d-flex align-items-center'>Chi tiết</span></Link>
+                            <Link className="control-overview" activeClass='active' to="ThongSoKyThuat" spy={true} offset={-270} smooth={true} duration={500} ><span className='span-icon' /><span className='d-flex align-items-center'>Thông số kỹ thuật</span></Link>
+                        </div>
+
+                    </div>
+                    <div className='detail-product-car'>
+                        <div className='container'>
+                            <div className='row'>
+                                <div className='DetailProduct'>
+                                    <div className='DetailProduct-header d-flex col-12'>
+                                        <div className='DetailProduct-header-overview'>
+                                            <div className='overview-name'>
+                                                <span className='name-car'>
+                                                    {detailItem.name}
+                                                </span>
+                                                <span className='LoaiXe'>
+                                                    {
+                                                        detailItem
+                                                        && detailItem.type
+                                                        && detailItem.type.name
+                                                        && <span>Mẫu xe: {detailItem.type.name}</span>
+                                                    }
+                                                </span>
                                             </div>
-                                        </div>
-                                        <div className='DetailProduct-TongQuan-money'>
-                                            <h3>Giá lăn bánh</h3>
-                                            <span>Tại Việt Nam, {detailItem.name} được phân phân phối chính hãng 1 phiên bản. Giá lăn bánh tham khảo như sau:</span>
-                                            <div className='DetailProduct-TongQuan-table-money pt-3'>
-                                                <table className="table table-bordered">
-                                                    <thead className='thead-dark'>
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">Tên phiên bản</th>
-                                                            <th scope="col">Giá niêm yết</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>{detailItem.name}</td>
-                                                            <td>{formatMoney}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                            <div className='overview-money'>
+                                                <span className='price-range mr-2'>Khoảng giá:</span>
+                                                <span className='money-car'>{formatMoney}</span>
                                             </div>
-                                        </div>
-                                        <div className='DetailProduct-ChiTiet-name'>
-                                            <span>Mô tả / Đánh giá chi tiết</span>
-                                            <div id='ChiTiet' className='DetailProduct-ChiTiet' dangerouslySetInnerHTML={{ __html: detailItem.descriptionHTML }} />
-                                        </div>
-                                        <div className='DetailProduct-ThongSoKyThuat-name'>
-                                            <span>Thông số kỹ thuật</span>
-                                            <div id='ThongSoKyThuat' className='DetailProduct-ThongSoKyThuat' dangerouslySetInnerHTML={{ __html: detailItem.specificationsHTML }} />
                                         </div>
                                     </div>
-                                    <div className='DetailProduct-summary col-4'>
-                                        <div className='DetailProduct-summary-name'>
-                                            <div className='title-detailProduct'>
-                                                <span>Hóa đơn</span>
-                                            </div>
-                                            <div className='detailProduct-body-Receipt'>
-                                                <div className='Receipt-body'>
-                                                    <div className='Receipt-body-money'>
-                                                        <span>Giá lăn bánh</span>
+                                    <div className='DetailProduct-body d-flex col-12'>
+                                        <div className='DetailProduct-body-car col-12'>
+                                            <div className='DetailProduct-TongQuan-name'>
+                                                <div className='DetailProduct-TongQuan' id='TongQuan'>
+                                                    <div className='title-detailProduct'>
+                                                        <span>
+                                                            Tổng Quan
+                                                        </span>
+                                                        <p>Thiết kế thuần điện: dấu ấn của kỷ nguyên mới</p>
                                                     </div>
-                                                    <div className='Receipt-body-select-name pt-2'>
-                                                        <span className='input-icons'><i className="fa-solid fa-star icon"></i></span>
-                                                        <input type="text" disabled className='Receipt-body-select' value={formatTien} />
 
+                                                    <div className='DetailProduct-TongQuan-img'>
+                                                        <img src={detailItem.avatar?.[0].url} />
                                                     </div>
-                                                </div>
-                                                <div className='Receipt-body-nameCity'>
-                                                    <div className='Receipt-nameCity-name'>
-                                                        <span>Tên chi nhánh</span>
-                                                    </div>
-                                                    <div className='Receipt-nameCity pt-2'>
-                                                        <span className='input-icons'><i className="fa-solid fa-city icon"></i></span>
-                                                        <input type="text" disabled className='Receipt-nameCity-input' value="MERCEDES-BENZ-MINH" />
-                                                    </div>
-                                                </div>
-                                                <div className='Money-Receipt'>
-                                                    <span className='title-Money-Receipt'>Giá niêm yết: </span>
-                                                    <span>{formatMoney}</span>
-                                                </div>
-                                            </div>
-                                            <div className='Receipt-incurred'>
-                                                <table className="table table-bordered">
-                                                    <thead className='thead-dark'>
-                                                        <tr>
-                                                            <th scope="col">Dự tính chi phí</th>
-                                                            <th scope="col" className='money-td'>(vnđ)</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Giá niêm yết:</td>
-                                                            <td className='money-td'>{formatMoney}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Phí trước bạ (12%):</td>
-                                                            <td className='money-td'>{money1}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Phí sử dụng đường bộ (01 năm):</td>
-                                                            <td className='money-td'>{money2}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Bảo hiểm trách nhiệm dân sự (01 năm):</td>
-                                                            <td className='money-td'>{money3}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Phí đăng kí biển số:</td>
-                                                            <td className='money-td'>{money4}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Phí đăng kiểm:</td>
-                                                            <td className='money-td'>{money5}</td>
-                                                        </tr>
-                                                        <tr className='tongtien'>
-                                                            <td>Tổng cộng:</td>
-                                                            <td className='money-td'>{formatTien}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div className='SetTime-TextCar'>
-                                                <div className='SetTime-TextCar-Name'>
-                                                    <span>Chọn ngày lái thử</span>
-                                                </div>
-                                                <div className='SetTime-TextCar-date'>
-                                                    {/* <RangePicker onChange={(value) => {
-                                                        // const values = moment(value[0]).format('DD-MM-YYYY')
-                                                        setDates(value.map(item => {
-                                                            return moment(item).format('DD-MM-YYYY')
-                                                        }))
-                                                    }} /> */}
+                                                    <SRLWrapper>
+                                                        <Slider className='DetailProduct-TongQuan-img-mini' {...settings}>
+                                                            {
+                                                                detailItem.avatar?.map((img, index) => (
+                                                                    <img key={index} src={img.url} alt={img.url} />
+                                                                ))
+                                                            }
+                                                        </Slider>
+                                                    </SRLWrapper>
 
-                                                    <DatePicker onChange={(value) => {
-                                                        //const values = moment(value[0]).format('DD-MM-YYYY')
-                                                        setDates(value.format('DD-MM-YYYY'))
-                                                    }}
-                                                        // dateFormat="DD-MM-YYYY" 
-                                                        defaultDate={dates} format='DD-MM-YYYY'
-                                                    />
                                                 </div>
                                             </div>
-                                            <div className='Title-note'>
-                                                <span><i className="fa-solid fa-circle-exclamation"></i></span> <p>Ngay sau khi nhận được yêu cầu chúng tôi sẽ liên hệ lại với quý khách trong thời gian sớm nhất.</p>
+                                            <div className='DetailProduct-TongQuan-money'>
+                                                <h3>Giá lăn bánh</h3>
+                                                <span>Tại Việt Nam, {detailItem.name} được phân phân phối chính hãng 1 phiên bản. Giá lăn bánh tham khảo như sau:</span>
+                                                <div className='DetailProduct-TongQuan-table-money pt-3'>
+                                                    <table className="table table-bordered">
+                                                        <thead className='thead-dark'>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">Tên phiên bản</th>
+                                                                <th scope="col">Giá niêm yết</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">1</th>
+                                                                <td>{detailItem.name}</td>
+                                                                <td>{formatMoney}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
-                                            <div className='Submit'>
-                                                <button type='submit' className='Submit-car' onClick={handleSubmit}>Đăng ký lái thử</button>
+                                            <div className='DetailProduct-ChiTiet-name'>
+                                                <span>Mô tả / Đánh giá chi tiết</span>
+                                                <div id='ChiTiet' className='DetailProduct-ChiTiet' dangerouslySetInnerHTML={{ __html: detailItem.descriptionHTML }} />
+                                            </div>
+                                            <div className='DetailProduct-ThongSoKyThuat-name'>
+                                                <span>Thông số kỹ thuật</span>
+                                                <div id='ThongSoKyThuat' className='DetailProduct-ThongSoKyThuat' dangerouslySetInnerHTML={{ __html: detailItem.specificationsHTML }} />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
-
                         </div>
                     </div>
                 </div>
