@@ -110,7 +110,7 @@ const productController = {
 
             req.body.avatar = imageBuffer
 
-            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, checked, checkThinhHanh, amount } = req.body
+            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, checked, checkThinhHanh, amount, laithu } = req.body
 
 
             if (!name || !type || !money || !energy || !description || !specifications || !amount) {
@@ -131,7 +131,7 @@ const productController = {
             if (newProduct) {
                 newProduct.name = name, newProduct.type = type, newProduct.money = money,
                     newProduct.energy = energy, newProduct.avatar = req.body.avatar, newProduct.description = description, newProduct.descriptionHTML = descriptionHTML, newProduct.specifications = specifications, newProduct.specificationsHTML = specificationsHTML, newProduct.checked = checked, newProduct.checkThinhHanh = checkThinhHanh
-                newProduct.amount = amount
+                newProduct.amount = amount, newProduct.laithu = laithu
 
                 await newProduct.save()
                 await Categorys.findByIdAndUpdate({
@@ -213,7 +213,7 @@ const productController = {
 
             //console.log(req.body.avatar)
 
-            const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, description, descriptionHTML, specifications, specificationsHTML, checked, checkThinhHanh, amount } = req.body
+            const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, description, descriptionHTML, specifications, specificationsHTML, checked, checkThinhHanh, amount, laithu } = req.body
 
             await ProductCars.findOneAndUpdate({
                 _id: req.params.id
@@ -221,7 +221,7 @@ const productController = {
                 name: name, type: type, money: money,
                 colortypeone: colortypeone, colortypetwo: colortypetwo, colortypethree: colortypethree, $push: { avatar: [...req.body.avatar] },
                 energy: energy, description: description, descriptionHTML: descriptionHTML, specifications: specifications, specificationsHTML: specificationsHTML, checked: checked, checkThinhHanh: checkThinhHanh,
-                amount: amount
+                amount: amount, laithu: laithu
             })
 
             await Categorys.findOneAndUpdate({

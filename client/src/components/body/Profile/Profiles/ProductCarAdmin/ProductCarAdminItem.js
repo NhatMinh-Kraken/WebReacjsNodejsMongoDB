@@ -82,6 +82,8 @@ function ProductCarAdminItem({ nametypes, setCallback, callback, handleCheck }) 
         }
     }
 
+    const formatMoney = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(nametypes.money)
+
     return (
         <>
 
@@ -118,12 +120,15 @@ function ProductCarAdminItem({ nametypes, setCallback, callback, handleCheck }) 
                                     nametypes
                                     && nametypes.type
                                     && nametypes.type.name
-                                    && <span>{nametypes.type.name}</span>
+                                    && <span className='pr-2'>{nametypes.type.name}</span>
                                 }
-
+                                -
+                                {
+                                    nametypes.energy === 0 ? <span className='pl-2 font-weight-bold text-success'>Xe Xăng</span> : <span className='pl-2 font-weight-bold text-warning'>Xe Điện</span>
+                                }
                             </div>
                             <div className='product-card-money'>
-                                <span>{nametypes.money}</span>
+                                <span>Giá từ: {formatMoney}</span>
                             </div>
                         </div>
                         <div className='product-card-bodys'>

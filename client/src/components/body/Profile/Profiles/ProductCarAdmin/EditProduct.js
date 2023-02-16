@@ -50,6 +50,8 @@ function EditProduct() {
 
     const [check, setCheck] = useState(false)
     const [num, setNum] = useState(0)
+    const [checkLaiThu, setCheckLaiThu] = useState(false)
+    const [numLaiThu, setNumLaiThu] = useState(0)
     //const { description, descriptionHTML } = markdown
 
     const history = useHistory()
@@ -143,6 +145,11 @@ function EditProduct() {
     const handleCheck = e => {
         setCheck(!check)
         setNum(num + 1)
+    }
+
+    const handleCheckLaiThu = e => {
+        setCheckLaiThu(!checkLaiThu)
+        setNumLaiThu(numLaiThu + 1)
     }
 
     //upload image
@@ -275,6 +282,7 @@ function EditProduct() {
         products?.forEach((pr) => {
             if (pr._id === param.id) {
                 setCheck(pr.checkThinhHanh === 1 ? true : false)
+                setCheckLaiThu(pr.laithu === 1 ? true : false)
             }
         })
     }, [product, param.id])
@@ -301,7 +309,8 @@ function EditProduct() {
                 specifications: specifications.specifications,
                 specificationsHTML: specifications.specificationsHTML,
                 avatar: imagesNew,
-                checkThinhHanh: check ? 1 : 0
+                checkThinhHanh: check ? 1 : 0,
+                laithu: checkLaiThu ? 1 : 0
                 // colortypeone: JSON.parse(colortypeone),
                 // colortypetwo: JSON.parse(colortypetwo),
                 // colortypethree: JSON.parse(colortypethree)
@@ -531,6 +540,15 @@ function EditProduct() {
                                     </div>
                                 </div>
                             </div>
+                            <Form className='d-flex align-items-center flex-column pt-3 '>
+                                <Form.Text>Cân nhắc kỹ có nên cho khách hàng lái thử hay không !!</Form.Text>
+                                <Form.Check
+                                    type="checkbox"
+                                    label="Cho phép lái thử"
+                                    checked={checkLaiThu}
+                                    onChange={handleCheckLaiThu}
+                                />
+                            </Form>
                             <div className='col-12 d-flex justify-content-center pt-4'>
                                 <button className="btn btn-danger btn-block mb-4 col-4 " disabled={loading} onClick={handleSubmit} type='submit'>Update</button>
                             </div>

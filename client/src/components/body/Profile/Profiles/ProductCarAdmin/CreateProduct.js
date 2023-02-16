@@ -64,6 +64,8 @@ function CreateProduct() {
 
     const [check, setCheck] = useState(false)
     const [num, setNum] = useState(0)
+    const [checkLaiThu, setCheckLaiThu] = useState(false)
+    const [numLaiThu, setNumLaiThu] = useState(0)
 
     const [images, setImages] = useState([])
 
@@ -171,6 +173,11 @@ function CreateProduct() {
         setNum(num + 1)
     }
 
+    const handleCheckLaiThu = e => {
+        setCheckLaiThu(!checkLaiThu)
+        setNumLaiThu(numLaiThu + 1)
+    }
+
     // submit
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -195,7 +202,8 @@ function CreateProduct() {
                 specifications: specifications.specifications,
                 specificationsHTML: specifications.specificationsHTML,
                 avatar: images,
-                checkThinhHanh: check ? 1 : 0
+                checkThinhHanh: check ? 1 : 0,
+                laithu: checkLaiThu ? 1 : 0
             }, {
                 headers: { Authorization: token }
             })
@@ -437,6 +445,14 @@ function CreateProduct() {
                                     </div>
                                 </div>
                             </div>
+                            <Form className='d-flex align-items-center flex-column pt-3 '>
+                                <Form.Text>Cân nhắc kỹ có nên cho khách hàng lái thử hay không !!</Form.Text>
+                                <Form.Check
+                                    type="checkbox"
+                                    label="Cho phép lái thử"
+                                    onChange={handleCheckLaiThu}
+                                />
+                            </Form>
                             <div className='col-12 d-flex justify-content-center pt-4'>
                                 <button className="btn btn-danger btn-block mb-4 col-4 " disabled={loading} onClick={handleSubmit} type='submit'>Create</button>
                             </div>

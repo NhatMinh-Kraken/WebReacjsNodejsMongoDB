@@ -13,7 +13,7 @@ const categoryController = {
 
     getCategoriesLimit: async (req, res) => {
         try {
-            const categories = await Categorys.find().limit(3)
+            const categories = await Categorys.find().limit(4)
             res.json(categories)
         } catch (err) {
             return res.status(500).json({ msg: err.message })

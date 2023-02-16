@@ -1,22 +1,22 @@
 .detail-product-car {
-    background-color: #eceef5;
+    background: linear-gradient(180deg, #000 0, #2e2e2e 300px, #000 1000px);
     // height: 1000vh;
-    padding-top: 15px;
+    //padding-top: 15px;
 
     .DetailProduct {
         display: flex;
         flex-flow: column;
 
         .DetailProduct-header {
-            background: #fff;
+            background: #2e2e2e;
             box-shadow: 0 8px 32px 0 rgba(223, 236, 244, 0.098);
             display: flex;
             flex-flow: column;
             padding-bottom: 10px;
             border-radius: 5px;
-            position: -webkit-sticky;
-            position: sticky;
-            top: 68px;
+            //position: -webkit-sticky;
+            //position: sticky;
+            //top: 68px;
             margin-top: 5px;
             z-index: 2;
             border-bottom: 1px solid #9f9b9bc7;
@@ -34,7 +34,7 @@
                         font-size: 20px;
                         font-weight: 600;
                         font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
-                        color: black;
+                        color: #fff;
                     }
 
                     .LoaiXe {
@@ -42,7 +42,7 @@
                             font-size: 20px;
                             font-weight: 600;
                             font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
-                            color: black;
+                            color: #fff;
                         }
                     }
                 }
@@ -52,14 +52,14 @@
                         font-size: 16px;
                         font-weight: 500;
                         font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
-                        color: #747272;
+                        color: #c6c3c3;
                     }
 
                     .money-car {
                         font-size: 18px;
                         font-weight: 500;
                         font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
-                        color: #070707;
+                        color: #fbd749;
                     }
                 }
             }
@@ -102,7 +102,7 @@
         }
 
         .DetailProduct-body {
-            background-color: #eceef5;
+            //background-color: #eceef5;
 
             .DetailProduct-body-car {
                 padding-top: 10px;
@@ -113,13 +113,13 @@
                 .DetailProduct-TongQuan-name {
                     padding: 30px;
                     margin-top: 10px;
-                    background-color: #fff;
+                    //background-color: #fff;
 
                     .DetailProduct-TongQuan {
 
                         .title-detailProduct {
-                            background-color: #0b0b0bf6;
-                            color: #fff;
+                            //background-color: #0b0b0bf6;
+                            color: #0088c6;
                             padding: 10px;
                             width: 100%;
                             border-radius: 10px;
@@ -129,11 +129,17 @@
                                 font-weight: 600;
                                 font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
                                 text-transform: uppercase;
+                            }
 
+                            p {
+                                color: #6ec7f0;
                             }
                         }
 
                         .DetailProduct-TongQuan-img {
+                            display: flex;
+                            justify-content: center;
+
                             img {
                                 width: 659px;
                                 padding-right: 15px;
@@ -157,29 +163,50 @@
                 .DetailProduct-TongQuan-money {
                     padding: 30px;
                     margin-top: 10px;
-                    background-color: #fff;
+                    //background-color: #fff;
+                    color: #fff;
+                    border-top: 1px solid #fff;
 
                     h3 {
                         font-weight: 600;
                         font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
                         text-transform: uppercase;
+                        color: #0088c6;
+                    }
+
+                    .DetailProduct-TongQuan-table-money {
+                        table {
+                            border: 1px solid #2e2e2e;
+                            border-radius: .25rem;
+
+                            td {
+                                color: #fff;
+                            }
+
+                            th {
+                                color: #fff;
+                            }
+                        }
                     }
                 }
 
                 .DetailProduct-ChiTiet-name {
                     padding: 30px;
                     margin-top: 10px;
-                    background-color: #fff;
+                    //background-color: #fff;
+                    border-top: 1px solid #fff;
 
                     span {
                         font-size: 20px;
                         font-weight: 600;
                         font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
                         text-transform: uppercase;
+                        color: #0088c6;
                     }
 
                     .DetailProduct-ChiTiet {
                         padding-top: 10px;
+                        color: #fff;
 
                         p {
                             text-align: justify;
@@ -194,17 +221,21 @@
                 .DetailProduct-ThongSoKyThuat-name {
                     padding: 30px;
                     margin-top: 10px;
-                    background-color: #fff;
+                    //background-color: #fff;
+                    border-top: 1px solid #fff;
 
                     span {
                         font-size: 20px;
                         font-weight: 600;
                         font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
                         text-transform: uppercase;
+                        color: #0088c6;
                     }
 
 
                     .DetailProduct-ThongSoKyThuat {
+                        color: #fff;
+
                         table {
                             border: 1px solid #dee2e6;
                             width: 100%;
@@ -636,9 +667,75 @@
     line-height: 1;
 }
 
-.SRLCaptionContainer{
-    p{
+.SRLCaptionContainer {
+    p {
         display: none !important;
     }
-    
+
+}
+
+
+.DetailProduct-header-controll {
+    width: 0;
+    height: 0;
+    position: sticky;
+    top: 40%;
+    z-index: 2;
+    left: 15px;
+
+    .formHover-button {
+        border-radius: 0.25rem;
+        border: 1px solid #5c5b5b;
+        background-color: #2f2f2fea;
+        width: 200px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+
+        .control-overview {
+            text-decoration: none;
+            color: #000 !important;
+            font-size: 16px;
+            width: 100%;
+            margin-right: 20px;
+            display: flex;
+            padding: 5px 5px 5px 10px;
+
+            .span-icon {
+                &::before {
+                    font-family: "Font Awesome 5 Free";
+                    content: "\f111";
+                    display: inline-block;
+                    padding-right: 3px;
+                    vertical-align: middle;
+                    font-weight: 900;
+                    font-size: 10px;
+                }
+            }
+
+            i {
+                font-size: 10px;
+            }
+
+            &:hover {
+                text-decoration: none;
+                color: #00adef;
+            }
+
+            &.active {
+                color: #00adef !important;
+
+                .span-icon {
+                    &::before {
+                        font-family: "Font Awesome 5 Free";
+                        content: "\f192";
+                        display: inline-block;
+                        padding-right: 3px;
+                        vertical-align: middle;
+                        font-weight: 900;
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
 }
