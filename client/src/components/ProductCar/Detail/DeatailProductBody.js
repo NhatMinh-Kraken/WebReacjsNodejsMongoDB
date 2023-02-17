@@ -16,6 +16,8 @@ import { DatePicker } from 'antd';
 import moment from 'moment';
 import { toast } from 'react-toastify'
 import { useSelector } from 'react-redux'
+
+import Steering_Wheel from '../../../assets/images/steering-wheel.svg'
 const { RangePicker } = DatePicker;
 //
 
@@ -35,6 +37,7 @@ function DeatailProductBody() {
     const [detailItem, setDetailItem] = useState([])
 
     const [isShown, setIsShown] = useState(false);
+    const [isShownRight, setIsShownRight] = useState(false)
 
     const [avatar, setAvatar] = useState(false);
     const [colortypeone, setColortypeone] = useState(false);
@@ -154,7 +157,6 @@ function DeatailProductBody() {
             console.log(err)
         }
     }
-    //
 
     return (
         <>
@@ -162,27 +164,43 @@ function DeatailProductBody() {
             <SimpleReactLightbox>
                 <div className='position-relative'>
                     <div className='DetailProduct-header-controll' onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}>
-                        {/* {
+                        {
                             isShown ?
 
                                 <>
-                                    <div className='formHover-button'>
-                                        <Link className="control-overview" activeClass='active' to="TongQuan" spy={true} offset={-330} smooth={true} duration={500} >Tổng quan</Link>
-                                        <Link className="control-overview" activeClass='active' to="ChiTiet" spy={true} offset={-270} smooth={true} duration={500} >Chi tiết</Link>
-                                        <Link className="control-overview" activeClass='active' to="ThongSoKyThuat" spy={true} offset={-270} smooth={true} duration={500} >Thông số kỹ thuật</Link>
+                                    <div className='formHover-button-hover'>
+                                        <div className='formHover'>
+                                            <Link className="control-overview" activeClass='active' to="TongQuan" spy={true} offset={-230} smooth={true} duration={100} ><span className='span-icon pr-2' /><span className='d-flex align-items-center'>Tổng quan</span></Link>
+                                            <Link className="control-overview" activeClass='active' to="ChiTiet" spy={true} offset={-270} smooth={true} duration={100} ><span className='span-icon pr-2' /><span className='d-flex align-items-center'>Chi tiết</span></Link>
+                                            <Link className="control-overview" activeClass='active' to="ThongSoKyThuat" spy={true} offset={-270} smooth={true} duration={100} ><span className='span-icon pr-2' /><span className='d-flex align-items-center'>Thông số kỹ thuật</span></Link>
+                                            <Link className="control-overview" activeClass='active' to="NoiThat" spy={true} offset={-270} smooth={true} duration={100} ><span className='span-icon pr-2' /><span className='d-flex align-items-center'>Nội Thất</span></Link>
+                                            <Link className="control-overview" activeClass='active' to="TienNghi" spy={true} offset={-270} smooth={true} duration={100} ><span className='span-icon pr-2' /><span className='d-flex align-items-center'>Tiện Nghi</span></Link>
+                                            <Link className="control-overview" activeClass='active' to="Models" spy={true} offset={-270} smooth={true} duration={100} ><span className='span-icon pr-2' /><span className='d-flex align-items-center'>Models</span></Link>
+                                        </div>
                                     </div>
                                 </>
                                 :
-                                <>chưa hover</>
+                                <>
+                                    <div className='formHover-button'>
+                                        <Link className="control-overview" activeClass='active' to="TongQuan" spy={true} offset={-230} smooth={true} duration={100} ><span className='span-icon pr-2' /></Link>
+                                        <Link className="control-overview" activeClass='active' to="ChiTiet" spy={true} offset={-270} smooth={true} duration={100} ><span className='span-icon pr-2' /></Link>
+                                        <Link className="control-overview" activeClass='active' to="ThongSoKyThuat" spy={true} offset={-270} smooth={true} duration={100} ><span className='span-icon pr-2' /></Link>
+                                        <Link className="control-overview" activeClass='active' to="NoiThat" spy={true} offset={-270} smooth={true} duration={100} ><span className='span-icon pr-2' /></Link>
+                                        <Link className="control-overview" activeClass='active' to="TienNghi" spy={true} offset={-270} smooth={true} duration={100} ><span className='span-icon pr-2' /></Link>
+                                        <Link className="control-overview" activeClass='active' to="Models" spy={true} offset={-270} smooth={true} duration={100} ><span className='span-icon pr-2' /></Link>
+                                    </div>
+                                </>
 
-                        } */}
+                        }
 
-                        <div className='formHover-button'>
-                            <Link className="control-overview" activeClass='active' to="TongQuan" spy={true} offset={-330} smooth={true} duration={500} ><span className='span-icon' /><span className='d-flex align-items-center'>Tổng quan</span></Link>
-                            <Link className="control-overview" activeClass='active' to="ChiTiet" spy={true} offset={-270} smooth={true} duration={500} ><span className='span-icon' /><span className='d-flex align-items-center'>Chi tiết</span></Link>
-                            <Link className="control-overview" activeClass='active' to="ThongSoKyThuat" spy={true} offset={-270} smooth={true} duration={500} ><span className='span-icon' /><span className='d-flex align-items-center'>Thông số kỹ thuật</span></Link>
+                    </div>
+                    <div className='controler-right'>
+                        <div className='controler-right-button' >
+                            <a href={`/dangky_laithu/${param.id}`} className='laithu-product'><img className='img-steering-wheel' src={Steering_Wheel} /><span>Đăng ký lái thử xe</span></a>
                         </div>
-
+                        <div className='controler-right-button' >
+                            <a href="tel:0396764757" className='laithu-product'><i className="fa-solid fa-phone img-steering-wheel d-flex justify-content-center align-items-center"></i><span>Liên hệ</span></a>
+                        </div>
                     </div>
                     <div className='detail-product-car'>
                         <div className='container'>
@@ -211,8 +229,8 @@ function DeatailProductBody() {
                                     </div>
                                     <div className='DetailProduct-body d-flex col-12'>
                                         <div className='DetailProduct-body-car col-12'>
-                                            <div className='DetailProduct-TongQuan-name'>
-                                                <div className='DetailProduct-TongQuan' id='TongQuan'>
+                                            <div className='DetailProduct-TongQuan-name' id='TongQuan'>
+                                                <div className='DetailProduct-TongQuan'>
                                                     <div className='title-detailProduct'>
                                                         <span>
                                                             Tổng Quan
@@ -227,7 +245,7 @@ function DeatailProductBody() {
                                                         <Slider className='DetailProduct-TongQuan-img-mini' {...settings}>
                                                             {
                                                                 detailItem.avatar?.map((img, index) => (
-                                                                    <img key={index} src={img.url} alt={img.url} />
+                                                                    <img className='pr-2' key={index} src={img.url} alt={img.url} />
                                                                 ))
                                                             }
                                                         </Slider>
@@ -265,10 +283,17 @@ function DeatailProductBody() {
                                                 <span>Thông số kỹ thuật</span>
                                                 <div id='ThongSoKyThuat' className='DetailProduct-ThongSoKyThuat' dangerouslySetInnerHTML={{ __html: detailItem.specificationsHTML }} />
                                             </div>
+                                            <div className='DetailProduct-ThongSoKyThuat-name'>
+                                                <span>Nội Thất</span>
+                                                <div id='NoiThat' className='DetailProduct-ThongSoKyThuat' dangerouslySetInnerHTML={{ __html: detailItem.descriptionInteriorHTML }} />
+                                            </div>
+                                            <div className='DetailProduct-ThongSoKyThuat-name'>
+                                                <span>Tiện Nghi</span>
+                                                <div id='TienNghi' className='DetailProduct-ThongSoKyThuat' dangerouslySetInnerHTML={{ __html: detailItem.descriptionConvenientHTML }} />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

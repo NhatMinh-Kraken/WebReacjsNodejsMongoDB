@@ -22,7 +22,6 @@ function Body() {
   return (
     <section>
       <Switch>
-        <Route path={path.HOME} component={Home} exact />
         <Route path={path.LOGIN} component={(isLogged ? NotFound : Login)} exact />
         <Route path={path.REGISTER} component={(isLogged ? NotFound : Register)} exact />
         <Route path={path.FORGOTPASSWORD} component={ForgotPassword} exact />

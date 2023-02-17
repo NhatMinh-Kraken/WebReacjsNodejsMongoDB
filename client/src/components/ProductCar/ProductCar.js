@@ -15,9 +15,10 @@ function ProductCar() {
             </div>
             <div className='ProductCar-Control'>
               <div className='ProductCar-Section'>
-                <Router basename='/product_car'>
-                  <ProductCarContr />
-                </Router>
+                {/* <Router basename='/product_car'>
+                  
+                </Router> */}
+                <ProductCarContr />
               </div>
             </div>
           </div>

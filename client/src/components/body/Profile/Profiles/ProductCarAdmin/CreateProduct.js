@@ -48,6 +48,8 @@ function CreateProduct() {
 
     const [markdown, setMarkdown] = useState("")
     const [specifications, setSpecifications] = useState("")
+    const [descriptionInterior, setDescriptionInterior] = useState("")
+    const [descriptionConvenient, setDescriptionConvenient] = useState("")
 
     //const { description, descriptionHTML } = markdown
 
@@ -201,6 +203,10 @@ function CreateProduct() {
                 descriptionHTML: markdown.descriptionHTML,
                 specifications: specifications.specifications,
                 specificationsHTML: specifications.specificationsHTML,
+                descriptionInterior: descriptionInterior.descriptionInterior,
+                descriptionInteriorHTML: descriptionInterior.descriptionInteriorHTML,
+                descriptionConvenient: descriptionConvenient.descriptionConvenient,
+                descriptionConvenientHTML: descriptionConvenient.descriptionConvenientHTML,
                 avatar: images,
                 checkThinhHanh: check ? 1 : 0,
                 laithu: checkLaiThu ? 1 : 0
@@ -235,7 +241,7 @@ function CreateProduct() {
     //markdown
     const mdParser = new MarkdownIt(/* Markdown-it options */);
 
-    const handleEditorChange = ({ html, text }) => {
+    const handleEditorChangeDescription = ({ html, text }) => {
         setMarkdown({
             description: text,
             descriptionHTML: html
@@ -243,16 +249,30 @@ function CreateProduct() {
     }
     //
 
-    //
+    //  
     const mdParsers = new MarkdownIt(/* Markdown-it options */);
 
-    const handleEditorChanged = ({ html, text }) => {
+    const handleEditorChangedSpecifications = ({ html, text }) => {
         setSpecifications({
             specifications: text,
             specificationsHTML: html
         })
     }
     //
+
+    const handleEditorChangedDescriptionInterior = ({ html, text }) => {
+        setDescriptionInterior({
+            descriptionInterior: text,
+            descriptionInteriorHTML: html
+        })
+    }
+
+    const handleEditorChangedDescriptionConvenient = ({ html, text }) => {
+        setDescriptionConvenient({
+            descriptionConvenient: text,
+            descriptionConvenientHTML: html
+        })
+    }
 
     // edit
     // const [onEdit, setOnEdit] = useState(false)
@@ -395,7 +415,7 @@ function CreateProduct() {
                                                 </span>
                                             </div>
                                             <div className='custom-all-img col-9 d-flex'>
-                                                <div className='row img-up mx-0'>
+                                                <div className='row img-up mx-0 w-100'>
                                                     {
                                                         images.map((img, index) => (
                                                             <div key={index} className="file_img my-1">
@@ -421,7 +441,7 @@ function CreateProduct() {
                                             <div className="form-control description col-11" >
                                                 <div className='description-title'>description</div>
                                                 <div className='description-note'><i>Mô tả chi tiết sản phẩm</i></div>
-                                                <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} value={markdown.description} onChange={handleEditorChange} />
+                                                <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} value={markdown.description} onChange={handleEditorChangeDescription} />
                                             </div>
                                         </div>
                                     </div>
@@ -439,7 +459,43 @@ function CreateProduct() {
                                             <div className="form-control description col-11" >
                                                 <div className='description-title'>specifications</div>
                                                 <div className='description-note'><i>Mô tả thông số kỹ thuật</i></div>
-                                                <MdEditor style={{ height: '500px' }} renderHTML={text => mdParsers.render(text)} value={specifications.specifications} onChange={handleEditorChanged} />
+                                                <MdEditor style={{ height: '500px' }} renderHTML={text => mdParsers.render(text)} value={specifications.specifications} onChange={handleEditorChangedSpecifications} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className='profile_item_form'>
+                                <div className='form-row'>
+                                    <div className='form col-12 pt-5'>
+                                        <div className='input-group'>
+                                            <div className="input-group-prepend ">
+                                                <span className="input-group-text boderr" id="inputGroupPrepend1"><i className="fa-solid fa-pen d-flex"></i></span>
+                                            </div>
+                                            {/* name='description' value={product.description} onChange={handleChangeInput} */}
+                                            <div className="form-control description col-11" >
+                                                <div className='description-title'>Interior</div>
+                                                <div className='description-note'><i>Mô tả nội thất</i></div>
+                                                <MdEditor style={{ height: '500px' }} renderHTML={text => mdParsers.render(text)} value={descriptionInterior.descriptionInterior} onChange={handleEditorChangedDescriptionInterior} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className='profile_item_form'>
+                                <div className='form-row'>
+                                    <div className='form col-12 pt-5'>
+                                        <div className='input-group'>
+                                            <div className="input-group-prepend ">
+                                                <span className="input-group-text boderr" id="inputGroupPrepend1"><i className="fa-solid fa-pen d-flex"></i></span>
+                                            </div>
+                                            {/* name='description' value={product.description} onChange={handleChangeInput} */}
+                                            <div className="form-control description col-11" >
+                                                <div className='description-title'>Convenient</div>
+                                                <div className='description-note'><i>Mô tả tiện nghi</i></div>
+                                                <MdEditor style={{ height: '500px' }} renderHTML={text => mdParsers.render(text)} value={descriptionConvenient.descriptionConvenient} onChange={handleEditorChangedDescriptionConvenient} />
                                             </div>
                                         </div>
                                     </div>
