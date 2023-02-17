@@ -23,6 +23,7 @@ import ManagerLayout from './components/body/ManagerLayout';
 import MessagerLayout from './components/body/MessagerLayout';
 
 import { DataProviderNew } from './GlobalState '
+import LaiThu from './components/ProductCar/LaiThu/LaiThu';
 
 
 
@@ -77,8 +78,10 @@ function App() {
     <DataProviderNew>
       <Router>
         <div className="App">
-          <Route path={path.PRODUCTCAR} component={Home} />
+          {/* <Route path={path.PRODUCTCAR} component={Home} /> */}
+          <Route path={path.HOME} component={Home} exact />
           <Route path="/detail_product/:id" component={DeatailProduct} exact />
+          <Route path="/dangky_laithu/:id" component={LaiThu} exact />
           <Body />
           <Route path={path.PROFILE} component={(isLogged ? ProfieLayout : NotFound)} />
           <Route path='/manager' component={(isAdmin ? ManagerLayout : NotFound)} />

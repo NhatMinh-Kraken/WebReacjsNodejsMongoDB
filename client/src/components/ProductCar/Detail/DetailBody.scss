@@ -8,7 +8,7 @@
         flex-flow: column;
 
         .DetailProduct-header {
-            background: #2e2e2e;
+            background: #1d1d1df1;
             box-shadow: 0 8px 32px 0 rgba(223, 236, 244, 0.098);
             display: flex;
             flex-flow: column;
@@ -19,7 +19,8 @@
             //top: 68px;
             margin-top: 5px;
             z-index: 2;
-            border-bottom: 1px solid #9f9b9bc7;
+            border-bottom: 1px solid #63c4eb;
+            //#9f9b9bc7;
 
             .DetailProduct-header-overview {
                 padding-top: 10px;
@@ -165,7 +166,7 @@
                     margin-top: 10px;
                     //background-color: #fff;
                     color: #fff;
-                    border-top: 1px solid #fff;
+                    border-top: 1px solid #44788de7;
 
                     h3 {
                         font-weight: 600;
@@ -194,7 +195,7 @@
                     padding: 30px;
                     margin-top: 10px;
                     //background-color: #fff;
-                    border-top: 1px solid #fff;
+                    border-top: 1px solid #44788de7;
 
                     span {
                         font-size: 20px;
@@ -222,7 +223,7 @@
                     padding: 30px;
                     margin-top: 10px;
                     //background-color: #fff;
-                    border-top: 1px solid #fff;
+                    border-top: 1px solid #44788de7;
 
                     span {
                         font-size: 20px;
@@ -681,24 +682,24 @@
     position: sticky;
     top: 40%;
     z-index: 2;
-    left: 15px;
+    //left: 15px;
 
     .formHover-button {
-        border-radius: 0.25rem;
-        border: 1px solid #5c5b5b;
-        background-color: #2f2f2fea;
-        width: 200px;
-        padding-bottom: 10px;
-        padding-left: 10px;
+        transform: translateX(10px);
+        padding: 10px 0 10px 0;
+        transition: transform 0.5s ease 0s;
 
         .control-overview {
             text-decoration: none;
-            color: #000 !important;
+            color: #fff !important;
             font-size: 16px;
             width: 100%;
-            margin-right: 20px;
-            display: flex;
+            height: 40px;
+            // line-height: 40px;
+            //margin-right: 20px;
+            //display: flex;
             padding: 5px 5px 5px 10px;
+            transition: max-width 300ms, background-color 300ms, padding 300ms;
 
             .span-icon {
                 &::before {
@@ -735,6 +736,132 @@
                         font-size: 20px;
                     }
                 }
+            }
+        }
+    }
+
+    .formHover-button-hover {
+        // border: 1px solid #5c5b5b;
+        background-color: #161616;
+        width: 210px;
+        // padding-bottom: 10px;
+        // padding-left: 10px;
+        padding: 10px 10px 10px 10px;
+        opacity: .90;
+        //transition: max-width 300ms, background-color 300ms, padding 300ms;
+
+        .formHover {
+            transition: transform 0.5s ease 0s;
+            transform: translateX(5px);
+
+            .control-overview {
+                text-decoration: none;
+                color: #fff !important;
+                font-size: 16px;
+                height: 40px;
+                //line-height: 40px;
+                width: 100%;
+                margin-right: 20px;
+                display: flex;
+                padding: 5px 5px 5px 10px;
+
+                .span-icon {
+                    &::before {
+                        font-family: "Font Awesome 5 Free";
+                        content: "\f111";
+                        display: inline-block;
+                        padding-right: 3px;
+                        vertical-align: middle;
+                        font-weight: 900;
+                        font-size: 10px;
+                    }
+                }
+
+                i {
+                    font-size: 10px;
+                }
+
+                &:hover {
+                    text-decoration: none;
+                    color: #00adef !important;
+                }
+
+                &.active {
+                    color: #00adef !important;
+
+                    .span-icon {
+                        &::before {
+                            font-family: "Font Awesome 5 Free";
+                            content: "\f192";
+                            display: inline-block;
+                            padding-right: 3px;
+                            vertical-align: middle;
+                            font-weight: 900;
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.controler-right {
+    width: 0;
+    height: 0;
+    position: sticky;
+    top: 40%;
+    z-index: 2;
+    left: calc(100% - 45px);
+
+    .controler-right-button {
+        min-width: 45px;
+        height: 45px;
+        display: inline-flex;
+        transition: transform 0.5s ease 0s;
+        transform: translateX(0px);
+        margin-bottom: 1.5px;
+
+        &:hover {
+            transform: translateX(-135px);
+            transition: -webkit-transform 0.5s ease 0s;
+            width: 250px;
+        }
+
+        .laithu-product {
+            background-color: #00adef;
+            display: flex;
+            white-space: nowrap;
+            padding: 0;
+            min-width: 45px;
+            min-height: 45px;
+            align-items: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 250px;
+
+            &:hover {
+                background: #0088c6;
+            }
+
+            .img-steering-wheel {
+                width: 25px;
+                height: 25px;
+            }
+
+            span {
+                font-size: 1rem;
+                font-family: "MBCorpoSTitle-Regular-Web", "DaimlerCS-Regular", Helvetica, Arial, sans-serif;
+                line-height: 1.25;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                padding-top: 0.00912em;
+                padding-bottom: 0.15788em;
+                height: 45px;
+                line-height: 45px;
+                margin-left: 5px;
+                padding-right: 15px;
+                padding-left: 5px;
             }
         }
     }

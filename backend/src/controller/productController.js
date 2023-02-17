@@ -110,10 +110,10 @@ const productController = {
 
             req.body.avatar = imageBuffer
 
-            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, checked, checkThinhHanh, amount, laithu } = req.body
+            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, descriptionInterior, descriptionInteriorHTML, descriptionConvenient, descriptionConvenientHTML, checked, checkThinhHanh, amount, laithu } = req.body
 
 
-            if (!name || !type || !money || !energy || !description || !specifications || !amount) {
+            if (!name || !type || !money || !energy || !description || !specifications || !descriptionInterior || !descriptionConvenient || !amount) {
                 return res.status(400).json({ msg: "Please complete all information" })
             }
 
@@ -130,7 +130,7 @@ const productController = {
 
             if (newProduct) {
                 newProduct.name = name, newProduct.type = type, newProduct.money = money,
-                    newProduct.energy = energy, newProduct.avatar = req.body.avatar, newProduct.description = description, newProduct.descriptionHTML = descriptionHTML, newProduct.specifications = specifications, newProduct.specificationsHTML = specificationsHTML, newProduct.checked = checked, newProduct.checkThinhHanh = checkThinhHanh
+                    newProduct.energy = energy, newProduct.avatar = req.body.avatar, newProduct.description = description, newProduct.descriptionHTML = descriptionHTML, newProduct.specifications = specifications, newProduct.specificationsHTML = specificationsHTML, newProduct.descriptionInterior = descriptionInterior, newProduct.descriptionInteriorHTML = descriptionInteriorHTML, newProduct.descriptionConvenient = descriptionConvenient, newProduct.descriptionConvenientHTML = descriptionConvenientHTML, newProduct.checked = checked, newProduct.checkThinhHanh = checkThinhHanh
                 newProduct.amount = amount, newProduct.laithu = laithu
 
                 await newProduct.save()
@@ -170,7 +170,12 @@ const productController = {
     },
     updateProductWhenDelete: async (req, res) => {
         try {
-            const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, avatar, description, descriptionHTML, specifications, specificationsHTML, checked, amount } = req.body
+            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, descriptionInterior, descriptionInteriorHTML, descriptionConvenient, descriptionConvenientHTML, checked, checkThinhHanh, amount, laithu } = req.body
+
+
+            // if (!name || !type || !money || !energy || !description || !specifications || !descriptionInterior || !descriptionConvenient || !amount) {
+            //     return res.status(400).json({ msg: "Please complete all information" })
+            // }
 
             // if (!name || !type || !money || !energy || !description || !specifications || !amount) {
             //     return res.status(400).json({ msg: "Please complete all information" })
@@ -181,9 +186,8 @@ const productController = {
             })
             if (newProduct) {
                 newProduct.name = name, newProduct.type = type, newProduct.money = money,
-                    newProduct.colortypeone = colortypeone, newProduct.colortypetwo = colortypetwo, newProduct.colortypethree = colortypethree,
-                    newProduct.energy = energy, newProduct.avatar = req.body.avatar, newProduct.description = description, newProduct.descriptionHTML = descriptionHTML, newProduct.specifications = specifications, newProduct.specificationsHTML = specificationsHTML, newProduct.checked = checked,
-                    newProduct.amount = amount
+                    newProduct.energy = energy, newProduct.avatar = req.body.avatar, newProduct.description = description, newProduct.descriptionHTML = descriptionHTML, newProduct.specifications = specifications, newProduct.specificationsHTML = specificationsHTML, newProduct.descriptionInterior = descriptionInterior, newProduct.descriptionInteriorHTML = descriptionInteriorHTML, newProduct.descriptionConvenient = descriptionConvenient, newProduct.descriptionConvenientHTML = descriptionConvenientHTML, newProduct.checked = checked, newProduct.checkThinhHanh = checkThinhHanh
+                newProduct.amount = amount, newProduct.laithu = laithu
 
                 await newProduct.save()
             }
@@ -213,14 +217,16 @@ const productController = {
 
             //console.log(req.body.avatar)
 
-            const { name, type, money, colortypeone, colortypetwo, colortypethree, energy, description, descriptionHTML, specifications, specificationsHTML, checked, checkThinhHanh, amount, laithu } = req.body
+            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, descriptionInterior, descriptionInteriorHTML, descriptionConvenient, descriptionConvenientHTML, checked, checkThinhHanh, amount, laithu } = req.body
 
             await ProductCars.findOneAndUpdate({
                 _id: req.params.id
             }, {
                 name: name, type: type, money: money,
-                colortypeone: colortypeone, colortypetwo: colortypetwo, colortypethree: colortypethree, $push: { avatar: [...req.body.avatar] },
-                energy: energy, description: description, descriptionHTML: descriptionHTML, specifications: specifications, specificationsHTML: specificationsHTML, checked: checked, checkThinhHanh: checkThinhHanh,
+                $push: { avatar: [...req.body.avatar] },
+                energy: energy, description: description, descriptionHTML: descriptionHTML, specifications: specifications, specificationsHTML: specificationsHTML,
+                descriptionInterior: descriptionInterior, descriptionInteriorHTML: descriptionInteriorHTML,
+                descriptionConvenient: descriptionConvenient, descriptionConvenientHTML: descriptionConvenientHTML, checked: checked, checkThinhHanh: checkThinhHanh,
                 amount: amount, laithu: laithu
             })
 
