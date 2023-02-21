@@ -158,6 +158,8 @@ function DeatailProductBody() {
         }
     }
 
+    console.log(detailItem)
+
     return (
         <>
 
@@ -196,7 +198,27 @@ function DeatailProductBody() {
                     </div>
                     <div className='controler-right'>
                         <div className='controler-right-button' >
-                            <a href={`/dangky_laithu/${param.id}`} className='laithu-product'><img className='img-steering-wheel' src={Steering_Wheel} /><span>Đăng ký lái thử xe</span></a>
+
+                            {
+                                detailItem.laithu === 1
+                                    ?
+                                    <>
+                                        {
+                                            isLogged
+                                                ?
+                                                <>
+                                                    <a href={`/dangky_laithu/${param.id}`} className='laithu-product'><img className='img-steering-wheel' src={Steering_Wheel} /><span>Đăng ký lái thử xe</span></a>
+                                                </>
+                                                :
+                                                <>
+                                                    <a className='laithu-product'><img className='img-steering-wheel' src={Steering_Wheel} /><span>Xin hãy đăng nhập</span></a>
+                                                </>
+                                        }
+                                    </>
+
+                                    :
+                                    null
+                            }
                         </div>
                         <div className='controler-right-button' >
                             <a href="tel:0396764757" className='laithu-product'><i className="fa-solid fa-phone img-steering-wheel d-flex justify-content-center align-items-center"></i><span>Liên hệ</span></a>

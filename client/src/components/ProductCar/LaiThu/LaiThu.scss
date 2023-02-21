@@ -1,0 +1,171 @@
+.formLaiThu {
+    .LaiThuSteper {
+        min-height: 48px;
+        width: 100%;
+        position: relative;
+        cursor: pointer;
+
+        .LaiThuSteper-form {
+            display: flex;
+            min-height: 72px;
+            padding-bottom: 24px;
+
+            .LaiThuSteper-form-number {
+
+                //background-color: #0078d6;
+                //color: #000;
+                border-radius: 50%;
+                //border: 1px solid #000;
+
+                .LaiThuSteper-form-number-boder {
+                    width: 32px;
+                    height: 32px;
+                    //background-color: #0078d6;
+                    color: #000;
+                    border-radius: 50%;
+                    border: 1px solid #0078d6;
+
+                    span {
+                        width: 32px;
+                        height: 32px;
+                        //background-color: #0078d6;
+                        color: #000;
+                        font-size: 1.125rem;
+                        line-height: 1.75rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+            }
+
+            .LaiThuSteper-form-number-before {
+                width: 32px;
+                height: 32px;
+                //background-color: #0078d6;
+                color: #000;
+                border-radius: 50%;
+                border: 1px solid #000;
+
+                span {
+                    width: 32px;
+                    height: 32px;
+                    //background-color: #0078d6;
+                    color: #000;
+                    font-size: 1.125rem;
+                    line-height: 1.75rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+            .LaiThuSteper-form-des {
+                padding-top: 5px;
+
+                span {
+                    -webkit-font-smoothing: antialiased;
+                    font: inherit;
+                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 1rem;
+                    line-height: 1.5rem;
+                }
+
+                p {
+                    -webkit-font-smoothing: antialiased;
+                    font: inherit;
+                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: .75rem;
+                    line-height: 1rem;
+                    letter-spacing: .01875em;
+                }
+            }
+        }
+
+        .LaiThuSteper-form-line {
+            position: absolute;
+            width: 1px;
+            height: calc(100% - 32px);
+            border-bottom: none;
+            border-top: none;
+            border-right: none;
+            left: 16px;
+            //border: 1px solid #0078d6;
+            top: 40px;
+        }
+    }
+
+    .form-thongtin-steper {
+        .Form-DaiLyXe {
+            .Form-DaiLyXe-Header {
+                h4 {
+                    -webkit-font-smoothing: antialiased;
+                    font: inherit;
+                    font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 2.5rem;
+                    line-height: 3.75rem;
+                }
+            }
+
+            .Form-DaiLyXe-body {
+                .card-address {
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+.button-back {
+    background-color: #151414;
+    text-transform: uppercase;
+    border: 1px solid #f9f9f9;
+    color: #fff;
+    border-radius: 5px;
+
+    &:hover {
+        color: #fff;
+        background-color: #706f6f;
+        transition: .2s all ease-in-out;
+        transition-duration: 200ms;
+    }
+}
+
+.button-next {
+    background-color: #0078d6;
+    text-transform: uppercase;
+    border: 1px solid #f9f9f9;
+    color: #fff;
+    border-radius: 5px;
+
+    &:hover {
+        color: #fff;
+        background-color: #1e97f4;
+        transition: .2s all ease-in-out;
+        transition-duration: 200ms;
+    }
+}
+
+.mapboxgl-popup-content {
+    background-color: #333333d9 !important;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+    border-top-color: #333333d9 !important;
+}
+
+.mapboxgl-popup {
+    top: -15px !important;
+}
+
+.mapboxgl-popup-close-button {
+    border: 0 !important;
+    outline: none !important;
+    color: #fff !important;
+}

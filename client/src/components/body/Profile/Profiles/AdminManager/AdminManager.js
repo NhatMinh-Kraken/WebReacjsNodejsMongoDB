@@ -17,6 +17,7 @@ import DonLaiThu from './DonLaiThu'
 import { Button, Modal } from 'react-bootstrap'
 import LoaiPhuKien from '../Accessory/LoaiPhuKien'
 import ProductAccessory from '../ProductAccessory/ProductAccessory'
+import AllDaiLy from '../../DaiLy/AllDaiLy'
 
 
 
@@ -151,7 +152,7 @@ function AdminManager() {
 
                                             <NavLink to="/all-user" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All user</span></NavLink>
                                             <NavLink to="/all-laithu" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All Lái thử</span></NavLink>
-
+                                            <NavLink to="/all-daily" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Địa chỉ đại lý</span></NavLink>
                                             <NavLink to="/allproduct" onClick={handleShow} className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Product</span></NavLink>
                                             <NavLink to="/allphukien" onClick={handleShowPhuKien} className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Phụ kiện</span></NavLink>
                                         </div>
@@ -174,6 +175,7 @@ function AdminManager() {
                                         <Route path="/edit-product/:id" component={isAdmin ? EditProduct : NotFound} exact />
                                         <Route path="/all-category-PhuKien" component={isAdmin ? LoaiPhuKien : NotFound} exact />
                                         <Route path="/all-category-product" component={isAdmin ? ProductAccessory : NotFound} exact />
+                                        <Route path="/all-daily" component={isAdmin ? AllDaiLy : NotFound} exact />
                                     </Switch>
                                 </div>
                             </Router>

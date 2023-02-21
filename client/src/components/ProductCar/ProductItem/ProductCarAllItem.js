@@ -38,7 +38,7 @@ function ProductCarAllItem({ nametypes }) {
     return (
         <>
             <div className='product-card col-4' onMouseEnter={handleHover} onMouseLeave={handleNotHover}>
-                <Link to="/detail_product" className='product-card-link' >
+                <Link to={`/detail_product/${nametypes._id}`} className='product-card-link' >
                     <div className='product-car-header'>
                         <div className='product-card-name'>
                             <span>{nametypes.name}</span>
@@ -82,8 +82,8 @@ function ProductCarAllItem({ nametypes }) {
                             ?
                             <>
                                 <div className='product-car-detail heights-48'>
-                                    <Link to="/3D" className='detail-product'><img src={steering_wheel} alt="steering" /><span>Đăng ký lái thử</span></Link>
-                                </div>  
+                                    <Link to={`/dangky_laithu/${nametypes._id}`} className='detail-product'><img src={steering_wheel} alt="steering" /><span>Đăng ký lái thử</span></Link>
+                                </div>
                             </>
                             :
                             null

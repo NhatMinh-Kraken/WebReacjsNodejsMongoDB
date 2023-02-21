@@ -1,0 +1,20 @@
+.form-thongtin-daily {
+    width: 100%;
+    // height: 280px;
+
+    .form-thongtin-daily-body {
+        box-shadow: 0 4px 4px;
+        height: 100%;
+
+        .form-thongtin-daily-body-title {
+            font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+            font-weight: 400;
+
+            span {
+                font-size: 18px;
+                font-weight: 400;
+                color: #ef4242;
+            }
+        }
+    }
+}
