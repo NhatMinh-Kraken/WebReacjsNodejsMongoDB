@@ -3,16 +3,16 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 
-function LaiThuSteper({ dailyData, steps, currentStep }) {
+function LaiThuSteper({ dailyData, steps, currentStep, carItem, dates, times }) {
     const auth = useSelector(state => state.auth)
     const token = useSelector(state => state.token)
     const { user, isAdmin, isLogged } = auth
     const [newStep, setNewStep] = useState([])
     const stepRef = useRef()
-    const [car, setCar] = useState([])
-    const [carItem, setCarItem] = useState([])
-    const { id } = useParams()
-    const [callback, setCallback] = useState(false)
+    // const [car, setCar] = useState([])
+    // const [carItem, setCarItem] = useState([])
+    // const { id } = useParams()
+    // const [callback, setCallback] = useState(false)
     const history = useHistory()
 
     const updateStep = (stepNumber, steps) => {
@@ -71,25 +71,6 @@ function LaiThuSteper({ dailyData, steps, currentStep }) {
         setNewStep(current)
     }, [steps, currentStep])
 
-
-    //car
-    useEffect(() => {
-        const getProducts = async () => {
-            const res = await Axios.get('/api/nametype')
-            setCar(res.data)
-        }
-        getProducts()
-    }, [callback])
-
-    useEffect(() => {
-        if (id) {
-            car.forEach((c) => {
-                if (c._id === id) {
-                    setCarItem(c)
-                }
-            })
-        }
-    }, [car, id])
 
     const css = {
         background: "#0078d6",
@@ -160,12 +141,9 @@ function LaiThuSteper({ dailyData, steps, currentStep }) {
                                             {
                                                 step.completed ?
                                                     <>
-                                                        <p className='m-0'>
-                                                            {
-                                                                step.description === "Thời gian" ? <>Thời gian</> : null
-                                                            }
-
-                                                        </p>
+                                                        {
+                                                            step.description === "Thời gian" ? <><p className='m-0'>Ngày: {dates}, Thời gian: {times}</p></> : null
+                                                        }
                                                     </>
                                                     :
                                                     null

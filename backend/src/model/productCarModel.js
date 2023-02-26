@@ -75,6 +75,14 @@ const productcarSchema = new mongoose.Schema({
     laithu: {
         type: Number,
         default: 0
+    },
+
+    tudong: {
+        type: Number,
+    },
+
+    tag: {
+        type: String,
     }
 
 }, {

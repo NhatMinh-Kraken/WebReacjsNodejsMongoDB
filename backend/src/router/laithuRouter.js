@@ -4,8 +4,10 @@ const LaiThuController = require('../controller/laithuController')
 const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
 
-router.route('/laithu').get(LaiThuController.getLaiThu).post(auth, LaiThuController.LaiThu).patch(auth, authAdmin,LaiThuController.getSuccessLaiThu)
-router.route('/laithu/:id').patch(auth, authAdmin,LaiThuController.getSuccessLaiThu)
+router.route('/laithu').get(LaiThuController.getLaiThu).post(auth, LaiThuController.LaiThu).patch(auth, authAdmin, LaiThuController.getSuccessLaiThu)
+router.route('/laithu/:id').patch(auth, authAdmin, LaiThuController.getSuccessLaiThu)
+
+router.route('/cron/:id').put(auth, authAdmin, LaiThuController.cronJob)
 
 
 module.exports = router

@@ -17,6 +17,7 @@ import MdEditor from 'react-markdown-editor-lite';
 // import style manually
 import 'react-markdown-editor-lite/lib/index.css';
 
+import Steering_Wheel from '../../../../../assets/images/steering-wheel.svg'
 //
 
 
@@ -31,6 +32,7 @@ const initialState = {
     specificationsHTML: '',
     amount: '',
     id: '',
+    tudong: ''
     // err: '',
     // success: ''
 }
@@ -80,6 +82,10 @@ function CreateProduct() {
     const [search, setSearch] = useState('')
     const [page, setPage] = useState(1)
     const [result, setResult] = useState(0)
+
+    const [checkTH, setCheckTH] = useState(false)
+    const [itemThinhHanh, setItemThinhHanh] = useState([])
+    const [numTH, setNumTH] = useState(0)
 
     // useEffect(() => {
     //     const getProducts = async () => {
@@ -170,10 +176,34 @@ function CreateProduct() {
         setProduct({ ...product, [name]: value })
     }
 
+    console.log(product.type)
+
+    useEffect(() => {
+        categories.forEach(ct => {
+            if (ct._id === product.type) {
+                setItemThinhHanh(ct)
+            }
+        })
+    }, [product.type])
+
+    console.log(itemThinhHanh.checkThinhHanh)
+
+    useEffect(() => {
+        if (itemThinhHanh.checkThinhHanh === 1) {
+            handleCheck()
+        }
+        else {
+            setCheck(false)
+            setNum(num - 1)
+        }
+    }, [itemThinhHanh])
+
     const handleCheck = e => {
-        setCheck(!check)
+        setCheck(true)
         setNum(num + 1)
     }
+
+    console.log(check)
 
     const handleCheckLaiThu = e => {
         setCheckLaiThu(!checkLaiThu)
@@ -209,7 +239,8 @@ function CreateProduct() {
                 descriptionConvenientHTML: descriptionConvenient.descriptionConvenientHTML,
                 avatar: images,
                 checkThinhHanh: check ? 1 : 0,
-                laithu: checkLaiThu ? 1 : 0
+                laithu: checkLaiThu ? 1 : 0,
+                tudong: product.tudong
             }, {
                 headers: { Authorization: token }
             })
@@ -234,6 +265,15 @@ function CreateProduct() {
         },
         {
             value: "1", label: "Điện"
+        }
+    ]
+
+    const optionAuto = [
+        {
+            value: "0", label: "Xe số sàn"
+        },
+        {
+            value: "1", label: "Xe tự động "
         }
     ]
 
@@ -343,8 +383,27 @@ function CreateProduct() {
                                                     type="checkbox"
                                                     label="Thịnh hành"
                                                     onChange={handleCheck}
+                                                    checked={check}
                                                 />
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='form-row'>
+                                    <div className='form col-12 mt-4'>
+                                        <div className="input-group">
+                                            <div className="input-group-prepend ">
+                                                <span className="input-group-text boderr" id="inputGroupPrepend1"><img className='img-steering-wheel d-flex' src={Steering_Wheel} /></span>
+                                            </div>
+                                            {/* <input type="text" className="form-controls col-11" name="energy" id="energy" placeholder="Energy" /> */}
+                                            <select className="custom-selects col-4" name="tudong" id="tudong" defaultValue={product.tudong} onChange={handleChangeInput}>
+                                                <option value="">Hãy chọn loại hình vận hành</option>
+                                                {optionAuto.map((option) => (
+                                                    <option key={option.value} value={option.value} selected={product.tudong == option.value}>
+                                                        {option.label}
+                                                    </option>
+                                                ))}
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

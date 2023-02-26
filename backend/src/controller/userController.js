@@ -294,17 +294,17 @@ const userController = {
     },
     googleLogin: async (req, res) => {
         try {
-            const { tokenId } = req.body
+            // const { tokenId } = req.body
 
-            const verify = await client.verifyIdToken({ idToken: tokenId, audience: process.env.MAILING_SERVICE_CLIENT_ID })
+            // const verify = await client.verifyIdToken({ idToken: tokenId, audience: process.env.MAILING_SERVICE_CLIENT_ID })
 
-            const { email_verified, email, name, picture } = verify.payload
+            const { email, name, picture } = req.body
 
             const password = email + process.env.GOOGLE_SECRET
 
             const passwordHash = await bcrypt.hash(password, 12)
 
-            if (!email_verified) return res.status(400).json({ msg: "Email verification failed." })
+            // if (!email_verified) return res.status(400).json({ msg: "Email verification failed." })
 
             const user = await Users.findOne({
                 email

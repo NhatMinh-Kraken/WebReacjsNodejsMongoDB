@@ -110,7 +110,7 @@ const productController = {
 
             req.body.avatar = imageBuffer
 
-            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, descriptionInterior, descriptionInteriorHTML, descriptionConvenient, descriptionConvenientHTML, checked, checkThinhHanh, amount, laithu } = req.body
+            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, descriptionInterior, descriptionInteriorHTML, descriptionConvenient, descriptionConvenientHTML, checked, checkThinhHanh, amount, laithu, tudong } = req.body
 
 
             if (!name || !type || !money || !energy || !description || !specifications || !descriptionInterior || !descriptionConvenient || !amount) {
@@ -131,7 +131,7 @@ const productController = {
             if (newProduct) {
                 newProduct.name = name, newProduct.type = type, newProduct.money = money,
                     newProduct.energy = energy, newProduct.avatar = req.body.avatar, newProduct.description = description, newProduct.descriptionHTML = descriptionHTML, newProduct.specifications = specifications, newProduct.specificationsHTML = specificationsHTML, newProduct.descriptionInterior = descriptionInterior, newProduct.descriptionInteriorHTML = descriptionInteriorHTML, newProduct.descriptionConvenient = descriptionConvenient, newProduct.descriptionConvenientHTML = descriptionConvenientHTML, newProduct.checked = checked, newProduct.checkThinhHanh = checkThinhHanh
-                newProduct.amount = amount, newProduct.laithu = laithu
+                newProduct.amount = amount, newProduct.laithu = laithu, newProduct.tudong = tudong
 
                 await newProduct.save()
                 await Categorys.findByIdAndUpdate({
@@ -170,7 +170,7 @@ const productController = {
     },
     updateProductWhenDelete: async (req, res) => {
         try {
-            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, descriptionInterior, descriptionInteriorHTML, descriptionConvenient, descriptionConvenientHTML, checked, checkThinhHanh, amount, laithu } = req.body
+            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, descriptionInterior, descriptionInteriorHTML, descriptionConvenient, descriptionConvenientHTML, checked, checkThinhHanh, amount, laithu, tudong } = req.body
 
 
             // if (!name || !type || !money || !energy || !description || !specifications || !descriptionInterior || !descriptionConvenient || !amount) {
@@ -187,7 +187,7 @@ const productController = {
             if (newProduct) {
                 newProduct.name = name, newProduct.type = type, newProduct.money = money,
                     newProduct.energy = energy, newProduct.avatar = req.body.avatar, newProduct.description = description, newProduct.descriptionHTML = descriptionHTML, newProduct.specifications = specifications, newProduct.specificationsHTML = specificationsHTML, newProduct.descriptionInterior = descriptionInterior, newProduct.descriptionInteriorHTML = descriptionInteriorHTML, newProduct.descriptionConvenient = descriptionConvenient, newProduct.descriptionConvenientHTML = descriptionConvenientHTML, newProduct.checked = checked, newProduct.checkThinhHanh = checkThinhHanh
-                newProduct.amount = amount, newProduct.laithu = laithu
+                newProduct.amount = amount, newProduct.laithu = laithu, newProduct.tudong = tudong
 
                 await newProduct.save()
             }
@@ -217,7 +217,7 @@ const productController = {
 
             //console.log(req.body.avatar)
 
-            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, descriptionInterior, descriptionInteriorHTML, descriptionConvenient, descriptionConvenientHTML, checked, checkThinhHanh, amount, laithu } = req.body
+            const { name, type, money, energy, description, descriptionHTML, specifications, specificationsHTML, descriptionInterior, descriptionInteriorHTML, descriptionConvenient, descriptionConvenientHTML, checked, checkThinhHanh, amount, laithu, tudong } = req.body
 
             await ProductCars.findOneAndUpdate({
                 _id: req.params.id
@@ -227,7 +227,7 @@ const productController = {
                 energy: energy, description: description, descriptionHTML: descriptionHTML, specifications: specifications, specificationsHTML: specificationsHTML,
                 descriptionInterior: descriptionInterior, descriptionInteriorHTML: descriptionInteriorHTML,
                 descriptionConvenient: descriptionConvenient, descriptionConvenientHTML: descriptionConvenientHTML, checked: checked, checkThinhHanh: checkThinhHanh,
-                amount: amount, laithu: laithu
+                amount: amount, laithu: laithu, tudong: tudong
             })
 
             await Categorys.findOneAndUpdate({

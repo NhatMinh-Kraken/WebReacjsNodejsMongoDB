@@ -6,48 +6,54 @@ const laithuSchema = new mongoose.Schema({
         ref: "Users"
     },
 
-    name: {
-        type: String,
+    phone: {
+        type: String
+    },
+
+    nhanxung: {
+        type: Number
+    },
+
+    Idcar: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ProductCars"
     },
 
     type: {
         type: String,
     },
 
-    money: {
-        type: String,
+    Iddaily: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "DaiLys"
     },
 
-    smoney1: {
-        type: String,
+    dates: {
+        type: String
     },
 
-    smoney2: {
-        type: String,
+    times: {
+        type: String
     },
 
-    smoney3: {
-        type: String,
-    },
-
-    smoney4: {
-        type: String,
-    },
-
-    smoney5: {
-        type: String,
-    },
-
-    sum: {
-        type: String,
-    },
-
-    date: {
-        type: String,
+    checkedEmail: {
+        type: Number,
+        default: 0
     },
 
     checked: {
         type: Number,
+        default: 0
+    },
+
+    duyet: {
+        type: Number,
+        default: 0
+    },
+
+    checkGuiThongBao: {
+        type: Number,
+        default: 0
     },
 
 }, {

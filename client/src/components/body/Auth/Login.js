@@ -7,8 +7,9 @@ import { useDispatch } from 'react-redux'
 
 import { toast } from 'react-toastify'
 
-import GoogleLogin from 'react-google-login';
-import { gapi } from 'gapi-script'
+import { GoogleLoginButton } from "react-social-login-buttons";
+import { LoginSocialGoogle } from "reactjs-social-login";
+// import { gapi } from 'gapi-script'
 
 import FacebookLogin from 'react-facebook-login'
 
@@ -78,16 +79,21 @@ function Login() {
 
     const clientId = "404529522208-ujotennbb9ujd2iqenar833pgnbkgo3f.apps.googleusercontent.com"
 
-    useEffect(() => {
-        gapi.load("client:auth2", () => {
-            gapi.auth2.init({ clientId: clientId })
-        })
-    }, [])
+    // useEffect(() => {
+    //     gapi.load("client:auth2", () => {
+    //         gapi.auth2.init({ clientId: clientId })
+    //     })
+    // }, [clientId])
 
     const responseGoogle = async (response) => {
+        // console.log(response)
         try {
             setLoadding(true)
-            const res = await axios.post('/user/google_login', { tokenId: response.tokenId })
+            const res = await axios.post('/user/google_login', {
+                name: response.data.name,
+                email: response.data.email,
+                picture: response.data.picture
+            })
             //socket
             //socket.current.emit("new-user")
 
@@ -184,13 +190,18 @@ function Login() {
                                         </div>
 
                                         <div className='d-flex col-12 login-online'>
-                                            <GoogleLogin className='col-6 mr-1'
-                                                clientId={clientId}
-                                                buttonText="Login with Google"
-                                                onSuccess={responseGoogle}
-                                                onFailure={responseGoogle}
-                                                cookiePolicy={'single_host_origin'}
-                                            />
+                                            <LoginSocialGoogle
+                                                client_id={clientId}
+                                                scope="openid profile email"
+                                                discoveryDocs="claims_supported"
+                                                access_type="offline"
+                                                onResolve={responseGoogle}
+                                                onReject={(err) => {
+                                                    console.log(err);
+                                                }}
+                                            >
+                                                <GoogleLoginButton className='GoogleLogin-Button m-0'/>
+                                            </LoginSocialGoogle>
                                             <FacebookLogin className='col-6 ml-1'
                                                 appId="665527241564883"
                                                 autoLoad={false}

@@ -17,7 +17,9 @@ const oauth2Client = new OAuth2(
     MAILING_SERVICE_CLIENT_REFRESH_TOKEN,
     OAUTH_PLAYGROUND
 )
-const sendEmailLaiThu = (to, name, type, money, smoney1, smoney2, smoney3, smoney4, smoney5, sum, date, nameUser) => {
+
+//emailUser, nameCar, type, moneyCar, dates, times, nameUser
+const sendEmailLaiThu = (emailUser, nameCar, type, moneyCar, dates, times, nameUser, nameDaiLy, addressDaiLy) => {
     oauth2Client.setCredentials({
         refresh_token: MAILING_SERVICE_CLIENT_REFRESH_TOKEN
     })
@@ -35,17 +37,11 @@ const sendEmailLaiThu = (to, name, type, money, smoney1, smoney2, smoney3, smone
         }
     })
 
-    const formatMoney = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(money)
-    const formatMoney1 = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(smoney1)
-    const formatMoney2 = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(smoney2)
-    const formatMoney3 = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(smoney3)
-    const formatMoney4 = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(smoney4)
-    const formatMoney5 = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(smoney5)
-    const formatSum = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sum)
+    const formatMoney = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(moneyCar)
 
     const mailOptions = {
         from: SENDER_EMAIL_ADDRESS,
-        to: to,
+        to: emailUser,
         subject: "DEVELOPER: Nguyễn Nhật Minh",
         html: `
                 <div style="max-width: 700px; margin:auto; border: 1px solid #f0f0f0;
@@ -81,7 +77,7 @@ const sendEmailLaiThu = (to, name, type, money, smoney1, smoney2, smoney3, smone
                                     url(https://ci6.googleusercontent.com/proxy/k7qEtegL4qOMQr0YuT4mRMoUxnnAgW8jfQRnS5irFNp96kbcIHx-zrdyc3yHA7TbmNeIH1UJfSZteKBnOWMxWeJ6aplqJ1BHX24meoUXsXFR0XTh8nneNUgD6phfjijA5z8t0HRNYWrD9epIlHkL4birohjd8w2MUyCPPgIvE4XQQzc=s0-d-e1-ft#http://cdn.mcauto-images-production.sendgrid.net/6c20475da3226ec8/29beeb69-d82d-4eb7-97e2-70ca2d868d40/18x18.png);
                                     font-family: inherit;">
                                 </div>
-                                <span>Đã Lưu Dữ Liệu Trò Chơi</span>
+                                <span>Đã Lưu Dữ Liệu</span>
                             </div>
                         </div>
                         <div style="padding-bottom: 10px;">
@@ -122,7 +118,7 @@ const sendEmailLaiThu = (to, name, type, money, smoney1, smoney2, smoney3, smone
                                         <td style="padding-right: 20px; font-weight:
                                             600;padding-bottom: 10px;">Tên Xe:</td>
                                         <td style="padding-left: 20px; padding-bottom:
-                                            10px;text-align: center;">${name}</td>
+                                            10px;text-align: center;">${nameCar}</td>
                                     </tr>
                                     <tr>
                                         <td style="padding-right: 20px; font-weight:
@@ -138,45 +134,27 @@ const sendEmailLaiThu = (to, name, type, money, smoney1, smoney2, smoney3, smone
                                     </tr>
                                     <tr>
                                         <td style="padding-right: 20px; font-weight:
-                                            600;">Phí trước bạ (12%):</td>
+                                            600;">Tên đại lý:</td>
                                         <td style="padding-left: 20px; padding-bottom:
-                                            10px;text-align: center;">${formatMoney1}</td>
+                                            10px;text-align: center;">${nameDaiLy}</td>
                                     </tr>
                                     <tr>
                                         <td style="padding-right: 20px; font-weight:
-                                            600;">Phí sử dụng đường bộ (01 năm):</td>
+                                            600;">Địa chỉ:</td>
                                         <td style="padding-left: 20px; padding-bottom:
-                                            10px;text-align: center;">${formatMoney2}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding-right: 20px; font-weight:
-                                            600;">Bảo hiểm trách nhiệm dân sự (01 năm):</td>
-                                        <td style="padding-left: 20px; padding-bottom:
-                                            10px;text-align: center;">${formatMoney3}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding-right: 20px; font-weight:
-                                            600;">Phí đăng kí biển số:</td>
-                                        <td style="padding-left: 20px; padding-bottom:
-                                            10px;text-align: center;">${formatMoney4}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding-right: 20px; font-weight:
-                                            600;">Phí đăng kiểm:</td>
-                                        <td style="padding-left: 20px; padding-bottom:
-                                            10px;text-align: center;">${formatMoney5}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding-right: 20px; font-weight:
-                                            600;">Tổng cộng:</td>
-                                        <td style="padding-left: 20px; padding-bottom:
-                                            10px;text-align: center;">${formatSum}</td>
+                                            10px;text-align: center;">${addressDaiLy}</td>
                                     </tr>
                                     <tr>
                                         <td style="padding-right: 20px; font-weight:
                                             600;">Ngày đăng ký lái thử:</td>
                                         <td style="padding-left: 20px; padding-bottom:
-                                            10px;text-align: center;">${date}</td>
+                                            10px;text-align: center;">${dates}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-right: 20px; font-weight:
+                                            600;">Thời gian đăng ký lái thử:</td>
+                                        <td style="padding-left: 20px; padding-bottom:
+                                            10px;text-align: center;">${times}</td>
                                     </tr>
                                 </tbody>
                             </table>
