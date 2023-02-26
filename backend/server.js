@@ -7,6 +7,12 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
 
+const cron = require('node-cron')
+
+const { getCronJob } = require('../backend/src/controller/laithuController')
+
+const Data = require('../backend/src/model/laithuModel')
+
 //const connectDB = require('./Config/ConnectDB')
 
 
@@ -23,7 +29,6 @@ app.use(cookieParser())
 app.use(fileUpload({
     useTempFiles: true
 }))
-
 
 
 //Routers
@@ -48,6 +53,19 @@ mongoose.connect(URI, {
     if (err) throw err;
     console.log("Connected to mongodb")
 })
+
+// const date = async () => {
+//     const res = await Data.find({
+
+//     })
+// }
+
+cron.schedule(`*/30 * * * * *`, () => {
+    getCronJob()
+}, {
+    scheduled: true,
+    timezone: "Asia/Ho_Chi_Minh"
+});
 
 // connectDB()
 

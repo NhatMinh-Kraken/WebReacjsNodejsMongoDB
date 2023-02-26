@@ -1,5 +1,5 @@
 .modal-content {
-    width: 600px !important;
+    width: calc(100% + 100px);
 }
 
 .modal-header {
@@ -45,6 +45,7 @@
 .form {
     display: flex;
     align-items: center;
+
     .form-tieude {
         border-right: 1px solid #e4e1e163;
         height: 40px;
@@ -55,6 +56,7 @@
     .input-group {
         .profile-address {
             width: 100%;
+
             .name-address {
                 color: black;
                 font-weight: 600;
@@ -62,12 +64,13 @@
                 font-size: 14px;
             }
 
-            .phone-address{
+            .phone-address {
                 padding-left: 5px;
                 font-size: 14px;
             }
         }
-        .body-address{
+
+        .body-address {
             color: #767676d9;
             font-size: 14px;
             padding-top: 3px;

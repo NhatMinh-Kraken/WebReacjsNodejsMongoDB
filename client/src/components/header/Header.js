@@ -52,7 +52,7 @@ function Header() {
                         <div className='left-none-header col-8 '>
                             <div className='input-header'>
                                 <div className='input-header-search'>
-                                    <input className='form-control' type="search" tabIndex="-1" placeholder='Từ khóa tìm kiếm / OnlineCode từ công cụ chọn cấu hình xe' pattern=".*\S.*" required />
+                                    <input className='form-control-search form-control ' type="search" tabIndex="-1" placeholder='Từ khóa tìm kiếm / OnlineCode từ công cụ chọn cấu hình xe' pattern=".*\S.*" required />
                                     <button type='button' className='btn btn-search button-search'><i className="fa-solid fa-magnifying-glass"></i></button>
                                 </div>
                             </div>

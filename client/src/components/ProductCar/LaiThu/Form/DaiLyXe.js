@@ -21,10 +21,11 @@ function DaiLyXe({ handleClick }) {
   const [viewport, setViewport] = useState({
     width: "100%",
     height: "420px",
-    latitude: 11.134113,
-    longitude: 106.554409,
-    zoom: 8
+    latitude: 10.815012,
+    longitude: 106.616145,
+    zoom: 10,
   })
+
 
   useEffect(() => {
     get()
@@ -42,9 +43,19 @@ function DaiLyXe({ handleClick }) {
     setClickDaiLy(dl)
   }
 
-  const handleMarkerClickUser = (id) => {
+ // console.log(viewport)
+
+  const handleMarkerClickUser = (id, lat, long) => {
     setCurrentPlaceId(id)
+    setViewport({
+      ...viewport,
+      latitude: lat,
+      longitude: long,
+      zoom: 10
+    })
   }
+
+  //console.log(viewport)
 
   // latitude: 10.9784309
   // longitude: 106.675044
@@ -74,6 +85,7 @@ function DaiLyXe({ handleClick }) {
         <div className='Form-DaiLyXe-body overflow-auto'>
           <ReactMapGL
             style={{ width: "100%", height: "400px" }}
+            transitionDuration="200"
             mapStyle="mapbox://styles/minhnguyen7/clece19sp001501qnjewr6dee"
             mapboxAccessToken={path.TOKENMAP}
             initialViewState={{
@@ -172,8 +184,8 @@ function DaiLyXe({ handleClick }) {
           clickDaiLy.length != 0
             ?
             <>
-              <div className=''>
-                <div className='form-thongtin-daily pt-2' style={{ height: "250px" }}>
+              <div className='position-relative'>
+                <div className='form-thongtin-daily position-absolute pt-2' style={{ height: "250px" }}>
                   <div className='form-thongtin-daily-body p-3'>
                     <span className='close-icon' onClick={handleCickClose}><i className="fa-solid fa-xmark d-flex justify-content-end"></i></span>
                     <div className='form-thongtin-daily-body-title pb-2 d-flex align-items-center'>

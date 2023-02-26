@@ -1,0 +1,39 @@
+.Form-ThongTinCaNhan {
+    .Form-ThongTinCaNhan-header {
+        span {
+            -webkit-font-smoothing: antialiased;
+            font: inherit;
+            font-family: MBCorpo Title, DaimlerCAC-Regular, serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 3rem;
+            line-height: 3.75rem;
+        }
+    }
+
+    .dieu-khoan {
+        // border-top: 1px solid #bbb;
+        // border-left: 1px solid #bbb;
+        // border-right: 1px solid #bbb;
+        border-radius: 0.5rem;
+        background-color: #f4f4f4 !important;
+        cursor: pointer;
+        height: auto;
+        padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+
+        .accordion-button {
+            background-color: #f4f4f4 !important;
+            box-shadow: none !important;
+        }
+    }
+
+    .text-dieukhoan {
+        -webkit-font-smoothing: antialiased;
+        font: inherit;
+        font-family: MBCorpo Text, DaimlerCS-Regular, sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+}
