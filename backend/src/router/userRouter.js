@@ -34,6 +34,8 @@ router.patch('/update_role/:id', auth, authAdmin, userController.updateUsersRole
 
 router.delete('/delete/:id', auth, authAdmin, userController.deleteUser)
 
+router.get('/findNVCV', userController.findNvCV)
+
 
 // Social Login
 router.post('/google_login', userController.googleLogin)

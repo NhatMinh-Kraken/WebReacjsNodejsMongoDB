@@ -91,12 +91,22 @@ const userSchema = new mongoose.Schema({
         default: "online"
     },
     chucvu: {
+        type: String,
+        default: "Chưa có"
+    },
+    chucvucuthe: {
         type: Number,
         default: 0
     },
-    chucvucuthe: {
-        type: String,
-        default: "Chưa có"
+
+    IdOptionBaoDuong: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "optionBaoDuongs"
+    },
+
+    IdRank: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Ranks"
     }
 }, {
     timestamps: true,

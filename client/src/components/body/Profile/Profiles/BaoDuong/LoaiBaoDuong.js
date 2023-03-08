@@ -5,17 +5,16 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
 const initialState = {
+    name: '',
+    icon: '',
     err: '',
     success: ''
 }
-function LoaiPhuKien() {
+function LoaiBaoDuong() {
     const auth = useSelector(state => state.auth)
-    const { user } = auth
-    const [data, setData] = useState(initialState)
     const token = useSelector(state => state.token)
 
     const [deleteId, setDeleteId] = useState("")
-    const [typeid, setTypeId] = useState([])
 
 
     const [show, setShow] = useState(false)
@@ -24,32 +23,28 @@ function LoaiPhuKien() {
 
     const users = useSelector(state => state.users)
 
-    const [categories, setCategories] = useState([])
-    const [category, setCategory] = useState("")
+    const [loaibaoduongs, setLoaiBaoDuongs] = useState([])
+    const [loaibaoduong, setLoaiBaoDuong] = useState(initialState)
 
     const [callback, setCallback] = useState(false)
 
     const [id, setID] = useState('')
 
     useEffect(() => {
-        const getCategories = async () => {
-            const res = await Axios.get('/api/categoryAccessory')
-            setCategories(res.data)
+        const getLoaiBaoDuong = async () => {
+            const res = await Axios.get('/api/loaibaoduong')
+            setLoaiBaoDuongs(res.data)
         }
-        getCategories()
+        getLoaiBaoDuong()
     }, [callback])
 
-    const [nametypes, setNametypes] = useState([])
-    // const [callback, setCallback] = useState(false)
+    console.log(loaibaoduongs)
 
-    useEffect(() => {
-        const getNameType = async () => {
-            const res = await Axios.get('/api/products')
-            setNametypes(res.data)
-        }
-        getNameType()
-    }, [callback])
 
+    const handleChangeInput = e => {
+        const { name, value } = e.target
+        setLoaiBaoDuong({ ...loaibaoduong, [name]: value })
+    }
 
     const handleClose = () => setShow(false);
 
@@ -63,26 +58,27 @@ function LoaiPhuKien() {
     }
 
     const handleShowAdd = () => {
-        setCategory("")
+        setLoaiBaoDuong("")
         setShowcategory(true)
     }
 
-    const handleShowEdit = (id, name) => {
+    const handleShowEdit = (giatri) => {
         setShowcategoryedit(true)
-        setID(id)
-        setCategory(name)
+        setID(giatri._id)
+        setLoaiBaoDuong(giatri)
     }
 
+    console.log(loaibaoduong)
     const handleCloseEdit = () => {
         setShowcategoryedit(false)
     }
 
     const handleEdit = async () => {
         try {
-            const res = await Axios.put(`/api/categoryAccessory/${id}`, { name: category }, {
+            const res = await Axios.put(`/api/loaibaoduong/${id}`, { name: loaibaoduong.name }, {
                 headers: { Authorization: token }
             })
-            setCategory("")
+            setLoaiBaoDuong("")
             setShowcategoryedit(false)
             setCallback(!callback)
             toast.success("Update Success")
@@ -94,10 +90,10 @@ function LoaiPhuKien() {
 
     const handleCreate = async () => {
         try {
-            const res = await Axios.post('/api/categoryAccessory', { name: category }, {
+            const res = await Axios.post('/api/loaibaoduong', { name: loaibaoduong.name }, {
                 headers: { Authorization: token }
             })
-            setCategory("")
+            setLoaiBaoDuong("")
             setShowcategory(false)
             setCallback(!callback)
             toast.success("Create Success")
@@ -107,45 +103,21 @@ function LoaiPhuKien() {
         }
     }
 
-    useEffect(() => {
-        const getNameTypes = () => {
-            nametypes.forEach(nametype => {
-                if (nametype.type == deleteId) {
-                    setTypeId(nametype)
-                }
-                else {
-                    console.log("khong co")
-                }
-            })
-        }
-        getNameTypes()
-
-    })
-
     const handleDelete = async () => {
         try {
-
-            if (typeid.type === deleteId) {
-                setShow(false)
-                toast.error("Không thể xóa vì có sản phẩm")
-            }
-            else {
-                const res = await Axios.delete(`/api/categoryAccessory/${deleteId}`, {
-                    headers: { Authorization: token }
-                })
-                setShow(false)
-                setCallback(!callback)
-                toast.success(res.data.msg)
-                // setShow(false)
-                // toast.success("xóa")
-            }
-
+            const res = await Axios.delete(`/api/loaibaoduong/${deleteId}`, {
+                headers: { Authorization: token }
+            })
+            setShow(false)
+            setCallback(!callback)
+            toast.success(res.data.msg)
+            // setShow(false)
+            // toast.success("xóa")
 
         } catch (err) {
             toast.err(err.response.data.msg)
         }
     }
-
 
 
     return (
@@ -183,11 +155,13 @@ function LoaiPhuKien() {
                     <div className='form-title'>
                         Please enter the category name</div>
                     <div className="form">
-                        <div className="input-group">
-                            <div className="input-group-prepend pl-0 pr-0">
-                                <span className="input-group-text" id="inputGroupPrepend1"><i className="fa-solid fa-list d-flex"></i></span>
+                        <div className='d-flex flex-column w-100'>
+                            <div className="input-group col-12 pb-3">
+                                <div className="input-group-prepend pl-0 pr-0">
+                                    <span className="input-group-text" id="inputGroupPrepend1"><i className="fa-solid fa-list d-flex"></i></span>
+                                </div>
+                                <input type="text" className="form-control col-11" name="name" id="name" value={loaibaoduong.name} placeholder="name" onChange={handleChangeInput} required />
                             </div>
-                            <input type="text" className="form-control col-11" name="name" id="name" value={category} placeholder="..." onChange={e => setCategory(e.target.value)} required />
                         </div>
                     </div>
                 </Modal.Body>
@@ -207,17 +181,19 @@ function LoaiPhuKien() {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit Account</Modal.Title>
+                    <Modal.Title>Edit</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className='form-title'>
                         Please enter the category name</div>
                     <div className="form">
-                        <div className="input-group">
-                            <div className="input-group-prepend pl-0 pr-0">
-                                <span className="input-group-text" id="inputGroupPrepend1"><i className="fa-solid fa-list d-flex"></i></span>
+                        <div className="d-flex flex-column w-100">
+                            <div className="input-group col-12 pb-3">
+                                <div className="input-group-prepend pl-0 pr-0">
+                                    <span className="input-group-text" id="inputGroupPrepend1"><i className="fa-solid fa-list d-flex"></i></span>
+                                </div>
+                                <input type="text" className="form-control col-11" name="name" id="name" value={loaibaoduong.name} placeholder="name" onChange={handleChangeInput} required />
                             </div>
-                            <input type="text" className="form-control col-11" name="name" id="name" value={category} placeholder="..." onChange={e => setCategory(e.target.value)} required />
                         </div>
                     </div>
                 </Modal.Body>
@@ -245,12 +221,12 @@ function LoaiPhuKien() {
                             </thead>
                             <tbody>
                                 {
-                                    categories.map((category, index) => (
+                                    loaibaoduongs.map((category, index) => (
                                         <tr key={category._id}>
                                             <th scope="row" className='col-2 text-center'>{index + 1}</th>
                                             <td className='col-5 text-center'>{category.name}</td>
                                             <td className='col-5 text-center'>
-                                                <a onClick={() => handleShowEdit(category._id, category.name)}><i className="fa-solid fa-pen-to-square mr-2 text-primary" title='edit'></i></a>
+                                                <a onClick={() => handleShowEdit(category)}><i className="fa-solid fa-pen-to-square mr-2 text-primary" title='edit'></i></a>
                                                 <a onClick={() => handleShow(category._id)}><i className="fa-solid fa-trash text-danger" title='delete'></i></a>
                                             </td>
                                         </tr>
@@ -266,4 +242,4 @@ function LoaiPhuKien() {
     )
 }
 
-export default LoaiPhuKien
+export default LoaiBaoDuong

@@ -86,12 +86,11 @@ const productController = {
         try {
             const productCar = await ProductCars.find()
             res.json(productCar)
-
-
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
     },
+
     createProducts: async (req, res) => {
         try {
             let avatar = [...req.body.avatar]

@@ -55,8 +55,8 @@ function ThongTinCaNhan({ user, handleClick, dailyData, dates, times, carItem })
 
 
   const handleSubmitLaiThu = async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
       if (!isLogged) {
         toast.error("Please login to proceed with registration!!!")
         history.push("/login")
@@ -145,7 +145,7 @@ function ThongTinCaNhan({ user, handleClick, dailyData, dates, times, carItem })
                 <Form.Label>Phone</Form.Label>
                 <Form.Control
                   required
-                  type="text" 
+                  type="text"
                   name="numberphone"
                   placeholder="phone"
                   defaultValue={user.numberphone}

@@ -185,7 +185,7 @@ function DaiLyXe({ handleClick }) {
             ?
             <>
               <div className='position-relative'>
-                <div className='form-thongtin-daily position-absolute pt-2' style={{ height: "250px" }}>
+                <div className='form-thongtin-daily position-absolute' style={{ height: "250px" }}>
                   <div className='form-thongtin-daily-body p-3'>
                     <span className='close-icon' onClick={handleCickClose}><i className="fa-solid fa-xmark d-flex justify-content-end"></i></span>
                     <div className='form-thongtin-daily-body-title pb-2 d-flex align-items-center'>

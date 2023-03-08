@@ -83,6 +83,11 @@ const productcarSchema = new mongoose.Schema({
 
     tag: {
         type: String,
+    },
+
+    IDoptionBaoDuong: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "optionBaoDuongs"
     }
 
 }, {

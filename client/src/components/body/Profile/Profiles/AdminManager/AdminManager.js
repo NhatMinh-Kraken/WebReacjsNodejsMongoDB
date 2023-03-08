@@ -15,9 +15,10 @@ import CategoryCar from '../CategoryCar/CategoryCar'
 import ProfileAllUser from './ProfileAllUser'
 import DonLaiThu from './DonLaiThu'
 import { Button, Modal } from 'react-bootstrap'
-import LoaiPhuKien from '../Accessory/LoaiPhuKien'
-import ProductAccessory from '../ProductAccessory/ProductAccessory'
+import LoaiPhuKien from '../BaoDuong/LoaiBaoDuong'
 import AllDaiLy from '../../DaiLy/AllDaiLy'
+import OptionBaoDuong from '../BaoDuong/optionBaoDuong/OptionBaoDuong'
+import DonBaoDuong from '../BaoDuong/DonBaoDuong/DonBaoDuong'
 
 
 
@@ -39,6 +40,7 @@ function AdminManager() {
 
     const [show, setShow] = useState(false)
     const [showPK, setShowPK] = useState(false)
+    const [showBD, setShowBD] = useState(false)
 
     useEffect(() => {
         if (isAdmin) {
@@ -53,12 +55,12 @@ function AdminManager() {
         setShow(true)
     }
 
-    const handleShowPhuKien = () => {
-        setShowPK(true)
+    const handleShowBaoDuong = () => {
+        setShowBD(true)
     }
 
-    const handleClosePhuKien = () => {
-        setShowPK(false)
+    const handleCloseBaoDuong = () => {
+        setShowBD(false)
     }
 
     const handleClose = () => {
@@ -107,7 +109,7 @@ function AdminManager() {
                                 </Modal>
 
                                 <Modal
-                                    show={showPK}
+                                    show={showBD}
                                     backdrop="static"
                                     keyboard={false}
                                 >
@@ -118,18 +120,21 @@ function AdminManager() {
                                         <div className='buttonChucNang d-flex'>
                                             <div className='container'>
                                                 <div className='row'>
-                                                    <div className='ClickChucNang d-flex justify-content-center col-6'>
-                                                        <NavLink onClick={handleClosePhuKien} to="/all-category-PhuKien" className="category"><i className="fa-solid fa-list"></i><span>Categor Phụ kiện</span></NavLink>
+                                                    <div className='ClickChucNang d-flex justify-content-center col-6 pb-2'>
+                                                        <NavLink onClick={handleCloseBaoDuong} to="/all-loai-baoduong" className="category"><i className="fa-solid fa-list"></i><span>Loại bảo dưỡng</span></NavLink>
                                                     </div>
-                                                    <div className='ClickChucNang d-flex justify-content-center col-6'>
-                                                        <NavLink onClick={handleClosePhuKien} to="/all-category-product" className="category"><i className="fa-solid fa-list"></i><span>Product Phụ Kiện</span></NavLink>
+                                                    <div className='ClickChucNang d-flex justify-content-center col-6 pb-2'>
+                                                        <NavLink onClick={handleCloseBaoDuong} to="/all-option-baoduong" className="category"><i className="fa-solid fa-list"></i><span>Option Bảo dưỡng</span></NavLink>
+                                                    </div>
+                                                    <div className='ClickChucNang d-flex justify-content-center col-6 pb-2'>
+                                                        <NavLink onClick={handleCloseBaoDuong} to="/all-don-baoduong" className="category"><i className="fa-solid fa-list"></i><span>Đơn Bảo dưỡng</span></NavLink>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </Modal.Body>
                                     <Modal.Footer>
-                                        <Button variant="primary" type="submit" onClick={handleClosePhuKien}>Thoát</Button>
+                                        <Button variant="primary" type="submit" onClick={handleCloseBaoDuong}>Thoát</Button>
                                     </Modal.Footer>
                                 </Modal>
 
@@ -154,7 +159,8 @@ function AdminManager() {
                                             <NavLink to="/all-laithu" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All Lái thử</span></NavLink>
                                             <NavLink to="/all-daily" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Địa chỉ đại lý</span></NavLink>
                                             <NavLink to="/allproduct" onClick={handleShow} className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Product</span></NavLink>
-                                            <NavLink to="/allphukien" onClick={handleShowPhuKien} className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Phụ kiện</span></NavLink>
+                                            {/* <NavLink to="/allphukien" onClick={handleShowPhuKien} className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Phụ kiện</span></NavLink> */}
+                                            <NavLink to="/allbaoduong" onClick={handleShowBaoDuong} className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Bảo dưỡng</span></NavLink>
                                         </div>
 
                                     </div>
@@ -173,9 +179,10 @@ function AdminManager() {
                                         <Route path="/all-product" component={isAdmin ? ProductCarAdmin : NotFound} exact />
                                         <Route path="/create-product" component={isAdmin ? CreateProduct : NotFound} exact />
                                         <Route path="/edit-product/:id" component={isAdmin ? EditProduct : NotFound} exact />
-                                        <Route path="/all-category-PhuKien" component={isAdmin ? LoaiPhuKien : NotFound} exact />
-                                        <Route path="/all-category-product" component={isAdmin ? ProductAccessory : NotFound} exact />
+                                        <Route path="/all-loai-baoduong" component={isAdmin ? LoaiPhuKien : NotFound} exact />
+                                        <Route path="/all-option-baoduong" component={isAdmin ? OptionBaoDuong : NotFound} exact />
                                         <Route path="/all-daily" component={isAdmin ? AllDaiLy : NotFound} exact />
+                                        <Route path="/all-don-baoduong" component={isAdmin ? DonBaoDuong : NotFound} exact />
                                     </Switch>
                                 </div>
                             </Router>

@@ -11,7 +11,8 @@ const cron = require('node-cron')
 
 const { getCronJob } = require('../backend/src/controller/laithuController')
 
-const Data = require('../backend/src/model/laithuModel')
+const Data = require('../backend/src/model/laithuModel');
+const { cronEmailDenHenBaoDuong } = require('./src/controller/datlichbaoduongController');
 
 //const connectDB = require('./Config/ConnectDB')
 
@@ -41,6 +42,9 @@ app.use('/api', require('./src/router/convertionRouter'))
 app.use('/api', require('./src/router/messageRouter'))
 app.use('/api', require('./src/router/categoryAccessoryRouter'))
 app.use('/api', require('./src/router/dailyRouter'))
+app.use('/api', require('./src/router/loaibaoduongRouter'))
+app.use('/api', require('./src/router/optionBaoDuongRouter'))
+app.use('/api', require('./src/router/datlichbaoduongRouter'))
 
 //connect to mongoDB
 const URI = process.env.MONGODB_URL
@@ -62,6 +66,7 @@ mongoose.connect(URI, {
 
 cron.schedule(`*/30 * * * * *`, () => {
     getCronJob()
+    cronEmailDenHenBaoDuong()
 }, {
     scheduled: true,
     timezone: "Asia/Ho_Chi_Minh"
