@@ -102,7 +102,7 @@ const EmailHenLaiThu = (giatri) => {
                 20px; padding-bottom: 20px; display: flex; justify-content:
                 center;">
               <div style="border-radius:4px;padding:14px 24px 15px 24px;text-align:left;font-family:inherit;width:350px;margin:auto;font-style:italic;font-weight:400;flex-direction: column;">
-                    <span style="padding-bottom: 5px;line-height:20px; display: block; margin-top: 10px;"><span>Xin chào ${giatri.nhanxung === 1 ? "Anh" : "Chị"}</span><span>${giatri.idUser.name}</span></span>
+                    <span style="padding-bottom: 5px;line-height:20px; display: block; margin-top: 10px;"><span>Xin chào ${giatri.nhanxung === 1 ? "Anh" : "Chị"} </span><span>${giatri.idUser.name}</span></span>
                     <span style="padding-bottom: 5px;line-height:20px; display: block; margin-top: 10px;">Anh có lịch hẹn lái thử vào ngày <span style="color: blue;">${giatri.dates}</span> lúc <span style="color: blue;">${giatri.times}</span></span>
                     <span style="padding-bottom: 5px;line-height:20px; display: block; margin-top: 10px;">Với mẫu xe <span style="color: red;">${giatri.Idcar.name}</span> thuộc loại xe <span style="color: red;">${giatri.type}</span></span>
                     <span style="padding-bottom: 5px;line-height:20px; display: block; margin-top: 10px;">Tại đại lý <span style="color: green;">${giatri.Iddaily.Name}</span>, địa chỉ tại: <span style="color: green;">${giatri.Iddaily.Address}</span></span>

@@ -1,0 +1,100 @@
+.span-edit-cricle {
+    display: grid;
+}
+
+.DonBaoDuong {
+    .ManagerDonBaoDuong-body {
+        .LaiThuItems {
+            width: 34%;
+            height: auto;
+            transition: all .4s ease-out;
+
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            animation-duration: .3s;
+
+            margin-bottom: 10px;
+
+            .LaiThuItems-border {
+                // margin: 2px;
+
+                .LaiThuItems-header {
+                    width: 10%;
+                    display: flex;
+
+                    .LaiThuItems-img {
+                        width: 46px;
+                        padding: 2px;
+
+                        img {
+                            width: 100%;
+                            border-radius: 50%;
+                            background-size: cover;
+                        }
+                    }
+                }
+
+                .LaiThuItems-body {
+                    display: flex;
+                    width: 61%;
+
+                    .LaiThuItems-name {
+                        font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                        font-size: 14px;
+                        font-weight: 400;
+                        font-style: italic;
+
+                        margin-left: 10px;
+                        display: flex;
+                    }
+
+                    .LaiThuItems-Date {
+                        display: flex;
+                        align-items: center;
+                        padding-right: 2px;
+                        padding-left: 2px;
+                        animation-duration: .3s;
+                        transition: visibility 0s, opacity 0.5s linear;
+
+                        font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                        font-size: 14px;
+                        font-weight: 400;
+                        font-style: italic;
+                        color: rgb(93, 70, 245);
+                    }
+                }
+
+
+                .logoMer {
+                    display: flex;
+                    width: 30%;
+                    height: 49px;
+                    background-color: black;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0;
+                    margin: 0;
+
+                    img {
+                        height: 30px;
+                        border-radius: 50%;
+                    }
+                }
+            }
+
+            &:hover {
+                width: 50%;
+                text-decoration: none;
+                // background: rgba(159, 201, 243, 0.128);
+                //background-color: transparent;
+                box-shadow: 0 8px 32px 0 rgba(184, 220, 245, 0.1);
+                // border-radius: 20%;
+                border-top-left-radius: 30px;
+                border-bottom-left-radius: 30px;
+                // border: 1px solid rgba(39, 30, 119, 0.37);
+                // border: 1px solid #f8d4d4;
+                transition: all .4s ease-in;
+            }
+        }
+    }
+}

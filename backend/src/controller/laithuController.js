@@ -85,19 +85,24 @@ const LaiThuController = {
             }).populate('idUser').populate('Idcar').populate('Iddaily')
 
             for (let i = 0; i < res.length; i++) {
-                if (res[i].dates === date) {
-                    if (res[i].checkGuiThongBao === 0) {
-                        EmailHenLaiThu(res[i])
-                        res[i].checkGuiThongBao = 1
-                        await res[i].save()
-                        console.log("đã gửi")
+                if (res[i].checkedEmail === 1) {
+                    if (res[i].dates === date) {
+                        if (res[i].checkGuiThongBao === 0) {
+                            EmailHenLaiThu(res[i])
+                            res[i].checkGuiThongBao = 1
+                            await res[i].save()
+                            console.log("đã gửi Email lái thử")
+                        }
+                        else {
+                            console.log("gửi email lái thử rồi")
+                        }
                     }
                     else {
-                        console.log("gửi rồi")
+                        console.log("không bằng ngày lái thử")
                     }
                 }
                 else {
-                    console.log("không bằng")
+                    console.log("không gửi email được")
                 }
             }
 

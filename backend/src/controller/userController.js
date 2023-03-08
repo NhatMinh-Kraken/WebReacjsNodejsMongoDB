@@ -442,6 +442,17 @@ const userController = {
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
+    },
+
+    findNvCV: async (req, res) => {
+        try {
+            const get = await Users.find({
+                chucvucuthe: 2
+            })
+            res.json(get)
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
     }
 }
 

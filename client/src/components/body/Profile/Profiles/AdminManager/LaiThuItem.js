@@ -34,23 +34,30 @@ function LaiThuItem({ laithus, setCallback, callback }) {
 
     const handleSubmit = async () => {
         try {
-            if (laithus.checked == 1) {
-                setCallback(!callback)
-                setIsShow(false)
-                toast.error("Đơn hàng này đã hoàn thành. Bạn không thể sửa lại !!!!")
-
-            } else {
-                if (window.confirm("Bạn có chắc là đơn hàng này đã hoàn thành hay không?")) {
-                    const res = await Axios.patch(`/api/laithu/${laithus._id}`, {
-                        checked: 1,
-                        LaiThuID: laithus._id
-                    }, {
-                        headers: { Authorization: token }
-                    })
+            if (laithus.duyet == 1) {
+                if (laithus.checked == 1) {
                     setCallback(!callback)
                     setIsShow(false)
-                    toast.success(res.data.msg)
+                    toast.error("Đơn hàng này đã hoàn thành. Bạn không thể sửa lại !!!!")
+
+                } else {
+                    if (window.confirm("Bạn có chắc là đơn hàng này đã hoàn thành hay không?")) {
+                        const res = await Axios.patch(`/api/laithu/${laithus._id}`, {
+                            checked: 1,
+                            LaiThuID: laithus._id
+                        }, {
+                            headers: { Authorization: token }
+                        })
+                        setCallback(!callback)
+                        setIsShow(false)
+                        toast.success(res.data.msg)
+                    }
                 }
+            }
+            else {
+                setCallback(!callback)
+                setIsShow(false)
+                toast.error("Đơn hàng này chưa duyệt")
             }
         } catch (err) {
             err.response.data.msg && toast.error(err.response.data.msg)
@@ -72,7 +79,6 @@ function LaiThuItem({ laithus, setCallback, callback }) {
             err.response.data.msg && toast.error(err.response.data.msg)
         }
     }
-    console.log(laithus)
     // const date = new Date()
     // console.log(date.toLocaleDateString())
 

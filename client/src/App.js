@@ -18,12 +18,14 @@ import DeatailProduct from './components/ProductCar/Detail/DeatailProduct'
 import AOS from 'aos'
 import "aos/dist/aos.css";
 import Loadding from './components/utils/Loadding/loadding';
-import DeatailProductBody from './components/ProductCar/Detail/DeatailProductBody';
+
 import ManagerLayout from './components/body/ManagerLayout';
 import MessagerLayout from './components/body/MessagerLayout';
 
 import { DataProviderNew } from './GlobalState '
 import LaiThu from './components/ProductCar/LaiThu/LaiThu';
+
+import BaoDuong from './components/BaoDuong/BaoDuong';
 
 
 
@@ -80,6 +82,7 @@ function App() {
         <div className="App">
           {/* <Route path={path.PRODUCTCAR} component={Home} /> */}
           <Route path={path.HOME} component={Home} exact />
+          <Route path="/datlich-baoduong" component={BaoDuong} exact />
           <Route path="/detail_product/:id" component={DeatailProduct} exact />
           <Route path="/dangky_laithu/:id" component={LaiThu} exact />
           <Body />

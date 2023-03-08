@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Dropdown from "./Dropdown";
+import { Link } from "react-router-dom"
 
 const NavMenuItems = ({ items, depthLevel }) => {
   const [dropdown, setDropdown] = useState(false);
@@ -57,7 +58,7 @@ const NavMenuItems = ({ items, depthLevel }) => {
         </>
       ) : (
         <>
-          <button type="button" className="text-title">{items.title}</button>
+          <Link to={items.link} className="text-title text-black">{items.title}</Link>
         </>
       )}
     </div >

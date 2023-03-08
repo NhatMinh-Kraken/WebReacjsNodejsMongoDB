@@ -232,7 +232,7 @@ function ProfileAllUser() {
             setLoadding(false);
         } catch (err) {
             console.log(err)
-            toast.error(`Dữ liệu không phụ hợp. Vui lòng tham khảo "["ID", "Name", "Email", "Phone", "ChucVu", "ChucVuCuThe"]" `)
+            toast.error(`Dữ liệu không phụ hợp. Vui lòng tham khảo "["ID", "Name", "Email", "Phone", "ChucVu = "Nhân viên"", "ChucVuCuThe = ví dụ "Nhân viên kỹ thuật""]" `)
         }
     }
 
@@ -405,6 +405,11 @@ function ProfileAllUser() {
                                             requiredFields.join(", ")
                                         }
                                     </Form.Text>
+                                    <Form.Text>
+                                        {
+                                            "ví dụ như : ChucVu = 'Nhân viên' ChucVuCuThe = ví dụ '1' => nhân viên kỹ thuật"
+                                        }
+                                    </Form.Text>
                                 </div>
 
                                 <div className='pl-2 d-flex'>
@@ -444,7 +449,7 @@ function ProfileAllUser() {
                                             <td className='col-3 text-center'>{user.name}</td>
                                             <td className='col-4 text-center'>{user.email}</td>
                                             <td className='col-1 text-center m-0'>{user.role === 1 ? <i className="fa-solid fa-circle-check text-primary"></i> : <i className="fa-solid fa-circle-xmark text-danger"></i>}</td>
-                                            <td className='col-1 text-center m-0'>{user.chucvu === 2 ? <i className="fa-solid fa-circle-check text-primary"></i> : <i className="fa-solid fa-circle-xmark text-danger"></i>}</td>
+                                            <td className='col-1 text-center m-0'>{user.chucvu === "Nhân viên" ? <i className="fa-solid fa-circle-check text-primary"></i> : <i className="fa-solid fa-circle-xmark text-danger"></i>}</td>
                                             <td className='col-2 text-center'>
                                                 <a onClick={() => handleShowAll(user._id, user.name, user.email, user.avatar, user.sex, user.numberphone, user.nameCity, user.nameDis, user.nameWard)}><i className="fa-solid fa-eye text-success mr-2" title='show'></i></a>
                                                 <Link to={`/edit_user/${user._id}`}><i className="fa-solid fa-pen-to-square mr-2 text-primary" title='edit'></i></Link>

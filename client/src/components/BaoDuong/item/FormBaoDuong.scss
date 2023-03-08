@@ -1,0 +1,761 @@
+.formBaoDuong {
+    .formBaoDuong-header {
+        -webkit-font-smoothing: antialiased;
+        font: inherit;
+        font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 2rem;
+        line-height: 2.5rem;
+        padding: 4 4 0 2;
+        color: #333;
+        font-family: "DaimlerCAC-Regular", serif;
+    }
+
+    .formBaoDuong-Step {
+        .BaoDuongSteps {
+            transition: 500ms ease-in-out;
+            border-radius: 50%;
+
+            .BaoDuongSteps-completed {
+                background-color: #0078d6;
+            }
+
+            .BaoDuongSteps-border-number {
+                transition: 500ms ease-in-out;
+                border-radius: 50%;
+                height: 32px;
+                width: 32px;
+                padding: 10px;
+            }
+        }
+
+        .BaoDuongSteps-des {
+            color: #9f9f9f;
+            font-size: 13px;
+            transition: 500ms ease-in-out;
+        }
+
+        .BaoDuongSteps-boder {
+            border: 1.25px solid #9f9f9f;
+            width: 160px;
+            transition: 500ms ease-in-out;
+            //margin-top: 2px;
+            position: absolute;
+            left: 3px;
+        }
+    }
+
+    .form-thongtin-steper-baoduong {
+        height: 100%;
+
+        .form-car-baoduong {
+            .form-car-baoduong-header {
+                -webkit-font-smoothing: antialiased;
+                font: inherit;
+                font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                font-style: normal;
+                font-weight: 400;
+                max-width: 70ch;
+                word-wrap: break-word;
+                padding-bottom: 2rem;
+                white-space: pre-wrap;
+
+                span {
+                    font-size: 1.5rem;
+                    line-height: 2.25rem;
+                }
+
+                p {
+                    font-size: 1.125rem;
+                    line-height: 1.75rem;
+                }
+            }
+
+            .form-car-baoduong-body {
+                .form-car-baoduong-body-thongtin {
+                    box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .1);
+                    background-color: #fff;
+
+                    .form-baoduong-thongtin-car-header {
+                        span {
+                            color: #333;
+                            -moz-osx-font-smoothing: grayscale;
+                            -webkit-font-smoothing: antialiased;
+                            font: inherit;
+                            font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                            font-style: normal;
+                            font-weight: 700;
+                            font-size: 1rem;
+                            line-height: 1.5rem;
+                            padding: 0 2rem 1.5rem 0;
+                        }
+                    }
+
+                    .form-baoduong-thongtin-car-body {
+                        .form-baoduong-thongtin-car-body-border {
+                            .form-baoduong-thongtin-car-body-button {
+                                width: 100%;
+                                box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .1);
+                                background-color: #f8f8f8;
+
+                                &:hover {
+                                    transition: 500ms ease-in-out;
+                                    background-color: #0078d6;
+                                }
+
+                                &:not(:hover) {
+                                    transition: 500ms ease-in-out;
+                                }
+                            }
+
+                            .FormThongTinCar-User {
+                                .FormThongTinCar-User-loaixe-back {
+                                    border: 1px solid #9f9f9f;
+
+                                    .FormThongTinCar-User-back {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: flex-start;
+                                        cursor: pointer;
+                                    }
+                                }
+
+                                .FormThongTinCar-User-header {
+                                    .label-FormThongTinCar-User {
+                                        font-size: 12px;
+                                        font-size: #bbb;
+                                    }
+
+                                    .input-FormThongTinCar-User {
+                                        border: 1px solid #bbb;
+                                        outline: none;
+                                        background-color: #f8f8f8;
+                                        width: 100%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .Form-BaoDuong-DichVu {
+            .Form-BaoDuong-DichVu-header {
+                display: inline-block;
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-font-smoothing: antialiased;
+                font: inherit;
+                font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                font-style: normal;
+                margin: 3rem 0 0.5rem 0;
+
+                .Form-BaoDuong-DichVu-header-span {
+                    font-size: 1.5rem;
+                    line-height: 2.25rem;
+                    color: #000;
+                    font-weight: 700;
+                }
+
+                p {
+                    -webkit-font-smoothing: antialiased;
+                    font: inherit;
+                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 1rem;
+                    line-height: 1.5rem;
+                    color: #9f9f9f;
+                    margin-left: 0.5rem;
+                }
+
+                span {
+                    font-size: 1.125rem;
+                    line-height: 1.75rem;
+                    color: #000;
+                }
+            }
+
+            .Form-BaoDuong-DichVu-body {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+
+                .Form-BaoDuong-DichVu-body-header {
+                    color: #333;
+                    -moz-osx-font-smoothing: grayscale;
+                    -webkit-font-smoothing: antialiased;
+                    font: inherit;
+                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 1rem;
+                    line-height: 1.5rem;
+                    margin: 3rem 0 1.5rem 0;
+                    padding-bottom: 0.5rem;
+                    border-bottom: 1px solid #e8e8e8;
+
+                    img {
+                        width: 32px;
+                        height: 32px;
+                    }
+
+                    span {
+                        font-size: 1.125rem;
+                        line-height: 1.75rem;
+                    }
+                }
+
+                .Form-BaoDuong-DichVu-body-items {
+                    .Form-BaoDuong-DichVu-items {
+                        border: 1px solid #0078d6;
+                        cursor: pointer;
+                        width: 100%;
+                        height: 100%;
+                        min-height: 150px;
+                        box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .1);
+                        background-color: #fff;
+
+                        .Form-BaoDuong-DichVu-items-check {
+                            padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+
+                            .Form-BaoDuong-DichVu-items-name {
+                                -webkit-font-smoothing: antialiased;
+                                font: inherit;
+                                font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                                font-style: normal;
+                                font-weight: 700;
+                                font-size: 1rem;
+                                line-height: 1.5rem;
+                                letter-spacing: .025em;
+                                margin-right: 2rem;
+                                flex-shrink: 1;
+                                overflow: hidden;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                            }
+
+                            .Form-items-check {
+                                .check-box-items {
+                                    height: 36px;
+                                    width: 36px;
+                                    border-radius: 50%;
+                                    vertical-align: middle;
+                                    appearance: none;
+                                    -webkit-appearance: none;
+                                    outline: none;
+                                    cursor: pointer;
+                                    border: 1px solid #bbb;
+                                    background-color: #f4f4f4;
+                                    outline-offset: 0;
+                                    overflow: visible;
+                                    text-transform: none;
+
+                                    &:checked {
+                                        background-color: #0078d6;
+
+                                        &::after {
+                                            content: "\f00c";
+                                            color: #fff;
+                                            font-family: "Font Awesome 5 Free";
+                                            display: inline-block;
+                                            padding-right: 3px;
+                                            vertical-align: middle;
+                                            font-weight: 900;
+                                            font-size: 18px;
+                                            font-style: italic;
+                                            display: flex;
+                                            justify-content: center;
+                                            padding-top: 3px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .Form-BaoDuong-DichVu-items-thongtin {
+                            padding: 1.5rem 1.5rem 0 1.5rem;
+                            color: #0078d6;
+
+                            i {
+                                font-size: 14px;
+                            }
+
+                            span {
+                                -webkit-font-smoothing: antialiased;
+                                font: inherit;
+                                font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                                font-size: 1rem;
+                                font-style: normal;
+                                font-weight: 700;
+                                letter-spacing: .025em;
+                                line-height: 1.5rem;
+                            }
+
+                            &:hover {
+                                text-decoration: underline;
+                                color: #036dc1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .form-nguyen-vong {
+            .Form-NguyenVong-header {
+                display: inline-block;
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-font-smoothing: antialiased;
+                font: inherit;
+                font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                font-style: normal;
+                margin: 3rem 0 0.5rem 0;
+
+                .Form-NguyenVong-header-span {
+                    font-size: 1.5rem;
+                    line-height: 2.25rem;
+                    color: #000;
+                    font-weight: 700;
+                }
+
+                p {
+                    -webkit-font-smoothing: antialiased;
+                    font: inherit;
+                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 1rem;
+                    line-height: 1.5rem;
+                    color: #9f9f9f;
+                    margin-left: 0.5rem;
+                }
+
+                span {
+                    font-size: 1.125rem;
+                    line-height: 1.75rem;
+                    color: #000;
+                }
+            }
+
+            .Form-NguyenVong-body {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+
+                .Form-NguyenVong-co-van {
+                    display: flex;
+                    border: 1px solid #e8e8e8;
+                    box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .1);
+                    background-color: #fff;
+
+                    .Form-NguyenVong-co-van-img {
+                        border-radius: 50%;
+                        border: 1px solid #e8e8e8;
+                        background-color: transparent;
+                        width: 48px;
+                        height: 48px;
+
+                        i {
+                            font-size: 24px;
+                            color: #bbb;
+                        }
+                    }
+
+                    .click-co-van {
+                        .check-box-items-covan {
+                            height: 36px;
+                            width: 36px;
+                            border-radius: 50%;
+                            vertical-align: middle;
+                            appearance: none;
+                            -webkit-appearance: none;
+                            outline: none;
+                            cursor: pointer;
+                            border: 1px solid #bbb;
+                            background-color: #f4f4f4;
+                            outline-offset: 0;
+                            overflow: visible;
+                            text-transform: none;
+
+                            &:checked {
+                                background-color: #0078d6;
+
+                                &::after {
+                                    content: "\f00c";
+                                    color: #fff;
+                                    font-family: "Font Awesome 5 Free";
+                                    display: inline-block;
+                                    padding-right: 3px;
+                                    vertical-align: middle;
+                                    font-weight: 900;
+                                    font-size: 18px;
+                                    font-style: italic;
+                                    display: flex;
+                                    justify-content: center;
+                                    padding-top: 3px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .Form-NguyenVong-body-time {
+                .Form-NguyenVong-time-header {
+                    display: inline-block;
+                    -moz-osx-font-smoothing: grayscale;
+                    -webkit-font-smoothing: antialiased;
+                    font: inherit;
+                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                    font-style: normal;
+                    margin: 3rem 0 0.5rem 0;
+
+                    .Form-NguyenVong-time-header-span {
+                        font-size: 1.5rem;
+                        line-height: 2.25rem;
+                        color: #000;
+                        font-weight: 700;
+                    }
+
+                    span {
+                        font-size: 1.125rem;
+                        line-height: 1.75rem;
+                        color: #000;
+                    }
+                }
+
+                .Calendar-form {
+                    box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .1);
+                    background-color: #fff;
+
+                    .react-calendar {
+
+                        border-radius: .25rem;
+                        text-decoration: none !important;
+                        border: 1px solid #fff;
+                        width: 655px;
+                        padding-bottom: .25rem;
+
+                    }
+
+                    abbr[data-original-title],
+                    abbr[title] {
+                        text-decoration: none !important;
+                    }
+
+                    .react-calendar__tile--now {
+                        background-color: #036dc1;
+                        border: 1px solid #0078d6;
+                    }
+
+                    .react-calendar__navigation__label {
+                        border-bottom-left-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                        border-bottom: 1px solid #9f9f9f;
+                    }
+
+                    .react-calendar__navigation__arrow {
+                        border-radius: 50%;
+                        border: 1px solid #e8e8e8;
+                        margin-left: 5px;
+                        margin-right: 5px;
+                    }
+                }
+
+                .Form-NguyenVong-time-body {
+                    .Form-NguyenVong-time-body-check {
+                        box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .1);
+                        background-color: #fff;
+
+                        .Form-NguyenVong-time-body-check-true {
+                            border-radius: 50%;
+                            border: 1px solid green;
+                            background-color: green;
+                            width: 25px;
+                            height: 25px;
+
+                            i {
+                                color: #fff;
+                                font-size: 14px;
+                            }
+                        }
+                    }
+
+                    .Form-NguyenVong-body-check-time {
+                        background-color: #fff;
+                        box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .1);
+
+                        .Form-check-time {
+                            padding: 1rem;
+                            cursor: pointer;
+
+                            .Form-check-time-border {
+                                //box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .1);
+                                background-color: #fff;
+                                border: 1px solid #e8e8e8;
+                                border-radius: 4px;
+
+                                &:hover {
+                                    transition: 500ms ease-in-out;
+                                    background-color: #0078d6;
+                                }
+
+                                &:not(:hover) {
+                                    transition: 500ms ease-in-out;
+                                }
+
+                                span {
+                                    -webkit-font-smoothing: antialiased;
+                                    font: inherit;
+                                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                                    font-style: normal;
+                                    font-weight: 500;
+                                    font-size: 1.25rem;
+                                    line-height: 1.5rem;
+                                    width: 100%;
+                                    color: #333;
+                                    border-radius: 4px;
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .form-tong-quan {
+            .Form-TongQuan-header {
+                display: inline-block;
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-font-smoothing: antialiased;
+                font: inherit;
+                font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                font-style: normal;
+                margin: 3rem 0 0.5rem 0;
+
+                .Form-TongQuan-header-span {
+                    font-size: 1.5rem;
+                    line-height: 2.25rem;
+                    color: #000;
+                    font-weight: 700;
+                }
+
+                p {
+                    -webkit-font-smoothing: antialiased;
+                    font: inherit;
+                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 1rem;
+                    line-height: 1.5rem;
+                    color: #9f9f9f;
+                    margin-left: 0.5rem;
+                }
+
+                span {
+                    font-size: 1.125rem;
+                    line-height: 1.75rem;
+                    color: #000;
+                }
+            }
+
+            .Form-TongQuan-body {
+                .form-thongtin {
+                    background-color: #fff;
+                    box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .1);
+
+                    .form-thongtin-header {
+                        span {
+                            -webkit-font-smoothing: antialiased;
+                            font: inherit;
+                            font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                            font-style: normal;
+                            font-weight: 700;
+                            font-size: 1rem;
+                            line-height: 1.5rem;
+                            letter-spacing: .025em;
+                            color: #333;
+                        }
+                    }
+
+                    .thongtin-diachi {
+                        span {
+                            p {
+                                color: #9f9f9f;
+                                font-size: 12;
+                                font-weight: 200;
+                            }
+                        }
+                    }
+
+                    .input-controller-border {
+                        border: 1px solid #e8e8e8;
+                        padding: 1.8rem;
+                        border-bottom: 1px solid #0078d6;
+                    }
+
+                    .select-controller-border {
+                        border: 1px solid #e8e8e8;
+                        padding: 1rem;
+                        border-bottom: 1px solid #0078d6;
+                    }
+                }
+
+                .form-thongtin-right {
+                    background-color: #fff;
+                    box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .1);
+                    padding-right: 15px;
+                    padding-left: 15px;
+
+                    .form-thongtin-right-header {
+                        span {
+                            -webkit-font-smoothing: antialiased;
+                            font: inherit;
+                            font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                            font-style: normal;
+                            font-weight: 700;
+                            font-size: 1rem;
+                            line-height: 1.5rem;
+                            letter-spacing: .025em;
+                            color: #333;
+                        }
+                    }
+
+                    .form-thongtin-right-body {
+                        .form-thongtin-body-right-date-time {
+                            span {
+                                -webkit-font-smoothing: antialiased;
+                                font: inherit;
+                                font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 1rem;
+                                line-height: 1.5rem;
+                                letter-spacing: .025em;
+                                color: #696969;
+                            }
+
+                            .dates-times {
+                                -webkit-font-smoothing: antialiased;
+                                font: inherit;
+                                font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                                font-style: normal;
+                                font-weight: 600;
+                                font-size: 1rem;
+                                line-height: 1.5rem;
+                                letter-spacing: .025em;
+                                color: #0078d6;
+                            }
+                        }
+
+                        .form-thongtin-body-right-thongtinxe {
+                            border-top: 1px solid #e8e8e8;
+                            padding-bottom: 1rem;
+
+                            span {
+                                -webkit-font-smoothing: antialiased;
+                                font: inherit;
+                                font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 1rem;
+                                line-height: 1.5rem;
+                                letter-spacing: .025em;
+                                color: #696969;
+                            }
+
+                            .items-nhap {
+                                -webkit-font-smoothing: antialiased;
+                                font: inherit;
+                                font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                                font-style: normal;
+                                font-weight: 600;
+                                font-size: 1rem;
+                                line-height: 1.5rem;
+                                letter-spacing: .025em;
+                                color: #696969;
+
+                                span {
+                                    color: #000;
+                                    font-weight: bold;
+                                }
+                            }
+
+                            p {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+
+                    .form-thong-tin-baogia {
+                        border-top: 1px solid #e8e8e8;
+                        padding-bottom: 1rem;
+
+                        .form-thong-tin-baogia-header {
+                            .form-thong-tin-baogia-header-left {
+                                .items-nhap {
+                                    -webkit-font-smoothing: antialiased;
+                                    font: inherit;
+                                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                                    font-style: normal;
+                                    font-weight: 700;
+                                    font-size: 1rem;
+                                    line-height: 1.5rem;
+                                }
+
+                                p {
+                                    -webkit-font-smoothing: antialiased;
+                                    font: inherit;
+                                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    font-size: .75rem;
+                                    line-height: 1rem;
+                                    letter-spacing: .01875em;
+                                    color: #333;
+                                }
+                            }
+
+                            .form-thong-tin-baogia-header-right {
+                                -webkit-font-smoothing: antialiased;
+                                font: inherit;
+                                font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                                font-style: normal;
+                                font-weight: 700;
+                                font-size: 1.25rem;
+                                line-height: 1.5rem;
+                            }
+                        }
+
+                        .luu-y {
+                            -webkit-font-smoothing: antialiased;
+                            font: inherit;
+                            font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: .75rem;
+                            line-height: 1rem;
+                            letter-spacing: .01875em;
+                            color: #f87272;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.form-chitiet-baoduong {
+    .form-chitiet-baoduong-header {
+        -webkit-font-smoothing: antialiased;
+        font: inherit;
+        font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 700;
+        letter-spacing: .025em;
+        line-height: 1.5rem;
+    }
+}
