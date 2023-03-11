@@ -9,5 +9,7 @@ router.route('/laithu/:id').patch(auth, authAdmin, LaiThuController.getSuccessLa
 
 router.route('/cron/:id').put(auth, authAdmin, LaiThuController.cronJob)
 
+router.route('/donlaithu-infor/:id').get(LaiThuController.getDonLaiThuInfor)
+
 
 module.exports = router

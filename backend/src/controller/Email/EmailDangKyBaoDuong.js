@@ -40,7 +40,7 @@ const EmailDangKyBaoDuong = (IdOptionBaoDuong, IdLoaiXe, energy, BienSo, QuangDu
 
     const mailOptions = {
         from: SENDER_EMAIL_ADDRESS,
-        to: EmailKhachHang,
+        to: email,
         subject: "DEVELOPER: Nguyễn Nhật Minh",
         html: `
                 <div style="max-width: 700px; margin:auto; border: 1px solid #f0f0f0;

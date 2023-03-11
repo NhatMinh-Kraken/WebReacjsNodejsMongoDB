@@ -1,0 +1,80 @@
+.button-tabs {
+    border-bottom: .1rem solid #f9f9f9;
+
+    .nav-link {
+        background-color: transparent !important;
+        color: #495057;
+        border: none;
+
+        font-size: 14px;
+        font-weight: 600;
+        font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+
+        &.active {
+            border-bottom: .1rem solid #0078d6;
+            color: #0078d6;
+        }
+    }
+}
+
+.form-all-laithu {
+    .form-laithu-view-user {
+        background-color: #fff;
+        border-bottom: 1px solid #303030eb;
+
+        .form-laithu-view-user-header {
+            border-bottom: 1px solid #f9f9f9;
+            font-size: 14px;
+            // background-color: #fff;
+
+            img {
+                border-radius: 50%;
+                width: 32px;
+                height: 32px;
+            }
+
+            span {
+                font-size: 1.5rem;
+                line-height: 2.25rem;
+                color: #000;
+                font-weight: 700;
+                display: inline-block;
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-font-smoothing: antialiased;
+                font: inherit;
+                font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                font-style: normal;
+            }
+        }
+
+        .form-laithu-view-user-body {
+            .form-laithu-view-body {
+                .form-laithu-view-body-img {
+                    img {
+                        width: 100%;
+                        height: 90px;
+                        border: 1px solid #f9f9f9;
+                        display: block;
+                        object-fit: cover;
+                    }
+                }
+
+                .form-laithu-view-body-name {
+                    display: inline-block;
+                    -moz-osx-font-smoothing: grayscale;
+                    -webkit-font-smoothing: antialiased;
+                    font: inherit;
+                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                    font-style: normal;
+
+                    span {
+                        font-size: 15px;
+                        color: #000;
+                    }
+                }
+
+                // .form-laithu-view-body-date-times {}
+            }
+        }
+    }
+}

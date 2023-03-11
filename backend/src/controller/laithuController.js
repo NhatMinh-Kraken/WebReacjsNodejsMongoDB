@@ -109,6 +109,17 @@ const LaiThuController = {
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
+    },
+
+    getDonLaiThuInfor: async (req, res) => {
+        try {
+            const laithu = await LaiThus.find({
+                idUser: req.params.id
+            }).populate('idUser').populate('Idcar').populate('Iddaily')
+            res.json(laithu)
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
     }
 }
 

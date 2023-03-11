@@ -5,7 +5,7 @@
 .DonBaoDuong {
     .ManagerDonBaoDuong-body {
         .LaiThuItems {
-            width: 34%;
+            width: 60%;
             height: auto;
             transition: all .4s ease-out;
 
@@ -82,19 +82,19 @@
                 }
             }
 
-            &:hover {
-                width: 50%;
-                text-decoration: none;
-                // background: rgba(159, 201, 243, 0.128);
-                //background-color: transparent;
-                box-shadow: 0 8px 32px 0 rgba(184, 220, 245, 0.1);
-                // border-radius: 20%;
-                border-top-left-radius: 30px;
-                border-bottom-left-radius: 30px;
-                // border: 1px solid rgba(39, 30, 119, 0.37);
-                // border: 1px solid #f8d4d4;
-                transition: all .4s ease-in;
-            }
+            // &:hover {
+            //     width: 50%;
+            //     text-decoration: none;
+            //     // background: rgba(159, 201, 243, 0.128);
+            //     //background-color: transparent;
+            //     box-shadow: 0 8px 32px 0 rgba(184, 220, 245, 0.1);
+            //     // border-radius: 20%;
+            //     border-top-left-radius: 30px;
+            //     border-bottom-left-radius: 30px;
+            //     // border: 1px solid rgba(39, 30, 119, 0.37);
+            //     // border: 1px solid #f8d4d4;
+            //     transition: all .4s ease-in;
+            // }
         }
     }
 }

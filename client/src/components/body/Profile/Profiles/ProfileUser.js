@@ -10,10 +10,12 @@ import EditRoleUser from './AdminManager/EditRoleUser'
 import ChangePassword from '../ChangePassword/ChangePassword'
 import CategoryCar from './CategoryCar/CategoryCar'
 import CreateProduct from './ProductCarAdmin/CreateProduct'
-
+import { Button, Modal } from 'react-bootstrap'
 import Address from '../Address/Address'
 import ProductCarAdmin from './ProductCarAdmin/ProductCarAdmin'
 import EditProduct from './ProductCarAdmin/EditProduct'
+import DonBaoDuongUser from './DonHangUser/DonBaoDuongUser'
+import DonLaiThuUser from './DonHangUser/DonLaiThuUser'
 
 
 function ProfileUser() {
@@ -30,6 +32,8 @@ function ProfileUser() {
 
     const dispatch = useDispatch()
 
+    const [show, setShow] = useState(false)
+
     useEffect(() => {
         if (isAdmin) {
             fetchAllUsers(token).then(res => {
@@ -38,6 +42,13 @@ function ProfileUser() {
         }
     }, [token, isAdmin, dispatch, callback])
 
+    const handleShow = () => {
+        setShow(true)
+    }
+
+    const handleClose = () => {
+        setShow(false)
+    }
 
     return (
         <>
@@ -46,6 +57,33 @@ function ProfileUser() {
                     <div className='profile_page_body'>
                         <div className='row'>
                             <Router basename='/profile'>
+                                <Modal
+                                    show={show}
+                                    backdrop="static"
+                                    keyboard={false}
+                                >
+                                    <Modal.Header>
+                                        <Modal.Title>Lựu chọn chức năng</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body className='text-danger'>
+                                        <div className='buttonChucNang d-flex'>
+                                            <div className='container'>
+                                                <div className='row'>
+                                                    <div className='ClickChucNang d-flex justify-content-center col-6'>
+                                                        <NavLink onClick={handleClose} to="/don-lai-thu-user" className="category"><i className="fa-solid fa-list"></i><span>Đơn lái thử</span></NavLink>
+                                                    </div>
+                                                    <div className='ClickChucNang d-flex justify-content-center col-6'>
+                                                        <NavLink onClick={handleClose} to="/don-bao-duong-user" className="category"><i className="fa-solid fa-list"></i><span>Đơn bảo dưỡng</span></NavLink>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="primary" type="submit" onClick={handleClose}>Thoát</Button>
+                                    </Modal.Footer>
+                                </Modal>
+
                                 <div style={{ width: isOpen ? "25%" : "9%" }} className='profile_item_controll' >
                                     <div className='profile_item-avatar' style={{ justifyContent: isOpen ? "start" : "center" }} onClick={toggle}>
                                         <img src={avatar ? avatar : user.avatar} alt="" />
@@ -61,7 +99,7 @@ function ProfileUser() {
                                             <NavLink to="/changePassword" className={({ isActive }) => (isActive ? 'changePassword pb-2 active' : 'changePassword pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-key"></i><span style={{ display: isOpen ? "" : "none" }}>changePassword</span></NavLink>
                                         </div>
                                         <div className='infor_additional' style={{ alignItems: isOpen ? "flex-start" : "center" }}>
-                                            <a href="#" className='order pb-2'><i className="fa-solid fa-cart-shopping"></i><span style={{ display: isOpen ? "" : "none" }}>order</span></a>
+                                            <NavLink to="/don-hang" onClick={handleShow} className={({ isActive }) => (isActive ? 'DonHang pb-2 active' : 'DonHang pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-clipboard-list"></i><span style={{ display: isOpen ? "" : "none" }}>Đơn hàng</span></NavLink>
                                             <a href="#" className='bank pb-2'><i className="fa-sharp fa-solid fa-building-columns"></i><span style={{ display: isOpen ? "" : "none" }}>bank</span></a>
                                             <a href="#" className='notification pb-2'><i className="fa-solid fa-bell"></i><span style={{ display: isOpen ? "" : "none" }}>notification</span></a>
                                         </div>
@@ -82,6 +120,8 @@ function ProfileUser() {
                                         <Route path="/all-product" component={isAdmin ? ProductCarAdmin : NotFound} exact />
                                         <Route path="/create-product" component={isAdmin ? CreateProduct : NotFound} exact />
                                         <Route path="/edit-product/:id" component={isAdmin ? EditProduct : NotFound} exact />
+                                        <Route path="/don-bao-duong-user" component={isAdmin ? DonBaoDuongUser : NotFound} exact />
+                                        <Route path="/don-lai-thu-user" component={isAdmin ? DonLaiThuUser : NotFound} exact />
                                     </Switch>
                                 </div>
                             </Router>
