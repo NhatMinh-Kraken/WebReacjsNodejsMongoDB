@@ -23,9 +23,10 @@ const datlichBaoDuongSchema = new mongoose.Schema({
         ref: "DaiLys"
     },
 
-    IdOptionBaoDuong: {
-        type: Array
-    },
+    IdOptionBaoDuong: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "optionBaoDuongs"
+    }],
 
     IdUser: {
         type: mongoose.Schema.Types.ObjectId,

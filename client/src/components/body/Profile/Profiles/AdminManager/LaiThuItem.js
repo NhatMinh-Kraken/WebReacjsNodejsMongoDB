@@ -191,7 +191,7 @@ function LaiThuItem({ laithus, setCallback, callback }) {
             </Modal>
 
 
-            <div className={`LaiThuItems ${laithus.checked === 1 ? "border-Success-bg" : "border-No-Success-bg"}`} onMouseEnter={handleHover} onMouseLeave={handleNotHover}>
+            <div className={`LaiThuItems ${laithus.checked === 1 ? "border-Success-bg" : "border-No-Success-bg"}`}>
                 <div className='LaiThuItems-border d-flex align-items-center mr-auto'>
                     <div className='LaiThuItems-header'>
                         <div className='LaiThuItems-img'>
@@ -204,7 +204,7 @@ function LaiThuItem({ laithus, setCallback, callback }) {
                         </div>
                     </div>
                     <div className='LaiThuItems-body'>
-                        <div className={`LaiThuItems-name p-0 ${isHover ? "col-7" : "col-12"}`}>
+                        <div className="LaiThuItems-name p-0 col-7">
                             {
                                 laithus
                                 && laithus.idUser
@@ -212,8 +212,11 @@ function LaiThuItem({ laithus, setCallback, callback }) {
                                 && <span>{laithus.idUser.name}</span>
                             }
                         </div>
-                        <div className={`LaiThuItems-Date ${isHover ? "visible" : "hidden"} ${isHover ? "opacity-1" : "opacity-0"} ${isHover ? "d-block" : "d-none"}`} >
+                        <div className="LaiThuItems-Date visible opacity-1 d-block" >
                             <span>{laithus.dates}</span>
+                        </div>
+                        <div className="LaiThuItems-Date visible opacity-1 d-block" >
+                            <span>/{laithus.times}</span>
                         </div>
                     </div>
                     <div className='logoMer' onClick={handleShow}>

@@ -4,15 +4,19 @@ import carSetting from '../../../assets/images/carSetting.png'
 import { Modal } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { BaoDuongStepperContext } from '../FormThongTinBaoDuong/FormThongTinBaoDuong'
+import Form from 'react-bootstrap/Form';
 
 function DichVu({ handleClick, handleClickBack, currentStep }) {
 
   const [dichvu, setDichVu] = useState([])
   const [callback, setCallback] = useState(false)
   const [optiondichvu, setOptionDichVu] = useState([])
+  const [optionNoLoaiDichVu, setOptionNoLoaiDichVu] = useState([])
   const [show, setShow] = useState(false)
   const [option, setOption] = useState([])
+  const [isCheckAll, setIsCheckAll] = useState(false)
 
+  const [clickCheck, setClickCheck] = useState([])
   const state = useContext(BaoDuongStepperContext)
 
   const [check, setCheck] = state.optionBaoDuongContent.OptionBaoDuongData
@@ -25,6 +29,15 @@ function DichVu({ handleClick, handleClickBack, currentStep }) {
     get()
   }, [callback])
 
+  useEffect(() => {
+    const get = async () => {
+      const ret = await Axios.get('/api/get-optionbaoduong')
+      setOptionNoLoaiDichVu(ret.data)
+    }
+    get()
+  }, [callback])
+
+
   const handleShow = (giatri) => {
     setShow(true)
     setOption(giatri)
@@ -35,27 +48,31 @@ function DichVu({ handleClick, handleClickBack, currentStep }) {
     setOption("")
   }
 
+
+  const handleSelectAll = e => {
+    setIsCheckAll(!isCheckAll);
+    setCheck(optionNoLoaiDichVu.map(li => li._id));
+    if (isCheckAll) {
+      setCheck([]);
+    }
+  };
+
   const handleCheck = (e, giatri) => {
+    console.log("giatri: ", giatri)
     if (e.target.checked) {
       setCheck([
-        ...check,
-        {
-          _id: giatri._id,
-          name: giatri.name,
-          money: giatri.money,
-          mota: giatri.mota,
-          IdLoaiDichVu: giatri.IdLoaiDichVu
-        }
+        ...check, giatri._id
       ])
     }
     else {
       setCheck(
-        check.filter((c) => c._id !== giatri._id)
+        check.filter((c) => c !== giatri._id)
       )
     }
   }
 
   console.log("check:", check)
+
 
   return (
     <>
@@ -89,6 +106,15 @@ function DichVu({ handleClick, handleClickBack, currentStep }) {
             <span>Chọn một hoặc nhiều dịch vụ.</span>
           </div>
           <div className='Form-BaoDuong-DichVu-body d-flex flex-column pt-3'>
+            <div className='d-flex check-box-items-baoduong'>
+              <Form.Check className="pt-3 pb-3 font-weight-bold check-box-items"
+                type="checkbox"
+                name="check"
+                label="Chọn tất cả"
+                onChange={handleSelectAll}
+                checked={isCheckAll}
+              />
+            </div>
             {
               optiondichvu.map(gt => (
                 <>
@@ -104,7 +130,7 @@ function DichVu({ handleClick, handleClickBack, currentStep }) {
                               <div className='Form-BaoDuong-DichVu-items-check d-flex align-items-center col-12'>
                                 <div className='Form-BaoDuong-DichVu-items-name col-10 p-0'>{g.name}</div>
                                 <div className='Form-items-check col-2 d-flex p-0 justify-content-end'>
-                                  <input className='check-box-items' type="checkbox" name='check' onChange={(e) => handleCheck(e, g)} />
+                                  <input className='check-box-items' type="checkbox" name='check' checked={check.includes(g._id)} onChange={(e) => handleCheck(e, g)} />
                                 </div>
                               </div>
                               <div className='Form-BaoDuong-DichVu-items-thongtin' onClick={() => handleShow(g)}>

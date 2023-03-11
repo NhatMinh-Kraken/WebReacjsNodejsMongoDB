@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -35,8 +35,19 @@ function TongQuan({ handleClickBack, currentStep }) {
   const [dates, setDates] = state.timesAndDatesContent.DateData;
   const [checkCV, setCheckCV] = state.convanContent.CoVanData
   const [times, setTimes] = state.timesAndDatesContent.TimesData
+  const [callback, setCallback] = useState(false)
+
+  const [optionNoLoaiDichVu, setOptionNoLoaiDichVu] = useState([])
 
   const history = useHistory()
+
+  useEffect(() => {
+    const get = async () => {
+      const ret = await Axios.get('/api/get-optionbaoduong')
+      setOptionNoLoaiDichVu(ret.data)
+    }
+    get()
+  }, [callback])
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -281,7 +292,15 @@ function TongQuan({ handleClickBack, currentStep }) {
                             {
                               check.map(c => (
                                 <>
-                                  <span className='items-nhap'>Mục tiêu bảo dưỡng: <span>{c.name}</span></span>
+                                  <span className='items-nhap'>Mục tiêu bảo dưỡng:
+                                    {
+                                      optionNoLoaiDichVu.map(d => (
+                                        <>
+                                          <span>{d._id === c && (<>{d.name}</>)}</span>
+                                        </>
+                                      ))
+                                    }
+                                  </span>
                                 </>
                               ))
                             }

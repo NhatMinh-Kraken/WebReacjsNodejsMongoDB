@@ -206,7 +206,7 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
                 </Modal.Footer>
             </Modal>
 
-            <div className={`LaiThuItems ${c.checked === 1 ? "border-Success-bg" : "border-No-Success-bg"}`} onMouseEnter={handleHover} onMouseLeave={handleNotHover}>
+            <div className={`LaiThuItems ${c.checked === 1 ? "border-Success-bg" : "border-No-Success-bg"}`}>
                 <div className='LaiThuItems-border d-flex align-items-center mr-auto'>
                     <div className='LaiThuItems-header'>
                         <div className='LaiThuItems-img'>
@@ -216,13 +216,16 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
                         </div>
                     </div>
                     <div className='LaiThuItems-body'>
-                        <div className={`LaiThuItems-name p-0 ${isHover ? "col-7" : "col-12"}`}>
+                        <div className={`LaiThuItems-name p-0 col-7`}>
                             {
                                 c && c.IdUser && c.IdUser.name ? <><span>{c.IdUser.name}</span></> : <><span>{c.name}</span></>
                             }
                         </div>
-                        <div className={`LaiThuItems-Date ${isHover ? "visible" : "hidden"} ${isHover ? "opacity-1" : "opacity-0"} ${isHover ? "d-block" : "d-none"}`} >
+                        <div className={`LaiThuItems-Date`} >
                             <span>{c.dates}</span>
+                        </div>
+                        <div className={`LaiThuItems-Date`} >
+                            <span>/{c.times}</span>
                         </div>
                     </div>
                     <div className='logoMer' onClick={handleShow}>

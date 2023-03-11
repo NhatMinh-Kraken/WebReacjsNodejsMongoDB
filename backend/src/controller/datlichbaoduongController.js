@@ -7,7 +7,7 @@ const moment = require('moment')
 const datlichbaoduongController = {
     get: async (req, res) => {
         try {
-            const get = await Data.find().populate("IdLoaiXe").populate("Iddaily").populate("IdUser").populate("IdCoVan")
+            const get = await Data.find().populate("IdLoaiXe").populate("Iddaily").populate("IdOptionBaoDuong").populate("IdUser").populate("IdCoVan")
             res.json(get)
         } catch (err) {
             return res.status(500).json({ msg: err.message })
@@ -87,7 +87,7 @@ const datlichbaoduongController = {
             const date = moment(new Date()).format('DD-MM-YYYY')
             const res = await Data.find({
                 Duyet: 1
-            }).populate('IdLoaiXe').populate('Iddaily').populate('IdUser').populate("IdCoVan")
+            }).populate('IdLoaiXe').populate('Iddaily').populate("IdOptionBaoDuong").populate('IdUser').populate("IdCoVan")
 
             for (let i = 0; i < res.length; i++) {
                 if (res[i].checkEmail === 1) {
