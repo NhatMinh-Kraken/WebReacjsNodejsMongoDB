@@ -97,8 +97,6 @@ function NguyenVong({ handleClick, handleClickBack, currentStep }) {
     setTimes(gt)
   }
 
-  console.log(dates, times)
-
   return (
     <>
       <div className='form-nguyen-vong'>

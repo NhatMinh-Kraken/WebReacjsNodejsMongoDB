@@ -3,6 +3,9 @@ const Data = require('../model/BaoDuong/DatLichBaoDuongModel')
 const EmailDangKyBaoDuong = require('./Email/EmailDangKyBaoDuong')
 const EmailHenBaoDuong = require('./Email/EmailHenBaoDuong')
 const moment = require('moment')
+const EmailChoCoVan = require('./Email/EmailChoCoVan')
+
+const DataQuyTrinh = require('../model/BaoDuong/QuyTrinhBaoDuong')
 
 const datlichbaoduongController = {
     get: async (req, res) => {
@@ -53,12 +56,26 @@ const datlichbaoduongController = {
     update: async (req, res) => {
         try {
             const { checked, BaoDuongID } = req.body
+            const date = moment(new Date()).format('DD-MM-YYYY')
+            const time = moment(new Date()).format('h:mm:ss')
 
-            await Data.findOneAndUpdate({
+            const get = await Data.findOneAndUpdate({
                 _id: BaoDuongID
             }, {
                 checked
             })
+
+            if (get) {
+                await DataQuyTrinh.updateOne({
+                    IdDonDatLichBaoDuong: req.params.id
+                }, {
+                    $set: {
+                        HoanThanhTatCa: checked,
+                        NgayHoanThanh: date,
+                        ThoiGianHoanThanh: time
+                    }
+                })
+            }
 
             res.json({ msg: "Đơn hàng đã sửa thành công" })
         } catch (err) {
@@ -68,13 +85,17 @@ const datlichbaoduongController = {
 
     updateDuyet: async (req, res) => {
         try {
-            const { Duyet } = req.body
+            const { Duyet, DonHang } = req.body
 
             await Data.findOneAndUpdate({
                 _id: req.params.id
             }, {
                 Duyet
             })
+
+            if (DonHang.IdCoVan !== undefined) {
+                EmailChoCoVan(DonHang)
+            }
 
             res.json({ msg: "Đơn hàng đã sửa thành công" })
         } catch (err) {

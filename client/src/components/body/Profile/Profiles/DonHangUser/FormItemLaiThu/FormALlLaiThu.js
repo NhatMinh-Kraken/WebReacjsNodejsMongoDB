@@ -19,7 +19,7 @@ function FormALlLaiThu() {
         get()
     }, [callback])
 
-    console.log(allLaiThu)
+   // console.log(allLaiThu)
 
     return (
         <>

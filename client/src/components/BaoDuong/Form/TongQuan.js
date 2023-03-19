@@ -284,7 +284,7 @@ function TongQuan({ handleClickBack, currentStep }) {
                       <span className='items-nhap'>Tên đại lý: <span>{clickDaiLy.Name}</span></span>
                       <span className='items-nhap'>Địa chỉ: <span>{clickDaiLy.Address}</span></span>
                     </div>
-                    <div className='form-thongtin-body-right-thongtinxe pt-3 d-flex flex-column'>
+                    <div className='form-thongtin-body-right-thongtinxe scroll-ldv pt-3 d-flex flex-column'>
                       <span>Loại hình dịch vụ bảo dưỡng </span>
                       {
                         check.length !== 0 ?

@@ -26,6 +26,7 @@ import { DataProviderNew } from './GlobalState '
 import LaiThu from './components/ProductCar/LaiThu/LaiThu';
 
 import BaoDuong from './components/BaoDuong/BaoDuong';
+import QuyTrinhBaoDuong from './components/body/Profile/Profiles/AdminManager/QuyTrinhBaoDuong/QuyTrinhBaoDuong';
 
 
 
@@ -88,6 +89,7 @@ function App() {
           <Body />
           <Route path={path.PROFILE} component={(isLogged ? ProfieLayout : NotFound)} />
           <Route path='/manager' component={(isAdmin ? ManagerLayout : NotFound)} />
+          <Route path='/quytrinh-bao-duong/:id' component={(isAdmin ? QuyTrinhBaoDuong : NotFound)} exact/>
           <Route path='/all-messager' component={(isAdmin ? MessagerLayout : NotFound)} />
 
           <ToastContainer

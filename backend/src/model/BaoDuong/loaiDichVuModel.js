@@ -7,6 +7,11 @@ const loaiDichVuSchema = new mongoose.Schema({
 
     icon: {
         type: String,
+    },
+
+    chung: {
+        type: Number,
+        default: 0
     }
 
 }, {

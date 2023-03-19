@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button, Modal } from 'react-bootstrap'
+import { Button, Form, Modal } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
@@ -30,6 +30,8 @@ function LoaiBaoDuong() {
 
     const [id, setID] = useState('')
 
+    const [isCheckChung, setIsCheckChung] = useState(false)
+
     useEffect(() => {
         const getLoaiBaoDuong = async () => {
             const res = await Axios.get('/api/loaibaoduong')
@@ -37,8 +39,6 @@ function LoaiBaoDuong() {
         }
         getLoaiBaoDuong()
     }, [callback])
-
-    console.log(loaibaoduongs)
 
 
     const handleChangeInput = e => {
@@ -63,25 +63,31 @@ function LoaiBaoDuong() {
     }
 
     const handleShowEdit = (giatri) => {
+        if (giatri.chung === 1) {
+            setIsCheckChung(true)
+        }
         setShowcategoryedit(true)
         setID(giatri._id)
         setLoaiBaoDuong(giatri)
     }
 
-    console.log(loaibaoduong)
     const handleCloseEdit = () => {
         setShowcategoryedit(false)
+        setIsCheckChung(false)
     }
 
     const handleEdit = async () => {
         try {
-            const res = await Axios.put(`/api/loaibaoduong/${id}`, { name: loaibaoduong.name }, {
-                headers: { Authorization: token }
-            })
-            setLoaiBaoDuong("")
-            setShowcategoryedit(false)
-            setCallback(!callback)
-            toast.success("Update Success")
+            if (isCheckChung === true) {
+                const res = await Axios.put(`/api/loaibaoduong/${id}`, { name: loaibaoduong.name, chung: 1 }, {
+                    headers: { Authorization: token }
+                })
+                setLoaiBaoDuong("")
+                setIsCheckChung(false)
+                setShowcategoryedit(false)
+                setCallback(!callback)
+                toast.success("Update Success")
+            }
 
         } catch (err) {
             toast.error(err.response.data.msg)
@@ -118,6 +124,12 @@ function LoaiBaoDuong() {
             toast.err(err.response.data.msg)
         }
     }
+
+    const handleCheck = () => {
+        setIsCheckChung(true)
+    }
+
+    console.log(loaibaoduongs)
 
 
     return (
@@ -193,6 +205,15 @@ function LoaiBaoDuong() {
                                     <span className="input-group-text" id="inputGroupPrepend1"><i className="fa-solid fa-list d-flex"></i></span>
                                 </div>
                                 <input type="text" className="form-control col-11" name="name" id="name" value={loaibaoduong.name} placeholder="name" onChange={handleChangeInput} required />
+                            </div>
+                            <div className='input-group col-12 pb-3'>
+                                <Form.Check className="pt-3 pb-3 font-weight-bold check-box-items"
+                                    type="checkbox"
+                                    name="chung"
+                                    label="loại bảo dưỡng chung"
+                                    onChange={handleCheck}
+                                    checked={isCheckChung}
+                                />
                             </div>
                         </div>
                     </div>

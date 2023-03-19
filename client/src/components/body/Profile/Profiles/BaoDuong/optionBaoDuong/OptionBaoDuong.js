@@ -33,6 +33,8 @@ function OptionBaoDuong() {
     const [loaihinhbaoduong, setLoaiHinhBaoDuong] = useState([])
     const [idLoaiDichVuEdit, setIdLoaiDichVuEdit] = useState("")
 
+    const [clickCheck, setClickCheck] = useState(false)
+
     useEffect(() => {
         getAllOption()
         const getLoaiBaoDuong = async () => {
@@ -227,10 +229,12 @@ function OptionBaoDuong() {
                 }, {
                     headers: { Authorization: token }
                 })
-                setLoaiHinhBaoDuong("")
+                setLoaiHinhBaoDuong([])
+                setClickCheck(false)
+                setCheckId("")
                 setShowCheckEditClick(false)
                 setCallback(!callback)
-                setCheckId("")
+
                 toast.success("Update Success")
             }
             else {
@@ -259,14 +263,20 @@ function OptionBaoDuong() {
                             <Form.Group as={Col} md="6" controlId="validationCustom01">
                                 <Form.Label>Danh sách</Form.Label>
                                 {
-                                    checkId.map(gt => (
+                                    checkId.length !== 0 && (
                                         <>
-                                            <div className='text-success' key={gt._id}>
-                                                <i className="fa-solid fa-circle-check pr-2"></i>
-                                                <span className='font-weight-light'>{gt.name}</span>
-                                            </div>
+                                            {
+                                                checkId.map(gt => (
+                                                    <>
+                                                        <div className='text-success' key={gt._id}>
+                                                            <i className="fa-solid fa-circle-check pr-2"></i>
+                                                            <span className='font-weight-light'>{gt.name}</span>
+                                                        </div>
+                                                    </>
+                                                ))
+                                            }
                                         </>
-                                    ))
+                                    )
                                 }
                             </Form.Group>
                             <Form.Group as={Col} md="6" controlId="validationCustom01">
@@ -453,11 +463,12 @@ function OptionBaoDuong() {
                             </thead>
                             <tbody>
                                 {
-                                    optionBaoDuong.map((option, index) => (
+                                    optionBaoDuong?.map((option, index) => (
                                         <tr key={option._id}>
                                             <td className='col-1 text-center m-0'>
-                                                <input type="checkbox" onChange={(e) => {
+                                                <input type="checkbox" checked={clickCheck} onChange={(e) => {
                                                     if (e.target.checked) {
+                                                        setClickCheck(true)
                                                         setCheckId([
                                                             ...checkId,
                                                             {

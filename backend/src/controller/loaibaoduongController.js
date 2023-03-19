@@ -53,14 +53,27 @@ const loaibaoduongController = {
     },
     update: async (req, res) => {
         try {
-            const { name } = req.body
-            await Data.findOneAndUpdate({
-                _id: req.params.id
-            }, {
-                name
+            const { name, chung } = req.body
+
+            const checkChung = await Data.findOne({
+                chung
             })
 
-            res.json({ msg: "Update Success!" })
+            if (checkChung) {
+                res.json({
+                    msg: "chỉ dc 1 loại option chung"
+                })
+            }
+            else {
+                await Data.findOneAndUpdate({
+                    _id: req.params.id
+                }, {
+                    name, chung
+                })
+
+                res.json({ msg: "Update Success!" })
+            }
+
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }

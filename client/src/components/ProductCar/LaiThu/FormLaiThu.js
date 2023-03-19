@@ -116,7 +116,6 @@ function FormLaiThu() {
 
     return (
         <>
-            {/* <UseContextProvider> */}
             <div className='formLaiThu container col-12 d-flex'>
                 <div className='Steper vertical mt-5 col-4 d-flex flex-column justify-content-center'>
                     <LaiThuSteper
@@ -135,7 +134,6 @@ function FormLaiThu() {
                 </div>
             </div>
             <LaiThuSteperController handleClick={handleClick} currentStep={currentStep} steps={steps} />
-            {/* </UseContextProvider> */}
         </>
     )
 }

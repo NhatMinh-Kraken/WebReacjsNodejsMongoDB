@@ -402,6 +402,11 @@ const userController = {
         try {
             const jokes = req.body;
 
+            for (let item of jokes) {
+                const passwordHash = await bcrypt.hash(String(item.password), 12)
+                item.password = passwordHash
+            }
+
             await Users.insertMany(jokes, (error, docs) => {
                 if (docs) {
                     res
@@ -417,6 +422,7 @@ const userController = {
                     });
                 }
             });
+
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
@@ -427,8 +433,14 @@ const userController = {
             const jokes = req.body;
 
             const promises = jokes.map(async (item) => {
+
+                const passwordHash = await bcrypt.hash(String(item.password), 12)
+
                 const res = await Users.findByIdAndUpdate(item._id, {
-                    $set: { ...item },
+                    $set: {
+                        ...item,
+                        password: passwordHash
+                    },
                 });
 
                 return res;

@@ -75,7 +75,6 @@ function AdminManager() {
 
     return (
         <>
-
             <div className='profile_page pt-5'>
                 <div className='container'>
                     <div className='profile_page_body'>
@@ -138,7 +137,6 @@ function AdminManager() {
                                     </Modal.Footer>
                                 </Modal>
 
-
                                 <div style={{ width: isOpen ? "25%" : "9%" }} className='profile_item_controll' >
                                     <div className='profile_item-avatar' style={{ justifyContent: isOpen ? "start" : "center" }} onClick={toggle}>
                                         <img src={avatar ? avatar : user.avatar} alt="" />
@@ -149,20 +147,12 @@ function AdminManager() {
                                     </div>
                                     <div className='profile_item-infor'>
                                         <div className='infor' style={{ alignItems: isOpen ? "flex-start" : "center" }}>
-                                            {/* <NavLink to="/all-messager" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-message"></i><span style={{ display: isOpen ? "" : "none" }}>Messager</span> */}
-                                            {/* </NavLink> */}
-                                            {/* <div className='note-mess'>
-                                                <span>1</span>
-                                            </div> */}
-
                                             <NavLink to="/all-user" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All user</span></NavLink>
                                             <NavLink to="/all-laithu" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>All Lái thử</span></NavLink>
                                             <NavLink to="/all-daily" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Địa chỉ đại lý</span></NavLink>
                                             <NavLink to="/allproduct" onClick={handleShow} className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Product</span></NavLink>
-                                            {/* <NavLink to="/allphukien" onClick={handleShowPhuKien} className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Phụ kiện</span></NavLink> */}
                                             <NavLink to="/allbaoduong" onClick={handleShowBaoDuong} className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Bảo dưỡng</span></NavLink>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div className='profile_item' style={{ width: isOpen ? "74%" : "89%" }}>
@@ -171,7 +161,6 @@ function AdminManager() {
                                         <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
                                     </div>
                                     <Switch>
-                                        {/* <Route path="/all-messager" component={isAdmin ? ProfileAllMessagaer : NotFound} exact /> */}
                                         <Route path="/all-user" component={isAdmin ? ProfileAllUser : NotFound} exact />
                                         <Route path="/all-laithu" component={isAdmin ? DonLaiThu : NotFound} exact />
                                         <Route path="/edit_user/:id" component={isAdmin ? EditRoleUser : NotFound} exact />

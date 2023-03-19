@@ -15,6 +15,7 @@ function DichVu({ handleClick, handleClickBack, currentStep }) {
   const [show, setShow] = useState(false)
   const [option, setOption] = useState([])
   const [isCheckAll, setIsCheckAll] = useState(false)
+  const [isCheckAllType, setIsCheckAllType] = useState(false)
 
   const [clickCheck, setClickCheck] = useState([])
   const state = useContext(BaoDuongStepperContext)
@@ -57,8 +58,20 @@ function DichVu({ handleClick, handleClickBack, currentStep }) {
     }
   };
 
+  console.log(check)
+
+  const handleSelectAllType = (giatri) => {
+    //console.log(giatri)
+    setIsCheckAllType(!isCheckAllType);
+    setCheck([giatri]);
+    if (isCheckAllType) {
+      setCheck([]);
+    }
+  }
+
+  // console.log(check)
+
   const handleCheck = (e, giatri) => {
-    console.log("giatri: ", giatri)
     if (e.target.checked) {
       setCheck([
         ...check, giatri._id
@@ -70,8 +83,6 @@ function DichVu({ handleClick, handleClickBack, currentStep }) {
       )
     }
   }
-
-  console.log("check:", check)
 
 
   return (
@@ -118,38 +129,61 @@ function DichVu({ handleClick, handleClickBack, currentStep }) {
             {
               optiondichvu.map(gt => (
                 <>
-                  <div className='Form-BaoDuong-DichVu-body-header d-flex align-items-center' key={gt._id}>
-                    <img src={carSetting} loading='lazy' /><span className='pl-2'>{gt._id.name}</span>
+                  <div className='Form-BaoDuong-DichVu-body-header d-flex align-items-center col-12' key={gt._id}>
+                    <div className='d-flex col-6'>
+                      <img src={carSetting} loading='lazy' /><span className='pl-2'>{gt._id.name}</span>
+                    </div>
+                    {/* <div className='d-flex col-6 justify-content-end'>
+                      <Form.Check className="pt-3 pb-3 font-weight-bold check-box-items"
+                        type="checkbox"
+                        name="check"
+                        label="Chọn tất cả"
+                        onChange={() => handleSelectAllType(gt._id)}
+                        checked={isCheckAllType}
+                      />
+                    </div> */}
                   </div>
-                  <div className='Form-BaoDuong-DichVu-body-items d-flex col-12'>
-                    {
-                      gt.records.map((g, index) => (
-                        <>
-                          <div className='Form-BaoDuong-DichVu-items col-4 mr-3' key={g._id}>
-                            <div className='d-flex flex-column'>
-                              <div className='Form-BaoDuong-DichVu-items-check d-flex align-items-center col-12'>
-                                <div className='Form-BaoDuong-DichVu-items-name col-10 p-0'>{g.name}</div>
-                                <div className='Form-items-check col-2 d-flex p-0 justify-content-end'>
-                                  <input className='check-box-items' type="checkbox" name='check' checked={check.includes(g._id)} onChange={(e) => handleCheck(e, g)} />
+
+                  <div className='d-flex'>
+                    <div className='Form-BaoDuong-DichVu-body-items'>
+                      <div className='row'>
+                        {
+                          gt.records.map((g, index) => (
+                            <>
+                              <div className='Form-BaoDuong-DichVu-items col-4 p-0 m-1' key={g._id}>
+                                <div className='d-flex flex-column'>
+                                  <div className='Form-BaoDuong-DichVu-items-check d-flex align-items-center col-12'>
+                                    <div className='Form-BaoDuong-DichVu-items-name col-10 p-0'>{g.name}</div>
+                                    <div className='Form-items-check col-2 d-flex p-0 justify-content-end'>
+                                      <input className='check-box-items' type="checkbox" name='check' checked={check.includes(g._id)} onChange={(e) => handleCheck(e, g)} />
+                                    </div>
+                                  </div>
+                                  <div className='Form-BaoDuong-DichVu-items-thongtin' onClick={() => handleShow(g)}>
+                                    <i className="fa-solid fa-chevron-right"></i>
+                                    <span className='pl-1'>Chi tiết</span>
+                                  </div>
                                 </div>
                               </div>
-                              <div className='Form-BaoDuong-DichVu-items-thongtin' onClick={() => handleShow(g)}>
-                                <i className="fa-solid fa-chevron-right"></i>
-                                <span className='pl-1'>Chi tiết</span>
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                      ))
-                    }
+                            </>
+                          ))
+                        }
+                      </div>
+                    </div>
                   </div>
                 </>
               ))
             }
           </div>
-          <div className='form-thongtin-daily-body-controll pt-4 d-flex justify-content-end'>
-            <Button onClick={() => handleClick("next")} className='bg-primary' >{check.length !== 0 ? "Tiếp tục" : "Tiếp tục và không chọn dịch vụ"}</Button>
-          </div>
+          {
+            check.length !== 0 && (
+              <>
+                <div className='form-thongtin-daily-body-controll pt-4 d-flex justify-content-end'>
+                  <Button onClick={() => handleClick("next")} className='bg-primary' >Tiếp tục</Button>
+                </div>
+              </>
+            )
+          }
+
         </div>
       </div>
       <div className='container pt-5 pb-2'>
