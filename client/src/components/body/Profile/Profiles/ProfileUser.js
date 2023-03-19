@@ -16,6 +16,7 @@ import ProductCarAdmin from './ProductCarAdmin/ProductCarAdmin'
 import EditProduct from './ProductCarAdmin/EditProduct'
 import DonBaoDuongUser from './DonHangUser/DonBaoDuongUser'
 import DonLaiThuUser from './DonHangUser/DonLaiThuUser'
+import LichLamViec from './NhanVien/LichLamViec'
 
 
 function ProfileUser() {
@@ -100,8 +101,13 @@ function ProfileUser() {
                                         </div>
                                         <div className='infor_additional' style={{ alignItems: isOpen ? "flex-start" : "center" }}>
                                             <NavLink to="/don-hang" onClick={handleShow} className={({ isActive }) => (isActive ? 'DonHang pb-2 active' : 'DonHang pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-clipboard-list"></i><span style={{ display: isOpen ? "" : "none" }}>Đơn hàng</span></NavLink>
-                                            <a href="#" className='bank pb-2'><i className="fa-sharp fa-solid fa-building-columns"></i><span style={{ display: isOpen ? "" : "none" }}>bank</span></a>
-                                            <a href="#" className='notification pb-2'><i className="fa-solid fa-bell"></i><span style={{ display: isOpen ? "" : "none" }}>notification</span></a>
+                                            {
+                                                user.chucvu === "Nhân viên" && (
+                                                    <>
+                                                        <NavLink to="/lich-lam-viec" className={({ isActive }) => (isActive ? 'LichLamViec pb-2 active' : 'LichLamViec pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-calendar-days"></i><span style={{ display: isOpen ? "" : "none" }}>Lịch làm việc</span></NavLink>
+                                                    </>
+                                                )
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -122,6 +128,7 @@ function ProfileUser() {
                                         <Route path="/edit-product/:id" component={isAdmin ? EditProduct : NotFound} exact />
                                         <Route path="/don-bao-duong-user" component={isAdmin ? DonBaoDuongUser : NotFound} exact />
                                         <Route path="/don-lai-thu-user" component={isAdmin ? DonLaiThuUser : NotFound} exact />
+                                        <Route path="/lich-lam-viec" component={isLogged && user.chucvu === "Nhân viên" ? LichLamViec : NotFound} exact />
                                     </Switch>
                                 </div>
                             </Router>

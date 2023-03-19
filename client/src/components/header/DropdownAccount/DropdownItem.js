@@ -40,7 +40,7 @@ function DropdownItem() {
         })
     }, [user])
 
-   // console.log(checkNoti)
+    // console.log(checkNoti)
 
     const handleLogout = async () => {
         try {

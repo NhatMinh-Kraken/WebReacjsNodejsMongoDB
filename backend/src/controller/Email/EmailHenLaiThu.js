@@ -110,8 +110,7 @@ const EmailHenLaiThu = (giatri) => {
                     <span style="padding-bottom: 5px; line-height:20px; display: block; margin-top: 10px;">Chúc ${giatri.nhanxung === 1 ? "Anh" : "Chị"} có buổi trải nghiệm đáng mong đợi.</span>
               </div>
             </div>
-            <div style="color: red; font-weight: 400; font-style: italic; text-align: center; padding-bottom: 20px;">Chúng
-                tôi sẽ liên hệ lại với quý khách trong thời gian sớm nhất.</div>
+            <div style="color: red; font-weight: 400; font-style: italic; text-align: center; padding-bottom: 20px;">Thân ái</div>
         </div>
     </div>
         `

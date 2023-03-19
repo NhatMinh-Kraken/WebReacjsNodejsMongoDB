@@ -1,0 +1,277 @@
+.form-item-quytrinh-baoduong {
+    .formQt-BaoDuong-header {
+        box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .1);
+        background-color: #fff;
+        width: 50%;
+        border: 1px solid #7cc1f6;
+
+        h1 {
+            -webkit-font-smoothing: antialiased;
+            font: inherit;
+            font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 2rem;
+            line-height: 2.5rem;
+            padding: 4 4 0 2;
+            color: #333;
+            font-family: "DaimlerCAC-Regular", serif;
+        }
+
+        p {
+            -webkit-font-smoothing: antialiased;
+            font: inherit;
+            font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            padding: 4 4 0 2;
+            color: #333;
+            font-family: "DaimlerCAC-Regular", serif;
+        }
+    }
+
+    .formQt-BaoDuong-Step {
+        .Dv-BaoDuongSteps {
+            transition: 500ms ease-in-out;
+            border-radius: 50%;
+
+            .Dv-BaoDuongSteps-completed {
+                background-color: #0078d6;
+            }
+
+            .Dv-BaoDuongSteps-border-number {
+                transition: 500ms ease-in-out;
+                border-radius: 50%;
+                height: 32px;
+                width: 32px;
+                padding: 10px;
+            }
+        }
+
+        .Dv-BaoDuongSteps-des {
+            color: #9f9f9f;
+            font-size: 13px;
+            transition: 500ms ease-in-out;
+        }
+
+        .Dv-BaoDuongSteps-boder {
+            border: 1.25px solid #9f9f9f;
+            width: 307px;
+            transition: 500ms ease-in-out;
+            //margin-top: 2px;
+            position: absolute;
+            left: 3px;
+        }
+    }
+
+    .form-thongtin-steper-Qt-baoduong {
+        .form-dichvu-baoduong-chung {
+            .form-dichvu-baoduong-chung-header {
+                span {
+                    -webkit-font-smoothing: antialiased;
+                    font: inherit;
+                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 1.25rem;
+                    line-height: 1.5rem;
+                }
+
+                p {
+                    font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+
+                .chungchi-hoanthanh {
+                    border: 1px solid #09c457;
+                    background-color: #baf9d2;
+                    border-radius: .2rem;
+                    color: #e7d112fe;
+
+                    span {
+                        -webkit-font-smoothing: antialiased;
+                        font: inherit;
+                        font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 1rem;
+                        line-height: 1.25rem;
+                    }
+                }
+            }
+
+            .form-dichvu-baoduong-chung-body {
+                .form-dichvu-baoduong-chung-text {
+                    box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .1);
+                    background-color: #fff;
+                    max-width: 360px;
+                    border: 1px solid rgb(234, 147, 147);
+                    //border: 1px solid rgb(22, 209, 34);
+
+                    .form-dichvu-baoduong-chung-text-stt {
+                        border-radius: 50%;
+                        border: 1px solid #00d659;
+                        width: 30px;
+                        height: 30px;
+                    }
+
+                    .form-dichvu-baoduong-chung-text-name {
+                        font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                        font-size: 17px;
+                        font-weight: 600;
+                        // font-style: italic;
+                    }
+
+                    .form-dichvu-baoduong-chung-text-chitiet {
+                        font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                        font-size: 14px;
+                        font-weight: 400;
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
+
+                    .form-dichvu-baoduong-chung-text-trang-thai {
+                        p {
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .form-dichvu-baoduong-tongtien {
+            .form-dichvu-baoduong-tongtin-header {
+                span {
+                    -webkit-font-smoothing: antialiased;
+                    font: inherit;
+                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 1.25rem;
+                    line-height: 1.5rem;
+                }
+
+                p {
+                    font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+
+                .chungchi-hoanthanh {
+                    border: 1px solid #09c457;
+                    background-color: #baf9d2;
+                    border-radius: .2rem;
+                    color: #e7d112fe;
+
+                    span {
+                        -webkit-font-smoothing: antialiased;
+                        font: inherit;
+                        font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 1rem;
+                        line-height: 1.25rem;
+                    }
+                }
+            }
+
+            .form-dichvu-baoduong-tongtien-mr {
+                margin-left: 15%;
+                margin-right: 15%;
+
+                .form-tong-tien-baoduong-body {
+                    .form-tongtin-baoduong-body-header-top {
+                        background-color: #000;
+
+                        span {
+                            -webkit-font-smoothing: antialiased;
+                            font: inherit;
+                            font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                            font-style: normal;
+                            font-weight: 600;
+                            font-size: 1.5rem;
+                            line-height: 1.25rem;
+                            color: #fff;
+                        }
+
+                        img {
+                            width: 50px;
+                        }
+                    }
+
+                    .form-dichvu-baoduong-tongtien-bg {
+                        background-color: #fff;
+                        box-shadow: 0 0 2px 0 rgba(0, 0, 0, .1), 0 2px 4px 0 rgba(0, 0, 0, .1);
+
+                        .form-tongtin-baoduong-body-user {
+                            position: relative;
+
+                            .form-tongtin-baoduong-body-user-title {
+                                width: 100%;
+
+                                span {
+                                    -webkit-font-smoothing: antialiased;
+                                    font: inherit;
+                                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    font-size: 1rem;
+                                    line-height: 1.25rem;
+                                }
+
+                            }
+
+                            .boder {
+                                border: 1px dotted rgba(0, 0, 0, .09);
+                                width: 100%;
+                                height: 0;
+                            }
+
+                            .border-p {
+                                border: 1px solid rgba(0, 0, 0, .09);
+                                width: 100%;
+                                height: 0;
+                            }
+                        }
+
+                        .form-tongtin-baoduong-body-header {
+                            span {
+                                -webkit-font-smoothing: antialiased;
+                                font: inherit;
+                                font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                                font-style: normal;
+                                font-weight: 600;
+                                font-size: 1rem;
+                                line-height: 1.25rem;
+                            }
+                        }
+
+                        .form-tongtin-baoduong-body {
+                            .option-baoduong {
+
+                                span {
+                                    -webkit-font-smoothing: antialiased;
+                                    font: inherit;
+                                    font-family: "MBCorpo Text", "DaimlerCS-Regular", "DaimlerCSArab-Regular", sans-serif;
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    font-size: 1rem;
+                                    line-height: 1.25rem;
+                                }
+                            }
+
+                            .boder {
+                                border: 1px dotted rgba(0, 0, 0, .09);
+                                width: 100%;
+                                height: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -306,6 +306,43 @@
                         }
                     }
 
+                    .LichLamViec {
+                        background: rgba(215, 225, 235, 0.128);
+                        box-shadow: 0 8px 32px 0 rgba(155, 207, 242, 0.37);
+                        border-radius: 10px;
+                        border: 1px solid rgba(155, 207, 242, 0.37);
+                        padding-top: 0.5rem;
+                        padding-bottom: 0.5rem;
+                        padding-left: 1rem;
+                        padding-right: 1rem;
+                        margin-bottom: 5px;
+                        text-align: center;
+
+                        i {
+
+                            margin: 0;
+                            color: rgb(13, 23, 214);
+                        }
+
+                        span {
+                            font-weight: 700;
+                            font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                            color: rgb(112, 109, 109);
+                            font-size: 16px;
+                            font-style: italic;
+                            text-transform: uppercase;
+                            padding-left: 20px;
+                        }
+
+                        &.active {
+                            font-weight: 700;
+                            font-family: "MBCorpo Title", "DaimlerCAC-Regular", "DaimlerCACArab-Regular", serif;
+                            color: rgb(30, 228, 8);
+                            background-color: rgba(22, 72, 237, 0.349);
+                            transition: all 0.4 ease;
+                        }
+                    }
+
                     .bank {
                         border: none;
                         background-color: transparent;

@@ -22,6 +22,21 @@ const optionBaoDuongSchema = new mongoose.Schema({
         ref: "loaiDichVus"
     },
 
+    HoanThanh: {
+        type: Number,
+        default: 0
+    },
+
+    NgayHoanThanh: {
+        type: String,
+        default: "chưa có"
+    },
+
+    ThoiGianHoanThanh: {
+        type: String,
+        default: "chưa có"
+    }
+
 }, {
     timestamps: true
 })

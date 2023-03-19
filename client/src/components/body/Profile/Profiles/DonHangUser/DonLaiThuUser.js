@@ -4,6 +4,8 @@ import Tabs from 'react-bootstrap/Tabs';
 
 import './DonLaiThu.scss'
 import FormALlLaiThu from './FormItemLaiThu/FormALlLaiThu';
+import FormDonChuaDuyet from './FormItemLaiThu/FormDonChuaDuyet';
+import FormDonHoanThanh from './FormItemLaiThu/FormDonHoanThanh';
 
 function DonLaiThuUser() {
   return (
@@ -19,10 +21,10 @@ function DonLaiThuUser() {
           </>
         </Tab>
         <Tab eventKey="DonChoDuyet" title="Đơn chưa duyệt">
-          <div>2</div>
+          <FormDonChuaDuyet />
         </Tab>
         <Tab eventKey="DonHoangThanh" title="Đơn hoàng thành">
-          <div>3</div>
+          <FormDonHoanThanh />
         </Tab>
       </Tabs>
     </>

@@ -32,7 +32,7 @@ function ProfileAllUser() {
     const [data, setData] = useState(initialState)
     const token = useSelector(state => state.token)
 
-    const requiredFields = ["ID", "Name", "Email", "Phone", "ChucVu", "ChucVuCuThe"];
+    const requiredFields = ["ID", "Name", "Email", "Phone", "Password", "ChucVu", "ChucVuCuThe"];
 
     const [deleteId, setDeleteId] = useState("")
 
@@ -67,7 +67,7 @@ function ProfileAllUser() {
 
     useEffect(() => {
         getAllUser()
-    }, [])
+    }, [callback])
 
     const getAllUser = async () => {
         const res = await Axios.get('/user/all_infor')
@@ -183,6 +183,7 @@ function ProfileAllUser() {
                 name: obj["Name"] || "",
                 email: obj["Email"] || "",
                 numberphone: obj["Phone"] || "",
+                password: obj["Password"] || "",
                 chucvu: obj["ChucVu"] || "",
                 chucvucuthe: obj["ChucVuCuThe"] || "",
             }));
@@ -232,7 +233,7 @@ function ProfileAllUser() {
             setLoadding(false);
         } catch (err) {
             console.log(err)
-            toast.error(`Dữ liệu không phụ hợp. Vui lòng tham khảo "["ID", "Name", "Email", "Phone", "ChucVu = "Nhân viên"", "ChucVuCuThe = ví dụ "Nhân viên kỹ thuật""]" `)
+            toast.error(`Dữ liệu không phụ hợp. Vui lòng tham khảo "["ID", "Name", "Email", "Phone","Password", "ChucVu = "Nhân viên"", "ChucVuCuThe = ví dụ "1" or "2"]" `)
         }
     }
 

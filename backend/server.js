@@ -45,6 +45,7 @@ app.use('/api', require('./src/router/dailyRouter'))
 app.use('/api', require('./src/router/loaibaoduongRouter'))
 app.use('/api', require('./src/router/optionBaoDuongRouter'))
 app.use('/api', require('./src/router/datlichbaoduongRouter'))
+app.use('/api', require('./src/router/QuyTrinhBaoDuongRouter'))
 
 //connect to mongoDB
 const URI = process.env.MONGODB_URL

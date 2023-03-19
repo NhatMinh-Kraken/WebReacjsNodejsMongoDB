@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-function BaoDuongSteps({ steps, currentStep }) {
+function QuyTrinhBaoDuongSteps({ steps, currentStep }) {
     const [newStep, setNewStep] = useState([])
     const stepRef = useRef()
 
@@ -70,8 +70,8 @@ function BaoDuongSteps({ steps, currentStep }) {
                 {
                     newStep.map((step, index) => (
                         <div className='d-flex align-items-center position-relative' key={index + 1}>
-                            <div className='BaoDuongSteps' style={step.completed ? css : null}>
-                                <div className='BaoDuongSteps-border-number d-flex align-items-center justify-content-center' style={{ border: step.selected ? "1px solid #0078d6" : "1px solid #000" }}>
+                            <div className='Dv-BaoDuongSteps' style={step.completed ? css : null}>
+                                <div className='Dv-BaoDuongSteps-border-number d-flex align-items-center justify-content-center' style={{ border: step.selected ? "1px solid #0078d6" : "1px solid #000" }}>
                                     {step.completed ? (
                                         <span>&#10003;</span>
                                     ) : (
@@ -79,14 +79,14 @@ function BaoDuongSteps({ steps, currentStep }) {
                                     )}
                                 </div>
                             </div>
-                            <div className='BaoDuongSteps-des d-flex align-items-center mt-16 ml-1' style={{ color: step.completed && ("#0078d6") }}>
+                            <div className='Dv-BaoDuongSteps-des d-flex align-items-center mt-16 ml-1' style={{ color: step.completed && ("#0078d6") }}>
                                 <span>{step.description}</span>
                             </div>
                             {
                                 index !== newStep.length - 1 &&
                                 (
                                     <div className='position-relative'>
-                                        <div className='BaoDuongSteps-boder' style={step.completed ? css : null} ></div>
+                                        <div className='Dv-BaoDuongSteps-boder' style={step.completed ? css : null} ></div>
                                     </div>
                                 )
                             }
@@ -99,4 +99,4 @@ function BaoDuongSteps({ steps, currentStep }) {
     )
 }
 
-export default BaoDuongSteps
+export default QuyTrinhBaoDuongSteps

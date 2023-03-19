@@ -100,6 +100,8 @@ function FormBaoDuong() {
         newStep > 0 && newStep <= steps.length && setCurrentStep(newStep);
     }
 
+    const two = 2
+
     return (
         <>
             <div className='formBaoDuong mx-auto container'>
@@ -114,9 +116,6 @@ function FormBaoDuong() {
                 <div className='form-thongtin-steper-baoduong pb-5'>
                     {displaySteps(currentStep)}
                 </div>
-                {/* <div className=''>
-                    <BaoDuongStepsController currentStep={currentStep} steps={steps} handleClick={handleClick} />
-                </div> */}
             </div>
         </>
     )

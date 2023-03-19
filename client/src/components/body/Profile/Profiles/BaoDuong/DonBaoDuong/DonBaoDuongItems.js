@@ -1,22 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import User from '../../../../../../assets/images/user.png'
 import logo from '../../../../../../assets/images/logo.png'
 import { useSelector } from 'react-redux'
 import { Button, Modal } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import Axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 function DonBaoDuongItems({ c, setCallback, callback }) {
 
-    console.log(c)
     const [isHover, setIsHover] = useState(false)
     const [isShow, setIsShow] = useState(false)
-
+    const [optionChung, setOptionChung] = useState([])
+    const [option, setOption] = useState([])
+    const [optionLoaiDichVu, setOptionLoaiDichVu] = useState([])
+    const [optiondichvuChung, setOptionDichVuChung] = useState([])
     const token = useSelector(state => state.token)
+    const history = useHistory()
 
     const handleHover = () => {
         setIsHover(true)
     }
+
+    // console.log(c)
 
     const handleNotHover = () => {
         setIsHover(false)
@@ -27,6 +33,37 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
     const handleShow = () => {
         setIsShow(true)
     }
+
+    useEffect(() => {
+        const get = async () => {
+            const ret = await Axios.get('/api/loaibaoduong')
+            setOptionLoaiDichVu(ret.data)
+        }
+        get()
+    }, [callback])
+
+    useEffect(() => {
+        optionLoaiDichVu.map(lt => {
+            if (lt.chung === 1) {
+                setOptionDichVuChung(lt)
+            }
+        })
+    }, [optionLoaiDichVu, callback])
+
+    useEffect(() => {
+        const arrChung = []
+        const arr = []
+        for (let i = 0; i < c.IdOptionBaoDuong?.length; i++) {
+            if (c.IdOptionBaoDuong[i].IdLoaiDichVu === optiondichvuChung._id) {
+                arrChung.push(c.IdOptionBaoDuong[i])
+            }
+            else {
+                arr.push(c.IdOptionBaoDuong[i])
+            }
+        }
+        setOptionChung(arrChung)
+        setOption(arr)
+    }, [c.IdOptionBaoDuong, optiondichvuChung])
 
     const diachivuthe = [c && c.IdUser && c.IdUser.nameWard, c && c.IdUser && c.IdUser.nameDis, c && c.IdUser && c.IdUser.nameCity].join(', ')
 
@@ -65,16 +102,37 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
     const handleSubmitDuyet = async () => {
         try {
             const res = await Axios.put(`/api/put-datlichbaoduong-duyet/${c._id}`, {
-                Duyet: 1
+                Duyet: 1,
+                DonHang: c
             }, {
                 headers: { Authorization: token }
             })
+            handleCreateQuyTrinh()
             setCallback(!callback)
             setIsShow(false)
             toast.success(res.data.msg)
         } catch (err) {
             err.response.data.msg && toast.error(err.response.data.msg)
         }
+    }
+
+    const handleCreateQuyTrinh = async () => {
+        try {
+            await Axios.post('/api/quytrinhbaoduong', {
+                IdDonDatLichBaoDuong: c._id,
+                IdOptionBaoDuongB1: optionChung,
+                IdOptionBaoDuongB2: option
+            }, {
+                headers: { Authorization: token }
+            })
+        } catch (err) {
+            err.response.data.msg && toast.error(err.response.data.msg)
+        }
+    }
+
+    const handleButton = (id) => {
+        handleClose()
+        window.location.href = `/quytrinh-bao-duong/${id}`
     }
 
     return (
@@ -186,14 +244,6 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
                     </table>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="success" style={{ width: "180px" }} disabled={c.checked === 1 && ("disabled")} onClick={handleSubmit}>
-                        {
-                            c.checked === 1
-                                ?
-                                "Đã Hoàn Thành"
-                                :
-                                "Chưa Hoàn Thành"
-                        }</Button>
                     <Button variant="primary" style={{ width: "180px" }} disabled={c.Duyet === 1 && ("disabled")} onClick={handleSubmitDuyet}>
                         {
                             c.Duyet === 1
@@ -202,6 +252,18 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
                                 :
                                 "Chưa Duyệt"
                         }
+                    </Button>
+                    <Button variant="success" style={{ width: "180px" }} disabled={c.checked === 1 && ("disabled")} onClick={handleSubmit}>
+                        {
+                            c.checked === 1
+                                ?
+                                "Đã Hoàn Thành"
+                                :
+                                "Chưa Hoàn Thành"
+                        }
+                    </Button>
+                    <Button variant="primary" style={{ width: "180px" }} onClick={() => handleButton(c._id)}>
+                        Xem quy trình <i className="fa-solid fa-circle-right"></i>
                     </Button>
                 </Modal.Footer>
             </Modal>

@@ -63,7 +63,7 @@ function DaiLyCar({ handleClick, handleClickBack, currentStep }) {
     setClickDaiLy([])
   }
 
-  console.log(clickDaiLy)
+
   return (
     <>
       <div className='Form-DaiLyXe pt-5 pb-5'>

@@ -1,8 +1,8 @@
 import React from 'react'
 
-function ItemsDonLaiThu({ lt, garage }) {
-
+function ItemDonChuaDuyet({ lt, garage }) {
     const formatMoney = Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(lt.Idcar.money)
+    console.log(lt)
     return (
         <>
             <div className='form-laithu-view-user pb-3'>
@@ -67,4 +67,4 @@ function ItemsDonLaiThu({ lt, garage }) {
     )
 }
 
-export default ItemsDonLaiThu
+export default ItemDonChuaDuyet
