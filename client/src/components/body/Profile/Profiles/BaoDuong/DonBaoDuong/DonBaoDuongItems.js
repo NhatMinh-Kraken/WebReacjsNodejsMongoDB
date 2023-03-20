@@ -131,8 +131,11 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
     }
 
     const handleButton = (id) => {
+        if (c.Duyet === 1) {
+            window.location.href = `/quytrinh-bao-duong/${id}`
+            handleClose()
+        }
         handleClose()
-        window.location.href = `/quytrinh-bao-duong/${id}`
     }
 
     return (
@@ -262,9 +265,16 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
                                 "Chưa Hoàn Thành"
                         }
                     </Button>
-                    <Button variant="primary" style={{ width: "180px" }} onClick={() => handleButton(c._id)}>
-                        Xem quy trình <i className="fa-solid fa-circle-right"></i>
-                    </Button>
+                    {
+                        c.Duyet === 1 && (
+                            <>
+                                <Button variant="primary" style={{ width: "180px" }} onClick={() => handleButton(c._id)}>
+                                    Xem quy trình <i className="fa-solid fa-circle-right"></i>
+                                </Button>
+                            </>
+                        )
+                    }
+
                 </Modal.Footer>
             </Modal>
 
