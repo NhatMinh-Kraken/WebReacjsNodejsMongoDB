@@ -9,16 +9,16 @@ const io = require("socket.io")(8900, {
 let users = [];
 
 const addUser = (userId, socketId) => {
-    !users.some((user) => user.userId === userId) &&
+    !users.some((user) => user?.userId === userId) &&
         users.push({ userId, socketId });
 };
 
 const removeUser = (socketId) => {
-    users = users.filter((user) => user.socketId !== socketId);
+    users = users.filter((user) => user?.socketId !== socketId);
 };
 
 const getUser = (userId) => {
-    return users.find((user) => user.userId === userId);
+    return users.find((user) => user?.userId === userId);
 };
 
 io.on("connection", (socket) => {
@@ -42,12 +42,12 @@ io.on("connection", (socket) => {
     //send and get message
     socket.on("sendMessage", ({ senderId, receiverId, text }) => {
         const user = getUser(receiverId);
-        io.to(user.socketId).emit("getMessage", {
+        io.to(user?.socketId).emit("getMessage", {
             senderId,
             text,
         });
 
-        io.to(user.socketId).emit("getNotif", {
+        io.to(user?.socketId).emit("getNotif", {
             senderId,
             text,
         });
@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
     socket.on("sendNotification", ({ notificationId, senderId, notification }) => {
         const user = getUser(notificationId);
 
-        io.to(user.socketId).emit("getNotification", {
+        io.to(user?.socketId).emit("getNotification", {
             senderId,
             notification
         })

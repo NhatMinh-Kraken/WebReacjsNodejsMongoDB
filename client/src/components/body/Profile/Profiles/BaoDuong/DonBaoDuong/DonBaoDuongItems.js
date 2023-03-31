@@ -6,6 +6,8 @@ import { Button, Modal } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import Axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import moment from 'moment'
+import carSetting from '../../../../../../assets/images/carSetting.png'
 
 function DonBaoDuongItems({ c, setCallback, callback }) {
 
@@ -17,6 +19,30 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
     const [optiondichvuChung, setOptionDichVuChung] = useState([])
     const token = useSelector(state => state.token)
     const history = useHistory()
+    const [showEdit, setShowEdit] = useState(false)
+    const [optiondichvu, setOptionDichVu] = useState([])
+    const [check, setCheck] = useState([])
+    const [id, setId] = useState("")
+    const [optionNoLoaiDichVu, setOptionNoLoaiDichVu] = useState([])
+    const [money, setMoney] = useState([])
+    const [TongTien, setTongTien] = useState("")
+
+
+    useEffect(() => {
+        const get = async () => {
+            const ret = await Axios.get('/api/getProductToType')
+            setOptionDichVu(ret.data)
+        }
+        get()
+    }, [callback])
+
+    useEffect(() => {
+        const get = async () => {
+            const ret = await Axios.get('/api/get-optionbaoduong')
+            setOptionNoLoaiDichVu(ret.data)
+        }
+        get()
+    }, [callback])
 
     const handleHover = () => {
         setIsHover(true)
@@ -30,8 +56,9 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
 
     const handleClose = () => setIsShow(false);
 
-    const handleShow = () => {
+    const handleShow = (id) => {
         setIsShow(true)
+        setId(id)
     }
 
     useEffect(() => {
@@ -107,10 +134,36 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
             }, {
                 headers: { Authorization: token }
             })
-            handleCreateQuyTrinh()
+            // handleCreateQuyTrinh()
+            handleLichLamViec()
             setCallback(!callback)
             setIsShow(false)
             toast.success(res.data.msg)
+        } catch (err) {
+            err.response.data.msg && toast.error(err.response.data.msg)
+        }
+    }
+
+    const newTitle = `Đơn bảo dưỡng (${c.dates})`
+    const newDate = moment(`${c.datesNoF} ${c.times}`).format('YYYY-MM-DDTHH:mm:ssZ')
+    const start = moment(newDate).toDate()
+
+    const newEnd = moment(`${c.datesNoF} 16:45:00`).format('YYYY-MM-DDTHH:mm:ssZ')
+    const end = moment(newEnd).toDate()
+
+    // console.log(moment(newEnd))
+
+    const handleLichLamViec = async () => {
+        try {
+            await Axios.post('/api/lichlamviec', {
+                title: newTitle,
+                start: start,
+                end: end,
+                idCoVan: c.IdCoVan?._id ? c.IdCoVan?._id : null,
+                IdDonBaoDuong: c._id
+            }, {
+                headers: { Authorization: token }
+            })
         } catch (err) {
             err.response.data.msg && toast.error(err.response.data.msg)
         }
@@ -125,6 +178,7 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
             }, {
                 headers: { Authorization: token }
             })
+            handleQuyTrinh()
         } catch (err) {
             err.response.data.msg && toast.error(err.response.data.msg)
         }
@@ -138,8 +192,167 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
         handleClose()
     }
 
+    const handleHuy = async () => {
+        try {
+            const res = await Axios.put(`/api/huy-datlichbaoduong/${id}`, {
+                TinhTrangDonHang: 1
+            }, {
+                headers: { Authorization: token }
+            })
+            setCallback(!callback)
+            setIsShow(false)
+            toast.success(res.data.msg)
+        } catch (err) {
+            err.response.data.msg && toast.error(err.response.data.msg)
+        }
+    }
+
+    const handleQuyTrinh = async () => {
+        try {
+            const res = await Axios.put(`/api/cr-QuyTrinh/${c._id}`, {
+                TaoQuyTrinh: 1
+            }, {
+                headers: { Authorization: token }
+            })
+            setCallback(!callback)
+            setIsShow(false)
+            toast.success(res.data.msg)
+        } catch (err) {
+            err.response.data.msg && toast.error(err.response.data.msg)
+        }
+    }
+
+    const HandleShowEdit = (id) => {
+        setShowEdit(true)
+        setIsShow(false)
+        setId(id)
+    }
+
+    const handleCloseEdit = () => {
+        setShowEdit(false)
+        setIsShow(true)
+    }
+
+
+    useEffect(() => {
+        const arr = []
+        for (let i = 0; i < c.IdOptionBaoDuong?.length; i++) {
+            arr.push(c.IdOptionBaoDuong[i]?._id)
+        }
+        setCheck(arr)
+    }, [c.IdOptionBaoDuong])
+
+
+    const handleCheck = (e, giatri) => {
+        if (e.target.checked) {
+            setCheck([
+                ...check, giatri._id
+            ])
+        }
+        else {
+            setCheck(
+                check.filter((c) => c !== giatri._id)
+            )
+        }
+    }
+
+    const handleSave = async () => {
+        try {
+            const res = await Axios.put(`/api/Edit-optionbaoduong/${id}`, {
+                check: check,
+                Tong: TongTien
+            }, {
+                headers: { Authorization: token }
+            })
+            toast.success(res.data.msg)
+            setIsShow(true)
+            setShowEdit(false)
+            setCallback(!callback)
+        } catch (err) {
+            err.response.data.msg && toast.error(err.response.data.msg)
+        }
+    }
+
+    useEffect(() => {
+        const arr = []
+
+        check.map(c => {
+            for (let i = 0; i < optionNoLoaiDichVu.length; i++) {
+                if (c === optionNoLoaiDichVu[i]._id) {
+                    arr.push(optionNoLoaiDichVu[i].money)
+                }
+            }
+        })
+
+        setMoney(arr)
+    }, [check, optionNoLoaiDichVu])
+
+    useEffect(() => {
+        let sum = 0
+        for (let i = 0; i < money?.length; i++) {
+            sum += Number(money[i]);
+        }
+        setTongTien(sum)
+    }, [money])
+
+
     return (
         <>
+            <Modal
+                size="lg"
+                show={showEdit}
+                onHide={handleCloseEdit}
+                backdrop="static"
+                keyboard={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Option Bảo dưỡng</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className='Form-Edit-DichVu-body d-flex flex-column'>
+                        {
+                            optiondichvu.map(gt => (
+                                <>
+                                    <div className='Form-BaoDuong-DichVu-body-header d-flex align-items-center col-12' key={gt._id}>
+                                        <div className='d-flex col-6'>
+                                            <img src={carSetting} loading='lazy' /><span className='pl-2'>{gt._id.name}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className='d-flex'>
+                                        <div className='Form-BaoDuong-DichVu-body-items'>
+                                            <div className='row'>
+                                                {
+                                                    gt.records.map((g, index) => (
+                                                        <>
+                                                            <div className='Form-BaoDuong-DichVu-items col-2 p-0 m-1' key={g._id}>
+                                                                <div className='d-flex flex-column'>
+                                                                    <div className='Form-BaoDuong-DichVu-items-check d-flex align-items-center col-12'>
+                                                                        <div className='Form-BaoDuong-DichVu-items-name col-10 p-0'>{g.name}</div>
+                                                                        <div className='Form-items-check col-2 d-flex p-0 justify-content-end'>
+                                                                            <input className='check-box-items' type="checkbox" name='check' checked={check.includes(g._id)} onChange={(e) => handleCheck(e, g)} />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </>
+                                                    ))
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                            ))
+                        }
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseEdit}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleSave}>Save</Button>
+                </Modal.Footer>
+            </Modal>
 
             <Modal
                 size="lg"
@@ -243,42 +456,69 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
                                 <td className="font-weight-bold">Ngày đăng ký:</td>
                                 <td className='text-primary font-weight-bold'>{c.dates}</td>
                             </tr>
+                            <tr>
+                                <td className="font-weight-bold">Tổng tiền:</td>
+                                <td className='text-primary font-weight-bold'>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(c.Tong)}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" style={{ width: "180px" }} disabled={c.Duyet === 1 && ("disabled")} onClick={handleSubmitDuyet}>
+                    <Button variant="primary" style={{ width: "180px" }} disabled={c.TinhTrangDonHang === 1 || c.checked === 1 && ("disabled")} onClick={() => HandleShowEdit(c._id)}>
+                        Sửa đơn bảo dưỡng
+                    </Button>
+                    <Button variant="danger" disabled={c.TinhTrangDonHang === 1 && ("disabled")} style={{ width: "110px" }} onClick={handleHuy}>
+                        {
+                            c.TinhTrangDonHang === 1
+                                ?
+                                "Đã hủy"
+                                :
+                                "Hủy đơn"
+                        }
+                    </Button>
+                    <Button variant="primary" style={{ width: "140px" }} disabled={c.Duyet === 1 || c.TinhTrangDonHang === 1 && ("disabled")} onClick={handleSubmitDuyet}>
                         {
                             c.Duyet === 1
                                 ?
                                 "Đã Duyệt"
                                 :
-                                "Chưa Duyệt"
+                                "Duyệt"
                         }
                     </Button>
-                    <Button variant="success" style={{ width: "180px" }} disabled={c.checked === 1 && ("disabled")} onClick={handleSubmit}>
+                    <Button variant="success" style={{ width: "170px" }} disabled={c.checked === 1 || c.TinhTrangDonHang === 1 && ("disabled")} onClick={handleSubmit}>
                         {
                             c.checked === 1
                                 ?
                                 "Đã Hoàn Thành"
                                 :
-                                "Chưa Hoàn Thành"
+                                "Hoàn Thành"
                         }
                     </Button>
                     {
                         c.Duyet === 1 && (
                             <>
-                                <Button variant="primary" style={{ width: "180px" }} onClick={() => handleButton(c._id)}>
-                                    Xem quy trình <i className="fa-solid fa-circle-right"></i>
-                                </Button>
+                                {
+                                    c.TaoQuyTrinh === 0
+                                        ?
+                                        <>
+                                            <Button variant="primary" disabled={c.TinhTrangDonHang === 1 && ("disabled")} style={{ width: "180px" }} onClick={handleCreateQuyTrinh}>
+                                                Tạo quy trình <i className="fa-solid fa-circle-right"></i>
+                                            </Button>
+                                        </>
+                                        :
+                                        <>
+                                            <Button variant="primary" disabled={c.TinhTrangDonHang === 1 && ("disabled")} style={{ width: "180px" }} onClick={() => handleButton(c._id)}>
+                                                Xem quy trình <i className="fa-solid fa-circle-right"></i>
+                                            </Button>
+                                        </>
+                                }
                             </>
                         )
                     }
-
                 </Modal.Footer>
             </Modal>
 
-            <div className={`LaiThuItems ${c.checked === 1 ? "border-Success-bg" : "border-No-Success-bg"}`}>
+            <div className={`LaiThuItems ${c.checked === 1 ? "border-Success-bg" : "border-No-Success-bg"} ${c.TinhTrangDonHang === 1 && ("border-danger-bg")}`}>
                 <div className='LaiThuItems-border d-flex align-items-center mr-auto'>
                     <div className='LaiThuItems-header'>
                         <div className='LaiThuItems-img'>
@@ -300,7 +540,7 @@ function DonBaoDuongItems({ c, setCallback, callback }) {
                             <span>/{c.times}</span>
                         </div>
                     </div>
-                    <div className='logoMer' onClick={handleShow}>
+                    <div className='logoMer' onClick={() => handleShow(c._id)}>
                         <img src={logo} alt="logo" />
                     </div>
                 </div>

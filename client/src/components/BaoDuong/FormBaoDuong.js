@@ -100,8 +100,6 @@ function FormBaoDuong() {
         newStep > 0 && newStep <= steps.length && setCurrentStep(newStep);
     }
 
-    const two = 2
-
     return (
         <>
             <div className='formBaoDuong mx-auto container'>

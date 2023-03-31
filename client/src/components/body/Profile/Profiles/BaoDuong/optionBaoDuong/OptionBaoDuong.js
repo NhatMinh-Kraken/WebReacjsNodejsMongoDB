@@ -157,8 +157,6 @@ function OptionBaoDuong() {
         setData({ ...data, [name]: value, err: '', success: '' })
     }
 
-
-
     const handleShowEdit = (giatri) => {
         setShowAll(true)
         setData(giatri)

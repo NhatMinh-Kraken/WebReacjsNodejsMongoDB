@@ -35,11 +35,14 @@ function TongQuan({ handleClickBack, currentStep }) {
   const [dates, setDates] = state.timesAndDatesContent.DateData;
   const [checkCV, setCheckCV] = state.convanContent.CoVanData
   const [times, setTimes] = state.timesAndDatesContent.TimesData
+  const [datesNoFormat, setDatesNoFormat] = state.timesAndDatesContent.DateNoFData;
   const [callback, setCallback] = useState(false)
 
   const [optionNoLoaiDichVu, setOptionNoLoaiDichVu] = useState([])
 
   const history = useHistory()
+  const [money, setMoney] = useState([])
+  const [Tong, setTong] = useState("")
 
   useEffect(() => {
     const get = async () => {
@@ -94,13 +97,20 @@ function TongQuan({ handleClickBack, currentStep }) {
         dates: dates,
         times: times,
 
+        datesNoF: moment(datesNoFormat).format('MM-DD-YYYY'),
+        dayMonthYear: datesNoFormat,
+
         TenLoaiXe: loaiXeNhap.name,
         TenDaiLy: clickDaiLy.Name,
         DiaChiDaiLy: clickDaiLy.Address,
         TenKhachHang: user.name,
         EmailKhachHang: user.email,
         NameCoVan: checkCV.name,
-        SDTCoVan: checkCV.numberphone
+        SDTCoVan: checkCV.numberphone,
+        Tong: Tong,
+        day: moment(datesNoFormat).format('DD'),
+        month: moment(datesNoFormat).format('MM'),
+        year: moment(datesNoFormat).format('YYYY')
       })
 
       history.push("/")
@@ -110,6 +120,30 @@ function TongQuan({ handleClickBack, currentStep }) {
       console.log(err)
     }
   }
+
+  console.log(check)
+
+  useEffect(() => {
+    const arr = []
+
+    check.map(c => {
+      for (let i = 0; i < optionNoLoaiDichVu.length; i++) {
+        if (c === optionNoLoaiDichVu[i]._id) {
+          arr.push(optionNoLoaiDichVu[i].money)
+        }
+      }
+    })
+
+    setMoney(arr)
+  }, [check, optionNoLoaiDichVu])
+
+  useEffect(() => {
+    let sum = 0
+    for (let i = 0; i < money?.length; i++) {
+      sum += Number(money[i]);
+    }
+    setTong(sum)
+  }, [money])
 
   return (
     <>
@@ -289,18 +323,20 @@ function TongQuan({ handleClickBack, currentStep }) {
                       {
                         check.length !== 0 ?
                           <>
+                            <span className='items-nhap'>Mục tiêu bảo dưỡng:</span>
                             {
                               check.map(c => (
                                 <>
-                                  <span className='items-nhap'>Mục tiêu bảo dưỡng:
-                                    {
-                                      optionNoLoaiDichVu.map(d => (
-                                        <>
-                                          <span>{d._id === c && (<>{d.name}</>)}</span>
-                                        </>
-                                      ))
-                                    }
-                                  </span>
+                                  {
+                                    optionNoLoaiDichVu.map(d => (
+                                      <>
+                                        <div className='d-flex col-12'>
+                                          <span className='pl-1 col-6'>{d._id === c && (<>{d.name}</>)}</span>
+                                          <span className='col-6 d-flex justify-content-end'>{d._id === c && (<>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(d.money)}</>)}</span>
+                                        </div>
+                                      </>
+                                    ))
+                                  }
                                 </>
                               ))
                             }
@@ -333,7 +369,7 @@ function TongQuan({ handleClickBack, currentStep }) {
                         <p>Chi phí bổ sung có thể được áp dụng.</p>
                         <p>Thanh toán sẽ chỉ được thực hiện sau khi bạn chấp thuận với Đối tác Mercedes-Benz của bạn.</p>
                       </div>
-                      <div className='form-thong-tin-baogia-header-right d-flex justify-content-end col-6 p-0'>chưa khả dụng</div>
+                      <div className='form-thong-tin-baogia-header-right d-flex justify-content-end col-6 p-0'>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Tong)}</div>
                     </div>
                     <div className='pt-3'>
                       <span className='luu-y'>Để có thể thực hiện sửa chữa hoặc dịch vụ theo thông số kỹ thuật của nhà sản xuất, khi tiếp nhận xe trong phạm vi đã đặt trước, xưởng sẽ tiến hành kiểm tra xem có cần thiết phải làm thêm gì hay không. Điều này có thể dẫn đến chi phí bổ sung. Tất cả giá đã bao gồm thuế giá trị gia tăng theo luật định.</span>

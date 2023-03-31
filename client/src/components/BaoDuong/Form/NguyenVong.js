@@ -14,6 +14,7 @@ function NguyenVong({ handleClick, handleClickBack, currentStep }) {
   const state = useContext(BaoDuongStepperContext)
   const [callback, setCallback] = useState(false)
   const [dates, setDates] = state.timesAndDatesContent.DateData;
+  const [datesNoFormat, setDatesNoFormat] = state.timesAndDatesContent.DateNoFData;
   const [checkCV, setCheckCV] = state.convanContent.CoVanData
   const [times, setTimes] = state.timesAndDatesContent.TimesData
   const [click, setClick] = useState(false)
@@ -97,6 +98,7 @@ function NguyenVong({ handleClick, handleClickBack, currentStep }) {
     setTimes(gt)
   }
 
+  
   return (
     <>
       <div className='form-nguyen-vong'>
@@ -152,6 +154,7 @@ function NguyenVong({ handleClick, handleClickBack, currentStep }) {
               <div className='col-12 d-flex p-0'>
                 <div className='Calendar-form pt-2 col-6 p-0 mr-1'>
                   <Calendar onChange={(c) => {
+                    setDatesNoFormat(c)
                     const values = moment(c).format('DD-MM-YYYY')
                     setDates(values)
                   }} />

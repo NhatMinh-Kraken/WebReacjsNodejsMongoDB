@@ -126,8 +126,8 @@ function ProfileUser() {
                                         <Route path="/all-product" component={isAdmin ? ProductCarAdmin : NotFound} exact />
                                         <Route path="/create-product" component={isAdmin ? CreateProduct : NotFound} exact />
                                         <Route path="/edit-product/:id" component={isAdmin ? EditProduct : NotFound} exact />
-                                        <Route path="/don-bao-duong-user" component={isAdmin ? DonBaoDuongUser : NotFound} exact />
-                                        <Route path="/don-lai-thu-user" component={isAdmin ? DonLaiThuUser : NotFound} exact />
+                                        <Route path="/don-bao-duong-user" component={isLogged ? DonBaoDuongUser : NotFound} exact />
+                                        <Route path="/don-lai-thu-user" component={isLogged ? DonLaiThuUser : NotFound} exact />
                                         <Route path="/lich-lam-viec" component={isLogged && user.chucvu === "Nhân viên" ? LichLamViec : NotFound} exact />
                                     </Switch>
                                 </div>

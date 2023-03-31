@@ -20,12 +20,12 @@ const datlichbaoduongController = {
     create: async (req, res) => {
         try {
             const IdOptionBaoDuong = [...req.body.IdOptionBaoDuong]
-            const { IdLoaiXe, energy, BienSo, QuangDuongDi, Iddaily, IdUser, nhanxung, name, email, numberphone, address, mabuuchinh, address_cuthe, checkEmail, IdCoVan, dates, times, TenLoaiXe, TenDaiLy, DiaChiDaiLy, TenKhachHang, EmailKhachHang, NameCoVan, SDTCoVan } = req.body
+            const { IdLoaiXe, energy, BienSo, QuangDuongDi, Iddaily, IdUser, nhanxung, name, email, numberphone, address, mabuuchinh, address_cuthe, checkEmail, IdCoVan, dates, times, TenLoaiXe, TenDaiLy, DiaChiDaiLy, TenKhachHang, EmailKhachHang, NameCoVan, SDTCoVan, datesNoF, Tong, day, month, year, dayMonthYear } = req.body
 
             EmailDangKyBaoDuong(IdOptionBaoDuong, IdLoaiXe, energy, BienSo, QuangDuongDi, Iddaily, IdUser, nhanxung, name, email, numberphone, address, mabuuchinh, address_cuthe, checkEmail, IdCoVan, dates, times, TenLoaiXe, TenDaiLy, DiaChiDaiLy, TenKhachHang, EmailKhachHang, NameCoVan, SDTCoVan)
 
             const newGet = new Data({
-                IdLoaiXe, energy, BienSo, QuangDuongDi, Iddaily, IdOptionBaoDuong, IdUser, nhanxung, name, email, numberphone, address, mabuuchinh, address_cuthe, checkEmail, IdCoVan, dates, times
+                IdLoaiXe, energy, BienSo, QuangDuongDi, Iddaily, IdOptionBaoDuong, IdUser, nhanxung, name, email, numberphone, address, mabuuchinh, address_cuthe, checkEmail, IdCoVan, dates, times, datesNoF, Tong, day, month, year, dayMonthYear
             })
             await newGet.save()
 
@@ -131,6 +131,203 @@ const datlichbaoduongController = {
                     console.log("không gửi email bảo dưỡng được")
                 }
             }
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
+    huyDon: async (req, res) => {
+        try {
+            const { TinhTrangDonHang } = req.body
+
+            await Data.findOneAndUpdate({
+                _id: req.params.id
+            }, {
+                TinhTrangDonHang
+            })
+
+            res.json({ msg: "Đơn hàng đã hủy thành công" })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
+    crQuyTrinh: async (req, res) => {
+        try {
+            const { TaoQuyTrinh } = req.body
+
+            await Data.findOneAndUpdate({
+                _id: req.params.id
+            }, {
+                TaoQuyTrinh
+            })
+
+            res.json({ msg: "Tạo quy trình thành công" })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
+    editOptionBaoDuong: async (req, res) => {
+        try {
+            const check = [...req.body.check]
+            const { Tong } = req.body
+
+            await Data.findOneAndUpdate({
+                _id: req.params.id
+            }, {
+                IdOptionBaoDuong: check,
+                Tong
+            })
+
+            res.json({ msg: "Sửa thành công" })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
+    findNVCVLength: async (req, res) => {
+        try {
+            const get = await Data.aggregate([
+                {
+                    $lookup: {
+                        from: 'users',
+                        localField: 'IdCoVan',
+                        foreignField: '_id',
+                        as: 'IdCoVan'
+                    },
+                },
+
+                {
+                    $unwind: "$IdCoVan"
+                },
+
+                {
+                    $group: {
+                        _id: "$IdCoVan",
+                        records: {
+                            $push: "$$ROOT"
+                        },
+                    }
+                },
+            ])
+
+            res.json(get)
+
+            // console.log(get)
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
+    findKHDonBaoDuong: async (req, res) => {
+        try {
+            const get = await Data.aggregate([
+                {
+                    $lookup: {
+                        from: 'users',
+                        localField: 'IdUser',
+                        foreignField: '_id',
+                        as: 'IdUser'
+                    },
+                },
+
+                {
+                    $unwind: "$IdUser"
+                },
+
+                {
+                    $match: {
+                        checked: 1
+                    }
+                },
+
+                {
+                    $group: {
+                        _id: "$IdUser",
+                        records: {
+                            $push: "$$ROOT"
+                        },
+                    }
+                },
+                {
+                    $sort: { _id: 1 }
+                },
+
+            ])
+
+            res.json(get)
+
+            // console.log(get)
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
+    FilterToYear: async (req, res) => {
+        try {
+            const get = await Data.aggregate([
+
+                {
+                    $unwind: "$year"
+                },
+
+                {
+                    $group: {
+                        _id: "$year",
+                        records: {
+                            $push: "$$ROOT"
+                        },
+                    }
+                },
+                {
+                    $sort: { _id: 1 }
+                }
+            ])
+
+            res.json(get)
+
+            console.log(get)
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
+    FilterToMonth: async (req, res) => {
+        try {
+            const get = await Data.aggregate([
+
+                {
+                    $unwind: "$dayMonthYear"
+                },
+
+                {
+                    $group: {
+                        _id: {
+                            year: {
+                                $year: "$dayMonthYear"
+                            },
+                            month: {
+                                $month: "$dayMonthYear"
+                            }
+                        },
+                        records: {
+                            $push: "$$ROOT"
+                        },
+                    }
+                },
+                {
+                    $sort: { _id: 1 }
+                }
+            ])
+
+            res.json(get)
+
+            console.log(get)
+
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }

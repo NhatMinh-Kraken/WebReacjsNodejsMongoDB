@@ -42,7 +42,7 @@ function FormBaoDuongChuaDuyet({ allBaoDuongChuaDuyet, garage, logo }) {
                                                                     </div>
 
                                                                 </div>
-                                                                <div className='col-3 d-flex justify-content-end'>
+                                                                <div className='col-3 d-flex justify-content-end p-0'>
                                                                     <div className='pl-2 pr-2 d-flex justify-content-center align-items-center font-p'>
                                                                         {
                                                                             lt.Duyet === 1 ? <><span className='text-success'>Đã duyệt</span></> : <><span className='text-danger'>Chưa duyệt</span></>
