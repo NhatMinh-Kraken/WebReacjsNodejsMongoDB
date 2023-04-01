@@ -23,7 +23,7 @@ function DonLaiThuUser() {
         <Tab eventKey="DonChoDuyet" title="Đơn chưa duyệt">
           <FormDonChuaDuyet />
         </Tab>
-        <Tab eventKey="DonHoangThanh" title="Đơn hoàng thành">
+        <Tab eventKey="DonHoangThanh" title="Đơn hoàn thành">
           <FormDonHoanThanh />
         </Tab>
       </Tabs>

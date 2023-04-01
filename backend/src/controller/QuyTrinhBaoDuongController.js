@@ -247,7 +247,7 @@ const QuyTrinhBaoDuongController = {
 
             EmailChoCoVanBaoDuong(khachhang.IdCoVan)
 
-            res.json({ msg: "Gửi gmail cho khách hàng thành công" })
+            res.json({ msg: "Gửi gmail cho cố vấn thành công" })
 
         } catch (err) {
             return res.status(500).json({ msg: err.message })

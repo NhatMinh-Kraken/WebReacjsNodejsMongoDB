@@ -24,7 +24,8 @@ const categoryController = {
         try {
             //if user info role === 0 ---> admin
             // only admin can reate, delete, edit category
-            const { name } = req.body
+            const { name, ClickKeHoach } = req.body
+
             const category = await Categorys.findOne({
                 name
             })
@@ -32,7 +33,7 @@ const categoryController = {
             if (category) return res.status(400).json({ msg: "This category already exists." })
 
             const newCategory = new Categorys({
-                name
+                name, ChiTietBaoDuong: ClickKeHoach
             })
             await newCategory.save()
 
@@ -62,14 +63,75 @@ const categoryController = {
     },
     updateCategory: async (req, res) => {
         try {
-            const { name } = req.body
-            await Categorys.findOneAndUpdate({
-                _id: req.params.id
-            }, {
-                name
-            })
+            const { name, ClickKeHoach } = req.body
+
+            if (ClickKeHoach) {
+                await Categorys.findOneAndUpdate({
+                    _id: req.params.id
+                }, {
+                    name, ChiTietBaoDuong: ClickKeHoach
+                })
+            }
+            else {
+                await Categorys.findOneAndUpdate({
+                    _id: req.params.id
+                }, {
+                    name
+                })
+            }
+
 
             res.json({ msg: "Update Success!" })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
+    createDataWithExcel: async (req, res) => {
+        try {
+            const jokes = req.body
+
+            const category = await Categorys.findOne({
+                name: jokes.name
+            })
+
+            if (category) return res.status(400).json({ msg: "This category already exists." })
+
+            const newCategory = new Categorys({
+                name: jokes.name, ChiTietBaoDuong: jokes.newJokes
+            })
+            await newCategory.save()
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
+    updateDataWithExcel: async (req, res) => {
+        try {
+            const jokes = req.body;
+
+            const gf = await Categorys.findOneAndUpdate({
+                _id: req.params.id
+            }, {
+                name: jokes.name
+            })
+
+            if (gf) {
+                const promises = jokes.map(async (item) => {
+                    const res = await Categorys.updateMany({ "ChiTietBaoDuong._id": item._id }, {
+                        $set: { "ChiTietBaoDuong": { ...item } },
+                    });
+
+                    return res;
+                });
+
+                Promise.all(promises)
+                    .then(() =>
+                        res.json({ success: true, message: "Update success" })
+                    )
+                    .catch((err) => res.status(400).json(err));
+            }
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }

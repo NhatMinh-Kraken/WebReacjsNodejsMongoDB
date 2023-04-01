@@ -12,7 +12,6 @@ import FormAllDonBaoDuongHoanThanh from './FormItemBaoDuong/FormAllDonBaoDuongHo
 
 function DonBaoDuongUser() {
   const auth = useSelector(state => state.auth)
-
   const { user } = auth
   const [allBaoDuong, setAllBaoDuong] = useState([])
   const [allBaoDuongUser, setAllBaoDuongUser] = useState([])
@@ -125,7 +124,7 @@ function DonBaoDuongUser() {
 
   const ClickDonHangHT = (giatri) => {
     setClickDonBaoDuong(giatri)
-    setShow(true)
+    setShowHT(true)
   }
 
   const handleCloseHT = () => {
@@ -150,6 +149,8 @@ function DonBaoDuongUser() {
     setTongGiaB2([])
   }
 
+  // console.log(datLichBaoDuongUser)
+
   useEffect(() => {
     setOptionBuoc1(datLichBaoDuongUser.Buoc1?.IdOptionBaoDuongB1)
   }, [datLichBaoDuongUser.Buoc1?.IdOptionBaoDuongB1])
@@ -161,7 +162,9 @@ function DonBaoDuongUser() {
   useEffect(() => {
     let sum = 0
     for (let i = 0; i < optionBuoc1?.length; i++) {
-      sum += Number(optionBuoc1[i].money);
+      if (optionBuoc1[i].HoanThanh === 1) {
+        sum += Number(optionBuoc1[i].money);
+      }
     }
     setTongGiaB1(sum)
   }, [optionBuoc1])
@@ -169,7 +172,9 @@ function DonBaoDuongUser() {
   useEffect(() => {
     let sum = 0
     for (let i = 0; i < optionBuoc2?.length; i++) {
-      sum += Number(optionBuoc2[i].money);
+      if (optionBuoc2[i].HoanThanh) {
+        sum += Number(optionBuoc2[i].money);
+      }
     }
     setTongGiaB2(sum)
   }, [optionBuoc2])
@@ -189,10 +194,14 @@ function DonBaoDuongUser() {
           </>
         </Tab>
         <Tab eventKey="DonChoDuyet" title="Đơn chưa duyệt">
-          <><FormBaoDuongChuaDuyet allBaoDuongChuaDuyet={allBaoDuongChuaDuyet} garage={garage} logo={logo} /></>
+          <>
+            <FormBaoDuongChuaDuyet allBaoDuongChuaDuyet={allBaoDuongChuaDuyet} garage={garage} logo={logo} />
+          </>
         </Tab>
-        <Tab eventKey="DonHoangThanh" title="Đơn hoàng thành">
-          <><FormAllDonBaoDuongHoanThanh sum={sum} handleCloseHT={handleCloseHT} optionBuoc1={optionBuoc1} optionBuoc2={optionBuoc2} showHT={showHT} donDatLichUser={donDatLichUser} datLichBaoDuongUser={datLichBaoDuongUser} ClickDonHangHT={ClickDonHangHT} allBaoDuongHoanThanh={allBaoDuongHoanThanh} garage={garage} logo={logo} /></>
+        <Tab eventKey="DonHoangThanh" title="Đơn hoàn thành">
+          <>
+            <FormAllDonBaoDuongHoanThanh sum={sum} handleCloseHT={handleCloseHT} optionBuoc1={optionBuoc1} optionBuoc2={optionBuoc2} showHT={showHT} donDatLichUser={donDatLichUser} datLichBaoDuongUser={datLichBaoDuongUser} ClickDonHangHT={ClickDonHangHT} allBaoDuongHoanThanh={allBaoDuongHoanThanh} garage={garage} logo={logo} />
+          </>
         </Tab>
       </Tabs>
     </>

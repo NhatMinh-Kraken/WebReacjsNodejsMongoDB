@@ -58,7 +58,6 @@ function DichVu({ handleClick, handleClickBack, currentStep }) {
     }
   };
 
-  console.log(check)
 
   const handleSelectAllType = (giatri) => {
     //console.log(giatri)
@@ -133,15 +132,6 @@ function DichVu({ handleClick, handleClickBack, currentStep }) {
                     <div className='d-flex col-6'>
                       <img src={carSetting} loading='lazy' /><span className='pl-2'>{gt._id.name}</span>
                     </div>
-                    {/* <div className='d-flex col-6 justify-content-end'>
-                      <Form.Check className="pt-3 pb-3 font-weight-bold check-box-items"
-                        type="checkbox"
-                        name="check"
-                        label="Chọn tất cả"
-                        onChange={() => handleSelectAllType(gt._id)}
-                        checked={isCheckAllType}
-                      />
-                    </div> */}
                   </div>
 
                   <div className='d-flex'>

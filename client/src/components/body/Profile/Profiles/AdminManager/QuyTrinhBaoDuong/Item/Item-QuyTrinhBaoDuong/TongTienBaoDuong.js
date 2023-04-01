@@ -1,10 +1,11 @@
 import Axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import logo from '../../../../../../../../assets/images/logo.png'
+import ReactToPrint from 'react-to-print';
 
 function TongTienBaoDuong({ handleClick, datLichBaoDuongUser, setCallback, callback, LichBaoDuongUser, id }) {
 
@@ -14,7 +15,7 @@ function TongTienBaoDuong({ handleClick, datLichBaoDuongUser, setCallback, callb
   const [demHt2, setDemHt2] = useState(0)
   const [optionBuoc2, setOptionBuoc2] = useState([])
   const [khachhang, setKhachHang] = useState([])
-
+  const componentRef = useRef();
   const [tonggiaB1, setTongGiaB1] = useState("")
   const [tonggiaB2, setTongGiaB2] = useState("")
 
@@ -108,7 +109,7 @@ function TongTienBaoDuong({ handleClick, datLichBaoDuongUser, setCallback, callb
 
   return (
     <>
-      <div className='form-dichvu-baoduong-tongtien'>
+      <div className='form-dichvu-baoduong-tongtien' id="print-content" ref={componentRef}>
         <div className='form-dichvu-baoduong-tongtin-header d-flex col-12 pb-2'>
           <div className='d-flex flex-column col-6'>
             <span>Tổng giá tiền option hoàn thành</span>
@@ -306,7 +307,12 @@ function TongTienBaoDuong({ handleClick, datLichBaoDuongUser, setCallback, callb
           </div>
         </div>
       </div>
-
+      <div>
+        <ReactToPrint
+          trigger={() => <button>Print</button>}
+          content={() => componentRef.current}
+        />
+      </div>  
     </>
   )
 }

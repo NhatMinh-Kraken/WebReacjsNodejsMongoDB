@@ -19,22 +19,35 @@ function FormALlLaiThu() {
         get()
     }, [callback])
 
-   // console.log(allLaiThu)
+    // console.log(allLaiThu)
 
     return (
         <>
             <div className='form-all-laithu'>
                 <div className='container'>
                     <div className='row'>
+
                         {
-                            allLaiThu.map((lt, index) => (
+                            allLaiThu.length !== 0
+                                ?
                                 <>
-                                    <div className='col-12'>
-                                        <ItemsDonLaiThu lt={lt} garage={garage} key={lt._id} />
-                                    </div>
+                                    {
+                                        allLaiThu.map((lt, index) => (
+                                            <>
+                                                <div className='col-12'>
+                                                    <ItemsDonLaiThu lt={lt} garage={garage} key={lt._id} />
+                                                </div>
+                                            </>
+                                        ))
+                                    }
                                 </>
-                            ))
+                                :
+                                <>
+                                    <span>
+                                        Chưa có đơn hàng 
+                                    </span></>
                         }
+
                     </div>
                 </div>
             </div>

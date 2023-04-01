@@ -19,6 +19,9 @@ import LoaiPhuKien from '../BaoDuong/LoaiBaoDuong'
 import AllDaiLy from '../../DaiLy/AllDaiLy'
 import OptionBaoDuong from '../BaoDuong/optionBaoDuong/OptionBaoDuong'
 import DonBaoDuong from '../BaoDuong/DonBaoDuong/DonBaoDuong'
+import KeHoachBaoDuong from '../BaoDuong/KeHoachBaoDuong/KeHoachBaoDuong'
+import FormThongKe from './ThongKe/FormThongKe'
+import FormThongKeKhachHang from './ThongKe/FormThongKeKhachHang'
 
 
 
@@ -41,6 +44,7 @@ function AdminManager() {
     const [show, setShow] = useState(false)
     const [showPK, setShowPK] = useState(false)
     const [showBD, setShowBD] = useState(false)
+    const [showTK, setShowTK] = useState(false)
 
     useEffect(() => {
         if (isAdmin) {
@@ -70,6 +74,14 @@ function AdminManager() {
     const handleClick = () => {
         setShow(false)
         window.location.href = '/manager/all-category'
+    }
+
+    const handleShowThongKe = () => {
+        setShowTK(true)
+    }
+
+    const handleCloseThongKe = () => {
+        setShowTK(false)
     }
 
 
@@ -128,12 +140,42 @@ function AdminManager() {
                                                     <div className='ClickChucNang d-flex justify-content-center col-6 pb-2'>
                                                         <NavLink onClick={handleCloseBaoDuong} to="/all-don-baoduong" className="category"><i className="fa-solid fa-list"></i><span>Đơn Bảo dưỡng</span></NavLink>
                                                     </div>
+                                                    <div className='ClickChucNang d-flex justify-content-center col-6 pb-2'>
+                                                        <NavLink onClick={handleCloseBaoDuong} to="/all-kehoach-baoduong" className="category"><i className="fa-solid fa-list"></i><span>Kế hoạch Bảo dưỡng</span></NavLink>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </Modal.Body>
                                     <Modal.Footer>
                                         <Button variant="primary" type="submit" onClick={handleCloseBaoDuong}>Thoát</Button>
+                                    </Modal.Footer>
+                                </Modal>
+
+                                <Modal
+                                    show={showTK}
+                                    backdrop="static"
+                                    keyboard={false}
+                                >
+                                    <Modal.Header>
+                                        <Modal.Title>Lựu chọn chức năng</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body className='text-danger'>
+                                        <div className='buttonChucNang d-flex'>
+                                            <div className='container'>
+                                                <div className='row d-flex flex-column'>
+                                                    <div className='ClickChucNang d-flex '>
+                                                        <NavLink style={{ width: "300px" }} onClick={handleCloseThongKe} to="/thongke-donbaoduong" className="category"><i className="fa-solid fa-list"></i><span>Thống kê đơn bảo dưỡng</span></NavLink>
+                                                    </div>
+                                                    <div className='ClickChucNang d-flex'>
+                                                        <NavLink style={{ width: "300px" }} onClick={handleCloseThongKe} to="/thongke-khachhang" className="category"><i className="fa-solid fa-list"></i><span>Thống kê khách hàng</span></NavLink>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="primary" type="submit" onClick={handleCloseThongKe}>Thoát</Button>
                                     </Modal.Footer>
                                 </Modal>
 
@@ -152,6 +194,7 @@ function AdminManager() {
                                             <NavLink to="/all-daily" className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Địa chỉ đại lý</span></NavLink>
                                             <NavLink to="/allproduct" onClick={handleShow} className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Product</span></NavLink>
                                             <NavLink to="/allbaoduong" onClick={handleShowBaoDuong} className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Bảo dưỡng</span></NavLink>
+                                            <NavLink to="/thongke" onClick={handleShowThongKe} className={({ isActive }) => (isActive ? 'category pb-2 active' : 'category pb-2')} style={{ width: isOpen ? "220px" : "48px" }}><i className="fa-solid fa-list"></i><span style={{ display: isOpen ? "" : "none" }}>Thống kê</span></NavLink>
                                         </div>
                                     </div>
                                 </div>
@@ -172,6 +215,9 @@ function AdminManager() {
                                         <Route path="/all-option-baoduong" component={isAdmin ? OptionBaoDuong : NotFound} exact />
                                         <Route path="/all-daily" component={isAdmin ? AllDaiLy : NotFound} exact />
                                         <Route path="/all-don-baoduong" component={isAdmin ? DonBaoDuong : NotFound} exact />
+                                        <Route path="/all-kehoach-baoduong" component={isAdmin ? KeHoachBaoDuong : NotFound} exact />
+                                        <Route path="/thongke-donbaoduong" component={isAdmin ? FormThongKe : NotFound} exact />
+                                        <Route path="/thongke-khachhang" component={isAdmin ? FormThongKeKhachHang : NotFound} exact />
                                     </Switch>
                                 </div>
                             </Router>

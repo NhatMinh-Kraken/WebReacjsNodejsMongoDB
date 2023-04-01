@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Modal } from 'react-bootstrap'
 
 function FormAllDonBaoDuongHoanThanh({ sum, optionBuoc1, optionBuoc2, handleCloseHT, showHT, ClickDonHangHT, donDatLichUser, datLichBaoDuongUser, allBaoDuongHoanThanh, garage, logo }) {
+    console.log(datLichBaoDuongUser)
     return (
         <>
             <Modal
@@ -200,7 +201,7 @@ function FormAllDonBaoDuongHoanThanh({ sum, optionBuoc1, optionBuoc2, handleClos
                                                                     </div>
 
                                                                 </div>
-                                                                <div className='col-3 d-flex justify-content-end'>
+                                                                <div className='col-3 d-flex justify-content-end p-0'>
                                                                     <div className='pl-2 pr-2 d-flex justify-content-center align-items-center font-p'>
                                                                         {
                                                                             lt.Duyet === 1 ? <><span className='text-success'>Đã duyệt</span></> : <><span className='text-danger'>Chưa duyệt</span></>

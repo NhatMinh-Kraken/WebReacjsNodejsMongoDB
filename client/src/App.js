@@ -27,6 +27,7 @@ import LaiThu from './components/ProductCar/LaiThu/LaiThu';
 
 import BaoDuong from './components/BaoDuong/BaoDuong';
 import QuyTrinhBaoDuong from './components/body/Profile/Profiles/AdminManager/QuyTrinhBaoDuong/QuyTrinhBaoDuong';
+import Text from '../../client/src/Text';
 
 
 
@@ -62,14 +63,14 @@ function App() {
 
   useEffect(() => {
     if (token) {
-      const getUser = () => {
+      const gettUser = () => {
         dispatch(dispatchLogin())
 
         return fetchUser(token).then(res => {
           dispatch(dispatchGetUser(res))
         })
       }
-      getUser()
+      gettUser()
     }
   }, [token, dispatch])
 
@@ -89,8 +90,10 @@ function App() {
           <Body />
           <Route path={path.PROFILE} component={(isLogged ? ProfieLayout : NotFound)} />
           <Route path='/manager' component={(isAdmin ? ManagerLayout : NotFound)} />
-          <Route path='/quytrinh-bao-duong/:id' component={(isAdmin ? QuyTrinhBaoDuong : NotFound)} exact/>
+          <Route path='/quytrinh-bao-duong/:id' component={(isAdmin ? QuyTrinhBaoDuong : NotFound)} exact />
           <Route path='/all-messager' component={(isAdmin ? MessagerLayout : NotFound)} />
+
+          <Route path='/text' component={(isAdmin ? Text : NotFound)} />
 
           <ToastContainer
             position="top-right"

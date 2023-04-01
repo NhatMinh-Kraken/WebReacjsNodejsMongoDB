@@ -10,6 +10,10 @@ const categorySchema = new mongoose.Schema({
         default: 0
     },
 
+    ChiTietBaoDuong: {
+        type: Array
+    }
+
 }, {
     timestamps: true
 })

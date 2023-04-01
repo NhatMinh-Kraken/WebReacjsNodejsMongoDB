@@ -75,6 +75,26 @@ const datlichBaoDuongSchema = new mongoose.Schema({
         type: String,
     },
 
+    datesNoF: {
+        type: String,
+    },
+
+    day: {
+        type: String,
+    },
+
+    month: {
+        type: String,
+    },
+
+    year: {
+        type: String,
+    },
+
+    dayMonthYear: {
+        type: Date,
+    },
+
     times: {
         type: String
     },
@@ -93,9 +113,26 @@ const datlichBaoDuongSchema = new mongoose.Schema({
         default: 0
     },
 
+    TaoQuyTrinh: {
+        type: Number,
+        default: 0
+    },
+
+    TinhTrangDonHang: {
+        type: Number,
+        default: 0
+    },
+
+    //Hủy, đang làm
+
     checkGuiThongBao: {
         type: Number,
         default: 0
+    },
+
+    Tong: {
+        type: String,
+        default: "0"
     }
 }, {
     timestamps: true

@@ -205,7 +205,7 @@ function FormAllDonBaoDuong({ sum, optionBuoc1, optionBuoc2, handleClose, show, 
                                                                     </div>
 
                                                                 </div>
-                                                                <div className='col-3 d-flex justify-content-end'>
+                                                                <div className='col-3 d-flex justify-content-end p-0'>
                                                                     <div className='pl-2 pr-2 d-flex justify-content-center align-items-center font-p'>
                                                                         {
                                                                             lt.Duyet === 1 ? <><span className='text-success'>Đã duyệt</span></> : <><span className='text-danger'>Chưa duyệt</span></>
@@ -240,11 +240,18 @@ function FormAllDonBaoDuong({ sum, optionBuoc1, optionBuoc2, handleClose, show, 
                                                                                 <span className='text-primary font-weight-bold'>Thời gian: </span><span className='text-primary'>{lt.times}</span>
                                                                             </div>
                                                                         </div>
-                                                                        <div className='d-flex col-2 align-items-center p-0 font-p'>
-                                                                            <Button variant="primary" onClick={() => ClickDonHang(lt)}>
-                                                                                Xem hóa đơn
-                                                                            </Button>
-                                                                        </div>
+                                                                        {
+                                                                            lt.checked === 1 && (
+                                                                                <>
+                                                                                    <div className='d-flex col-2 align-items-center p-0 font-p'>
+                                                                                        <Button variant="primary" onClick={() => ClickDonHang(lt)}>
+                                                                                            Xem hóa đơn
+                                                                                        </Button>
+                                                                                    </div>
+                                                                                </>
+                                                                            )
+                                                                        }
+
                                                                     </div>
                                                                 </div>
                                                             </div>
